@@ -14,5 +14,11 @@
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/index.jsp" />
 		<put-attribute name="title" value="index" />
 	</definition>
+	
+	<definition name="employee" extends = "common">
+		<put-attribute name="title" value="Titanic Employee" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/user/employee.jsp" />
+		<put-attribute name="current" value="employee"/>
+	</definition>
 	  	  
 </tiles-definitions>

@@ -33,7 +33,6 @@ public class InitDbService {
 
 	@PostConstruct
 	public void Init() {
-		
 		Authority auth = new Authority();
 		auth.setId(1);
 		auth.setName("VIEW_EMPLOYEE");
