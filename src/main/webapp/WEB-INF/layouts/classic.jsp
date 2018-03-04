@@ -37,7 +37,10 @@
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-	 
+
+	<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx"%>
+	<tilesx:useAttribute name="current"/>
+	
 	<!-- REQUIRED JS SCRIPTS -->
 	<!-- jQuery 2.2.3 -->
 	<script src="<c:url value="/resources/plugins/jQuery/jquery-2.2.3.min.js" />"></script>
@@ -50,15 +53,13 @@
 	<script src="<c:url value="/resources/plugins/datatables/jquery.dataTables.min.js" />"></script>
   	<script src="<c:url value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />"></script>
   	
-	<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx" %>
-	
 	 <!-- wrapper -->
 	<div class="wrapper">
 	
 	  <!-- Main Header -->
 	  <tiles:insertAttribute name = "header"></tiles:insertAttribute>
 	 
-	  <!-- Left side column. contains the logo and sidebar -->
+	  <!-- Left side column. contains the logo and side bar -->
 	  <tiles:insertAttribute name = "leftMenu"></tiles:insertAttribute>
 	 
 	  <!-- Body -->
@@ -67,7 +68,7 @@
 	  <!-- Main Footer -->
 	  <tiles:insertAttribute name = "footer"></tiles:insertAttribute>
 
-	  <!-- Add the sidebar's background. This div must be placed immediately after the control sidebar -->
+	  <!-- Add the sidebar's background. This div must be placed immediately after the control side bar -->
 	  <div class="control-sidebar-bg"></div>
 	  
 	</div>

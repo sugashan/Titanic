@@ -11,13 +11,12 @@ import javax.persistence.OneToOne;
 public class Employee {
 	
 	@Id
-	private Integer id;
+	private int id;
 	private String nic;
 	private String contact;
 	private String address;
 	private Date dob;
 	private String gender;
-	private String branch;
 	
 	@OneToOne
 	@JoinColumn(name="role_id")
@@ -26,7 +25,9 @@ public class Employee {
 	@OneToOne
 	private User user;
 	
-	
+	@OneToOne
+	@JoinColumn(name="branch_id")
+	private Branch branch;
 	
 	public Role getRole() {
 		return role;
@@ -39,12 +40,6 @@ public class Employee {
 	}
 	public void setUser(User user) {
 		this.user = user;
-	}
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
 	}
 	public String getNic() {
 		return nic;
@@ -76,11 +71,19 @@ public class Employee {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public String getBranch() {
+	public Branch getBranch() {
 		return branch;
 	}
-	public void setBranch(String branch) {
+	public void setBranch(Branch branch) {
 		this.branch = branch;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	
 	
 }

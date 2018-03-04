@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 public class Role {
 	
 	@Id
-	private Integer id;
+	private int id;
 	private String name;
 	private String description;
 	
@@ -23,11 +23,25 @@ public class Role {
 	@OneToMany(mappedBy="role")
 	private List<Employee> employee;
 	
-	public Integer getId() {
+	
+	
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+	public List<Authority> getAuthorities() {
+		return authorities;
+	}
+	public void setAuthorities(List<Authority> authorities) {
+		this.authorities = authorities;
+	}
+	public List<Employee> getEmployee() {
+		return employee;
+	}
+	public void setEmployee(List<Employee> employee) {
+		this.employee = employee;
 	}
 	public String getName() {
 		return name;

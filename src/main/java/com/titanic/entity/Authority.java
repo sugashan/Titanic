@@ -10,17 +10,24 @@ import javax.persistence.ManyToMany;
 public class Authority {
 	
 	@Id
-	private Integer id;
+	private int id;
 	private String name;
 	private String authority;
 	@ManyToMany
 	private List<Role> roles;
 	
-	public Integer getId() {
+	
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+	public List<Role> getRoles() {
+		return roles;
+	}
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
 	public String getName() {
 		return name;

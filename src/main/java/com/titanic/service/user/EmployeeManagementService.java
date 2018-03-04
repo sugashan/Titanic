@@ -11,9 +11,14 @@ public class EmployeeManagementService {
 	
 	@Autowired
 	private EmployeeRepository eRepository;
-
+	
 	public List<Employee> findAll(){
 		return eRepository.findAll();
 	}
 
+	public void save(Employee employee) {
+		eRepository.save(employee);
+	}
+
+	
 }
