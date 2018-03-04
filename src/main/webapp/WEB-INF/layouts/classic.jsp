@@ -25,7 +25,7 @@
 	  <!-- AdminLTE Skins.  -->
    	  <link href="<c:url value="/resources/dist/css/skins/skin-blue.min.css" />" rel="stylesheet">
    	  
-   	   <!-- DataTable  -->
+   	   <!-- DataTable css -->
    	  <link href="<c:url value="/resources/plugins/datatables/dataTables.bootstrap.css" />" rel="stylesheet">
    	  
    	  	<!--multiple-select  -->
@@ -42,16 +42,18 @@
 	<!-- jQuery 2.2.3 -->
 	<script src="<c:url value="/resources/plugins/jQuery/jquery-2.2.3.min.js" />"></script>
 	<script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
+	
 	<!-- AdminLTE App -->
 	<script src="<c:url value="/resources/dist/js/app.min.js" />"></script>	
-
-
 	
+	<!-- Data Table -->
+	<script src="<c:url value="/resources/plugins/datatables/jquery.dataTables.min.js" />"></script>
+  	<script src="<c:url value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />"></script>
+  	
 	<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx" %>
 	
 	 <!-- wrapper -->
 	<div class="wrapper">
-	
 	
 	  <!-- Main Header -->
 	  <tiles:insertAttribute name = "header"></tiles:insertAttribute>
