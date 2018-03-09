@@ -1,8 +1,10 @@
 package com.titanic.entity;
 
-import java.util.Date;
+
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -11,15 +13,14 @@ import javax.persistence.OneToOne;
 public class Employee {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nic;
 	private String contact;
-	private String address;
-	private Date dob;
+	private String dob;
 	private String gender;
 	
 	@OneToOne
-	@JoinColumn(name="role_id")
 	private Role role;
 	
 	@OneToOne
@@ -29,6 +30,8 @@ public class Employee {
 	@JoinColumn(name="branch_id")
 	private Branch branch;
 	
+	
+
 	public Role getRole() {
 		return role;
 	}
@@ -53,16 +56,10 @@ public class Employee {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 	public String getGender() {

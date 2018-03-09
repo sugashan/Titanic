@@ -18,14 +18,20 @@
 	
 	<definition name="home" extends = "common">
 		<put-attribute name="title" value="Titanic Home" />
-		<put-attribute name="containerbody" value="/WEB-INF/jsp/index.jsp" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/dashBoard/home.jsp" />
 		<put-attribute name="current" value="home"/>
 	</definition>
 	
 	<definition name="employee" extends = "common">
 		<put-attribute name="title" value="Titanic Employee" />
-		<put-attribute name="containerbody" value="/WEB-INF/jsp/user/employee.jsp" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/user/employee/employee.jsp" />
 		<put-attribute name="current" value="employee"/>
+	</definition>
+	
+	<definition name="employee-detail" extends = "common">
+		<put-attribute name="title" value="Titanic Employee Detail" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/user/employee/employee-detail.jsp" />
+		<put-attribute name="current" value="employee-detail"/>
 	</definition>
 	  	  
 </tiles-definitions>

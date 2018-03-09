@@ -3,6 +3,8 @@ package com.titanic.entity;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -12,6 +14,7 @@ import javax.persistence.OneToMany;
 public class Role {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String name;
 	private String description;
@@ -20,11 +23,10 @@ public class Role {
 	@JoinColumn
 	private List<Authority> authorities;
 	
-	@OneToMany(mappedBy="role")
+	@OneToMany
 	private List<Employee> employee;
 	
-	
-	
+
 	public int getId() {
 		return id;
 	}

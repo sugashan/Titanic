@@ -68,6 +68,7 @@ public class InitDbService {
 		newUser.setMobile("077-3284456");
 		newUser.setUserName("admin");
 		newUser.setPassword("admin");
+		newUser.setAddress("Alvai, East");
 		urepo.save(newUser);
 		
 		Employee newEmployee = new Employee();
@@ -76,7 +77,7 @@ public class InitDbService {
 		newEmployee.setRole(role);
 		newEmployee.setBranch(defaultBranch);
 		eRepo.save(newEmployee);
-	
+		
 	}
 
 }

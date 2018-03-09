@@ -39,4 +39,6 @@
 	</bean>
 	
 	<jpa:repositories base-package="com.titanic.respository" entity-manager-factory-ref="emf" />
+	
+	
 </beans>
