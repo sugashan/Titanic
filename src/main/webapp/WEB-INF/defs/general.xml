@@ -63,5 +63,17 @@
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/foodType/foodType-detail.jsp" />
 		<put-attribute name="current" value="foodType-detail"/>
 	</definition>
+	
+	<definition name="meal" extends = "common">
+		<put-attribute name="title" value="Titanic Meal" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/meal/meal.jsp" />
+		<put-attribute name="current" value="meal"/>
+	</definition>
+	
+	<definition name="meal-detail" extends = "common">
+		<put-attribute name="title" value="Titanic Meal Detail" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/meal/meal-detail.jsp" />
+		<put-attribute name="current" value="meal-detail"/>
+	</definition>
 	  	  
 </tiles-definitions>

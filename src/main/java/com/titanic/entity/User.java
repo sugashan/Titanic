@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class User {
@@ -21,6 +22,9 @@ public class User {
 	private String userName;
 	private String address;
 	private String gender;
+	
+	@OneToOne
+	private Login login;
 	
 	public String getGender() {
 		return gender;
@@ -66,6 +70,12 @@ public class User {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public Login getLogin() {
+		return login;
+	}
+	public void setLogin(Login login) {
+		this.login = login;
 	}
 	
 	

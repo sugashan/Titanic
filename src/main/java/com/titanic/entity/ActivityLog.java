@@ -11,7 +11,8 @@ public class ActivityLog {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private User user;
+	
+//	private User user;
 	private String activity;
 	
 	
@@ -21,12 +22,12 @@ public class ActivityLog {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
+//	public User getUser() {
+//		return user;
+//	}
+//	public void setUser(User user) {
+//		this.user = user;
+//	}
 	public String getActivity() {
 		return activity;
 	}

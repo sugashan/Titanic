@@ -17,9 +17,9 @@ public class Meal {
 	private String image;
 	private String code;
 	private Float price;
-	private Float discount;
-	private User addedByUser;
+	private String addedByUser;
 	private String preferedTime;
+	private String description;
 	
 	@OneToOne
 	@JoinColumn(name="foodType_id")
@@ -56,16 +56,10 @@ public class Meal {
 	public void setPrice(Float price) {
 		this.price = price;
 	}
-	public Float getDiscount() {
-		return discount;
-	}
-	public void setDiscount(Float discount) {
-		this.discount = discount;
-	}
-	public User getAddedByUser() {
+	public String getAddedByUser() {
 		return addedByUser;
 	}
-	public void setAddedByUser(User addedByUser) {
+	public void setAddedByUser(String addedByUser) {
 		this.addedByUser = addedByUser;
 	}
 	public FoodType getFoodType() {
@@ -79,6 +73,12 @@ public class Meal {
 	}
 	public void setPreferedTime(String preferedTime) {
 		this.preferedTime = preferedTime;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 }
