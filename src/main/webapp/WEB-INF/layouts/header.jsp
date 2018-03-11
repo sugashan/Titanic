@@ -155,7 +155,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href='/doLogout?token=26bcb6eb9a0dcddd' class="btn btn-default btn-flat">Sign out</a>
+                  <a href='<spring:url value="/logout.do" />' class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

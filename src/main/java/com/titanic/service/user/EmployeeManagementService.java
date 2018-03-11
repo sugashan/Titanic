@@ -4,12 +4,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.titanic.entity.Authority;
 import com.titanic.entity.Employee;
 import com.titanic.entity.Role;
 import com.titanic.entity.User;
-import com.titanic.respository.AuthorityRepository;
 import com.titanic.respository.EmployeeRepository;
 import com.titanic.respository.RoleRepository;
 import com.titanic.respository.UserRepository;
@@ -26,8 +23,6 @@ public class EmployeeManagementService {
 	@Autowired
 	private RoleRepository rRepository;
 	
-	@Autowired
-	private AuthorityRepository aRepository;
 	
 	// GET ALL EMPLOYEE AS LIST
 	public List<Employee> findAll(){

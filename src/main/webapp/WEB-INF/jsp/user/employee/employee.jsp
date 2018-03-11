@@ -39,11 +39,11 @@
 									href='<spring:url value="/deleteEmployee/${emp.user.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a> ${emp.user.id}</td>
-								<td onclick="singleView(${emp.user.id})">${emp.user.name}</td>
-								<td onclick="singleView(${emp.user.id})">${emp.user.mobile}</td>
-								<td onclick="singleView(${emp.user.id})">${emp.role.name}</td>
-								<td onclick="singleView(${emp.user.id})">${emp.branch.name}</td>
-								<td>${emp.user.address}</td>
+								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.name}</a></td>
+								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.mobile}</a></td>
+								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.role.name}</a></td>
+								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.branch.name}</a></td>
+								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.address}</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

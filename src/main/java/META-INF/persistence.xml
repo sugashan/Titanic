@@ -6,5 +6,6 @@
 		<class>com.titanic.entity.Role</class>
 		<class>com.titanic.entity.User</class>
 		<class>com.titanic.entity.Branch</class>
+		<class>com.titanic.entity.Customer</class>
 	</persistence-unit>
 </persistence>
