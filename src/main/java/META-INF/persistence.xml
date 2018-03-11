@@ -7,5 +7,10 @@
 		<class>com.titanic.entity.User</class>
 		<class>com.titanic.entity.Branch</class>
 		<class>com.titanic.entity.Customer</class>
+		<class>com.titanic.entity.Login</class>
+		<class>com.titanic.entity.ActivityLog</class>
+		<class>com.titanic.entity.FoodType</class>
+		<class>com.titanic.entity.Meal</class>
+		<class>com.titanic.entity.Table</class>
 	</persistence-unit>
 </persistence>

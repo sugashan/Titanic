@@ -18,7 +18,7 @@ public class Employee {
 	private String nic;
 	private String contact;
 	private String dob;
-	private String gender;
+	
 	
 	@OneToOne
 	private Role role;
@@ -31,7 +31,6 @@ public class Employee {
 	private Branch branch;
 	
 	
-
 	public Role getRole() {
 		return role;
 	}
@@ -61,12 +60,6 @@ public class Employee {
 	}
 	public void setDob(String dob) {
 		this.dob = dob;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 	public Branch getBranch() {
 		return branch;

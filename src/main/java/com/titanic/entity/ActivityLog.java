@@ -4,18 +4,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity
-public class Customer {
+public class ActivityLog {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
-	@OneToOne
 	private User user;
-
+	private String activity;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -28,5 +27,10 @@ public class Customer {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+	public String getActivity() {
+		return activity;
+	}
+	public void setActivity(String activity) {
+		this.activity = activity;
+	}
 }

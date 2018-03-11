@@ -33,6 +33,7 @@
 
 		<!-- Side bar Menu -->
 		<ul class="sidebar-menu">
+		
 			<li class="header ${current == 'home' ? 'active' : ''}">
 				<a href='<spring:url value="/home.jsp" />'> <i class="fa fa-home"></i><span>Home</span></a>
 			</li>
@@ -43,25 +44,31 @@
 				</span> </a>
 				<ul class="treeview-menu">
 					<li class="${current == 'employee' ? 'active' : ''}">
-						<a href='<spring:url value="/employee" />'><i class="fa fa-circle-thin"></i><span>
+						<a href='<spring:url value="/employee.do" />'><i class="fa fa-circle-thin"></i><span>
 								Employees</span></a>
 					</li>
-					<li class="">
-						<a href="/customer.jsp"><i
+					<li class="${current == 'employee' ? 'active' : ''}">
+						<a href='<spring:url value="/customer.do" />'><i
 							class="fa fa-circle-thin"></i><span> 
 								Customers</span></a>
 					</li>
 				</ul>
 			</li>
 
-			<li class="treeview">
-				<a href="#"><i class="fa fa-cart-arrow-down"></i> <span>Sales</span> 
+			<li class="treeview ${current == 'foodType' ? 'active' : ''}">
+				<a href="#"><i class="fa fa-cart-arrow-down"></i> <span>Meal</span> 
 					<span class="pull-right-container"> <i	class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
-					<li class="active"><a href="#"><i class="fa fa-circle-thin"></i><span> </span></a></li>
-					<li class="active"><a href="#"><i class="fa fa-circle-thin"></i><span> </span></a></li>
-					<li class="active"><a href="#"><i class="fa fa-circle-thin"></i><span> </span></a></li>
+					<li class="${current == 'foodType' ? 'active' : ''}">
+						<a href='<spring:url value="/foodType.do" />'><i class="fa fa-circle-thin"></i><span>
+								Meal-Type</span></a>
+					</li>
+					<li class="${current == 'meal' ? 'active' : ''}">
+						<a href='<spring:url value="/meal.do" />'><i
+							class="fa fa-circle-thin"></i><span> 
+								Meal</span></a>
+					</li>
 				</ul>
 			</li>
 
@@ -76,7 +83,8 @@
 							class="fa fa-circle-thin"></i><span> </span></a></li>
 					<li class="active"><a href="#"><i
 							class="fa fa-circle-thin"></i><span> </span></a></li>
-				</ul></li>
+				</ul>
+			</li>
 
 			<li class="treeview"><a href="#"><i class="fa fa-money"></i>
 					<span>Payments</span> <span class="pull-right-container"> <i
