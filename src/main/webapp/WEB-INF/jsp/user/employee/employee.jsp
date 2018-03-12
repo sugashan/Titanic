@@ -90,7 +90,7 @@
 				    
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Role :</label>
-				     	<form:select path="role.id" cssClass="form-control" >
+				     	<form:select path="role" cssClass="form-control" >
 				     	   <c:forEach items="${role}" var ="role">
 				     	   		<form:option label="${role.name}" value="${role.id}"/>
 				     	   </c:forEach>

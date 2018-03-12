@@ -11,9 +11,9 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form name='f' action='<c:url value="/titanic/login" />' method='POST'>
+    <form name='f' action='<c:url value="/login" />' method='POST'>
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" name="username" placeholder="UserName">
+        <input type="text" class="form-control" name="username" placeholder="UserName" autofocus="autofocus">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -26,7 +26,7 @@
         <!-- /.col -->
         <div class="col-xs-4">
           <input name="submit" type="submit" class="btn btn-danger btn-block btn-flat" value="Login"/>
-          <input name="_csrf" type="hidden" value="9a99d84c-15d4-4835-a5a6-b75cb72b7650" />
+          <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden" />
         </div>
         <!-- /.col -->
       </div>

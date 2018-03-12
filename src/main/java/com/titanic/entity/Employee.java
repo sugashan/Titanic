@@ -22,6 +22,7 @@ public class Employee {
 	@OneToOne
 	private Role role;
 	
+
 	@OneToOne
 	private User user;
 	

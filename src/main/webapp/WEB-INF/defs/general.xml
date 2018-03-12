@@ -6,12 +6,12 @@
 <tiles-definitions>
 	<definition name="classicLogin" template="/WEB-INF/layouts/classicLogin.jsp"/>
 	
-	<definition name="login" extends = "classicLogin">
+	<definition name="login" extends="classicLogin">
 		<put-attribute name="body" value="/WEB-INF/jsp/user/login.jsp" />
 		<put-attribute name="title" value="Titanic Login" />
 	</definition>
 	
-	<definition name="lockScreen" extends = "classicLogin">
+	<definition name="lockScreen" extends="classicLogin">
 		<put-attribute name="body" value="/WEB-INF/jsp/user/lockScreen.jsp" />
 		<put-attribute name="title" value="Titanic SignIn" />
 	</definition>
@@ -22,55 +22,55 @@
 		<put-attribute name="footer" value="/WEB-INF/layouts/footer.jsp" />
 	</definition>
 	
-	<definition name="home" extends = "common">
+	<definition name="home" extends="common">
 		<put-attribute name="title" value="Titanic Home" />
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/dashBoard/home.jsp" />
 		<put-attribute name="current" value="home"/>
 	</definition>
 	
-	<definition name="employee" extends = "common">
+	<definition name="employee" extends="common">
 		<put-attribute name="title" value="Titanic Employee" />
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/user/employee/employee.jsp" />
 		<put-attribute name="current" value="employee"/>
 	</definition>
 	
-	<definition name="employee-detail" extends = "common">
+	<definition name="employee-detail" extends="common">
 		<put-attribute name="title" value="Titanic Employee Detail" />
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/user/employee/employee-detail.jsp" />
 		<put-attribute name="current" value="employee-detail"/>
 	</definition>
 	
-	<definition name="customer" extends = "common">
+	<definition name="customer" extends="common">
 		<put-attribute name="title" value="Titanic Customer" />
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/user/customer/customer.jsp" />
 		<put-attribute name="current" value="customer"/>
 	</definition>
 	
-	<definition name="customer-detail" extends = "common">
+	<definition name="customer-detail" extends="common">
 		<put-attribute name="title" value="Titanic Customer Detail" />
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/user/customer/customer-detail.jsp" />
 		<put-attribute name="current" value="customer-detail"/>
 	</definition>
 	
-	<definition name="foodType" extends = "common">
+	<definition name="foodType" extends="common">
 		<put-attribute name="title" value="Titanic FoodType" />
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/foodType/foodType.jsp" />
 		<put-attribute name="current" value="foodType"/>
 	</definition>
 	
-	<definition name="foodType-detail" extends = "common">
+	<definition name="foodType-detail" extends="common">
 		<put-attribute name="title" value="Titanic FoodType Detail" />
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/foodType/foodType-detail.jsp" />
 		<put-attribute name="current" value="foodType-detail"/>
 	</definition>
 	
-	<definition name="meal" extends = "common">
+	<definition name="meal" extends="common">
 		<put-attribute name="title" value="Titanic Meal" />
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/meal/meal.jsp" />
 		<put-attribute name="current" value="meal"/>
 	</definition>
 	
-	<definition name="meal-detail" extends = "common">
+	<definition name="meal-detail" extends="common">
 		<put-attribute name="title" value="Titanic Meal Detail" />
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/meal/meal-detail.jsp" />
 		<put-attribute name="current" value="meal-detail"/>

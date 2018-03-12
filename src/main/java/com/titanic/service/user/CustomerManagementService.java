@@ -18,6 +18,9 @@ public class CustomerManagementService {
 	@Autowired
 	private UserRepository uRepository;
 	
+	// WHILE SAVING CUDTOMER 
+	
+	
 	
 	// GET ALL EMPLOYEE AS LIST
 	public List<Employee> findAll(){

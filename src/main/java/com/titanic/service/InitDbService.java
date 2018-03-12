@@ -50,7 +50,7 @@ public class InitDbService {
 		
 		Role role = new Role();
 		role.setId(1);
-		role.setName("ADMIN");
+		role.setName("ROLE_ADMIN");
 		role.setDescription("role-admin");
 		role.setAuthorities(authorities);
 		rRepo.save(role);
@@ -67,7 +67,7 @@ public class InitDbService {
 		newUser.setName("ADMIN");
 		newUser.setMobile("077-3284456");
 		newUser.setUserName("admin");
-		newUser.setPassword("admin");
+		newUser.setPassword("{noop}admin");
 		newUser.setAddress("Alvai, East");
 		urepo.save(newUser);
 		

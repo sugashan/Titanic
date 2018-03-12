@@ -26,6 +26,7 @@ public class User {
 	@OneToOne
 	private Login login;
 	
+
 	public String getGender() {
 		return gender;
 	}

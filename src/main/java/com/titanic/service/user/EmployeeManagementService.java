@@ -63,7 +63,6 @@ public class EmployeeManagementService {
 		updatedEmployee.setContact(employee.getContact());
 		updatedEmployee.setDob(employee.getDob());
 		updatedEmployee.setNic(employee.getNic());
-		updatedEmployee.setRole(employee.getRole());
 		eRepository.save(updatedEmployee);
 		return findOnebyId(id);
 	}
