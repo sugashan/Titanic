@@ -19,7 +19,6 @@ public class Employee {
 	private String contact;
 	private String dob;
 	
-	
 	@OneToOne
 	private Role role;
 	

@@ -8,13 +8,16 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<http pattern="/resources/**" security="none"/>
-	<http pattern="/login.do" security="none"/>
-	<http pattern="/logout" security="none"/>
+<!-- 	<http pattern="/login.do" security="none"/> -->
+<!-- 		<http pattern="/login" security="none"/> -->
+<!-- 	<http pattern="/logout" security="none"/> -->
 	
 	<http use-expressions="false">
 		<intercept-url pattern="/**" access="ROLE_ADMIN"/>
-		<form-login login-page="/login.do"/>
-		<logout logout-url="/logout.do" logout-success-url="/lockScreen.do"/>
+		<form-login/>
+<!-- 		<form-login login-page="/login.do" login-processing-url="/login"/> -->
+		<logout/>
+<!-- 		<logout logout-url="/logout.do" logout-success-url="/lockScreen.do"/> -->
 	</http>
 
 	<authentication-manager>

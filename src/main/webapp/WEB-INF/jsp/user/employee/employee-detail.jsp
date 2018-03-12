@@ -11,7 +11,7 @@
 	<button value = "Edit Employee" class="btn btn-info" id="ediBtn" onclick="showEdit()"><i class="fa fa-pencil-square-o"></i> Edit Employee</button>
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">${singleEmployee.user.name}- Employee</h3>
+				<h3 class="box-title">${singleEmployee.user.userName}- Employee</h3>
 				<div class="" id="main-res-msg"	style="margin-top: 5px; display: none;">
 					<strong></strong>
 				</div>

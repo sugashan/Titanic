@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-
-
+	
 <%@ include file="../../../layouts/taglib.jsp" %>
 
 <!-- Content Wrapper. Contains page content -->
@@ -38,7 +37,7 @@
 								</a> <a class="btn text-danger"
 									href='<spring:url value="/deleteEmployee/${emp.user.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
-								</a> ${emp.code}</td>
+								</a> ${emp.user.userName}</td>
 								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.name}</a></td>
 								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.mobile}</a></td>
 								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.role.name}</a></td>

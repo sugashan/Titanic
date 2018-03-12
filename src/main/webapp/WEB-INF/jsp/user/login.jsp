@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@ include file="../../layouts/taglib.jsp" %>
+
 <div class="login-box">
   <div class="login-logo">
     <a href="../../index2.html"><b>Titanic</b>Admin</a>
@@ -9,7 +11,7 @@
   <div class="login-box-body">
     <p class="login-box-msg">Sign in to start your session</p>
 
-    <form name='f' action='/titanic/login.do' method='POST'>
+    <form name='f' action='<c:url value="/titanic/login" />' method='POST'>
       <div class="form-group has-feedback">
         <input type="text" class="form-control" name="username" placeholder="UserName">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
@@ -24,6 +26,7 @@
         <!-- /.col -->
         <div class="col-xs-4">
           <input name="submit" type="submit" class="btn btn-danger btn-block btn-flat" value="Login"/>
+          <input name="_csrf" type="hidden" value="9a99d84c-15d4-4835-a5a6-b75cb72b7650" />
         </div>
         <!-- /.col -->
       </div>
