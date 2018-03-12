@@ -2,6 +2,7 @@ package com.titanic.service.user;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.titanic.entity.Employee;
@@ -31,7 +32,9 @@ public class EmployeeManagementService {
 
 	// SAVE NEW EMPLOYEE
 	public void save(Employee employee) {
-		System.out.println("saving..");
+		employee.getUser().setEnabled(true);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		employee.getUser().setPassword(encoder.encode(employee.getUser().getPassword()));
 		uRepository.save(employee.getUser());
 		eRepository.save(employee);
 	}
@@ -72,6 +75,11 @@ public class EmployeeManagementService {
 		List<Role> roles= rRepository.findAll();
 		//	List<Authority> authority = aRepository.findByRoles(roles);
 		return roles;
+	}
+
+	public Employee findOneByName(String name) {
+		User user = uRepository.findByUserName(name);
+		return eRepository.findByUser(user);
 	}
 
 	

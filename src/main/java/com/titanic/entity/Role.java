@@ -24,7 +24,7 @@ public class Role {
 	private List<Authority> authorities;
 	
 	@OneToMany
-	private List<Employee> employee;
+	private List<User> user;
 	
 
 	public int getId() {
@@ -39,11 +39,11 @@ public class Role {
 	public void setAuthorities(List<Authority> authorities) {
 		this.authorities = authorities;
 	}
-	public List<Employee> getEmployee() {
-		return employee;
+	public List<User> getUser() {
+		return user;
 	}
-	public void setEmployee(List<Employee> employee) {
-		this.employee = employee;
+	public void setUser(List<User> user) {
+		this.user = user;
 	}
 	public String getName() {
 		return name;

@@ -22,11 +22,20 @@ public class User {
 	private String userName;
 	private String address;
 	private String gender;
+	private boolean enabled;
 	
 	@OneToOne
 	private Login login;
 	
-
+	@OneToOne
+	private Role role;
+	
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	public String getGender() {
 		return gender;
 	}
@@ -78,6 +87,10 @@ public class User {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
-	
-	
+	public boolean isEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

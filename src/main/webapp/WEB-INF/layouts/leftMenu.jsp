@@ -1,7 +1,6 @@
 
 <%@ include file="taglib.jsp"%>
 
-
 <aside class="main-sidebar" id="tofix">
 
 	<!-- sidebar: style can be found in sidebar.less -->
@@ -13,7 +12,7 @@
 					class="img-circle" alt="User Image">
 			</div>
 			<div class="pull-left info">
-				<p>Sugashan</p>
+				<p><%= session.getAttribute("LoggerName") %></p>
 				<!-- Status -->
 				<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 			</div>

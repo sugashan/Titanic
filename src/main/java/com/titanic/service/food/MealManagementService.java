@@ -20,7 +20,6 @@ public class MealManagementService {
 
 	// SAVE NEW MEAL
 	public void save(Meal meal) {
-		System.out.println("saving..");
 		mRepository.save(meal);
 	}
 

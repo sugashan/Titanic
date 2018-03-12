@@ -18,10 +18,6 @@ public class Employee {
 	private String nic;
 	private String contact;
 	private String dob;
-	
-	@OneToOne
-	private Role role;
-	
 
 	@OneToOne
 	private User user;
@@ -31,12 +27,6 @@ public class Employee {
 	private Branch branch;
 	
 	
-	public Role getRole() {
-		return role;
-	}
-	public void setRole(Role role) {
-		this.role = role;
-	}
 	public User getUser() {
 		return user;
 	}

@@ -60,7 +60,7 @@ public class EmployeeController {
 			
 		}
 		model.addAttribute("employee", emService.findAll());
-		return "employee";
+		return "redirect:/employee.do?success=true";
 	}
 	
 	// UPDATE EXITING USER

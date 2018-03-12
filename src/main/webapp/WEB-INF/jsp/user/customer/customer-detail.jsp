@@ -24,16 +24,6 @@
 				    	<label for="exampleInputEmail1">Employee Name :</label>
 				    	 <form:input path="user.name" class="form-control" id="empName" type="text" placeholder="Name" value="${singleEmployee.user.name}"/>
 				    </div>
-				    
-				    <div class="form-group col-md-6">
-				   		<label for="exampleInputEmail1">Role :</label>
-				     	<form:select path="role" class="form-control" id="empRole" disabled="true" >
-				     		<form:option label="${singleEmployee.role.name}" value="${singleEmployee.role.id}" cssClass="editToShow"/>
-				     	   <c:forEach items="${role}" var ="role">
-				     	   		<form:option label="${role.name}" value="${role.id}"/>
-				     	   </c:forEach>
-						</form:select>
-				     </div>
 				  </div>
 				  
 			     <div class="row">

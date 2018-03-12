@@ -11,9 +11,13 @@
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">Employee</h3>
-				<div class="" id="main-res-msg"	style="margin-top: 5px; display: none;">
-					<strong></strong>
-				</div>
+       		 	 <c:if test="${param.success eq true}">
+                 <div class="alert alert-success" style = "margin-top:15px; padding:5px;">Registration Success!</div>
+                 </c:if>
+                 
+                  <c:if test="${param.success eq false}">
+                 <div class="alert alert-warning" style = "margin-top:15px; padding:5px;">Registration Failed</div>
+                 </c:if>
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body">
@@ -40,7 +44,7 @@
 								</a> ${emp.user.userName}</td>
 								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.name}</a></td>
 								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.mobile}</a></td>
-								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.role.name}</a></td>
+								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.role.name}</a></td>
 								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.branch.name}</a></td>
 								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.address}</a></td>
 							</tr>
@@ -72,13 +76,6 @@
       <div class="modal-content">
       	<div class="modal-header">
         	<h4 class="modal-title">Add New Employee</h4>
-<%--        		 	 <c:if test="${employee.message == 'SUCCESS'}"> --%>
-<%--                  <div class="alert alert-success" style = "margin-top:15px;">${employee.description}</div> --%>
-<%--                  </c:if> --%>
-                 
-<%--                   <c:if test="${employee.message == 'FAILED'}"> --%>
-<%--                  <div class="alert alert-warning" style = "margin-top:15px;">${employee.description}</div> --%>
-<%--                  </c:if> --%>
      	 </div>
         <div class="modal-body">
     		 <form:form modelAttribute="newEmployee" enctype="application/x-www-form-urlencoded" method="post" >
@@ -90,7 +87,7 @@
 				    
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Role :</label>
-				     	<form:select path="role" cssClass="form-control" >
+				     	<form:select path="user.role" cssClass="form-control" >
 				     	   <c:forEach items="${role}" var ="role">
 				     	   		<form:option label="${role.name}" value="${role.id}"/>
 				     	   </c:forEach>
