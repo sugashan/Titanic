@@ -44,11 +44,11 @@
 									href='<spring:url value="deleteEmployee/${emp.user.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a> ${emp.user.userName}</td>
-								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.name}</a></td>
-								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.mobile}</a></td>
-								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.role.name}</a></td>
-								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.branch.name}</a></td>
-								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.address}</a></td>
+								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'>${emp.user.name}</a></td>
+								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'>${emp.user.mobile}</a></td>
+								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'>${emp.user.role.name}</a></td>
+								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'>${emp.branch.name}</a></td>
+								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'>${emp.user.address}</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

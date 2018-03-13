@@ -31,7 +31,7 @@ public class MealController {
 	}
 	
 	// GET ALL MEAL
-	@RequestMapping("/meal")
+	@RequestMapping("/meals/meal")
 	public String meals(Model model) {
 		model.addAttribute("mealType", ftService.findAll());
 		model.addAttribute("meal", mmService.findAll());
@@ -39,14 +39,14 @@ public class MealController {
 	}
 	
 	// SINGLE MEAL
-	@RequestMapping("/singleMeal/{id}")
+	@RequestMapping("/meals/singleMeal/{id}")
 	public String singleFoodType(Model model, @PathVariable int id) {
 		model.addAttribute("singleMeal", mmService.findOnebyId(id));
 		return "meal-detail";
 	}
 	
 	// ADD NEW MEAL
-	@RequestMapping(value="/meal", method=RequestMethod.POST)
+	@RequestMapping(value="/meals/meal", method=RequestMethod.POST)
 	public String addFoodType(@ModelAttribute("newMeal") Meal meal, BindingResult errors, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
@@ -61,23 +61,21 @@ public class MealController {
 //			}
 			
 		}
-	//	model.addAttribute("meal", mmService.findAll());
-		return "redirect:/meal?success=true";
+		return "redirect:/meals/meal?success=true&msg=Successfully Added";
 	}
 	
 	// UPDATE EXITING MEAL
-	@RequestMapping(value="/singleMeal/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/meals/singleMeal/{id}", method=RequestMethod.POST)
 	public String updateMeal(@ModelAttribute("singleUpdatedMeal")  Meal meal, @PathVariable int id, Model model) {
 		System.out.println(meal.getName() + "----contact");
-		//	model.addAttribute("singleEmployee",fmService.update(employee, id));
-		return "redirect:/meal-detail?success=true";
+		mmService.update(meal, id);
+		return "redirect:/meals/meal-detail?success=true&msg=Successfully Updated";
 	}
 	
 	// DELETE MEAL
-	@RequestMapping(value="/deleteMeal/{id}")
+	@RequestMapping(value="/meals/deleteMeal/{id}")
 	public String deleteMeal(@PathVariable int id, Model model) {
 		mmService.delete(id);
-		model.addAttribute("meal", mmService.findAll());
-		return "redirect:/meal?success=true";
+		return "redirect:/meals/meal?success=true&msg=Successfully Deleted";
 	}
 }

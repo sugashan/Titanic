@@ -73,14 +73,14 @@ public class InitDbService {
 		User newUser = new User();
 		newUser.setEnabled(true);
 		newUser.setId(1);
-		newUser.setName("Admin");
+		newUser.setName("ddd");
 		newUser.setMobile("077-3284456");
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 		newUser.setUserName("admin");
 		newUser.setPassword(encoder.encode("admin"));
 		newUser.setAddress("Alvai, East");
-		newUser.setRole(adminRole);
+		newUser.setRole(deliveryRole);
 		urepo.save(newUser);
 		
 		Employee newEmployee = new Employee();

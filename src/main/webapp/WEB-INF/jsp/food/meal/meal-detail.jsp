@@ -12,9 +12,13 @@
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">${singleMeal.code}- Meal</h3>
-				<div class="" id="main-res-msg"	style="margin-top: 5px; display: none;">
-					<strong></strong>
-				</div>
+				<c:if test="${param.success eq true}">
+                 <div class="alert alert-success alertMsg" style = "margin-top:15px; padding:5px;">${param.msg}</div>
+                 </c:if>
+                 
+                  <c:if test="${param.success eq false}">
+                 <div class="alert alert-warning alertMsg" style = "margin-top:15px; padding:5px;">${param.msg}</div>
+                 </c:if>
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body">

@@ -27,21 +27,22 @@ public class FoodTypeController {
 		return new FoodType();
 	}
 	
-	@RequestMapping("/foodType")
+	// GET ALL FOODTYPE
+	@RequestMapping("/meals/foodType")
 	public String foodType(Model model) {
 		model.addAttribute("foodType", fmService.findAll());
 		return "foodType";
 	}
 	
 	// SINGLE USER
-	@RequestMapping("/singlefoodType/{id}")
+	@RequestMapping("/meals/singlefoodType/{id}")
 	public String singleFoodType(Model model, @PathVariable int id) {
 		model.addAttribute("singleFoodType", fmService.findOnebyId(id));
 		return "foodType-detail";
 	}
 	
 	// ADD NEW USER
-	@RequestMapping(value="/foodType", method=RequestMethod.POST)
+	@RequestMapping(value="/meals/foodType", method=RequestMethod.POST)
 	public String addFoodType(@ModelAttribute("newFoodType") FoodType foodType, BindingResult errors, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
@@ -56,23 +57,21 @@ public class FoodTypeController {
 //			}
 			
 		}
-		model.addAttribute("foodType", fmService.findAll());
-		return "foodType";
+		return "redirect:/meals/foodType?success=true&msg=Successfully Added";
 	}
 	
 	// UPDATE EXITING USER
-	@RequestMapping(value="/singleFoodType/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/meals/singleFoodType/{id}", method=RequestMethod.POST)
 	public String updateFoodType(@ModelAttribute("singleUpdatednewFoodType") FoodType foodType, @PathVariable int id, Model model) {
-		System.out.println(foodType.getName() + "----contact");
-		//	model.addAttribute("singleEmployee",fmService.update(employee, id));
-		return "foodType-detail";
+		fmService.update(foodType, id);
+		return "redirect:/meals/foodType-detail?success=true&msg=Successfully Updated";
 	}
 	
 	// DELETE USER
-	@RequestMapping(value="/deleteFoodType/{id}")
+	@RequestMapping(value="/meals/deleteFoodType/{id}")
 	public String deleteFoodType(@PathVariable int id, Model model) {
 		fmService.delete(id);
 		model.addAttribute("foodType", fmService.findAll());
-		return "foodType";
+		return "redirect:/meals/foodType?success=true&msg=Successfully Deleted";
 	}
 }

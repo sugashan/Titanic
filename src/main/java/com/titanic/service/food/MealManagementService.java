@@ -2,6 +2,7 @@ package com.titanic.service.food;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.titanic.entity.Meal;
@@ -33,6 +34,7 @@ public class MealManagementService {
 	}
 
 	// DELETE A MEAL
+	@PreAuthorize(value = "hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST')")
 	public void delete(int id) {
 		mRepository.delete(findOnebyId(id));
 	}

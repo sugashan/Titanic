@@ -18,12 +18,15 @@
 		<access-denied-handler error-page="/accessDenied.do"/> 
 		
 		<!-- EMPLOYEE URL -->
-		<intercept-url pattern="/users/employee**" access="hasAnyRole('ROLE_ADMIN, ROLE_RECEPTIONIST')"/>
-		<intercept-url pattern="/users/singleEmployee/**" access="hasAnyRole('ROLE_ADMIN, ROLE_COOK, ROLE_DELIVERYBOY, ROLE_RECEPTIONIST')"/>
+		<intercept-url pattern="/users/employee**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')"/>
+		<intercept-url pattern="/users/singleEmployee/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_DELIVERYBOY', 'ROLE_RECEPTIONIST')"/>
 		
 		<!-- CUSTOMER URL -->
 		<intercept-url pattern="/users/customer**" access="hasAnyRole('ROLE_ADMIN, ROLE_RECEPTIONIST')"/>
-		<intercept-url pattern="/users/singleCustomer**" access="hasAnyRole('ROLE_ADMIN, ROLE_COOK, ROLE_DELIVERYBOY, ROLE_RECEPTIONIST')"/>
+		<intercept-url pattern="/users/singleCustomer**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_DELIVERYBOY', 'ROLE_RECEPTIONIST')"/>
+		
+		<!-- MEAL URL -->
+		<intercept-url pattern="/meals/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST')"/>
 		
 		<form-login authentication-success-forward-url="/handleSuccesLogin.do" authentication-failure-forward-url="/handleFailureLogin.do"/>
 		<logout/>

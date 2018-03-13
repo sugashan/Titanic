@@ -13,6 +13,13 @@
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">Meal</h3>
+				<c:if test="${param.success eq true}">
+                 <div class="alert alert-success alertMsg" style = "margin-top:15px; padding:5px;">${param.msg}</div>
+                 </c:if>
+                 
+                  <c:if test="${param.success eq false}">
+                 <div class="alert alert-warning alertMsg" style = "margin-top:15px; padding:5px;">${param.msg}</div>
+                 </c:if>
 				<div class="" id="main-res-msg"	style="margin-top: 5px; display: none;">
 					<strong></strong>
 				</div>
@@ -34,17 +41,17 @@
 					<tbody>
 						<c:forEach items="${meal}" var="meal">
 							<tr>
-								<td><a class="btn" href='<spring:url value="/singleMeal/${meal.id}.do" />'>
+								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
 								</a> <a class="btn text-danger triggerRemove"
-									href='<spring:url value="/deleteMeal/${meal.id}.do" />'> <i
+									href='<spring:url value="deleteMeal/${meal.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a> ${meal.code}</td>
-								<td><a class="btn" href='<spring:url value="/singleMeal/${meal.id}.do" />'>${meal.name}</a></td>
-								<td><a class="btn" href='<spring:url value="/singleMeal/${meal.id}.do" />'>${meal.foodType}</a></td>
-								<td><a class="btn" href='<spring:url value="/singleMeal/${meal.id}.do" />'>${meal.preferedTime}</a></td>
-								<td><a class="btn" href='<spring:url value="/singleMeal/${meal.id}.do" />'>${meal.image}</a></td>
-								<td><a class="btn" href='<spring:url value="/singleMeal/${meal.id}.do" />'>${meal.description}</a></td>
+								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>${meal.name}</a></td>
+								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>${meal.foodType}</a></td>
+								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>${meal.preferedTime}</a></td>
+								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>${meal.image}</a></td>
+								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>${meal.description}</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

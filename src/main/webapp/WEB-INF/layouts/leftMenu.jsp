@@ -60,11 +60,11 @@
 				</a>
 				<ul class="treeview-menu">
 					<li class="${current == 'foodType' ? 'active' : ''}">
-						<a href='<spring:url value="/foodType.do" />'><i class="fa fa-circle-thin"></i><span>
+						<a href='<spring:url value="/meals/foodType.do" />'><i class="fa fa-circle-thin"></i><span>
 								Meal-Type</span></a>
 					</li>
 					<li class="${current == 'meal' ? 'active' : ''}">
-						<a href='<spring:url value="/meal.do" />'><i
+						<a href='<spring:url value="/meals/meal.do" />'><i
 							class="fa fa-circle-thin"></i><span> 
 								Meal</span></a>
 					</li>

@@ -2,6 +2,7 @@ package com.titanic.service.user;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,17 +23,14 @@ public class CustomerManagementService {
 	private UserRepository uRepository;
 	
 	@Autowired
-	private RoleRepository rRepo;
+	private RoleRepository rRepository;
 	
 	// WHILE SAVING CUDTOMER WITH YOUR ROLE
 	public void save(Customer customer) {
 		customer.getUser().setEnabled(true);
 		
-		Role userRole = new Role();
-		userRole.setId(2);
-		userRole.setName("ROLE_USER");
-		userRole.setDescription("role-user");
-		rRepo.save(userRole);
+		Role userRole = rRepository.findById(4);
+		customer.getUser().setRole(userRole);
 		
 		customer.getUser().setRole(userRole);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -48,6 +46,7 @@ public class CustomerManagementService {
 	}
 
 	// DELETE A CUSTOMER
+	@PreAuthorize(value = "hasRole('ROLE_ADMIN', 'ROLE_CUSTOMER')")
 	public void delete(int id) {
 		cRepository.delete(findOnebyId(id));
 	}
