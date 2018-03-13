@@ -28,15 +28,16 @@ public class EmployeeController {
 		return new Employee();
 	}
 	
-	@RequestMapping("/employee")
+	// GET ALL EMPLOYEE
+	@RequestMapping("users/employee")
 	public String employee(Model model) {
-		model.addAttribute("role", emService.findAllRoles());
+		model.addAttribute("roles", emService.findAllRoles());
 		model.addAttribute("employee", emService.findAll());
 		return "employee";
 	}
 	
 	// SINGLE USER
-	@RequestMapping("/singleEmployee/{id}")
+	@RequestMapping("users/singleEmployee/{id}")
 	public String singleEmployee(Model model, @PathVariable int id) {
 		model.addAttribute("role", emService.findAllRoles());
 		model.addAttribute("singleEmployee", emService.findOnebyId(id));
@@ -44,7 +45,7 @@ public class EmployeeController {
 	}
 	
 	// ADD NEW USER
-	@RequestMapping(value="/employee", method=RequestMethod.POST)
+	@RequestMapping(value="users/employee", method=RequestMethod.POST)
 	public String addEmployee(@ModelAttribute("newEmployee") Employee employee, BindingResult errors, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
@@ -52,6 +53,7 @@ public class EmployeeController {
 		else {
 //			try {
 		//		System.out.println(JsonFormer.form(employee));
+			employee.getUser().setRole(emService.findRoleById(employee.getUser().getRoleId()));
 				emService.save(employee);
 //			} catch (JSONException e) {
 //				// TODO Auto-generated catch block
@@ -59,24 +61,24 @@ public class EmployeeController {
 //			}
 			
 		}
-		model.addAttribute("employee", emService.findAll());
-		return "redirect:/employee.do?success=true";
+		
+		return "redirect:/users/employee.do?success=true&msg=Successfully Registered";
 	}
 	
 	// UPDATE EXITING USER
-	@RequestMapping(value="/singleEmployee/{id}", method=RequestMethod.POST, headers = "content-type=text/*")
+	@RequestMapping(value="users/singleEmployee/{id}", method=RequestMethod.POST)
 	public String updateEmployee(@ModelAttribute("singleUpdatedEmployee") Employee employee, @PathVariable int id, Model model) {
-		System.out.println(employee.getContact() + "----contact");
-		//	model.addAttribute("singleEmployee",emService.update(employee, id));
-		return "employee-detail";
+		employee.getUser().setRole(emService.findRoleById(employee.getUser().getRoleId()));
+		emService.update(employee, id);
+		return "redirect:/users/employee-detail.do?success=true&msg=Successfully Updated";
 	}
 	
 	// DELETE USER
-	@RequestMapping(value="/deleteEmployee/{id}")
+	@RequestMapping(value="users/deleteEmployee/{id}")
 	public String deleteEmployee(@PathVariable int id, Model model) {
-		emService.delete(id);
-		model.addAttribute("employee", emService.findAll());
-		return "employee";
+		Employee employee = emService.findOnebyId(id);
+		emService.delete(employee);
+		return "redirect:/users/employee.do?success=true&msg=Successfully Deleted";
 	}
 		
 }

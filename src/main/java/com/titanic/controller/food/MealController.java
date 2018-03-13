@@ -61,8 +61,8 @@ public class MealController {
 //			}
 			
 		}
-		model.addAttribute("meal", mmService.findAll());
-		return "meals";
+	//	model.addAttribute("meal", mmService.findAll());
+		return "redirect:/meal?success=true";
 	}
 	
 	// UPDATE EXITING MEAL
@@ -70,7 +70,7 @@ public class MealController {
 	public String updateMeal(@ModelAttribute("singleUpdatedMeal")  Meal meal, @PathVariable int id, Model model) {
 		System.out.println(meal.getName() + "----contact");
 		//	model.addAttribute("singleEmployee",fmService.update(employee, id));
-		return "meal-detail";
+		return "redirect:/meal-detail?success=true";
 	}
 	
 	// DELETE MEAL
@@ -78,6 +78,6 @@ public class MealController {
 	public String deleteMeal(@PathVariable int id, Model model) {
 		mmService.delete(id);
 		model.addAttribute("meal", mmService.findAll());
-		return "meals";
+		return "redirect:/meal?success=true";
 	}
 }

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-
+<%@ include file="../../common/commonModals.jsp" %>
 <%@ include file="../../../layouts/taglib.jsp" %>
 
 <!-- Content Wrapper. Contains page content -->
@@ -34,7 +34,7 @@
 							<tr>
 								<td><a class="btn" href='<spring:url value="/singleCustomer/${cust.user.id}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
-								</a> <a class="btn text-danger"
+								</a> <a class="btn text-danger triggerRemove"
 									href='<spring:url value="/deleteCustomer/${cust.user.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a> ${emp.user.id}</td>
@@ -73,5 +73,13 @@
 	      "info": true,
 	      "autoWidth": false
 	    });  		
+    	 
+    	 
+    	 $("#confModalText").html("Are you want to delete this Customer?");
+    	 $(".triggerRemove").click(function(e){
+    		e.preventDefault();
+    		 $("#confModalbtn").attr("href", $(this).attr("href")); 
+    		$("#confirmModal").modal("show");
+    	 });
   	});
   	</script>

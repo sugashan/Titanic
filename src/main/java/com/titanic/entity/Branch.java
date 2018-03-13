@@ -2,6 +2,7 @@ package com.titanic.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,7 @@ public class Branch {
 	private String address;
 	private String contact;
 	
-	@OneToMany(mappedBy="branch")
+	@OneToMany(mappedBy="branch", cascade=CascadeType.REMOVE)
 	private List<Employee> employee;
 	
 	

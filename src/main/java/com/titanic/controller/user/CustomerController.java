@@ -14,14 +14,14 @@ public class CustomerController {
 	private CustomerManagementService cmService;
 	
 	// GET ALL CUSTOMERS
-	@RequestMapping("/customer")
+	@RequestMapping("/users/customer")
 	public String employee(Model model) {
 		model.addAttribute("customer", cmService.findAll());
 		return "customer";
 	}
 	
 	// SINGLE USER
-	@RequestMapping("/singleCustomer/{id}")
+	@RequestMapping("/users/singleCustomer/{id}")
 	public String singleEmployee(Model model, @PathVariable int id) {
 		model.addAttribute("singleCustomer", cmService.findOnebyId(id));
 		return "customer-detail";

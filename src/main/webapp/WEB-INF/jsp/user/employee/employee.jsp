@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 	
 <%@ include file="../../../layouts/taglib.jsp" %>
+<%@ include file="../../common/commonModals.jsp" %>
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -12,11 +14,11 @@
 			<div class="box-header">
 				<h3 class="box-title">Employee</h3>
        		 	 <c:if test="${param.success eq true}">
-                 <div class="alert alert-success" style = "margin-top:15px; padding:5px;">Registration Success!</div>
+                 <div class="alert alert-success alertMsg" style = "margin-top:15px; padding:5px;">${param.msg}</div>
                  </c:if>
                  
                   <c:if test="${param.success eq false}">
-                 <div class="alert alert-warning" style = "margin-top:15px; padding:5px;">Registration Failed</div>
+                 <div class="alert alert-warning alertMsg" style = "margin-top:15px; padding:5px;">${param.msg}</div>
                  </c:if>
 			</div>
 			<!-- /.box-header -->
@@ -36,10 +38,10 @@
 					<tbody>
 						<c:forEach items="${employee}" var="emp">
 							<tr>
-								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>
+								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
-								</a> <a class="btn text-danger"
-									href='<spring:url value="/deleteEmployee/${emp.user.id}.do" />'> <i
+								</a> <a class="btn text-danger triggerRemove"
+									href='<spring:url value="deleteEmployee/${emp.user.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a> ${emp.user.userName}</td>
 								<td><a class="btn" href='<spring:url value="/singleEmployee/${emp.user.id}.do" />'>${emp.user.name}</a></td>
@@ -87,8 +89,8 @@
 				    
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Role :</label>
-				     	<form:select path="user.role" cssClass="form-control" >
-				     	   <c:forEach items="${role}" var ="role">
+				     	<form:select path="user.roleId" cssClass="form-control" >
+				     	   <c:forEach items="${roles}" var ="role">
 				     	   		<form:option label="${role.name}" value="${role.id}"/>
 				     	   </c:forEach>
 						</form:select>
@@ -183,5 +185,13 @@
 	      "info": true,
 	      "autoWidth": false
 	    });  		
+    	 
+    	 $("#confModalText").html("Are you want to delete this Employee?");
+    	 $(".triggerRemove").click(function(e){
+    		e.preventDefault();
+    		 $("#confModalbtn").attr("href", $(this).attr("href")); 
+    		$("#confirmModal").modal("show");
+    	 });
+    	 
   	});
   	</script>

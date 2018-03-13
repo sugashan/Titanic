@@ -2,13 +2,13 @@ package com.titanic.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
 
 @Entity
 public class Role {
@@ -19,11 +19,7 @@ public class Role {
 	private String name;
 	private String description;
 	
-	@ManyToMany
-	@JoinColumn
-	private List<Authority> authorities;
-	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.REMOVE)
 	private List<User> user;
 	
 
@@ -32,12 +28,6 @@ public class Role {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public List<Authority> getAuthorities() {
-		return authorities;
-	}
-	public void setAuthorities(List<Authority> authorities) {
-		this.authorities = authorities;
 	}
 	public List<User> getUser() {
 		return user;

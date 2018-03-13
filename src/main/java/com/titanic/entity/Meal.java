@@ -17,7 +17,8 @@ public class Meal {
 	private String image;
 	private String code;
 	private Float price;
-	private String addedByUser;
+	@OneToOne
+	private User addedByUser;
 	private String preferedTime;
 	private String description;
 	
@@ -56,10 +57,10 @@ public class Meal {
 	public void setPrice(Float price) {
 		this.price = price;
 	}
-	public String getAddedByUser() {
+	public User getAddedByUser() {
 		return addedByUser;
 	}
-	public void setAddedByUser(String addedByUser) {
+	public void setAddedByUser(User addedByUser) {
 		this.addedByUser = addedByUser;
 	}
 	public FoodType getFoodType() {

@@ -2,6 +2,7 @@ package com.titanic.service.user;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -40,8 +41,9 @@ public class EmployeeManagementService {
 	}
 
 	// DELETE A EMPLOYEE
-	public void delete(int id) {
-		eRepository.delete(findOnebyId(id));
+	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
+	public void delete( Employee employee) {
+		eRepository.delete(employee);
 	}
 	
 	// GET A USER WITH ID
@@ -76,10 +78,16 @@ public class EmployeeManagementService {
 		//	List<Authority> authority = aRepository.findByRoles(roles);
 		return roles;
 	}
-
+	
+	// GET EMPLOYEE WITH NAME
 	public Employee findOneByName(String name) {
 		User user = uRepository.findByUserName(name);
 		return eRepository.findByUser(user);
+	}
+
+	// GET ROLE WITH ID
+	public Role findRoleById(int id) {
+		return rRepository.findById(id);
 	}
 
 	

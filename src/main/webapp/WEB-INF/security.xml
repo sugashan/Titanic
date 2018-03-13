@@ -7,21 +7,31 @@
 		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
+	<global-method-security pre-post-annotations="enabled" />
+
 	<http pattern="/resources/**" security="none"/>
 <!-- 	<http pattern="/login.do" security="none"/> -->
 <!-- 	<http pattern="/login" security="none"/> -->
 <!-- 	<http pattern="/logout" security="none"/> -->
 	
-	<http use-expressions="false">
-		<intercept-url pattern="/**" access="ROLE_ADMIN"/>
-		<form-login authentication-success-forward-url="/home.do"/>
+	<http use-expressions="true" >
+		<access-denied-handler error-page="/accessDenied.do"/> 
+		
+		<!-- EMPLOYEE URL -->
+		<intercept-url pattern="/users/employee**" access="hasAnyRole('ROLE_ADMIN, ROLE_RECEPTIONIST')"/>
+		<intercept-url pattern="/users/singleEmployee/**" access="hasAnyRole('ROLE_ADMIN, ROLE_COOK, ROLE_DELIVERYBOY, ROLE_RECEPTIONIST')"/>
+		
+		<!-- CUSTOMER URL -->
+		<intercept-url pattern="/users/customer**" access="hasAnyRole('ROLE_ADMIN, ROLE_RECEPTIONIST')"/>
+		<intercept-url pattern="/users/singleCustomer**" access="hasAnyRole('ROLE_ADMIN, ROLE_COOK, ROLE_DELIVERYBOY, ROLE_RECEPTIONIST')"/>
+		
+		<form-login authentication-success-forward-url="/handleSuccesLogin.do" authentication-failure-forward-url="/handleFailureLogin.do"/>
 		<logout/>
 <!-- 		<logout logout-url="/logout.do" logout-success-url="/lockScreen.do"/> -->
 	</http>
 
 	<authentication-manager>
 		<authentication-provider>
-<!-- 			<user-service><user name="admin" password="{noop}admin" authorities="ROLE_ADMIN, ROLE_USER"/></user-service> -->
 			<password-encoder hash="bcrypt"/>
 			<jdbc-user-service data-source-ref="dataSource"
 				authorities-by-username-query="select user.userName, role.name from user 

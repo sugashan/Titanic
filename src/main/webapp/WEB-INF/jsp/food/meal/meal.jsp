@@ -3,6 +3,7 @@
 
 <%@page import="com.titanic.entity.MealsSchedule"%>
 <%@ include file="../../../layouts/taglib.jsp" %>
+<%@ include file="../../common/commonModals.jsp" %>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -35,7 +36,7 @@
 							<tr>
 								<td><a class="btn" href='<spring:url value="/singleMeal/${meal.id}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
-								</a> <a class="btn text-danger"
+								</a> <a class="btn text-danger triggerRemove"
 									href='<spring:url value="/deleteMeal/${meal.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a> ${meal.code}</td>
@@ -165,5 +166,11 @@
 	      "info": true,
 	      "autoWidth": false
 	    });  		
+    	 $("#confModalText").html("Are you want to delete this Meal?");
+    	 $(".triggerRemove").click(function(e){
+    		e.preventDefault();
+    		 $("#confModalbtn").attr("href", $(this).attr("href")); 
+    		$("#confirmModal").modal("show");
+    	 });
   	});
   	</script>

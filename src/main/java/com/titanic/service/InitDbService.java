@@ -1,19 +1,14 @@
 package com.titanic.service;
 
-import java.util.ArrayList;
-
 import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.titanic.entity.Authority;
 import com.titanic.entity.Branch;
 import com.titanic.entity.Employee;
 import com.titanic.entity.Role;
 import com.titanic.entity.User;
-import com.titanic.respository.AuthorityRepository;
 import com.titanic.respository.BranchRepository;
 import com.titanic.respository.EmployeeRepository;
 import com.titanic.respository.RoleRepository;
@@ -32,31 +27,41 @@ public class InitDbService {
 	@Autowired
 	private RoleRepository rRepo;
 	
-	@Autowired 
-	private AuthorityRepository aRepo;
-	
 	@Autowired
 	private BranchRepository bRepo;
 
 	@PostConstruct
 	public void Init() {
-		// NEED TO ADD AUTHORITIES TO ROLE
-		
-		Authority auth = new Authority();
-		auth.setId(1);
-		auth.setName("VIEW_EMPLOYEE");
-		auth.setAuthority("VIEW_EMPLOYEE");
-		aRepo.save(auth);
-		
-		ArrayList<Authority> authorities = new ArrayList<Authority>();
-		authorities.add(auth);
 		
 		Role adminRole = new Role();
 		adminRole.setId(1);
 		adminRole.setName("ROLE_ADMIN");
 		adminRole.setDescription("role-admin");
-		adminRole.setAuthorities(authorities);
 		rRepo.save(adminRole);
+		
+		Role cookRole = new Role();
+		cookRole.setId(2);
+		cookRole.setName("ROLE_COOK");
+		cookRole.setDescription("role-cook");
+		rRepo.save(cookRole);
+		
+		Role recepientRole = new Role();
+		recepientRole.setId(3);
+		recepientRole.setName("ROLE_RECEPTIONIST");
+		recepientRole.setDescription("role-recepient");
+		rRepo.save(recepientRole);
+		
+		Role customerRole = new Role();
+		customerRole.setId(4);
+		customerRole.setName("ROLE_CUSTOMER");
+		customerRole.setDescription("role-customer");
+		rRepo.save(customerRole);
+		
+		Role deliveryRole = new Role();
+		deliveryRole.setId(5);
+		deliveryRole.setName("ROLE_DELIVERYBOY,");
+		deliveryRole.setDescription("role-deliveryBoy");
+		rRepo.save(deliveryRole);
 		
 		Branch defaultBranch = new Branch();
 		defaultBranch.setId(1);
@@ -68,7 +73,7 @@ public class InitDbService {
 		User newUser = new User();
 		newUser.setEnabled(true);
 		newUser.setId(1);
-		newUser.setName("ADMIN");
+		newUser.setName("Admin");
 		newUser.setMobile("077-3284456");
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		

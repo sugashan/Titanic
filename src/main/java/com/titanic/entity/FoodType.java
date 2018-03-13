@@ -2,6 +2,7 @@ package com.titanic.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,9 +18,7 @@ public class FoodType {
 	private String name;
 	private String description;
 	
-	@OneToMany(mappedBy="foodType")
-	
-	
+	@OneToMany(mappedBy="foodType", cascade=CascadeType.REMOVE)
 	private List<Meal> meal;
 	
 	public int getId() {

@@ -43,11 +43,11 @@
 				</span> </a>
 				<ul class="treeview-menu">
 					<li class="${current == 'employee' ? 'active' : ''}">
-						<a href='<spring:url value="/employee.do" />'><i class="fa fa-circle-thin"></i><span>
+						<a href='<spring:url value="/users/employee.do" />'><i class="fa fa-circle-thin"></i><span>
 								Employees</span></a>
 					</li>
 					<li class="${current == 'employee' ? 'active' : ''}">
-						<a href='<spring:url value="/customer.do" />'><i
+						<a href='<spring:url value="/users/customer.do" />'><i
 							class="fa fa-circle-thin"></i><span> 
 								Customers</span></a>
 					</li>

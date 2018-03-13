@@ -27,7 +27,7 @@
 				    
 				    <div class="form-group col-md-6">
 				   		<label for="exampleInputEmail1">Role :</label>
-				     	<form:select path="user.role" class="form-control" id="empRole" disabled="true" >
+				     	<form:select path="user.roleId" class="form-control" id="empRole" disabled="true" >
 				     		<form:option label="${singleEmployee.user.role.name}" value="${singleEmployee.user.role.id}" cssClass="editToShow"/>
 				     	   <c:forEach items="${role}" var ="role">
 				     	   		<form:option label="${role.name}" value="${role.id}"/>

@@ -24,12 +24,22 @@ public class User {
 	private String gender;
 	private boolean enabled;
 	
+	private int roleId;
+	
 	@OneToOne
 	private Login login;
 	
 	@OneToOne
 	private Role role;
 	
+	
+	
+	public int getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
 	public Role getRole() {
 		return role;
 	}

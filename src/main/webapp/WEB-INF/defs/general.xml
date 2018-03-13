@@ -11,6 +11,11 @@
 		<put-attribute name="title" value="Titanic Login" />
 	</definition>
 	
+	<definition name="forbidden" extends="classicLogin">
+		<put-attribute name="body" value="/WEB-INF/jsp/common/forbidden.jsp" />
+		<put-attribute name="title" value="Titanic Forbidden" />
+	</definition>
+	
 	<definition name="lockScreen" extends="classicLogin">
 		<put-attribute name="body" value="/WEB-INF/jsp/user/lockScreen.jsp" />
 		<put-attribute name="title" value="Titanic SignIn" />
