@@ -46,12 +46,12 @@
 								</a> <a class="btn text-danger triggerRemove"
 									href='<spring:url value="deleteMeal/${meal.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
-								</a> ${meal.code}</td>
-								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>${meal.name}</a></td>
-								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>${meal.foodType}</a></td>
-								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>${meal.preferedTime}</a></td>
-								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>${meal.image}</a></td>
-								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>${meal.description}</a></td>
+								</a><c:out value="${meal.code}"/></td>
+								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'><c:out value="${meal.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'><c:out value="${meal.foodType}"/></a></td>
+								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'><c:out value="${meal.preferedTime}"/></a></td>
+								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'><c:out value="${meal.image}"/></a></td>
+								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'><c:out value="${meal.description}"/></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -11,7 +11,7 @@
 	<button value = "Edit Employee" class="btn btn-info" id="ediBtn" onclick="showEdit()"><i class="fa fa-pencil-square-o"></i> Edit Employee</button>
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">${singleMeal.code}- Meal</h3>
+				<h3 class="box-title"><c:out value="${singleMeal.code}"/>- Meal</h3>
 				<c:if test="${param.success eq true}">
                  <div class="alert alert-success alertMsg" style = "margin-top:15px; padding:5px;">${param.msg}</div>
                  </c:if>

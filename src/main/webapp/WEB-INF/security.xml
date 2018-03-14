@@ -10,12 +10,11 @@
 	<global-method-security pre-post-annotations="enabled" />
 
 	<http pattern="/resources/**" security="none"/>
-<!-- 	<http pattern="/login.do" security="none"/> -->
-<!-- 	<http pattern="/login" security="none"/> -->
 <!-- 	<http pattern="/logout" security="none"/> -->
 	
 	<http use-expressions="true" >
 		<access-denied-handler error-page="/accessDenied.do"/> 
+		<intercept-url pattern="/login*" access="isAnonymous()" />
 		
 		<!-- EMPLOYEE URL -->
 		<intercept-url pattern="/users/employee**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')"/>
@@ -28,12 +27,16 @@
 		<!-- MEAL URL -->
 		<intercept-url pattern="/meals/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST')"/>
 		
-		<form-login authentication-success-forward-url="/handleSuccesLogin.do" authentication-failure-forward-url="/handleFailureLogin.do"/>
+		<form-login 
+			login-page="/login.do"
+			authentication-success-forward-url="/handleSuccesLogin.do" 
+			authentication-failure-forward-url="/handleFailureLogin.do" />
+			
 		<logout/>
-<!-- 		<logout logout-url="/logout.do" logout-success-url="/lockScreen.do"/> -->
+<!-- 		<logout logout-success-url="/lockScreen.do"/> -->
 	</http>
 
-	<authentication-manager>
+	<authentication-manager id="authenticationSource">
 		<authentication-provider>
 			<password-encoder hash="bcrypt"/>
 			<jdbc-user-service data-source-ref="dataSource"

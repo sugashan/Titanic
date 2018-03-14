@@ -43,9 +43,9 @@
 								</a> <a class="btn text-danger triggerRemove"
 									href='<spring:url value="deleteFoodType/${fte.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
-								</a> ${fte.id}</td>
-								<td><a class="btn" href='<spring:url value="singlefoodType/${fte.id}.do" />'>${fte.name}</a></td>
-								<td><a class="btn" href='<spring:url value="singlefoodType/${fte.id}.do" />'>${fte.description}</a></td>
+								</a> <c:out value="${fte.id}"/></td>
+								<td><a class="btn" href='<spring:url value="singlefoodType/${fte.id}.do" />'><c:out value="${fte.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="singlefoodType/${fte.id}.do" />'><c:out value="${fte.description}"/></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
