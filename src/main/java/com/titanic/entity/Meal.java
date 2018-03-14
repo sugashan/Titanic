@@ -6,6 +6,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Currency;
 
 @Entity
 public class Meal {
@@ -13,12 +16,19 @@ public class Meal {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Size(min=3, message="Invalid Meal Name!")
 	private String name;
 	private String image;
 	private String code;
+	
+	@Currency(message="Invalid Price!", value = { "LKR" })
 	private Float price;
+	
 	@OneToOne
 	private User addedByUser;
+	
+	@NotNull(message="Prefered Time Can Not Be Empty!")
 	private String preferedTime;
 	private String description;
 	
@@ -26,7 +36,15 @@ public class Meal {
 	@JoinColumn(name="foodType_id")
 	private FoodType foodType;
 	
-
+	@NotNull(message="Food Type Can Not Be Empty!")
+	private int foodTypeId;
+	
+	public int getFoodTypeId() {
+		return foodTypeId;
+	}
+	public void setFoodTypeId(int foodTypeId) {
+		this.foodTypeId = foodTypeId;
+	}
 	public int getId() {
 		return id;
 	}
@@ -81,5 +99,6 @@ public class Meal {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
 	
 }

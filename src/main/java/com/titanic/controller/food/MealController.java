@@ -1,5 +1,7 @@
 package com.titanic.controller.food;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,8 @@ public class MealController {
 	private MealManagementService mmService;
 	private FoodTypeManagementService ftService;
 	
+	private String redirectUrlString="";
+	
 	@ModelAttribute("newMeal")
 	public Meal Construct() {
 		return new Meal();
@@ -39,7 +43,7 @@ public class MealController {
 	}
 	
 	// SINGLE MEAL
-	@RequestMapping("/meals/singleMeal/{id}")
+	@RequestMapping("/meals/meal-detail/{id}")
 	public String singleFoodType(Model model, @PathVariable int id) {
 		model.addAttribute("singleMeal", mmService.findOnebyId(id));
 		return "meal-detail";
@@ -47,29 +51,39 @@ public class MealController {
 	
 	// ADD NEW MEAL
 	@RequestMapping(value="/meals/meal", method=RequestMethod.POST)
-	public String addFoodType(@ModelAttribute("newMeal") Meal meal, BindingResult errors, Model model) {
+	public String addFoodType( @Valid @ModelAttribute("newMeal") Meal meal, BindingResult errors, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
+			redirectUrlString = "redirect:/meals/meal?success=false&msg=Added Failed";
 		}
 		else {
 //			try {
 		//		System.out.println(JsonFormer.form(employee));
+				meal.setFoodType(ftService.findOnebyId(meal.getFoodTypeId()));
 				mmService.save(meal);
+				redirectUrlString = "redirect:/meals/meal?success=true&msg=Successfully Added";
 //			} catch (JSONException e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
 			
 		}
-		return "redirect:/meals/meal?success=true&msg=Successfully Added";
+		return redirectUrlString;
 	}
 	
 	// UPDATE EXITING MEAL
-	@RequestMapping(value="/meals/singleMeal/{id}", method=RequestMethod.POST)
-	public String updateMeal(@ModelAttribute("singleUpdatedMeal")  Meal meal, @PathVariable int id, Model model) {
-		System.out.println(meal.getName() + "----contact");
-		mmService.update(meal, id);
-		return "redirect:/meals/meal-detail?success=true&msg=Successfully Updated";
+	@RequestMapping(value="/meals/meal-detail/{id}", method=RequestMethod.POST)
+	public String updateMeal(@Valid @ModelAttribute("singleUpdatedMeal")  Meal meal, BindingResult errors, @PathVariable int id, Model model) {
+		if(errors.hasErrors()) {
+			System.out.println(errors.getFieldErrors().toString());
+			redirectUrlString = "redirect:/meals/meal-detail?success=false&msg=Updated Failed";
+		}
+		else {
+			meal.setFoodType(ftService.findOnebyId(meal.getFoodTypeId()));
+			mmService.update(meal, id);
+			redirectUrlString = "redirect:/meals/meal-detail?success=true&msg=Successfully Updated";
+		}
+		return redirectUrlString;
 	}
 	
 	// DELETE MEAL

@@ -27,11 +27,13 @@
 				    <div class="form-group col-md-6">
 				   		 <label for="exampleInputEmail1">Meal-Name :</label>
 				    	 <form:input path="name" cssClass="form-control" value="${singleMeal.name}"/>
+				    	  <span style="color:red;"><form:errors path="name"/></span>
 				    </div>
 				    
 				     <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Meal-Code :</label>
 				    	 <form:input path="code" cssClass="form-control" disabled="true" value="${singleMeal.code}"/>
+				    	  <span style="color:red;"><form:errors path="code"/></span>
 				    </div>
 				  </div>
 				  
@@ -44,16 +46,18 @@
 								<form:option value="<%=ms.getName()%>"><%=ms.getName()%></form:option>
 						  <% } %>
 						</form:select>
+						 <span style="color:red;"><form:errors path="preferedTime"/></span>
 				     </div>
 				     
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Food-Type :</label>
-				     	<form:select path="foodType" class="form-control" id="foodType">
+				     	<form:select path="foodTypeId" class="form-control" id="foodType">
 				     			<form:option label="${singleMeal.foodType.name}" value="${singleMeal.foodType.id}"/>
 				     	   <c:forEach items="${mealType}" var ="mealType">
 				     	   		<form:option label="${mealType.name}" value="${mealType.id}"/>
 				     	   </c:forEach>
 						</form:select>
+							 <span style="color:red;"><form:errors path="foodTypeId"/></span>
 				     </div>
 				  </div>
 				  
@@ -61,11 +65,13 @@
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Unit-Price :</label>
 				     <form:input path="price" cssClass="form-control" type="number" step="0.01" value="${singleMeal.price}"/>
+				   	<span style="color:red;"><form:errors path="price"/></span>
 				    </div>
 				    
 				     <div class="form-group col-md-6">
 				    	<form:input path="image" type="file" cssClass="form-control" name="image"/>
 				    	<img src="${singleMeal.image}" alt="Meal face" height="42" width="42">
+				    	<span style="color:red;"><form:errors path="image"/></span>
 	 			    </div> 
 				  </div>
 				  
@@ -73,6 +79,7 @@
 				  	<div class = "col-md-12">
 				  	<label for="exampleInputEmail1">Description :</label>
 				  		<form:textarea path = "description" cssClass="form-control" value="${singleMeal.description}" />
+				  		<span style="color:red;"><form:errors path="description"/></span>
 				  	</div>
 			  	</div>
 				  

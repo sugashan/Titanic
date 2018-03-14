@@ -1,5 +1,7 @@
 package com.titanic.controller.food;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,9 @@ public class FoodTypeController {
 
 	@Autowired
 	private FoodTypeManagementService fmService;
+	
+	
+	private String redirectUrlString="";
 	
 	@ModelAttribute("newFoodType")
 	public FoodType Construct() {
@@ -35,7 +40,7 @@ public class FoodTypeController {
 	}
 	
 	// SINGLE USER
-	@RequestMapping("/meals/singlefoodType/{id}")
+	@RequestMapping("/meals/foodType-detail/{id}")
 	public String singleFoodType(Model model, @PathVariable int id) {
 		model.addAttribute("singleFoodType", fmService.findOnebyId(id));
 		return "foodType-detail";
@@ -43,28 +48,36 @@ public class FoodTypeController {
 	
 	// ADD NEW USER
 	@RequestMapping(value="/meals/foodType", method=RequestMethod.POST)
-	public String addFoodType(@ModelAttribute("newFoodType") FoodType foodType, BindingResult errors, Model model) {
+	public String addFoodType( @Valid @ModelAttribute("newFoodType") FoodType foodType, BindingResult errors, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
+			redirectUrlString = "redirect:/meals/foodType?success=false&msg=Added Failed";
 		}
 		else {
 //			try {
 		//		System.out.println(JsonFormer.form(employee));
 				fmService.save(foodType);
+				redirectUrlString = "redirect:/meals/foodType?success=true&msg=Successfully Added";
 //			} catch (JSONException e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
-			
 		}
-		return "redirect:/meals/foodType?success=true&msg=Successfully Added";
+		return redirectUrlString;
 	}
 	
 	// UPDATE EXITING USER
-	@RequestMapping(value="/meals/singleFoodType/{id}", method=RequestMethod.POST)
-	public String updateFoodType(@ModelAttribute("singleUpdatednewFoodType") FoodType foodType, @PathVariable int id, Model model) {
-		fmService.update(foodType, id);
-		return "redirect:/meals/foodType-detail?success=true&msg=Successfully Updated";
+	@RequestMapping(value="/meals/foodType-detail/{id}", method=RequestMethod.POST)
+	public String updateFoodType(@Valid @ModelAttribute("singleUpdatednewFoodType") FoodType foodType, BindingResult errors, @PathVariable int id, Model model) {
+		if(errors.hasErrors()) {
+			System.out.println(errors.getFieldErrors().toString());
+			redirectUrlString = "redirect:/meals/foodType-detail?success=false&msg=Added Failed";
+		}
+		else {
+			fmService.update(foodType, id);
+			redirectUrlString = "redirect:/meals/foodType-detail?success=true&msg=Successfully Updated";
+		}
+		return redirectUrlString;
 	}
 	
 	// DELETE USER

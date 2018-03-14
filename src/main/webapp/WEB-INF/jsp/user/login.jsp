@@ -9,15 +9,21 @@
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
-
+	 	<c:if test="${param.success eq null}">
+	         <div class="alert alert-info" style = "margin-top:15px;"> <p style=" text-align: center;">Login to start your session</p></div>
+	 	</c:if>
+	   <c:if test="${param.success eq false}">
+            <div class="alert alert-danger" style = "margin-top:15px;"> <p style=" text-align: center;">Failed..! Check your Credentials.</p></div>
+       </c:if>
+	  
+	  
     <form name='f' action='<c:url value="/login" />' method='POST'>
       <div class="form-group has-feedback">
         <input type="text" class="form-control" name="username" placeholder="UserName" autofocus="autofocus">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" name="password" class="form-control" placeholder="Password">
+        <input type="password" name="password"  class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
@@ -25,7 +31,7 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <input name="submit" type="submit" class="btn btn-danger btn-block btn-flat" value="Login"/>
+          <input name="submit" type="submit" class="btn btn-danger btn-block btn-flat" value="Login" />
           <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden" />
         </div>
         <!-- /.col -->
@@ -40,7 +46,7 @@
 
 
 <script>
-  $(function () {
+  $(document).ready(function () {
 	  $(".hold-transition").removeClass("lockscreen").addClass("login-page");
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',

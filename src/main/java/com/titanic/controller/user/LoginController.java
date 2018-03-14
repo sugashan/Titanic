@@ -54,7 +54,7 @@ public class LoginController {
 	// FAILURE LOGIN HANDLER
 	@RequestMapping("/handleFailureLogin")
 	public String handleFailureLogin(HttpSession session) {
-		return "redirect:/login.do?failed=true"; 
+		return "redirect:/login.do?success=false"; 
 	}
 		
 	// VIEW MYSELF USER

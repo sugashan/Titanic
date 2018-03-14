@@ -80,7 +80,7 @@ public class InitDbService {
 		newUser.setUserName("admin");
 		newUser.setPassword(encoder.encode("admin"));
 		newUser.setAddress("Alvai, East");
-		newUser.setRole(deliveryRole);
+		newUser.setRole(adminRole);
 		urepo.save(newUser);
 		
 		Employee newEmployee = new Employee();

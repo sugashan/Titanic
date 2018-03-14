@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Employee {
@@ -15,8 +18,14 @@ public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
+	@Size(min=10, max=12, message="Invalid NIC")
 	private String nic;
+	
+	@Size(min=10, max=10, message="Invalid Mobile Number!")
 	private String contact;
+	
+	@DateTimeFormat
 	private String dob;
 
 	@OneToOne

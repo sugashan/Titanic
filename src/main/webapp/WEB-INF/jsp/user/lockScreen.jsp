@@ -18,12 +18,13 @@
     <!-- /.lockscreen-image -->
 
     <!-- lockscreen credentials (contains the form) -->
-    <form class="lockscreen-credentials">
+    <form class="lockscreen-credentials" name='f' action='<c:url value="/login" />' method='POST'>
       <div class="input-group">
         <input type="password" class="form-control" placeholder="password" autofocus="autofocus">
-
+		  <input type="text" class="form-control" name="username" placeholder="UserName" hidden="true">
         <div class="input-group-btn">
-          <button type="button" class="btn"><i class="fa fa-arrow-right text-muted"></i></button>
+        	 <input name="submit" type="submit" class="btn"><i class="fa fa-arrow-right text-muted"/>
+         	 <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden" />
         </div>
       </div>
     </form>

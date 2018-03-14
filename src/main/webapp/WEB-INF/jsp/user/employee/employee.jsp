@@ -38,17 +38,17 @@
 					<tbody>
 						<c:forEach items="${employee}" var="emp">
 							<tr>
-								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'>
+								<td><a class="btn" href='<spring:url value="employee-detail/${emp.user.id}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
 								</a> <a class="btn text-danger triggerRemove"
 									href='<spring:url value="deleteEmployee/${emp.user.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a> <c:out value="${emp.user.userName}"/></td>
-								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'><c:out value="${emp.user.name}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'><c:out value="${emp.user.mobile}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'><c:out value="${emp.user.role.name}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'><c:out value="${emp.branch.name}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singleEmployee/${emp.user.id}.do" />'><c:out value="${emp.user.address}"/></a></td>
+								<td><a class="btn" href='<spring:url value="employee-detail/${emp.user.id}.do" />'><c:out value="${emp.user.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="employee-detail/${emp.user.id}.do" />'><c:out value="${emp.user.mobile}"/></a></td>
+								<td><a class="btn" href='<spring:url value="employee-detail/${emp.user.id}.do" />'><c:out value="${emp.user.role.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="employee-detail/${emp.user.id}.do" />'><c:out value="${emp.branch.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="employee-detail/${emp.user.id}.do" />'><c:out value="${emp.user.address}"/></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -85,6 +85,7 @@
 				    <div class="form-group col-md-6">
 				   		 <label for="exampleInputEmail1">Name :</label>
 				    	 <form:input path="user.name" cssClass="form-control"/>
+				    	  <span style="color:red;"><form:errors path="user.name"/></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
@@ -94,6 +95,7 @@
 				     	   		<form:option label="${role.name}" value="${role.id}"/>
 				     	   </c:forEach>
 						</form:select>
+						 <span style="color:red;"><form:errors path="user.roleId"/></span>
 				     </div>
 				  </div>
 				  
@@ -101,11 +103,13 @@
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">User Name :</label>
 				    	 <form:input path="user.userName" cssClass="form-control" disabled="true"/>
+				    	 <span style="color:red;"><form:errors path="user.userName"/></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Mobile :</label>
 				     	<form:input path="user.mobile" cssClass="form-control" type="number"/>
+				     	<span style="color:red;"><form:errors path="user.mobile"/></span>
 				     </div>
 				  </div>
 				  
@@ -113,11 +117,13 @@
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">NIC Number :</label>
 				     <form:input path="nic" cssClass="form-control" />
+				      <span style="color:red;"><form:errors path="nic"/></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Email :</label>
 				     	<form:input path="user.email" cssClass="form-control" />
+				     	   <span style="color:red;"><form:errors path="user.email"/></span>
 				     </div>
 				  </div>
 				  
@@ -125,11 +131,13 @@
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Contact :</label>
 				     <form:input path="contact" cssClass="form-control" type="number" />
+				     <span style="color:red;"><form:errors path="contact"/></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Date of Birth :</label>
 	 			      <form:input path = "dob" type = "date" cssClass="form-control"/> 
+	 			       <span style="color:red;"><form:errors path="dob"/></span>
 	 			    </div> 
 				  </div> 
 				  
@@ -144,12 +152,14 @@
 			  	<div class="row">
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Password :</label>
-				       <form:password path="user.password" cssClass="form-control" />
+				       <form:password path="user.password" cssClass="form-control" id="empPassword" />
+				       <span style="color:red;"><form:errors path="user.password"/></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Confirm Password :</label>
-<!-- 				     	<input class="form-control" id="empConfirmPassword" type="text" placeholder="Confirm Password"/> -->
+				     	<input class="form-control" id="empConfirmPassword" data-rule-equalTo="#empPassword" type="text" placeholder="Confirm Password"/>
+				   		<span id="confirmPasswordError" style="color:red;"></span>
 				    </div>
 		 		 </div>
 				  
@@ -164,7 +174,7 @@
 			     	   <i class="fa fa-repeat"></i> Reset</button>
 				 	</div>
 				 	<div class="form-group col-md-4">
-				     	 <button type="submit" class="btn btn-lg btn-block btn-success">
+				     	 <button type="submit" id="submitBtn" class="btn btn-lg btn-block btn-success">
 				        <i class="fa fa-floppy-o"></i> Submit</button>
 				  	  </div>
 				 </div>
@@ -193,5 +203,11 @@
     		$("#confirmModal").modal("show");
     	 });
     	 
+  	});
+  	
+  	$('#empPassword, #empConfirmPassword').on('keyup', function () {
+  	  if ($('#empPassword').val() == $('#empConfirmPassword').val()) {
+  	  } else 
+  		 $('#confirmPasswordError').html('Password Mis-Matching!');
   	});
   	</script>

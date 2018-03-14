@@ -27,6 +27,7 @@
 				    <div class="form-group col-md-12">
 				    	<label for="exampleInputEmail1">Type Name :</label>
 				    	 <form:input path="name" class="form-control" id="empName" type="text" placeholder="Name" value="${singleFoodTyper.name}"/>
+				    	  <span style="color:red;"><form:errors path="name"/></span>
 				    </div>
 				  </div>
 				    
@@ -34,6 +35,7 @@
 				  	<div class = "col-md-12">
 				  	<label for="exampleInputEmail1">Description :</label>
 				  		<form:textarea path = "description" class="form-control" row = "3" name="Address" placeholder="address" value="${singleFoodType.description}"/>
+				  		 <span style="color:red;"><form:errors path="description"/></span>
 				  	</div>
 			  	</div>
 			  	

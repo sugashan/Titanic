@@ -27,6 +27,7 @@
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Employee Name :</label>
 				    	 <form:input path="user.name" class="form-control" id="empName" type="text" placeholder="Name" value="${singleEmployee.user.name}"/>
+				   		 <span style="color:red;"><form:errors path="user.name"/></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
@@ -37,6 +38,7 @@
 				     	   		<form:option label="${role.name}" value="${role.id}"/>
 				     	   </c:forEach>
 						</form:select>
+							 <span style="color:red;"><form:errors path="user.roleId"/></span>
 				     </div>
 				  </div>
 				  
@@ -44,11 +46,13 @@
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">User Name :</label>
 				    	 <form:input path="user.userName" class="form-control" id="empUserName" type="text" placeholder="Code" value="${singleEmployee.user.userName}" disabled="true"/>
+				    	 <span style="color:red;"><form:errors path="user.userName"/></span>
 				    </div>
 				    
 				     <div class="form-group col-md-6">
 				   		 <label for="exampleInputEmail1">Mobile Number :</label>
 				     	<form:input path="user.mobile" class="form-control" id="empMobile" type="number" placeholder="Mobile" value="${singleEmployee.user.mobile}"/>
+				    	 <span style="color:red;"><form:errors path="user.mobile"/></span>
 				     </div>
 				  </div>
 				  
@@ -56,11 +60,13 @@
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">NIC Number :</label>
 				     <form:input path="nic" class="form-control" id="empNic" type="text" placeholder="NIC" value="${singleEmployee.nic}"/>
+				   	 <span style="color:red;"><form:errors path="nic"/></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Email :</label>
 				     	<form:input path="user.email" class="form-control" id="empEmail" type="text" placeholder="Email" value="${singleEmployee.user.email}"/>
+				     	<span style="color:red;"><form:errors path="user.email"/></span>
 				     </div>
 				  </div>
 				  
@@ -68,11 +74,13 @@
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Contact Number :</label>
 				     <form:input path="contact" cssClass="form-control" id="empContact" type="number" placeholder="Contact" value="${singleEmployee.contact}"/>
+				   <span style="color:red;"><form:errors path="contact"/></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
 				      <label for="exampleInputEmail1">Date Of Birth :</label>
 	 			      <form:input path = "dob" type = "date" class="form-control"  placeholder="Date of birth" value="${singleEmployee.dob}"/> 
+	 			   		<span style="color:red;"><form:errors path="dob"/></span>
 	 			    </div> 
 				  </div> 
 				  
@@ -80,21 +88,23 @@
 				  	<div class = "col-md-12">
 				  	<label for="exampleInputEmail1">Address :</label>
 				  		<form:textarea path = "user.address" class="form-control" row = "3" name="Address" placeholder="address" value="${singleEmployee.user.address}"/>
+				  		<span style="color:red;"><form:errors path="user.address"/></span>
 				  	</div>
 			  	</div>
 			  	
 			  	<br/>
-			  	<div class="row">
-				    <div class="form-group col-md-6">
-				    <label for="exampleInputEmail1">Password :</label>
-				     <form:input path="user.password" class="form-control" id="empPassword" type="text" placeholder="Password" value = "${singleEmployee.user.password}"/>
-				    </div>
+<!-- 			  	<div class="row"> -->
+<!-- 				    <div class="form-group col-md-6"> -->
+<!-- 				    <label for="exampleInputEmail1">Password :</label> -->
+<%-- 				     <form:input path="user.password" class="form-control" id="empPassword" type="text" placeholder="Password" value = "${singleEmployee.user.password}"/> --%>
+<%-- 				    	<span style="color:red;"><form:errors path="user.password"/></span> --%>
+<!-- 				    </div> -->
 				    
-				    <div class="form-group col-md-6 cnfPassword">
-				    <label for="exampleInputEmail1">Confirm Password :</label>
-				     	<input class="form-control" id="empConfirmPassword" type="text" placeholder="Confirm Password"/>
-				    </div>
-		 		 </div>
+<!-- 				    <div class="form-group col-md-6 cnfPassword"> -->
+<!-- 				    <label for="exampleInputEmail1">Confirm Password :</label> -->
+<!-- 				     	<input class="form-control" id="empConfirmPassword" type="text" placeholder="Confirm Password" data-rule-equalTo="#empPassword"/> -->
+<!-- 				    </div> -->
+<!-- 		 		 </div> -->
 				  
 			  	<br/>
 			     <div class = "row" id="updBtnDiv">

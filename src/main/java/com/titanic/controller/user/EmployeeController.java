@@ -1,6 +1,8 @@
 package com.titanic.controller.user;
 
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,9 @@ public class EmployeeController {
 	
 	@Autowired
 	private EmployeeManagementService emService;
+	
+	
+	private String redirectUrlString="";
 	
 	@ModelAttribute("newEmployee")
 	public Employee Construct() {
@@ -37,7 +42,7 @@ public class EmployeeController {
 	}
 	
 	// SINGLE USER
-	@RequestMapping("users/singleEmployee/{id}")
+	@RequestMapping("users/employee-detail/{id}")
 	public String singleEmployee(Model model, @PathVariable int id) {
 		model.addAttribute("role", emService.findAllRoles());
 		model.addAttribute("singleEmployee", emService.findOnebyId(id));
@@ -46,31 +51,39 @@ public class EmployeeController {
 	
 	// ADD NEW USER
 	@RequestMapping(value="users/employee", method=RequestMethod.POST)
-	public String addEmployee(@ModelAttribute("newEmployee") Employee employee, BindingResult errors, Model model) {
+	public String addEmployee( @Valid @ModelAttribute("newEmployee") Employee employee, BindingResult errors, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
+			redirectUrlString = "redirect:/users/employee.do?success=false&msg=Registered Failed";
 		}
 		else {
 //			try {
 		//		System.out.println(JsonFormer.form(employee));
 			employee.getUser().setRole(emService.findRoleById(employee.getUser().getRoleId()));
 				emService.save(employee);
+				redirectUrlString = "redirect:/users/employee.do?success=true&msg=Successfully Registered";
 //			} catch (JSONException e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
 			
 		}
-		
-		return "redirect:/users/employee.do?success=true&msg=Successfully Registered";
+		return redirectUrlString;
 	}
 	
 	// UPDATE EXITING USER
-	@RequestMapping(value="users/singleEmployee/{id}", method=RequestMethod.POST)
-	public String updateEmployee(@ModelAttribute("singleUpdatedEmployee") Employee employee, @PathVariable int id, Model model) {
+	@RequestMapping(value="users/employee-detail/{id}", method=RequestMethod.POST)
+	public String updateEmployee(@Valid @ModelAttribute("singleUpdatedEmployee") Employee employee, BindingResult errors, @PathVariable int id, Model model) {
+		if(errors.hasErrors()) {
+			System.out.println(errors.getFieldErrors().toString());
+			redirectUrlString = "redirect:/users/employee-detai.do?success=false&msg=Update Failed";
+		}
+		else {
 		employee.getUser().setRole(emService.findRoleById(employee.getUser().getRoleId()));
 		emService.update(employee, id);
-		return "redirect:/users/employee-detail.do?success=true&msg=Successfully Updated";
+		redirectUrlString = "redirect:/users/employee-detail.do?success=true&msg=Successfully Updated";
+		}
+		return redirectUrlString;
 	}
 	
 	// DELETE USER

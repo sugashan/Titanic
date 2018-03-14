@@ -38,14 +38,14 @@
 					<tbody>
 						<c:forEach items="${foodType}" var="fte">
 							<tr>
-								<td><a class="btn" href='<spring:url value="singlefoodType/${fte.id}.do" />'>
+								<td><a class="btn" href='<spring:url value="foodType-detail/${fte.id}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
 								</a> <a class="btn text-danger triggerRemove"
 									href='<spring:url value="deleteFoodType/${fte.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a> <c:out value="${fte.id}"/></td>
-								<td><a class="btn" href='<spring:url value="singlefoodType/${fte.id}.do" />'><c:out value="${fte.name}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singlefoodType/${fte.id}.do" />'><c:out value="${fte.description}"/></a></td>
+								<td><a class="btn" href='<spring:url value="foodType-detail/${fte.id}.do" />'><c:out value="${fte.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="foodType-detail/${fte.id}.do" />'><c:out value="${fte.description}"/></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -86,22 +86,15 @@
 				    <div class="form-group col-md-12">
 				   		 <label for="exampleInputEmail1">Name :</label>
 				    	 <form:input path="name" cssClass="form-control"/>
+				    	 <span style="color:red;"><form:errors path="name"/></span>
 				    </div>
-				    
-<!-- 				    <div class="form-group col-md-6"> -->
-<!-- 				    	<label for="exampleInputEmail1">Role :</label> -->
-<%-- 				     	<form:select path="role.id" cssClass="form-control" > --%>
-<%-- 				     	   <c:forEach items="${role}" var ="role"> --%>
-<%-- 				     	   		<form:option label="${role.name}" value="${role.id}"/> --%>
-<%-- 				     	   </c:forEach> --%>
-<%-- 						</form:select> --%>
-<!-- 				     </div> -->
 				  </div>
 				  
 			  	<div class = "row">
 				  	<div class = "col-md-12">
 				  	<label for="exampleInputEmail1">Description :</label>
 				  		<form:textarea path = "description" cssClass="form-control" />
+				  		 <span style="color:red;"><form:errors path="description"/></span>
 				  	</div>
 			  	</div>
 			  	

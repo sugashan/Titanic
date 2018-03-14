@@ -13,6 +13,8 @@ public class CustomerController {
 	@Autowired
 	private CustomerManagementService cmService;
 	
+	private String redirectUrlString="";
+	
 	// GET ALL CUSTOMERS
 	@RequestMapping("/users/customer")
 	public String employee(Model model) {

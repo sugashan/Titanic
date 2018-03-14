@@ -41,17 +41,17 @@
 					<tbody>
 						<c:forEach items="${meal}" var="meal">
 							<tr>
-								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'>
+								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
 								</a> <a class="btn text-danger triggerRemove"
 									href='<spring:url value="deleteMeal/${meal.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a><c:out value="${meal.code}"/></td>
-								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'><c:out value="${meal.name}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'><c:out value="${meal.foodType}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'><c:out value="${meal.preferedTime}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'><c:out value="${meal.image}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singleMeal/${meal.id}.do" />'><c:out value="${meal.description}"/></a></td>
+								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.foodType}"/></a></td>
+								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.preferedTime}"/></a></td>
+								<td><a class="btn" href='<spring:url value="meal-detaill/${meal.id}.do" />'><c:out value="${meal.image}"/></a></td>
+								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.description}"/></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -81,13 +81,6 @@
       <div class="modal-content">
       	<div class="modal-header">
         	<h4 class="modal-title">Add New Meal</h4>
-<%--        		 	 <c:if test="${employee.message == 'SUCCESS'}"> --%>
-<%--                  <div class="alert alert-success" style = "margin-top:15px;">${employee.description}</div> --%>
-<%--                  </c:if> --%>
-                 
-<%--                   <c:if test="${employee.message == 'FAILED'}"> --%>
-<%--                  <div class="alert alert-warning" style = "margin-top:15px;">${employee.description}</div> --%>
-<%--                  </c:if> --%>
      	 </div>
         <div class="modal-body">
     		 <form:form modelAttribute="newMeal" enctype="application/x-www-form-urlencoded" method="post" >
@@ -95,11 +88,13 @@
 				    <div class="form-group col-md-6">
 				   		 <label for="exampleInputEmail1">Meal-Name :</label>
 				    	 <form:input path="name" cssClass="form-control"/>
+				    	  <span style="color:red;"><form:errors path="name"/></span>
 				    </div>
 				    
 				     <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Meal-Code :</label>
 				    	 <form:input path="code" cssClass="form-control" disabled="true"/>
+				    	  <span style="color:red;"><form:errors path="code"/></span>
 				    </div>
 				  </div>
 				  
@@ -111,15 +106,17 @@
 								<option value="<%=ms.getName()%>"><%=ms.getName()%></option>
 						  <%}%>
 						</form:select>
+						 <span style="color:red;"><form:errors path="preferedTime"/></span>
 				     </div>
 				     
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Food-Type :</label>
-				     	<form:select path="foodType" class="form-control" id="foodType">
+				     	<form:select path="foodTypeId" class="form-control" id="foodType">
 				     	   <c:forEach items="${mealType}" var ="mealType">
 				     	   		<form:option label="${mealType.name}" value="${mealType.id}"/>
 				     	   </c:forEach>
 						</form:select>
+						 <span style="color:red;"><form:errors path="foodTypeId"/></span>
 				     </div>
 				  </div>
 				  
@@ -127,10 +124,12 @@
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Unit-Price :</label>
 				     <form:input path="price" cssClass="form-control" type="number" step="0.01"/>
+				      <span style="color:red;"><form:errors path="price"/></span>
 				    </div>
 				    
 				     <div class="form-group col-md-6">
 				    	<form:input path="image" type="file" cssClass="form-control" name="image"/>
+				    	 <span style="color:red;"><form:errors path="image"/></span>
 	 			    </div> 
 				  </div>
 				  
@@ -138,6 +137,7 @@
 				  	<div class = "col-md-12">
 				  	<label for="exampleInputEmail1">Description :</label>
 				  		<form:textarea path = "description" cssClass="form-control" />
+				  		 <span style="color:red;"><form:errors path="description"/></span>
 				  	</div>
 			  	</div>
 			  	
