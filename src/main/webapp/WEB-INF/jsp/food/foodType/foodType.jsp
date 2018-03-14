@@ -9,7 +9,7 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-	<input type = "button" data-target="#add-foodType" data-toggle="modal" class="btn btn-success" value = "Add New"/>
+	<input type = "button" data-target="#add-foodType" data-toggle="modal" data-backdrop="static" data-keyboard="false" class="btn btn-success" value = "Add New"/>
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">Food-Type</h3>

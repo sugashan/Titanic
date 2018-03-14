@@ -1,5 +1,6 @@
 
 <%@ include file="taglib.jsp"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 
 <aside class="main-sidebar" id="tofix">
 
@@ -32,7 +33,7 @@
 
 		<!-- Side bar Menu -->
 		<ul class="sidebar-menu">
-		
+			<security:authorize access="! isAuthenticated()">
 			<li class="header ${current == 'home' ? 'active' : ''}">
 				<a href='<spring:url value="/home.jsp" />'> <i class="fa fa-home"></i><span>Home</span></a>
 			</li>
@@ -70,7 +71,7 @@
 					</li>
 				</ul>
 			</li>
-
+			</security:authorize>
 			<li class="treeview"><a href="#"><i class="fa fa-truck"></i>
 					<span>Purchase</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
