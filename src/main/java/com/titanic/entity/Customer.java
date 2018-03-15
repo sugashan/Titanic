@@ -15,6 +15,8 @@ public class Customer {
 	
 	@OneToOne
 	private User user;
+	
+	private String codeBasedCity;
 
 	public int getId() {
 		return id;
@@ -28,5 +30,12 @@ public class Customer {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public String getCodeBasedCity() {
+		return codeBasedCity;
+	}
+	public void setCodeBasedCity(String codeBasedCity) {
+		this.codeBasedCity = codeBasedCity;
+	}
+	
 	
 }

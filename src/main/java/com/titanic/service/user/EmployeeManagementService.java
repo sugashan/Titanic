@@ -6,9 +6,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.titanic.entity.Branch;
 import com.titanic.entity.Employee;
 import com.titanic.entity.Role;
 import com.titanic.entity.User;
+import com.titanic.respository.BranchRepository;
 import com.titanic.respository.EmployeeRepository;
 import com.titanic.respository.RoleRepository;
 import com.titanic.respository.UserRepository;
@@ -25,6 +28,9 @@ public class EmployeeManagementService {
 	@Autowired
 	private RoleRepository rRepository;
 	
+	@Autowired
+	private BranchRepository bRepository;
+	
 	
 	// GET ALL EMPLOYEE AS LIST
 	public List<Employee> findAll(){
@@ -36,7 +42,12 @@ public class EmployeeManagementService {
 		employee.getUser().setEnabled(true);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		employee.getUser().setPassword(encoder.encode(employee.getUser().getPassword()));
+		
+		Branch branch = bRepository.findById(1);
+		 employee.setBranch(branch);
+		 
 		uRepository.save(employee.getUser());
+		if(uRepository.save(employee.getUser()) != null)
 		eRepository.save(employee);
 	}
 

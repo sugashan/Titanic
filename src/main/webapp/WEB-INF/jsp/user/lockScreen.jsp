@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+    <%@ include file="../../layouts/taglib.jsp" %>
 
     <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
@@ -21,9 +23,8 @@
     <form class="lockscreen-credentials" name='f' action='<c:url value="/login" />' method='POST'>
       <div class="input-group">
         <input type="password" class="form-control" placeholder="password" autofocus="autofocus">
-		  <input type="text" class="form-control" name="username" placeholder="UserName" hidden="true">
         <div class="input-group-btn">
-        	 <input name="submit" type="submit" class="btn"><i class="fa fa-arrow-right text-muted"/>
+        	 <a type="submit"><i  class="fa fa-arrow-right text-muted"></i></a>
          	 <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden" />
         </div>
       </div>

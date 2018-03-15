@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.titanic.entity.Branch;
 import com.titanic.entity.Employee;
+import com.titanic.entity.FoodType;
 import com.titanic.entity.Role;
 import com.titanic.entity.User;
 import com.titanic.respository.BranchRepository;
 import com.titanic.respository.EmployeeRepository;
+import com.titanic.respository.FoodTypeRepository;
 import com.titanic.respository.RoleRepository;
 import com.titanic.respository.UserRepository;
 
@@ -29,9 +31,23 @@ public class InitDbService {
 	
 	@Autowired
 	private BranchRepository bRepo;
+	
+	@Autowired
+	private FoodTypeRepository fRepo;
 
 	@PostConstruct
 	public void Init() {
+		FoodType kottu = new FoodType();
+		kottu.setName("KOTTU");
+		kottu.setId(1);
+		kottu.setPreFix("KOT");
+		fRepo.save(kottu);
+		
+		FoodType kottu1 = new FoodType();
+		kottu1.setName("KOTTU11");
+		kottu1.setId(2);
+		kottu1.setPreFix("KOT11");
+		fRepo.save(kottu1);
 		
 		Role adminRole = new Role();
 		adminRole.setId(1);
@@ -73,7 +89,7 @@ public class InitDbService {
 		User newUser = new User();
 		newUser.setEnabled(true);
 		newUser.setId(1);
-		newUser.setName("ddd");
+		newUser.setName("Admin");
 		newUser.setMobile("077-3284456");
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		

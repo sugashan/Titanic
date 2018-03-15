@@ -77,65 +77,67 @@
       <!-- Modal content-->
       <div class="modal-content">
       	<div class="modal-header">
-        	<h4 class="modal-title">Add New Employee</h4>
+        	<h4 class="modal-title" style="text-align: center;"><b>Add New Employee</b></h4>
      	 </div>
+     	 <div class="alert alert-info">Fill All Blanks And Hit Submit.</div>
         <div class="modal-body">
-    		 <form:form modelAttribute="newEmployee" enctype="application/x-www-form-urlencoded" method="post" >
+    		 <form:form modelAttribute="newEmployee" enctype="application/x-www-form-urlencoded" method="post"  >
 				  <div class="row">
 				    <div class="form-group col-md-6">
-				   		 <label for="exampleInputEmail1">Name :</label>
-				    	 <form:input path="user.name" cssClass="form-control"/>
-				    	  <span style="color:red;"><form:errors path="user.name"/></span>
+				   		 <label for="exampleInputEmail1" Class="difColor">Name :</label>
+				    	 <form:input path="user.name" cssClass="form-control textFiled"/>
+				    	  <span style="color:red;"><form:errors path="user.name" type="text"/></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
-				    	<label for="exampleInputEmail1">Role :</label>
+				    	<label for="exampleInputEmail1" Class="difColor">Role :</label>
 				     	<form:select path="user.roleId" cssClass="form-control" >
 				     	   <c:forEach items="${roles}" var ="role">
 				     	   		<form:option label="${role.name}" value="${role.id}"/>
 				     	   </c:forEach>
 						</form:select>
-						 <span style="color:red;"><form:errors path="user.roleId"/></span>
+						 <span style="color:red;" id="selectBox"><form:errors path="user.roleId"/></span>
 				     </div>
 				  </div>
 				  
 				   <div class="row">
 				    <div class="form-group col-md-6">
-				    	<label for="exampleInputEmail1">User Name :</label>
-				    	 <form:input path="user.userName" cssClass="form-control" disabled="true"/>
+				    	<label for="exampleInputEmail1" Class="difColor">User Name :</label>
+				    	 <form:input path="user.userName" cssClass="form-control uniqueTextFiled" type="text" />
 				    	 <span style="color:red;"><form:errors path="user.userName"/></span>
+				    	 <span id="dublicateUserNameError" style="color:red;"></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
-				    	<label for="exampleInputEmail1">Mobile :</label>
-				     	<form:input path="user.mobile" cssClass="form-control" type="number"/>
+				    	<label for="exampleInputEmail1" Class="difColor">Mobile :</label>
+				     	<form:input path="user.mobile" cssClass="form-control numberFiled" type="number"/>
 				     	<span style="color:red;"><form:errors path="user.mobile"/></span>
 				     </div>
 				  </div>
 				  
 				   <div class="row">
 				    <div class="form-group col-md-6">
-				    <label for="exampleInputEmail1">NIC Number :</label>
-				     <form:input path="nic" cssClass="form-control" />
+				    <label for="exampleInputEmail1" Class="difColor">NIC Number :</label>
+				     <form:input path="nic" cssClass="form-control numberFiled" type="text" />
 				      <span style="color:red;"><form:errors path="nic"/></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
-				    	<label for="exampleInputEmail1">Email :</label>
-				     	<form:input path="user.email" cssClass="form-control" />
+				    	<label for="exampleInputEmail1" Class="difColor">Email :</label>
+				     	<form:input path="user.email" cssClass="form-control emailFiled"/>
 				     	   <span style="color:red;"><form:errors path="user.email"/></span>
 				     </div>
 				  </div>
 				  
 				   <div class="row">
 				    <div class="form-group col-md-6">
-				    <label for="exampleInputEmail1">Contact :</label>
-				     <form:input path="contact" cssClass="form-control" type="number" />
+				    <label for="exampleInputEmail1" Class="difColor">Contact :</label>
+				     <form:input path="contact" cssClass="form-control numberFiled" type="number" />
 				     <span style="color:red;"><form:errors path="contact"/></span>
 				    </div>
 				    
 				    <div class="form-group col-md-6">
-				    <label for="exampleInputEmail1">Date of Birth :</label>
+				    <label for="exampleInputEmail1" Class="difColor">Date of Birth :</label>
 	 			      <form:input path = "dob" type = "date" cssClass="form-control"/> 
 	 			       <span style="color:red;"><form:errors path="dob"/></span>
 	 			    </div> 
@@ -143,22 +145,22 @@
 				  
 			  	<div class = "row">
 				  	<div class = "col-md-12">
-				  	<label for="exampleInputEmail1">Address :</label>
-				  		<form:textarea path = "user.address" cssClass="form-control" />
+				  	<label for="exampleInputEmail1" Class="difColor">Address :</label>
+				  		<form:textarea path = "user.address" cssClass="form-control textFiled" type="text" />
 				  	</div>
 			  	</div>
 			  	
 			  	<br/>
 			  	<div class="row">
-				    <div class="form-group col-md-6">
+				    <div class="form-group col-md-6" Class="difColor">
 				    <label for="exampleInputEmail1">Password :</label>
-				       <form:password path="user.password" cssClass="form-control" id="empPassword" />
+				       <form:password path="user.password" cssClass="form-control passwordFiled empPassword"  />
 				       <span style="color:red;"><form:errors path="user.password"/></span>
 				    </div>
 				    
-				    <div class="form-group col-md-6">
+				    <div class="form-group col-md-6" Class="difColor">
 				    <label for="exampleInputEmail1">Confirm Password :</label>
-				     	<input class="form-control" id="empConfirmPassword" data-rule-equalTo="#empPassword" type="text" placeholder="Confirm Password"/>
+				     	<input class="form-control passwordFiled" id="empConfirmPassword" type="password" placeholder="Confirm Password"/>
 				   		<span id="confirmPasswordError" style="color:red;"></span>
 				    </div>
 		 		 </div>
@@ -185,8 +187,9 @@
   </div>
 
 
-  <script>
+  <script type="text/javascript">
   	$(document).ready(function(){  		
+  		
     	 $('#employeeTable').DataTable({
 	      "paging": true,
 	      "lengthChange": true,
@@ -196,18 +199,65 @@
 	      "autoWidth": false
 	    });  		
     	 
+    	 // SHOW CONFIRMATION MODAL TO DELETE EMPLOYEE
     	 $("#confModalText").html("Are you want to delete this Employee?");
     	 $(".triggerRemove").click(function(e){
     		e.preventDefault();
     		 $("#confModalbtn").attr("href", $(this).attr("href")); 
     		$("#confirmModal").modal("show");
-    	 });
+    	 }); 
     	 
+   		 //   VALIDATIONS
+    	 $("#newEmployee").validate();
+    	 
+    	 $('.textFiled, .uniqueTextFiled').each(function () {
+    	      $(this).rules('add', {
+    	          required: true,
+    	          minlength:3
+    	      });
+    	 $('.numberFiled').each(function () {
+   	      $(this).rules('add', {
+   	          required: true,
+   	          minlength:10,
+   	      });
+   	    });
+    	 $('.passwordFiled').each(function () {
+      	      $(this).rules('add', {
+      	          required: true,
+      	          minlength:5
+      	      });
+      	    });
+    	 $('.emailFiled').each(function () {
+     	      $(this).rules('add', {
+     	          email:true
+     	      });
+     	    });
+  		});
   	});
   	
-  	$('#empPassword, #empConfirmPassword').on('keyup', function () {
-  	  if ($('#empPassword').val() == $('#empConfirmPassword').val()) {
+  	// CHECK UNIQUE USERNAME
+  	 $('.uniqueTextFiled').on('change', function () {
+		  $.get('http://localhost:8080/titanic/users/availableUserName.do?userName=' +$(this).val(), 
+	              function(data){
+	                  if(data == false){
+	                		 $('#dublicateUserNameError').html('User Name Already Exits!');
+	                		 $("#submitBtn").css("display", "none");
+	                  }
+	                  else{
+	                	  $('#dublicateUserNameError').html('');
+	                	  $("#submitBtn").css("display", "block");
+	                  }
+	              }, 'json');
+	    });
+  	
+  	// CONFIRM PASSWORD
+  	$('.empPassword, #empConfirmPassword').on('keyup', function () {
+  	  if ($('.empPassword').val() == $('#empConfirmPassword').val()) {
+  		 $("#submitBtn").css("display", "block");
+  		 $('#confirmPasswordError').html('');
   	  } else 
   		 $('#confirmPasswordError').html('Password Mis-Matching!');
+  		 $("#submitBtn").css("display", "none");
   	});
+
   	</script>

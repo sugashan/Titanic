@@ -33,7 +33,7 @@
 
 		<!-- Side bar Menu -->
 		<ul class="sidebar-menu">
-			<security:authorize access="! isAuthenticated()">
+			<security:authorize access=" isAuthenticated()">
 			<li class="header ${current == 'home' ? 'active' : ''}">
 				<a href='<spring:url value="/home.jsp" />'> <i class="fa fa-home"></i><span>Home</span></a>
 			</li>

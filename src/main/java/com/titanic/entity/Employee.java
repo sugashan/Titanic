@@ -22,7 +22,7 @@ public class Employee {
 	@Size(min=10, max=12, message="Invalid NIC")
 	private String nic;
 	
-	@Size(min=10, max=10, message="Invalid Mobile Number!")
+	@Size(min=10, message="Invalid Mobile Number!")
 	private String contact;
 	
 	@DateTimeFormat

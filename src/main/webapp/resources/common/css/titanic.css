@@ -1,0 +1,6 @@
+@charset "ISO-8859-1";
+
+.form-control[disabled]{
+	background-color:#fafafa;
+	cursor:pointer;
+}

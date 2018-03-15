@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
-<%@page  import=com.titanic.entity.MealsSchedule %>
+<%@page  import="com.titanic.entity.MealsSchedule" %>
 <%@ include file="../../../layouts/taglib.jsp" %>
 
 <!-- Content Wrapper. Contains page content -->
@@ -76,7 +76,7 @@
 				  </div>
 				  
 			  	<div class = "row">
-				  	<div class = "col-md-12">
+				  	<div class = "col-md-6">
 				  	<label for="exampleInputEmail1">Description :</label>
 				  		<form:textarea path = "description" cssClass="form-control" value="${singleMeal.description}" />
 				  		<span style="color:red;"><form:errors path="description"/></span>

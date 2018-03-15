@@ -31,6 +31,7 @@
 						<tr>
 							<th></th>
 							<th>Name</th>
+							<th>Prefix</th>
 							<th>Description</th>
 						</tr>
 					</thead>
@@ -45,6 +46,7 @@
 										class="fa fa-trash-o"></i>
 								</a> <c:out value="${fte.id}"/></td>
 								<td><a class="btn" href='<spring:url value="foodType-detail/${fte.id}.do" />'><c:out value="${fte.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="foodType-detail/${fte.id}.do" />'><c:out value="${fte.preFix}"/></a></td>
 								<td><a class="btn" href='<spring:url value="foodType-detail/${fte.id}.do" />'><c:out value="${fte.description}"/></a></td>
 							</tr>
 						</c:forEach>
@@ -54,6 +56,7 @@
 						<tr>
 							<th></th>
 							<th>Name</th>
+							<th>Prefix</th>
 							<th>Description</th>
 						</tr>
 					</tfoot>
@@ -72,21 +75,20 @@
       <div class="modal-content">
       	<div class="modal-header">
         	<h4 class="modal-title">Add New Food Type</h4>
-<%--        		 	 <c:if test="${employee.message == 'SUCCESS'}"> --%>
-<%--                  <div class="alert alert-success" style = "margin-top:15px;">${employee.description}</div> --%>
-<%--                  </c:if> --%>
-                 
-<%--                   <c:if test="${employee.message == 'FAILED'}"> --%>
-<%--                  <div class="alert alert-warning" style = "margin-top:15px;">${employee.description}</div> --%>
-<%--                  </c:if> --%>
      	 </div>
+     	 <div class="alert alert-info">Fill All Blanks And Hit Submit.</div>
         <div class="modal-body">
     		 <form:form modelAttribute="newFoodType" enctype="application/x-www-form-urlencoded" method="post" >
 				  <div class="row">
-				    <div class="form-group col-md-12">
+				    <div class="form-group col-md-6">
 				   		 <label for="exampleInputEmail1">Name :</label>
-				    	 <form:input path="name" cssClass="form-control"/>
+				    	 <form:input path="name" cssClass="form-control textFiled"/>
 				    	 <span style="color:red;"><form:errors path="name"/></span>
+				    </div>
+				    <div class="form-group col-md-6">
+				   		 <label for="exampleInputEmail1">PreFix :</label>
+				    	 <form:input path="preFix" cssClass="form-control textFiled"/>
+				    	 <span style="color:red;"><form:errors path="preFix"/></span>
 				    </div>
 				  </div>
 				  
@@ -129,12 +131,24 @@
 	      "ordering": true,
 	      "info": true,
 	      "autoWidth": false
-	    });  		
+	    });  	
+    	 
+    	//   CONFIRM MODAL TO DELETE
     	 $("#confModalText").html("Are you want to delete this Food Type?");
     	 $(".triggerRemove").click(function(e){
     		e.preventDefault();
     		 $("#confModalbtn").attr("href", $(this).attr("href")); 
     		$("#confirmModal").modal("show");
     	 });
+    	 
+    	//   VALIDATIONS
+    	 $("#newFoodType").validate();
+    	 
+    	 $('.textFiled').each(function () {
+    	      $(this).rules('add', {
+    	          required: true,
+    	          minlength:3
+    	      });
+	  	});
   	});
   	</script>

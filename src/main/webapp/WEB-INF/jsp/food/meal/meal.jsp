@@ -48,7 +48,7 @@
 										class="fa fa-trash-o"></i>
 								</a><c:out value="${meal.code}"/></td>
 								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.name}"/></a></td>
-								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.foodType}"/></a></td>
+								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.foodType.name}"/></a></td>
 								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.preferedTime}"/></a></td>
 								<td><a class="btn" href='<spring:url value="meal-detaill/${meal.id}.do" />'><c:out value="${meal.image}"/></a></td>
 								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.description}"/></a></td>
@@ -82,36 +82,19 @@
       	<div class="modal-header">
         	<h4 class="modal-title">Add New Meal</h4>
      	 </div>
+     	 <div class="alert alert-info">Fill All Blanks And Hit Submit.</div>
         <div class="modal-body">
     		 <form:form modelAttribute="newMeal" enctype="application/x-www-form-urlencoded" method="post" >
 				  <div class="row">
 				    <div class="form-group col-md-6">
 				   		 <label for="exampleInputEmail1">Meal-Name :</label>
-				    	 <form:input path="name" cssClass="form-control"/>
+				    	 <form:input path="name" cssClass="form-control textFiled"/>
 				    	  <span style="color:red;"><form:errors path="name"/></span>
 				    </div>
 				    
 				     <div class="form-group col-md-6">
-				    	<label for="exampleInputEmail1">Meal-Code :</label>
-				    	 <form:input path="code" cssClass="form-control" disabled="true"/>
-				    	  <span style="color:red;"><form:errors path="code"/></span>
-				    </div>
-				  </div>
-				  
-				   <div class="row">
-				     <div class="form-group col-md-6">
-				    	<label for="exampleInputEmail1">Meal-Type :</label>
-				     	<form:select path="preferedTime" cssClass="form-control" >
-				     	  <%for (MealsSchedule ms : MealsSchedule.values()) {%>
-								<option value="<%=ms.getName()%>"><%=ms.getName()%></option>
-						  <%}%>
-						</form:select>
-						 <span style="color:red;"><form:errors path="preferedTime"/></span>
-				     </div>
-				     
-				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Food-Type :</label>
-				     	<form:select path="foodTypeId" class="form-control" id="foodType">
+				     	<form:select path="foodTypeId" class="form-control foodTypeGenCode">
 				     	   <c:forEach items="${mealType}" var ="mealType">
 				     	   		<form:option label="${mealType.name}" value="${mealType.id}"/>
 				     	   </c:forEach>
@@ -121,13 +104,32 @@
 				  </div>
 				  
 				   <div class="row">
+				     <div class="form-group col-md-6">
+				    	<label for="exampleInputEmail1">Prefer-Time :</label>
+				     	<form:select path="preferedTime" cssClass="form-control" >
+				     	  <%for (MealsSchedule ms : MealsSchedule.values()) {%>
+								<option value="<%=ms.getName()%>"><%=ms.getName()%></option>
+						  <%}%>
+						</form:select>
+						 <span style="color:red;"><form:errors path="preferedTime"/></span>
+				     </div>
+				     
+				   	 <div class="form-group col-md-6">
+				    	<label for="exampleInputEmail1">Meal-Code :</label>
+				    	 <form:input path="code" cssClass="form-control codeClass"/>
+				    	  <span style="color:red;"><form:errors path="code"/></span>
+				    </div>
+				  </div>
+				  
+				   <div class="row">
 				    <div class="form-group col-md-6">
-				    <label for="exampleInputEmail1">Unit-Price :</label>
+				    <label for="exampleInputEmail1">Unit-Price (LKR) :</label>
 				     <form:input path="price" cssClass="form-control" type="number" step="0.01"/>
 				      <span style="color:red;"><form:errors path="price"/></span>
 				    </div>
 				    
 				     <div class="form-group col-md-6">
+				       <label for="exampleInputEmail1">Meal-Image :</label>
 				    	<form:input path="image" type="file" cssClass="form-control" name="image"/>
 				    	 <span style="color:red;"><form:errors path="image"/></span>
 	 			    </div> 
@@ -173,11 +175,33 @@
 	      "info": true,
 	      "autoWidth": false
 	    });  		
+    	 
+    	 // MODAL CONFIRMATION TO DELETE
     	 $("#confModalText").html("Are you want to delete this Meal?");
     	 $(".triggerRemove").click(function(e){
     		e.preventDefault();
     		 $("#confModalbtn").attr("href", $(this).attr("href")); 
     		$("#confirmModal").modal("show");
     	 });
+    	 
+    	 
+    	 // VALIDATIONS
+    	 $("#newMeal").validate();
+    	 
+    	 $('.textFiled, .uniqueTextFiled').each(function () {
+    	      $(this).rules('add', {
+    	          required: true,
+    	          minlength:3
+    	      });
+  		});
   	});
+  	
+ 	// CHECK UNIQUE CODE
+ 	 $('.foodTypeGenCode').on("change", function() {
+ 		 var code = $('.foodTypeGenCode option:selected').text();
+		  $.get('http://localhost:8080/titanic/meals/lastMealId.do?code='+ code, 
+	              function(data){
+               		  $(".codeClass").val(code + "-" + data);
+	              }, 'json');
+	    });
   	</script>

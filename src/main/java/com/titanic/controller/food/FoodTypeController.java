@@ -51,13 +51,13 @@ public class FoodTypeController {
 	public String addFoodType( @Valid @ModelAttribute("newFoodType") FoodType foodType, BindingResult errors, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
-			redirectUrlString = "redirect:/meals/foodType?success=false&msg=Added Failed";
+			redirectUrlString = "redirect:/meals/foodType.do?success=false&msg=Added Failed";
 		}
 		else {
 //			try {
 		//		System.out.println(JsonFormer.form(employee));
 				fmService.save(foodType);
-				redirectUrlString = "redirect:/meals/foodType?success=true&msg=Successfully Added";
+				redirectUrlString = "redirect:/meals/foodType.do?success=true&msg=Successfully Added";
 //			} catch (JSONException e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
@@ -75,7 +75,7 @@ public class FoodTypeController {
 		}
 		else {
 			fmService.update(foodType, id);
-			redirectUrlString = "redirect:/meals/foodType-detail?success=true&msg=Successfully Updated";
+			redirectUrlString = "redirect:/meals/foodType-detail.do?success=true&msg=Successfully Updated";
 		}
 		return redirectUrlString;
 	}
@@ -85,6 +85,6 @@ public class FoodTypeController {
 	public String deleteFoodType(@PathVariable int id, Model model) {
 		fmService.delete(id);
 		model.addAttribute("foodType", fmService.findAll());
-		return "redirect:/meals/foodType?success=true&msg=Successfully Deleted";
+		return "redirect:/meals/foodType.do?success=true&msg=Successfully Deleted";
 	}
 }

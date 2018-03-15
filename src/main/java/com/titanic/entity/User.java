@@ -1,11 +1,14 @@
 package com.titanic.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
+
+import com.titanic.annotation.UniqueUserName;
 
 
 @Entity
@@ -18,7 +21,7 @@ public class User {
 	@Size(min=3, message="Name Should Be Atleast 3 Character!")
 	private String name;
 	
-	@Size(min=10, max=12, message="Invalid Mobile Number!")
+	@Size(min=10, message="Invalid Mobile Number!")
 	private String mobile;
 	
 	@Size(min=4, message="Password Should Be Atleast 4 Character!")
@@ -29,9 +32,11 @@ public class User {
 	private String email;
 	
 	@Size(min=5, message="Invalid UserName!")
+	@Column(unique=true)
+	@UniqueUserName(message="UserName Already exits!")
 	private String userName;
+	
 	private String address;
-	private String gender;
 	private boolean enabled;
 	
 	private int roleId;
@@ -53,12 +58,6 @@ public class User {
 	}
 	public void setRole(Role role) {
 		this.role = role;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 	public int getId() {
 		return id;

@@ -11,7 +11,7 @@
 	<button value = "Edit Food Type" class="btn btn-info" id="ediBtn" onclick="showEdit()"><i class="fa fa-pencil-square-o"></i> Edit Employee</button>
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">${singleEmployee.user.name}- Employee</h3>
+				<h3 class="box-title">${singleFoodType.name}- Meal</h3>
 				<c:if test="${param.success eq true}">
                  <div class="alert alert-success alertMsg" style = "margin-top:15px; padding:5px;">${param.msg}</div>
                  </c:if>
@@ -24,9 +24,14 @@
 			<div class="box-body">
 				<form:form modelAttribute="singleUpdatednewFoodType" method="post">
 				  <div class="row">
-				    <div class="form-group col-md-12">
+				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Type Name :</label>
-				    	 <form:input path="name" class="form-control" id="empName" type="text" placeholder="Name" value="${singleFoodTyper.name}"/>
+				    	 <form:input path="name" class="form-control" id="empName" type="text" placeholder="Name" value="${singleFoodType.name}"/>
+				    	  <span style="color:red;"><form:errors path="name"/></span>
+				    </div>
+				    <div class="form-group col-md-6">
+				    	<label for="exampleInputEmail1">PreFix :</label>
+				    	 <form:input path="preFix" class="form-control" id="empName" type="text" placeholder="Name" value="${singleFoodType.preFix}"/>
 				    	  <span style="color:red;"><form:errors path="name"/></span>
 				    </div>
 				  </div>

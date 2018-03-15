@@ -6,4 +6,5 @@ import com.titanic.entity.Branch;
 
 public interface BranchRepository extends JpaRepository<Branch, Integer>{
 
+	Branch findById(int id);
 }

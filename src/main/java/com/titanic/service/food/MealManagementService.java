@@ -50,4 +50,14 @@ public class MealManagementService {
 		// TODO
 		return findOnebyId(id);
 	}
+	
+	// GET THE LAST INSERTED MEAL ID
+	public String getLastInsertedMealId(String code) {
+		String lastId = "0";
+		lastId = mRepository.getLastInsertedId(code);
+		if(lastId == null) {
+			return lastId = "0";
+		}
+		return lastId;
+	}
 }

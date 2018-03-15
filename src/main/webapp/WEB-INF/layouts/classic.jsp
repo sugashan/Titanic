@@ -34,6 +34,14 @@
    	  
 
    	  <title><tiles:getAsString name="title"/></title>
+   	  
+   	  <style type="text/css">
+   	  	.difColor{
+/*    	  		color:red; */
+   	  	}
+   	  
+   	  
+   	  </style>
 
 </head>
 
@@ -53,6 +61,11 @@
 	<!-- Data Table -->
 	<script src="<c:url value="/resources/plugins/datatables/jquery.dataTables.min.js" />"></script>
   	<script src="<c:url value="/resources/plugins/datatables/dataTables.bootstrap.min.js" />"></script>
+  	
+  	<!-- Validator -->
+  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+  	<script type="text/javascript" src="<c:url value="/resources/common/js/titanic.js" />"></script>
+  	
   	
 	 <!-- wrapper -->
 	<div class="wrapper">

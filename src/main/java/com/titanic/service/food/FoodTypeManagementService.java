@@ -35,7 +35,7 @@ public class FoodTypeManagementService {
 		return fRepository.findOneById(id);
 	}
 
-	// UPDATE A EMPLOYEE
+	// UPDATE A FOOD
 	@Transactional
 	public FoodType update(FoodType foodType, int id) {
 		// TODO

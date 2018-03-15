@@ -24,6 +24,8 @@ public class FoodType {
 	@OneToMany(mappedBy="foodType", cascade=CascadeType.REMOVE)
 	private List<Meal> meal;
 	
+	private String preFix;
+	
 	public int getId() {
 		return id;
 	}
@@ -48,5 +50,10 @@ public class FoodType {
 	public void setMeal(List<Meal> meal) {
 		this.meal = meal;
 	}
-	
+	public String getPreFix() {
+		return preFix;
+	}
+	public void setPreFix(String preFix) {
+		this.preFix = preFix;
+	}
 }

@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.titanic.entity.Employee;
 import com.titanic.service.user.EmployeeManagementService;
 
@@ -93,5 +96,15 @@ public class EmployeeController {
 		emService.delete(employee);
 		return "redirect:/users/employee.do?success=true&msg=Successfully Deleted";
 	}
+	
+	// CHECK AVAILABLE USER NAME
+	@RequestMapping(value="users/availableUserName")
+	@ResponseBody
+	public String userName(@RequestParam String userName) {
+		Boolean availableUserName = emService.findOneByName(userName) == null;
+		System.out.println(availableUserName.toString()+"------------");
+		return availableUserName.toString();
+	}
+	
 		
 }

@@ -22,7 +22,7 @@ public class Meal {
 	private String image;
 	private String code;
 	
-	@Currency(message="Invalid Price!", value = { "LKR" })
+	@NotNull(message="Prefered Time Can Not Be Empty!")
 	private Float price;
 	
 	@OneToOne
