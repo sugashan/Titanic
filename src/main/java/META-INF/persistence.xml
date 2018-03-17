@@ -11,5 +11,9 @@
 		<class>com.titanic.entity.FoodType</class>
 		<class>com.titanic.entity.Meal</class>
 		<class>com.titanic.entity.Table</class>
+		<class>com.titanic.entity.FoodOrder</class>
+		<class>com.titanic.entity.Orders</class>
+		<class>com.titanic.entity.Payment</class>
+		<class>com.titanic.entity.DeliveryOrder</class>
 	</persistence-unit>
 </persistence>

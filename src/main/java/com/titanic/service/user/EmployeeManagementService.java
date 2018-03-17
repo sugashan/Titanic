@@ -6,14 +6,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.titanic.entity.Branch;
 import com.titanic.entity.Employee;
-import com.titanic.entity.Role;
 import com.titanic.entity.User;
-import com.titanic.respository.BranchRepository;
 import com.titanic.respository.EmployeeRepository;
-import com.titanic.respository.RoleRepository;
 import com.titanic.respository.UserRepository;
 
 @Service
@@ -26,10 +21,7 @@ public class EmployeeManagementService {
 	private UserRepository uRepository;
 	
 	@Autowired
-	private RoleRepository rRepository;
-	
-	@Autowired
-	private BranchRepository bRepository;
+	private UserCommonService ucService;
 	
 	
 	// GET ALL EMPLOYEE AS LIST
@@ -42,31 +34,25 @@ public class EmployeeManagementService {
 		employee.getUser().setEnabled(true);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		employee.getUser().setPassword(encoder.encode(employee.getUser().getPassword()));
+		employee.setBranch(ucService.getBranchWithId(1));
+		employee.getUser().setRole(ucService.findRoleById(employee.getUser().getRoleId()));
 		
-		Branch branch = bRepository.findById(1);
-		 employee.setBranch(branch);
-		 
-		uRepository.save(employee.getUser());
-		if(uRepository.save(employee.getUser()) != null)
+		User resultUser = uRepository.save(employee.getUser());
+		if(resultUser!= null)
 		eRepository.save(employee);
 	}
 
 	// DELETE A EMPLOYEE
 	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
-	public void delete( Employee employee) {
+	public void delete( int id) {
+		Employee employee = findOnebyId(id);
 		eRepository.delete(employee);
-	}
-	
-	// GET A USER WITH ID
-	public User findOneByIdUser(int id) {
-		return uRepository.findById(id);
 	}
 	
 	// GET A EMPLOYEE
 	@Transactional
 	public Employee findOnebyId(int id) {
-		User user = findOneByIdUser(id);
-		 return eRepository.findByUser(user);
+		 return eRepository.findByUser(ucService.findOneByIdUser(id));
 	}
 
 	// UPDATE A EMPLOYEE
@@ -79,27 +65,14 @@ public class EmployeeManagementService {
 		updatedEmployee.setContact(employee.getContact());
 		updatedEmployee.setDob(employee.getDob());
 		updatedEmployee.setNic(employee.getNic());
+		employee.getUser().setRole(ucService.findRoleById(employee.getUser().getRoleId()));
 		eRepository.save(updatedEmployee);
 		return findOnebyId(id);
 	}
 
-	// GET ALL ROLES
-	public List<Role> findAllRoles() {
-		List<Role> roles= rRepository.findAll();
-		//	List<Authority> authority = aRepository.findByRoles(roles);
-		return roles;
-	}
-	
 	// GET EMPLOYEE WITH NAME
 	public Employee findOneByName(String name) {
-		User user = uRepository.findByUserName(name);
-		return eRepository.findByUser(user);
+		return eRepository.findByUser(ucService.findOneByUserName(name));
 	}
 
-	// GET ROLE WITH ID
-	public Role findRoleById(int id) {
-		return rRepository.findById(id);
-	}
-
-	
 }

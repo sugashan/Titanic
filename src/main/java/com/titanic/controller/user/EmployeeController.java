@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.titanic.entity.Employee;
 import com.titanic.service.user.EmployeeManagementService;
+import com.titanic.service.user.UserCommonService;
 
 @Controller
 public class EmployeeController {
@@ -23,6 +24,8 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeManagementService emService;
 	
+	@Autowired
+	private UserCommonService ucService;
 	
 	private String redirectUrlString="";
 	
@@ -39,7 +42,7 @@ public class EmployeeController {
 	// GET ALL EMPLOYEE
 	@RequestMapping("users/employee")
 	public String employee(Model model) {
-		model.addAttribute("roles", emService.findAllRoles());
+		model.addAttribute("roles", ucService.findAllRoles());
 		model.addAttribute("employee", emService.findAll());
 		return "employee";
 	}
@@ -47,7 +50,7 @@ public class EmployeeController {
 	// SINGLE USER
 	@RequestMapping("users/employee-detail/{id}")
 	public String singleEmployee(Model model, @PathVariable int id) {
-		model.addAttribute("role", emService.findAllRoles());
+		model.addAttribute("role", ucService.findAllRoles());
 		model.addAttribute("singleEmployee", emService.findOnebyId(id));
 		return "employee-detail";
 	}
@@ -62,7 +65,6 @@ public class EmployeeController {
 		else {
 //			try {
 		//		System.out.println(JsonFormer.form(employee));
-			employee.getUser().setRole(emService.findRoleById(employee.getUser().getRoleId()));
 				emService.save(employee);
 				redirectUrlString = "redirect:/users/employee.do?success=true&msg=Successfully Registered";
 //			} catch (JSONException e) {
@@ -82,8 +84,7 @@ public class EmployeeController {
 			redirectUrlString = "redirect:/users/employee-detai.do?success=false&msg=Update Failed";
 		}
 		else {
-		employee.getUser().setRole(emService.findRoleById(employee.getUser().getRoleId()));
-		emService.update(employee, id);
+			model.addAttribute("singleEmployee", emService.update(employee, id));
 		redirectUrlString = "redirect:/users/employee-detail.do?success=true&msg=Successfully Updated";
 		}
 		return redirectUrlString;
@@ -92,19 +93,8 @@ public class EmployeeController {
 	// DELETE USER
 	@RequestMapping(value="users/deleteEmployee/{id}")
 	public String deleteEmployee(@PathVariable int id, Model model) {
-		Employee employee = emService.findOnebyId(id);
-		emService.delete(employee);
+		emService.delete(id);
 		return "redirect:/users/employee.do?success=true&msg=Successfully Deleted";
 	}
 	
-	// CHECK AVAILABLE USER NAME
-	@RequestMapping(value="users/availableUserName")
-	@ResponseBody
-	public String userName(@RequestParam String userName) {
-		Boolean availableUserName = emService.findOneByName(userName) == null;
-		System.out.println(availableUserName.toString()+"------------");
-		return availableUserName.toString();
-	}
-	
-		
 }

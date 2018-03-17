@@ -32,7 +32,7 @@ public class User {
 	private String email;
 	
 	@Size(min=5, message="Invalid UserName!")
-	@Column(unique=true)
+	@Column(unique = true)
 	@UniqueUserName(message="UserName Already exits!")
 	private String userName;
 	
