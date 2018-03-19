@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.titanic.entity.Employee;
 import com.titanic.service.user.EmployeeManagementService;
 import com.titanic.service.user.UserCommonService;
 
 @Controller
-public class EmployeeController {
+public class EmployeeManagementController {
 	
 	@Autowired
 	private EmployeeManagementService emService;
@@ -57,7 +55,7 @@ public class EmployeeController {
 	
 	// ADD NEW USER
 	@RequestMapping(value="users/employee", method=RequestMethod.POST)
-	public String addEmployee( @Valid @ModelAttribute("newEmployee") Employee employee, BindingResult errors, Model model) {
+	public String addEmployee( @Valid @ModelAttribute("newEmployee") Employee employee, BindingResult errors) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
 			redirectUrlString = "redirect:/users/employee.do?success=false&msg=Registered Failed";

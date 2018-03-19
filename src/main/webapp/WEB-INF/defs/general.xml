@@ -80,5 +80,28 @@
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/meal/meal-detail.jsp" />
 		<put-attribute name="current" value="meal-detail"/>
 	</definition>
+	
+	<definition name="order" extends="common">
+		<put-attribute name="title" value="Titanic Order" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/order/order.jsp" />
+		<put-attribute name="current" value="order"/>
+	</definition>
+	
+	<definition name="order-detail" extends="common">
+		<put-attribute name="title" value="Titanic Order Detail" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/order/order-detail.jsp" />
+		<put-attribute name="current" value="order-detail"/>
+	</definition>
 	  	  
+  	<definition name="comboPackage" extends="common">
+		<put-attribute name="title" value="Titanic Combo Package" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/offer/comboPackage.jsp" />
+		<put-attribute name="current" value="comboPackage"/>
+	</definition>
+	
+	<definition name="comboPackage-detail" extends="common">
+		<put-attribute name="title" value="TitanicCombo Package Detail" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/offer/comboPackage-detail.jsp" />
+		<put-attribute name="current" value="comboPackage-detail"/>
+	</definition>
 </tiles-definitions>

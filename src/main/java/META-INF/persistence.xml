@@ -15,5 +15,7 @@
 		<class>com.titanic.entity.Orders</class>
 		<class>com.titanic.entity.Payment</class>
 		<class>com.titanic.entity.DeliveryOrder</class>
+		<class>com.titanic.entity.PickUpDeskOrder</class>
+		<class>com.titanic.entity.FoodComboPackage</class>
 	</persistence-unit>
 </persistence>

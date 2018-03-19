@@ -69,23 +69,28 @@
 							class="fa fa-circle-thin"></i><span> 
 								Meal</span></a>
 					</li>
+					<li class="${current == 'comboPackage' ? 'active' : ''}">
+						<a href='<spring:url value="/meals/comboPackage.do" />'><i
+							class="fa fa-circle-thin"></i><span> 
+								Combo-Packages</span></a>
+					</li>
 				</ul>
 			</li>
-			</security:authorize>
+			
 			<li class="treeview"><a href="#"><i class="fa fa-truck"></i>
-					<span>Purchase</span> <span class="pull-right-container"> <i
+					<span>Orders</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span> </a>
 				<ul class="treeview-menu">
-					<li class="active"><a href="#"><i
-							class="fa fa-circle-thin"></i><span> </span></a></li>
+					<li class="${current == 'meal' ? 'active' : ''}"><a href="<spring:url value="/orders/order.do" />"><i
+							class="fa fa-circle-thin"></i><span> Order</span></a></li>
 					<li class="active"><a href="#"><i
 							class="fa fa-circle-thin"></i><span> </span></a></li>
 					<li class="active"><a href="#"><i
 							class="fa fa-circle-thin"></i><span> </span></a></li>
 				</ul>
 			</li>
-
+			</security:authorize>
 			<li class="treeview"><a href="#"><i class="fa fa-money"></i>
 					<span>Payments</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>

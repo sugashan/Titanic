@@ -11,31 +11,30 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
-public class DeliveryOrder {
+public class PickUpDeskOrder {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private String deliveryDate;
-	private String deliveryTime;
+	private String pickUpDate;
+	private String pickUpTime;
 	
 	@OneToMany(cascade=CascadeType.REMOVE)
 	private List<Orders> order;
 	
-	private String deliveryAddress;
-	private Boolean deliveryStatus;
+	@OneToOne
+	private Branch branch;
 	
 	@OneToOne
 	private Employee employee;
 	
 	
-	
-	public String getDeliveryTime() {
-		return deliveryTime;
+	public String getPickUpDate() {
+		return pickUpDate;
 	}
-	public void setDeliveryTime(String deliveryTime) {
-		this.deliveryTime = deliveryTime;
+	public void setPickUpDate(String pickUpDate) {
+		this.pickUpDate = pickUpDate;
 	}
 	public Employee getEmployee() {
 		return employee;
@@ -49,28 +48,23 @@ public class DeliveryOrder {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getDeliveryDate() {
-		return deliveryDate;
-	}
-	public void setDeliveryDate(String deliveryDate) {
-		this.deliveryDate = deliveryDate;
-	}
 	public List<Orders> getOrder() {
 		return order;
 	}
 	public void setOrder(List<Orders> order) {
 		this.order = order;
 	}
-	public String getDeliveryAddress() {
-		return deliveryAddress;
+	public String getPickUpTime() {
+		return pickUpTime;
 	}
-	public void setDeliveryAddress(String deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
+	public void setPickUpTime(String pickUpTime) {
+		this.pickUpTime = pickUpTime;
 	}
-	public Boolean getDeliveryStatus() {
-		return deliveryStatus;
+	public Branch getBranch() {
+		return branch;
 	}
-	public void setDeliveryStatus(Boolean deliveryStatus) {
-		this.deliveryStatus = deliveryStatus;
+	public void setBranch(Branch branch) {
+		this.branch = branch;
 	}
+	
 }

@@ -17,7 +17,7 @@ import com.titanic.service.user.EmployeeManagementService;
 import com.titanic.session.CurrentUser;
 
 @Controller
-public class LoginController {
+public class LoginManagementController {
 	
 	@Autowired
 	private EmployeeManagementService emService;

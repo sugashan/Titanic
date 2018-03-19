@@ -14,7 +14,7 @@ import com.titanic.entity.FoodType;
 import com.titanic.service.food.FoodTypeManagementService;
 
 @Controller
-public class FoodTypeController {
+public class FoodTypeManagementController {
 
 	@Autowired
 	private FoodTypeManagementService fmService;

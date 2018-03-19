@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class FoodOrder {
@@ -11,9 +12,10 @@ public class FoodOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+	@OneToOne
 	private Meal meal;
 	private int quantity;
+	@OneToOne
 	private Orders order;
 	
 	public int getId() {

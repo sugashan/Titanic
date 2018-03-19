@@ -28,6 +28,10 @@
 		<!-- MEAL URL -->
 		<intercept-url pattern="/meals/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST')"/>
 		
+		<!-- ORDER URL -->
+		<intercept-url pattern="/orders/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST', 'ROLE_DELIVERYBOY' )"/>
+		
+		
 		<form-login 
 			login-page="/login.do"
 			authentication-success-forward-url="/handleSuccesLogin.do" 

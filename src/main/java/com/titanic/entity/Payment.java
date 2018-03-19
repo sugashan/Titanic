@@ -1,9 +1,12 @@
 package com.titanic.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -19,6 +22,11 @@ public class Payment {
 	private String addedOn;
 	@OneToOne
 	private Employee employee;
+	
+	@OneToMany
+	private List<Orders> orders;
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -55,4 +63,11 @@ public class Payment {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+	public List<Orders> getOrders() {
+		return orders;
+	}
+	public void setOrders(List<Orders> orders) {
+		this.orders = orders;
+	}
+	
 }

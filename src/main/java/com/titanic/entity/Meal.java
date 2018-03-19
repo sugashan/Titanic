@@ -1,10 +1,13 @@
 package com.titanic.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -31,12 +34,18 @@ public class Meal {
 	private String preferedTime;
 	private String description;
 	
+	@NotNull(message="Prefered Time Can Not Be Empty!")
+	private String itemCatergory;
+	
 	@OneToOne
 	@JoinColumn(name="foodType_id")
 	private FoodType foodType;
 	
 	@NotNull(message="Food Type Can Not Be Empty!")
 	private int foodTypeId;
+	
+	@OneToMany
+	private List<FoodComboPackage> combo;
 	
 	public int getFoodTypeId() {
 		return foodTypeId;
@@ -97,6 +106,12 @@ public class Meal {
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public String getItemCatergory() {
+		return itemCatergory;
+	}
+	public void setItemCatergory(String itemCatergory) {
+		this.itemCatergory = itemCatergory;
 	}
 	
 	

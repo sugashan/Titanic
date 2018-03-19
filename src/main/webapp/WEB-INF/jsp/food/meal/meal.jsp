@@ -1,3 +1,4 @@
+<%@page import="com.titanic.entity.ItemCatergory"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
@@ -32,6 +33,7 @@
 							<th></th>
 							<th>Name</th>
 							<th>Type</th>
+							<th>Item-Catergory</th>
 							<th>Prefer Time</th>
 							<th>Image</th>
 							<th>Description</th>
@@ -49,6 +51,7 @@
 								</a><c:out value="${meal.code}"/></td>
 								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.name}"/></a></td>
 								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.foodType.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.itemCatergory}"/></a></td>
 								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.preferedTime}"/></a></td>
 								<td><a class="btn" href='<spring:url value="meal-detaill/${meal.id}.do" />'><c:out value="${meal.image}"/></a></td>
 								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.description}"/></a></td>
@@ -61,6 +64,7 @@
 							<th></th>
 							<th>Name</th>
 							<th>Type</th>
+							<th>Item-Catergory</th>
 							<th>Prefer Time</th>
 							<th>Image</th>
 							<th>Description</th>
@@ -85,6 +89,18 @@
      	 <div class="alert alert-info">Fill All Blanks And Hit Submit.</div>
         <div class="modal-body">
     		 <form:form modelAttribute="newMeal" enctype="application/x-www-form-urlencoded" method="post" >
+    		 		<div class="row">
+				     <div class="form-group col-md-12">
+				    	<label for="exampleInputEmail1">Item-Type :</label>
+				     	<form:select path="itemCatergory" cssClass="form-control" >
+				     	  <%for (ItemCatergory ic : ItemCatergory.values()) {%>
+								<option value="<%=ic.getName()%>"><%=ic.getName()%></option>
+						  <%}%>
+						</form:select>
+						 <span style="color:red;"><form:errors path="itemCatergory"/></span>
+				     </div>
+				   </div>  
+    		 	
 				  <div class="row">
 				    <div class="form-group col-md-6">
 				   		 <label for="exampleInputEmail1">Meal-Name :</label>
@@ -167,6 +183,8 @@
 
   <script>
   	$(document).ready(function(){  		
+		$("#foodTypeId").val(1);
+		
     	 $('#employeeTable').DataTable({
 	      "paging": true,
 	      "lengthChange": true,
@@ -194,14 +212,16 @@
     	          minlength:3
     	      });
   		});
+    	 
+    	// CHECK UNIQUE CODE
+     	 $('.foodTypeGenCode').on("change", function() {
+     		 var code = $('.foodTypeGenCode option:selected').text();
+    		  $.get('http://localhost:8080/titanic/meals/lastMealId.do?code='+ code, 
+    	              function(data){
+                   		  $(".codeClass").val(code + "-" + data);
+    	              }, 'json');
+    	    });
   	});
   	
- 	// CHECK UNIQUE CODE
- 	 $('.foodTypeGenCode').on("change", function() {
- 		 var code = $('.foodTypeGenCode option:selected').text();
-		  $.get('http://localhost:8080/titanic/meals/lastMealId.do?code='+ code, 
-	              function(data){
-               		  $(".codeClass").val(code + "-" + data);
-	              }, 'json');
-	    });
+ 	
   	</script>

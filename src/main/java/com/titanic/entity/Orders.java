@@ -18,11 +18,19 @@ public class Orders {
 	
 	private String orderCode;
 	private String orderStatus;
+	
+	@OneToOne
 	private Payment payment;
-	private Branch branch;
+	
+	@OneToOne
+	private Branch outletBranch;
 	private String orderedOn;
 	private String waitingTime;
+	
+	@OneToOne
 	private Customer customer;
+	
+	@OneToOne
 	private Employee employee;
 	private String deliveryType;
 	
@@ -31,7 +39,25 @@ public class Orders {
 	
 	@OneToOne
 	private DeliveryOrder deliveryTypeorder;
-
+	
+	@OneToOne
+	private PickUpDeskOrder pickUpOrder;
+	
+	private String expectedOrderTime; 
+	
+	
+	public String getExpectedOrderTime() {
+		return expectedOrderTime;
+	}
+	public void setExpectedOrderTime(String expectedOrderTime) {
+		this.expectedOrderTime = expectedOrderTime;
+	}
+	public PickUpDeskOrder getPickUpOrder() {
+		return pickUpOrder;
+	}
+	public void setPickUpOrder(PickUpDeskOrder pickUpOrder) {
+		this.pickUpOrder = pickUpOrder;
+	}
 	public int getId() {
 		return id;
 	}
@@ -56,11 +82,11 @@ public class Orders {
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
-	public Branch getBranch() {
-		return branch;
+	public Branch getOutletBranch() {
+		return outletBranch;
 	}
-	public void setBranch(Branch branch) {
-		this.branch = branch;
+	public void setOutletBranch(Branch outletBranch) {
+		this.outletBranch = outletBranch;
 	}
 	public String getOrderedOn() {
 		return orderedOn;

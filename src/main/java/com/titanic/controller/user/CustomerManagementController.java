@@ -14,7 +14,7 @@ import com.titanic.entity.Customer;
 import com.titanic.service.user.CustomerManagementService;
 
 @Controller
-public class CustomerController {
+public class CustomerManagementController {
 	
 	@Autowired
 	private CustomerManagementService cmService;

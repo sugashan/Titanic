@@ -2,6 +2,8 @@ package com.titanic.controller.food;
 
 
 import javax.validation.Valid;
+
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +20,7 @@ import com.titanic.service.food.FoodTypeManagementService;
 import com.titanic.service.food.MealManagementService;
 
 @Controller
-public class MealController {
+public class MealManagementController {
 	
 	@Autowired
 	private MealManagementService mmService;
@@ -101,4 +103,12 @@ public class MealController {
 	public String lastInsertedMealId(@RequestParam String code) {
 		return mmService.getLastInsertedMealId(code);
 	}
+	
+	// GET ALL LIST OF MEAL AS MAP
+	@RequestMapping(value="/meals/allMealsString")
+	@ResponseBody
+	public String getMealList() throws JSONException {
+		return mmService.getAllMealMapString();
+	}
+	
 }
