@@ -34,7 +34,7 @@
 				   		<label for="exampleInputEmail1">Role :</label>
 				     	<form:select path="user.roleId" class="form-control" id="empRole" disabled="true" >
 				     		<form:option label="${singleEmployee.user.role.name}" value="${singleEmployee.user.role.id}" cssClass="editToShow"/>
-				     	   <c:forEach items="${role}" var ="role">
+				     	   <c:forEach items="${role}" var ="role" begin="1">
 				     	   		<form:option label="${role.name}" value="${role.id}"/>
 				     	   </c:forEach>
 						</form:select>

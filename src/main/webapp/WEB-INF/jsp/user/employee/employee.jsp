@@ -92,7 +92,7 @@
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1" Class="difColor">Role :</label>
 				     	<form:select path="user.roleId" cssClass="form-control" >
-				     	   <c:forEach items="${roles}" var ="role">
+				     	   <c:forEach items="${roles}" var ="role"  begin="1">
 				     	   		<form:option label="${role.name}" value="${role.id}"/>
 				     	   </c:forEach>
 						</form:select>
@@ -219,6 +219,7 @@
    	      $(this).rules('add', {
    	          required: true,
    	          minlength:10,
+   	          maxlength:12
    	      });
    	    });
     	 $('.passwordFiled').each(function () {
@@ -241,7 +242,7 @@
 	              function(data){
 	                  if(data == false){
 	                		 $('#dublicateUserNameError').html('User Name Already Exits!');
-	                		 $("#submitBtn").css("display", "none");
+// 	                		 $("#submitBtn").css("display", "none");
 	                  }
 	                  else{
 	                	  $('#dublicateUserNameError').html('');
@@ -253,11 +254,11 @@
   	// CONFIRM PASSWORD
   	$('.empPassword, #empConfirmPassword').on('keyup', function () {
   	  if ($('.empPassword').val() == $('#empConfirmPassword').val()) {
-  		 $("#submitBtn").css("display", "block");
+//   		 $("#submitBtn").css("display", "block");
   		 $('#confirmPasswordError').html('');
   	  } else 
   		 $('#confirmPasswordError').html('Password Mis-Matching!');
-  		 $("#submitBtn").css("display", "none");
+//   		 $("#submitBtn").css("display", "none");
   	});
 
   	</script>

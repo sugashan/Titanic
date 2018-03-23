@@ -4,19 +4,44 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.titanic.entity.FoodComboPackage;
+import com.titanic.entity.PackageMeals;
 import com.titanic.respository.FoodComboPackageRepository;
+import com.titanic.respository.FoodPckgMealRepository;
 
 @Service
 public class FoodComboPackageManagementService {
 	
 	@Autowired
 	private FoodComboPackageRepository fcpRepository;
+	
+	@Autowired
+	private FoodPckgMealRepository fpmRepository; 
 
 	// GET ALL FOOD COMBO
 	public List<FoodComboPackage> findAll() {
 		return fcpRepository.findAll();
 	}
 
+	// SAVE FOODCOMBOS
+	public void save(FoodComboPackage fcp) {
+		FoodComboPackage savednew = fcpRepository.save(fcp);
+		if(savednew != null) {
+			fpmRepository.saveAll(fcp.getPackageMeal());
+		}
+	}
+
+	// SINGLE COMBO PACKAGE
+	public FoodComboPackage findOnebyId(int id) {
+		FoodComboPackage fcp = fcpRepository.findOneById(id);
+		List<PackageMeals> pckg = fpmRepository.findAllByFcpkg(fcp);
+		fcp.setPackageMeal(pckg);
+		return fcp;
+	}
+
+	// DELETE COMBO PACKAGE
+	public void delete(int id) {
+		fcpRepository.deleteById(id);
+	}
+	
 }

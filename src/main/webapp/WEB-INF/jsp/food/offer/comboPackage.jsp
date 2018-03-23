@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <%@page import="com.titanic.entity.MealsSchedule"%>
 <%@ include file="../../../layouts/taglib.jsp" %>
 <%@ include file="../../common/commonModals.jsp" %>
@@ -36,7 +37,7 @@
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body">
-				<table id="employeeTable" class="table table-bordered table-striped">
+				<table id="comboPackageTable" class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th></th>
@@ -51,10 +52,10 @@
 					<tbody>
 						<c:forEach items="${comboPackages}" var="comboPackage">
 							<tr>
-								<td><a class="btn" href='<spring:url value="comboPackage-detail/${comboPackage.id}.do" />'>
+								<td><a class="btn" href='<spring:url value="/meals/comboPackage-detail/${comboPackage.id}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
 								</a> <a class="btn text-danger triggerRemove"
-									href='<spring:url value="deletecomboPackage/${comboPackage.id}.do" />'> <i
+									href='<spring:url value="/meals/deleteComboPackage/${comboPackage.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a><c:out value="${comboPackage.id}"/></td>
 								<td><a class="btn" href='<spring:url value="comboPackage-detail/${comboPackage.id}.do" />'><c:out value="${comboPackage.name}"/></a></td>
@@ -92,14 +93,14 @@
       	<div class="modal-header">
         	<h4 class="modal-title">Add New Combo Package</h4>
      	 </div>
-     	 <div class="alert alert-info">Fill All Blanks And Hit Submit.</div>
+     	 <div class="alert alert-info" id="res-msg"><strong>Fill All Blanks And Hit Submit.</strong></div>
         <div class="modal-body">
     		 <form id="newComboPackage" enctype="application/x-www-form-urlencoded" method="post" >
-    		 	
+    		 	<security:csrfInput />
 				  <div class="row">
 				    <div class="form-group col-md-12">
 				   		 <label for="exampleInputEmail1">Combo-Package-Name :</label>
-				    	 <input name="name" class="form-control textFiled"/>
+				    	 <input name="name" id="name" class="form-control textFiled"/>
 				    	  <span style="color:red;"></span>
 				    </div>
 				  </div>
@@ -110,7 +111,6 @@
 					<div class="form-group col-md-8">
 						<label for="exampleInputEmail1">Meal :</label>
 						<select name="meal" class="form-control mealSelect" id="selectedMeal">
-					
 						</select>
 					</div>				
    						
@@ -132,10 +132,10 @@
 				    <table class="form-group col-md-12">
 				    	<thead>
 							<tr style="border:1px solid black">
-								<th>Number</th>
-								<th>Meal</th>
-								<th>Quantity</th>
-								<th></th>
+								<th style="background-color:powderblue;">Number</th>
+								<th style="background-color:powderblue;">Meal</th>
+								<th style="background-color:powderblue;">Quantity</th>
+								<th style="background-color:powderblue;"></th>
 							</tr>
 						</thead>
 
@@ -151,27 +151,27 @@
 				  <div class="row"> 
 				    <div class="form-group col-md-6">
 					    <label for="exampleInputEmail1">Start-From :</label>
-							<input name = "addedOn" type = "datetime-local" class="form-control"/> 
+							<input name = "addedOn" id = "addedOn" type = "date" class="form-control"/> 
 		 			       <span style="color:red;"></span>				    
 	 			    </div>
 				    
 				     <div class="form-group col-md-6">
 				       <label for="exampleInputEmail1">Valid-Until :</label>
-						<input name = "validUntil" type = "datetime-local" class="form-control"/> 
+						<input name = "validUntil" id = "validUntil" type = "date" class="form-control"/> 
 	 			       <span style="color:red;"></span>	 			   
 	 			      </div> 
 				  </div>
 				  
 				  <div class="row">
 				    <div class="form-group col-md-6">
-				    <label for="exampleInputEmail1">Unit-Price (LKR) :</label>
-				     <input name = "price" class="form-control" type="number" step="0.01"/>
+				    <label for="exampleInputEmail1">Package-Price (LKR) :</label>
+				     <input name = "price" id = "price" class="form-control" type="number" step="0.01"/>
 				      <span style="color:red;"></span>
 				    </div>
 				    
 				     <div class="form-group col-md-6">
 				       <label for="exampleInputEmail1">Meal-Image :</label>
-				    	<input name = "image" type="file" class="form-control" name="image"/>
+				    	<input name = "image" id = "image" type="file" class="form-control" name="image"/>
 				    	 <span style="color:red;"></span>
 	 			    </div> 
 				  </div>
@@ -179,7 +179,7 @@
 			  	<div class = "row">
 				  	<div class = "col-md-12">
 				  	<label for="exampleInputEmail1">Description :</label>
-				  		<textarea name = "description" class="form-control"></textarea>
+				  		<textarea name = "description" id = "description"  class="form-control"></textarea>
 				  		 <span style="color:red;"></span>
 				  	</div>
 			  	</div>
@@ -188,15 +188,14 @@
 			     <div class = "row">
 				 	 <div class="form-group col-md-4">
 			     	    <button type="button" class="btn btn-lg btn-block btn-warning" data-dismiss="modal">
-			     	     <i class="fa fa-close"></i> Cancel</button>
+			     	     Cancel</button>
 				 	  </div>
 				    	<div class="form-group col-md-4">
 				     	 <button type="button" class="btn btn-lg btn-block btn-secondary" type="reset">
-			     	   <i class="fa fa-repeat"></i> Reset</button>
+			     	    Reset</button>
 				 	</div>
 				 	<div class="form-group col-md-4">
-				     	 <button type="submit" class="btn btn-lg btn-block btn-success">
-				        <i class="fa fa-floppy-o"></i> Save</button>
+				     	 <input type="button" id="submitBtn" onclick="addDta()" class="btn btn-lg btn-block btn-success" value="Save"/>
 				  	  </div>
 				 </div>
 			</form>
@@ -210,9 +209,18 @@
   var mealArray = [];	
   
   	$(document).ready(function(){  		
+  		
 		getMealListAndFillSelectBox();
 		
-    	 $('#employeeTable').DataTable({
+		// SET AJAX WITH CSRF
+		 var token =$("meta[name='_csrf']").attr("content");
+	  		var header = $("meta[name='_csrf_header']").attr("content");
+	  		$(document).ajaxSend(function(e, xhr, options) {
+	  			xhr.setRequestHeader(header, token);
+	  		});
+
+		
+    	 $('#comboPackageTable').DataTable({
 	      "paging": true,
 	      "lengthChange": true,
 	      "searching": true,
@@ -222,7 +230,7 @@
 	    });  		
     	 
     	 // MODAL CONFIRMATION TO DELETE
-    	 $("#confModalText").html("Are you want to delete this Meal?");
+    	 $("#confModalText").html("Are you want to delete this Package?");
     	 $(".triggerRemove").click(function(e){
     		e.preventDefault();
     		 $("#confModalbtn").attr("href", $(this).attr("href")); 
@@ -237,9 +245,8 @@
   		 $.get('http://localhost:8080/titanic/meals/allMealsString.do', 
 	         function(data){
 	  			var data = JSON.parse(data);
-	  			console.log(data.result);
-	  			 $.each(data.result, function(key, meal) {   
-	 	 			htmlOption += "<option value="+ key +">" + meal.name + "</option>";
+	  			 $.each(data, function(key, meal) {   
+	 	 			htmlOption += '<option value="'+ meal.id +'">' + meal.name + '</option>';
 	 		  	 }); 
 	  			$("#selectedMeal").append(htmlOption);
   		 });
@@ -248,21 +255,19 @@
   	 
   	// MANAGE MEAL TO ARRAY AND DISPLAY TABLE
   	 function addMeal() {
-  		alert(mealArray.length);
   		// ADD MEAL
   		var mealobj = {};
-  		mealobj.mealId = $("#selectedMeal").val();
-  		mealobj.mealName = $("#selectedMeal").text();
-  		console.log(mealobj.mealName);
+  		mealobj.mealId = $("#selectedMeal option:selected").val();
+  		mealobj.mealName = $("#selectedMeal option:selected").text();
   		mealobj.quantity = $("#quantity").val();
   		
   		mealArray.push(mealobj);
    		var key = mealArray.length;
-   		alert(key + "key");
+
 			// DISPLAY TABLE APPENDING
 			var htmlStr = '<tr>';
 			htmlStr += "<td>"+key+"</td>";
-			htmlStr += "<td>"+ mealobj.mealName + "</td>";
+			htmlStr += "<td>"+ mealobj.mealName  + "</td>";
 			htmlStr += "<td>"+ mealobj.quantity + "</td>";
 			htmlStr += '<td><a class="btn text-danger triggerRemove" data-id="'+ key +'"> <i class="fa fa-trash-o"></i> </a></td>';
 			htmlStr += "</tr>";
@@ -273,13 +278,56 @@
 	  		// REMOVE FROM ARRAY AND DISPLAY
 	  	  	$(".triggerRemove").click(function deleteMeal(){
 	  	  		var id = $(this).attr("data-id")-1;
-	  	  		alert(id);
-	  	  		console.log(mealArray);
-	  	  		mealArray.splice(id, 1);
-	  	  		console.log(mealArray);
+	  	  		if(id > -1){
+	  	  		mealArray.splice(id);
 	  	  		document.getElementById("addedMealTable").deleteRow(id);
+	  	  		}
 	  	  	});
   	}
   	
+  	// SUBMIT DATA
+  	function addDta(){
+  		var pckg = {};
+  		pckg.name = $("#name").val();
+  		pckg.addedOn = $("#addedOn").val();
+  		pckg.price = $("#price").val();
+  		pckg.validUntil = $("#validUntil").val();
+  		pckg.description = $("#description").val();
+  		pckg.mealArr = JSON.stringify(mealArray);
+  		console.log(pckg.mealArr);
+  		
+		if (pckg.name.trim() == ""){
+			$("#res-msg").removeClass("alert-success").removeClass("alert-info").addClass("alert-danger");
+			$("#res-msg strong").html("Name can not be empty");
+		}
+		else if (pckg.mealArr == "" || pckg.mealArr == null){
+			$("#res-msg").removeClass("alert-success").removeClass("alert-info").addClass("alert-danger");
+			$("#res-msg strong").html("Atleast One Meal is needed!");
+		}
+		else{
+			$("#res-msg").removeClass("alert-success").removeClass("alert-danger").addClass("alert-info");
+			$("#res-msg strong").html("Fill All And Hit Save!");
+			 $.ajax({
+		  	    type: 'POST',
+		  	    url: 'http://localhost:8080/titanic/meals/comboPackage.do',
+		  	 	data: pckg,
+		  	    success: function(data, textStatus ){
+		  	    	 $(".form-control").val("");
+		  			 $("#add-meal").modal("hide");
+			  	    if(data == "success"){
+			  	    	window.location.href = "http://localhost:8080/titanic/meals/comboPackage.do?success=true&msg=Successfully Added";
+			  	    }
+			  	    else{
+			  	    	window.location.href = "http://localhost:8080/titanic/meals/comboPackage.do?success=false&msg=Failed";
+			  	    }
+		  	    },
+		  	    error: function(xhr, textStatus, errorThrown){
+		  	    	$("#res-msg").removeClass("alert-success").removeClass("alert-info").addClass("alert-danger");
+		  			$("#res-msg strong").html(xhr);
+		  	    	console.log(xhr);
+		  	    }
+		  	  });  	
+		}
+  	}
   
   	</script>

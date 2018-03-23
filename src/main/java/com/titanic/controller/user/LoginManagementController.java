@@ -11,9 +11,10 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.titanic.entity.Employee;
+import com.titanic.entity.User;
 import com.titanic.service.user.EmployeeManagementService;
+import com.titanic.service.user.UserCommonService;
 import com.titanic.session.CurrentUser;
 
 @Controller
@@ -21,6 +22,9 @@ public class LoginManagementController {
 	
 	@Autowired
 	private EmployeeManagementService emService;
+	
+	@Autowired
+	private UserCommonService ucService;
 	
 	// SHOW LOGIN
 	@RequestMapping("/login")
@@ -37,13 +41,13 @@ public class LoginManagementController {
 	// SUCCESSFULL LOGIN HANDLER
 	@RequestMapping("/handleSuccesLogin")
 	public String handleSuccesLogin(HttpSession session) {
-		CurrentUser currUser = new CurrentUser();
-		Employee currLogger = new Employee();
+		User currUser = new User();
 		try {
-    	currLogger = emService.findOneByName(currUser.me());
-    	session.setAttribute("LoggerId", currLogger.getUser().getName());
-    	session.setAttribute("LoggerName", currLogger.getUser().getName());
-		
+			currUser = ucService.findOneByUserName(CurrentUser.me());
+	    	session.setAttribute("LoggerId", currUser.getId());
+	    	session.setAttribute("LoggerName", currUser.getName());
+	    	
+	    	ucService.saveLogin(currUser);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

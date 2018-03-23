@@ -4,6 +4,15 @@
 <%@page  import="com.titanic.entity.MealsSchedule" %>
 <%@ include file="../../../layouts/taglib.jsp" %>
 
+
+<style type="text/css">
+
+	table, th, td {
+   border: 1px solid black;
+   text-align:center;
+}
+</style>
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
@@ -11,7 +20,7 @@
 	<button value = "Edit Employee" class="btn btn-info" id="ediBtn" onclick="showEdit()"><i class="fa fa-pencil-square-o"></i> Edit Employee</button>
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title"><c:out value="${singleMeal.code}"/>- Meal</h3>
+				<h3 class="box-title"><c:out value="${singleCombo.code}"/>- Combo Package</h3>
 				<c:if test="${param.success eq true}">
                  <div class="alert alert-success alertMsg" style = "margin-top:15px; padding:5px;">${param.msg}</div>
                  </c:if>
@@ -22,67 +31,79 @@
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body">
-				<form:form modelAttribute="singleUpdatedMeal" method="post">
+				<form id="singleUpdatedMeal" method="post">
 				 <div class="row">
 				    <div class="form-group col-md-6">
-				   		 <label for="exampleInputEmail1">Meal-Name :</label>
-				    	 <form:input path="name" cssClass="form-control" value="${singleMeal.name}"/>
-				    	  <span style="color:red;"><form:errors path="name"/></span>
+				   		 <label for="exampleInputEmail1">Combo-Name :</label>
+				    	 <input name="name" class="form-control" value="${singleCombo.name}"/>
+				    	  <span style="color:red;"></span>
 				    </div>
 				    
 				     <div class="form-group col-md-6">
-				    	<label for="exampleInputEmail1">Meal-Code :</label>
-				    	 <form:input path="code" cssClass="form-control" disabled="true" value="${singleMeal.code}"/>
-				    	  <span style="color:red;"><form:errors path="code"/></span>
+				    	<label for="exampleInputEmail1">Combo-Code :</label>
+				    	 <input name="code" class="form-control" disabled value="${singleCombo.code}"/>
+				    	  <span style="color:red;"></span>
 				    </div>
 				  </div>
 				  
 				   <div class="row">
-				     <div class="form-group col-md-6">
-				    	<label for="exampleInputEmail1">Meal-Type :</label>
-				     	<form:select path="preferedTime" cssClass="form-control" >
-				     		<option>${singleMeal.preferedTime}</option>
-				     	  <%for (MealsSchedule ms : MealsSchedule.values()) {%>
-								<form:option value="<%=ms.getName()%>"><%=ms.getName()%></form:option>
-						  <% } %>
-						</form:select>
-						 <span style="color:red;"><form:errors path="preferedTime"/></span>
-				     </div>
-				     
-				    <div class="form-group col-md-6">
-				    	<label for="exampleInputEmail1">Food-Type :</label>
-				     	<form:select path="foodTypeId" class="form-control" id="foodType">
-				     			<form:option label="${singleMeal.foodType.name}" value="${singleMeal.foodType.id}"/>
-				     	   <c:forEach items="${mealType}" var ="mealType">
-				     	   		<form:option label="${mealType.name}" value="${mealType.id}"/>
-				     	   </c:forEach>
-						</form:select>
-							 <span style="color:red;"><form:errors path="foodTypeId"/></span>
-				     </div>
-				  </div>
-				  
-				   <div class="row">
-				    <div class="form-group col-md-6">
-				    <label for="exampleInputEmail1">Unit-Price :</label>
-				     <form:input path="price" cssClass="form-control" type="number" step="0.01" value="${singleMeal.price}"/>
-				   	<span style="color:red;"><form:errors path="price"/></span>
+				    <div class="form-group col-md-4">
+				    <label for="exampleInputEmail1">Added-On :</label>
+				     <input name="addedOn" class="form-control" type = "date" value="${singleCombo.addedOn}"/>
+				   	<span style="color:red;"></span>
 				    </div>
 				    
-				     <div class="form-group col-md-6">
-				    	<form:input path="image" type="file" cssClass="form-control" name="image"/>
-				    	<img src="${singleMeal.image}" alt="Meal face" height="42" width="42">
-				    	<span style="color:red;"><form:errors path="image"/></span>
-	 			    </div> 
+				     <div class="form-group col-md-4">
+				    <label for="exampleInputEmail1">Valid-Until :</label>
+				     <input name="validUntil" class="form-control" type = "date" value="${singleCombo.validUntil}"/>
+				   	<span style="color:red;"></span>
+				    </div>
+				    
+				     <div class="form-group col-md-4">
+				    <label for="exampleInputEmail1">Package-Price :</label>
+				     <input class="form-control" type="number" step="0.01" value="${singleCombo.price}"/>
+				   	<span style="color:red;"></span>
+				    </div>
 				  </div>
 				  
 			  	<div class = "row">
-				  	<div class = "col-md-6">
+				  	<div class = "col-md-12">
 				  	<label for="exampleInputEmail1">Description :</label>
-				  		<form:textarea path = "description" cssClass="form-control" value="${singleMeal.description}" />
-				  		<span style="color:red;"><form:errors path="description"/></span>
+				  		<textarea name = "description" class="form-control">${singleCombo.description}</textarea>
+				  		<span style="color:red;"></span>
 				  	</div>
 			  	</div>
-				  
+			  	
+			  	<br/>
+			  	 <div class="row">
+			  	 	<fieldset class="form-group col-md-12"><legend>Included Meals</legend>
+			  		  <table class="form-group col-md-6">
+			  		  		<thead>
+							<tr style="border:1px solid black">
+								<th style="background-color:powderblue;">Number</th>
+								<th style="background-color:powderblue;">Meal</th>
+								<th style="background-color:powderblue;">Quantity</th>
+							</tr>
+						</thead>
+
+						<tbody id="addedMealTable">
+					  	<c:forEach items="${singleCombo.packageMeal}" var="pckgMeal" varStatus="pckg" >
+					  	  <tr>
+					  	  	  <td><c:out value="${pckg.index + 1}"/></td>
+					  	  	  <td><c:out value="${pckgMeal.mealName}"/></td>
+					  	  	  <td><c:out value="${pckgMeal.quantity}"/></td>
+					  	  </tr>
+					  	</c:forEach>
+					  	</tbody>
+					 </table>
+					  <div class="form-group col-md-6">
+				    	<input name="image" type="file" class="form-control" name="image"/>
+				    	<img src="${singleMeal.image}" alt="Meal face" height="42" width="42">
+				    	<span style="color:red;"></span>
+	 			    </div> 
+				   </fieldset>
+				</div>			  	
+			  	
 			  	<br/>
 			     <div class = "row" id="updBtnDiv">
 		       		  <div class="form-group col-md-8" >
@@ -94,7 +115,7 @@
 			     	     <i class="fa fa-repeat"></i> Reset</button>
 				 	  </div>
 				 </div>
-			</form:form>
+			</form>
 			</div>
 			<!-- /.box-body -->
 		</div>

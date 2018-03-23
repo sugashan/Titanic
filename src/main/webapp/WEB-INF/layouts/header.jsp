@@ -35,7 +35,7 @@
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        <img src="<c:url value="/resources/dist/img/user2-160x160.jpg" />" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -150,7 +150,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href='<spring:url value="/logout.do" />' class="btn btn-warning btn-flat">Sign out</a>
+                  <a href='<spring:url value="/logout" />' class="btn btn-warning btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

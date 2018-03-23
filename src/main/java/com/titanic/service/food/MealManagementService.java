@@ -1,6 +1,5 @@
 package com.titanic.service.food;
 
-import java.sql.ResultSet;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,8 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.titanic.entity.Meal;
 import com.titanic.entity.User;
-import com.titanic.other.GenericResult;
-import com.titanic.other.JsonFormer;
 import com.titanic.respository.MealRepository;
 import com.titanic.respository.UserRepository;
 import com.titanic.session.CurrentUser;
@@ -38,8 +35,7 @@ public class MealManagementService {
 
 	// SAVE NEW MEAL
 	public void save(Meal meal) {
-		CurrentUser currUser = new CurrentUser();
-		User user = uRepository.findByUserName(currUser.me());
+		User user = uRepository.findByUserName(CurrentUser.me());
 		meal.setAddedByUser(user);
 		mRepository.save(meal);
 	}
@@ -77,13 +73,16 @@ public class MealManagementService {
 		return mRepository.findByItemCatergory(name);
 	}
 
-	// GET MEAL AND CHANGED INTO MAP STRING 
+	// GET MEAL AND CHANGED INTO STRING 
 	public String getAllMealMapString() throws JSONException {
-		String resultString = null;
-		List<Meal> result = mRepository.findAllNameId();
-
-		resultString = JsonFormer.form(new GenericResult("success", result));
-		System.out.println(resultString);
-		return resultString;
+		List<Meal> result = findAll();
+		JSONArray jsonResultArry = new JSONArray();
+		for(Meal meal: result) {
+			JSONObject object = new JSONObject();
+			object.put("id", meal.getId());
+			object.put("name", meal.getName());
+			jsonResultArry.put(object);
+		}
+		return jsonResultArry.toString();
 	}
 }

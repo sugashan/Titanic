@@ -6,4 +6,5 @@ import com.titanic.entity.Login;
 
 public interface LoginRepository extends JpaRepository<Login, Integer> {
 
+
 }
