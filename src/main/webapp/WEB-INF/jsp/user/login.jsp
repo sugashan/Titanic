@@ -32,7 +32,7 @@
         <!-- /.col -->
         <div class="col-xs-4">
           <input name="submit" type="submit" class="btn btn-danger btn-block btn-flat" value="Login" />
-          <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden" />
+          <security:csrfInput/>
         </div>
         <!-- /.col -->
       </div>

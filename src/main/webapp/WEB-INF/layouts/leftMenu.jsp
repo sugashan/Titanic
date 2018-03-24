@@ -35,7 +35,7 @@
 		<ul class="sidebar-menu">
 			<security:authorize access=" isAuthenticated()">
 			<li class="header ${current == 'home' ? 'active' : ''}">
-				<a href='<spring:url value="/home.jsp" />'> <i class="fa fa-home"></i><span>Home</span></a>
+				<a href='<spring:url value="/home.do" />'> <i class="fa fa-home"></i><span>Home</span></a>
 			</li>
 
 			<li class="treeview ${current == 'employee' ? 'active' : ''}"><a href="#"><i class="fa fa-user"></i>

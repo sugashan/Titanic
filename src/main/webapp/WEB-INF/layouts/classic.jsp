@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-     <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
      <%@ include file="taglib.jsp" %>
+     <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
      <c:set var="contextPath" value="${pageContext.request.contextPath} "/>
      
 <!DOCTYPE html>
@@ -10,8 +10,7 @@
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta charset="UTF-8">
-<meta name="_csrf" content="${_csrf.token}"/>
-<meta name="_csrf_header" content="${_csrf.headerName}"/>
+<security:csrfMetaTags />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	  <!-- Font Awesome -->

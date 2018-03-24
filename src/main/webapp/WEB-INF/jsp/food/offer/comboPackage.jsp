@@ -20,7 +20,7 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-	<input type = "button" data-target="#add-meal" data-toggle="modal" data-backdrop="static" data-keyboard="false" class="btn btn-success" value = "Add New"/>
+	<input type = "button" data-target="#add-package" data-toggle="modal" data-backdrop="static" data-keyboard="false" class="btn btn-success" value = "Add New"/>
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title">Meal</h3>
@@ -86,7 +86,7 @@
 </div>
 
 <!-- Meal Add modal -->
-  <div class="modal fade" id="add-meal" role="dialog">
+  <div class="modal fade" id="add-package" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -151,13 +151,13 @@
 				  <div class="row"> 
 				    <div class="form-group col-md-6">
 					    <label for="exampleInputEmail1">Start-From :</label>
-							<input name = "addedOn" id = "addedOn" type = "date" class="form-control"/> 
+							<input name = "addedOn" id = "addedOn" type = "date" class="form-control dateField"/> 
 		 			       <span style="color:red;"></span>				    
 	 			    </div>
 				    
 				     <div class="form-group col-md-6">
 				       <label for="exampleInputEmail1">Valid-Until :</label>
-						<input name = "validUntil" id = "validUntil" type = "date" class="form-control"/> 
+						<input name = "validUntil" id = "validUntil" type = "date" class="form-control dateField"/> 
 	 			       <span style="color:red;"></span>	 			   
 	 			      </div> 
 				  </div>
@@ -165,7 +165,7 @@
 				  <div class="row">
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Package-Price (LKR) :</label>
-				     <input name = "price" id = "price" class="form-control" type="number" step="0.01"/>
+				     <input name = "price" id = "price" class="form-control currencyField" />
 				      <span style="color:red;"></span>
 				    </div>
 				    
@@ -237,6 +237,11 @@
     		$("#confirmModal").modal("show");
     	 });
     	 
+    	 //   VALIDATIONS
+    	 $("#newComboPackage").validate();
+    	 
+    	 validator();
+    	
   	});
   	
   	 //GET ALL MEAL AS LIST
@@ -251,7 +256,6 @@
 	  			$("#selectedMeal").append(htmlOption);
   		 });
   	 }
-  	 
   	 
   	// MANAGE MEAL TO ARRAY AND DISPLAY TABLE
   	 function addMeal() {
@@ -283,7 +287,7 @@
 	  	  		document.getElementById("addedMealTable").deleteRow(id);
 	  	  		}
 	  	  	});
-  	}
+  			}
   	
   	// SUBMIT DATA
   	function addDta(){

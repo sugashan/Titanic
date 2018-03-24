@@ -10,12 +10,12 @@
 	<global-method-security pre-post-annotations="enabled" />
 
 	<http pattern="/resources/**" security="none"/>
-	<http pattern="/logout*" security="none"></http>
 	
-	<http use-expressions="true" >
-		<access-denied-handler error-page="/accessDenied.do"/> 
+	<http use-expressions="true" auto-config="true">
 		<intercept-url pattern="/login*" access="isAnonymous()" />
-<!-- 		<intercept-url pattern="/logout*" access="isAuthenticated()"/> -->
+		<intercept-url pattern="/logout*" access="isAnonymous()"/>
+		
+		<access-denied-handler error-page="/accessDenied.do"/> 
 		
 		<!-- EMPLOYEE URL -->
 		<intercept-url pattern="/users/employee**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')"/>
@@ -31,15 +31,18 @@
 		<!-- ORDER URL -->
 		<intercept-url pattern="/orders/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST', 'ROLE_DELIVERYBOY' )"/>
 		
-		
+		 <logout
+		      logout-success-url="/login.do"
+		      delete-cookies="true"
+		      invalidate-session="true" />
+  
 		<form-login 
 			login-page="/login.do"
 			authentication-success-forward-url="/handleSuccesLogin.do" 
 			authentication-failure-forward-url="/handleFailureLogin.do" />
 			
- 		<logout logout-url="/logout.do"/>
 	</http>
-
+	
 	<authentication-manager id="authenticationSource">
 		<authentication-provider>
 			<password-encoder hash="bcrypt"/>

@@ -12,9 +12,12 @@ public class FoodOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	
 	@OneToOne
 	private Meal meal;
+	
 	private int quantity;
+	
 	@OneToOne
 	private Orders order;
 	

@@ -32,6 +32,7 @@ public class EmployeeManagementService {
 	// SAVE NEW EMPLOYEE
 	public void save(Employee employee) {
 		employee.getUser().setEnabled(true);
+		employee.setAvailableForDeivery(true);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		employee.getUser().setPassword(encoder.encode(employee.getUser().getPassword()));
 		employee.setBranch(ucService.getBranchWithId(1));

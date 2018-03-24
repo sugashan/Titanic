@@ -144,11 +144,6 @@
     	//   VALIDATIONS
     	 $("#newFoodType").validate();
     	 
-    	 $('.textFiled').each(function () {
-    	      $(this).rules('add', {
-    	          required: true,
-    	          minlength:3
-    	      });
-	  	});
+    	 validator();
   	});
   	</script>

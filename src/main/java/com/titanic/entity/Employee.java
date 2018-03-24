@@ -35,6 +35,7 @@ public class Employee {
 	@JoinColumn(name="branch_id")
 	private Branch branch;
 	
+	private boolean availableForDeivery;
 	
 	public User getUser() {
 		return user;
@@ -71,6 +72,12 @@ public class Employee {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Boolean getAvailableForDeivery() {
+		return availableForDeivery;
+	}
+	public void setAvailableForDeivery(Boolean availableForDeivery) {
+		this.availableForDeivery = availableForDeivery;
 	}
 	
 	

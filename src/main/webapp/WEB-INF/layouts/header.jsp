@@ -149,8 +149,11 @@
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
-                <div class="pull-right">
-                  <a href='<spring:url value="/logout" />' class="btn btn-warning btn-flat">Sign out</a>
+                <div class="pull-left">
+                 	<form name='f' action='<c:url value="/logout" />' method='POST'>
+                	   <button type="submit"  class="btn btn-warning btn-flat">Sign out</button>
+                	  <security:csrfInput/>
+                	</form>
                 </div>
               </li>
             </ul>

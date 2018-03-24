@@ -138,7 +138,7 @@
 				    
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1" Class="difColor">Date of Birth :</label>
-	 			      <form:input path = "dob" type = "date" cssClass="form-control"/> 
+	 			      <form:input path = "dob" type = "date" cssClass="form-control dateField"/> 
 	 			       <span style="color:red;"><form:errors path="dob"/></span>
 	 			    </div> 
 				  </div> 
@@ -209,31 +209,7 @@
     	 
    		 //   VALIDATIONS
     	 $("#newEmployee").validate();
-    	 
-    	 $('.textFiled, .uniqueTextFiled').each(function () {
-    	      $(this).rules('add', {
-    	          required: true,
-    	          minlength:3
-    	      });
-    	 $('.numberFiled').each(function () {
-   	      $(this).rules('add', {
-   	          required: true,
-   	          minlength:10,
-   	          maxlength:12
-   	      });
-   	    });
-    	 $('.passwordFiled').each(function () {
-      	      $(this).rules('add', {
-      	          required: true,
-      	          minlength:5
-      	      });
-      	    });
-    	 $('.emailFiled').each(function () {
-     	      $(this).rules('add', {
-     	          email:true
-     	      });
-     	    });
-  		});
+    	 validator();
   	});
   	
   	// CHECK UNIQUE USERNAME

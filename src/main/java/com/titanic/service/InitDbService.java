@@ -43,29 +43,29 @@ public class InitDbService {
 	@PostConstruct
 	public void Init() {
 		
-		FoodType kottu = new FoodType();
-		kottu.setName("KOTTU");
-		kottu.setId(1);
-		kottu.setPreFix("KOT");
-		fRepo.save(kottu);
+//		FoodType kottu = new FoodType();
+//		kottu.setName("KOTTU");
+//		kottu.setId(1);
+//		kottu.setPreFix("KOT");
+//		fRepo.save(kottu);
+//		
+//		FoodType kottu1 = new FoodType();
+//		kottu1.setName("KOTTU11");
+//		kottu1.setId(2);
+//		kottu1.setPreFix("KOT11");
+//		fRepo.save(kottu1);
 		
-		FoodType kottu1 = new FoodType();
-		kottu1.setName("KOTTU11");
-		kottu1.setId(2);
-		kottu1.setPreFix("KOT11");
-		fRepo.save(kottu1);
-		
-		Meal meal = new Meal();
-		meal.setId(1);
-		meal.setName("sssssss");
-		meal.setFoodType(kottu1);
-		mRepo.save(meal);
-		
-		Meal meal1 = new Meal();
-		meal1.setId(2);
-		meal1.setName("qqqqqqq");
-		meal1.setFoodType(kottu);
-		mRepo.save(meal1);
+//		Meal meal = new Meal();
+//		meal.setId(1);
+//		meal.setName("sssssss");
+//		meal.setFoodType(kottu1);
+//		mRepo.save(meal);
+//		
+//		Meal meal1 = new Meal();
+//		meal1.setId(2);
+//		meal1.setName("qqqqqqq");
+//		meal1.setFoodType(kottu);
+//		mRepo.save(meal1);
 		
 		
 		Role adminRole = new Role();

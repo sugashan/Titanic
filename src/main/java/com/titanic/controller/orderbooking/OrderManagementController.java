@@ -1,4 +1,4 @@
-package com.titanic.controller.order;
+package com.titanic.controller.orderbooking;
 
 import javax.validation.Valid;
 
@@ -12,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.titanic.entity.MealsSchedule;
 import com.titanic.entity.Orders;
 import com.titanic.service.food.MealManagementService;
-import com.titanic.service.order.OrderManagementService;
+import com.titanic.service.orderbooking.OrderManagementService;
 
 @Controller
 public class OrderManagementController {

@@ -20,6 +20,7 @@ public class DeliveryOrder {
 	private String deliveryDate;
 	private String deliveryTime;
 	
+	
 	@OneToMany(cascade=CascadeType.REMOVE)
 	private List<Orders> order;
 	
@@ -30,7 +31,7 @@ public class DeliveryOrder {
 	private Employee employee;
 	
 	
-	
+
 	public String getDeliveryTime() {
 		return deliveryTime;
 	}

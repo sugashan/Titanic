@@ -140,7 +140,7 @@
 				   <div class="row">
 				    <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Unit-Price (LKR) :</label>
-				     <form:input path="price" cssClass="form-control" type="number" step="0.01"/>
+				     <form:input path="price" cssClass="form-control currencyField"/>
 				      <span style="color:red;"><form:errors path="price"/></span>
 				    </div>
 				    
@@ -206,12 +206,7 @@
     	 // VALIDATIONS
     	 $("#newMeal").validate();
     	 
-    	 $('.textFiled, .uniqueTextFiled').each(function () {
-    	      $(this).rules('add', {
-    	          required: true,
-    	          minlength:3
-    	      });
-  		});
+    	 validator();
     	 
     	// CHECK UNIQUE CODE
      	 $('.foodTypeGenCode').on("change", function() {

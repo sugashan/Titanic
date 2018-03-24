@@ -1,5 +1,6 @@
 package com.titanic.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Orders {
@@ -24,14 +29,18 @@ public class Orders {
 	
 	@OneToOne
 	private Branch outletBranch;
-	private String orderedOn;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date orderedOn;
+	
 	private String waitingTime;
 	
 	@OneToOne
 	private Customer customer;
 	
 	@OneToOne
-	private Employee employee;
+	private Employee cook;
+	
 	private String deliveryType;
 	
 	@OneToMany
@@ -45,7 +54,29 @@ public class Orders {
 	
 	private String expectedOrderTime; 
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date deliveredTime;
 	
+	
+	// ORDERED-ON & DELIVERED TIME ON SERVER TIMESTAMP
+	@PrePersist
+    protected void onCreate() {
+		orderedOn = new Date();
+    }
+	
+	@PreUpdate
+    protected void onUpdate() {
+		deliveredTime = new Date();
+    }
+
+	
+	// GETTER SETTER
+	public Date getDeliveredTime() {
+		return deliveredTime;
+	}
+	public void setDeliveredTime(Date deliveredTime) {
+		this.deliveredTime = deliveredTime;
+	}
 	public String getExpectedOrderTime() {
 		return expectedOrderTime;
 	}
@@ -88,10 +119,10 @@ public class Orders {
 	public void setOutletBranch(Branch outletBranch) {
 		this.outletBranch = outletBranch;
 	}
-	public String getOrderedOn() {
+	public Date getOrderedOn() {
 		return orderedOn;
 	}
-	public void setOrderedOn(String orderedOn) {
+	public void setOrderedOn(Date orderedOn) {
 		this.orderedOn = orderedOn;
 	}
 	public String getWaitingTime() {
@@ -106,11 +137,11 @@ public class Orders {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public Employee getEmployee() {
-		return employee;
+	public Employee getCook() {
+		return cook;
 	}
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
+	public void setCook(Employee cook) {
+		this.cook = cook;
 	}
 	public List<FoodOrder> getFoodOrder() {
 		return foodOrder;
