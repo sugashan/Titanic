@@ -1,8 +1,10 @@
 package com.titanic.controller.food;
 
-
+import java.io.File;
+import java.nio.file.Files;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 import javax.validation.Valid;
-
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,20 +16,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.titanic.entity.Meal;
+import com.titanic.entity.User;
+import com.titanic.other.TitanicMessageConstant;
+import com.titanic.other.UniqueIdManager;
+import com.titanic.respository.UserRepository;
 import com.titanic.service.food.FoodTypeManagementService;
 import com.titanic.service.food.MealManagementService;
+import com.titanic.session.CurrentUser;
 
 @Controller
 public class MealManagementController {
 	
 	@Autowired
 	private MealManagementService mmService;
+	
 	@Autowired
 	private FoodTypeManagementService ftService;
 	
+	@Autowired
+	private UserRepository uRepository;
+	
 	private String redirectUrlString="";
+	
+	// UPLOADED PATH
+	public File uploadFolder = new File(TitanicMessageConstant.UPLOAD_PATH+"meal/");
+	
 	
 	@ModelAttribute("newMeal")
 	public Meal Construct() {
@@ -56,22 +70,34 @@ public class MealManagementController {
 	
 	// ADD NEW MEAL
 	@RequestMapping(value="/meals/meal", method=RequestMethod.POST)
-	public String addFoodType( @Valid @ModelAttribute("newMeal") Meal meal, BindingResult errors, Model model) {
+	public String addFoodType( @Valid @ModelAttribute("newMeal") Meal meal, BindingResult errors, HttpServletRequest request, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
 			redirectUrlString = "redirect:/meals/meal.do?success=false&msg=Added Failed";
 		}
-		else {
-//			try {
-				meal.setFoodType(ftService.findOnebyId(meal.getFoodTypeId()));
-				mmService.save(meal);
-				redirectUrlString = "redirect:/meals/meal.do?success=true&msg=Successfully Added";
-//			} catch (JSONException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-			
-		}
+	else {
+			try {
+				 // Save file on system
+				 Part filePart = request.getPart("image");
+				 
+				 String fileName = UniqueIdManager.getRandom(0) + filePart.getSubmittedFileName();
+				 File file = new File(uploadFolder, fileName);
+                 Files.copy(filePart.getInputStream(), file.toPath());
+                
+            	 meal.setFoodType(ftService.findOnebyId(meal.getFoodTypeId()));         
+			     meal.setImageUrl("/titanic/resources/uploads/meal/" + fileName);
+			     
+			     User user = uRepository.findByUserName(CurrentUser.me());
+				 meal.setAddedByUser(user);
+					
+			     mmService.save(meal);
+			     redirectUrlString = "redirect:/meals/meal.do?success=true&msg=Successfully Added";
+			    
+			} catch (Exception e) {
+				e.printStackTrace();
+				redirectUrlString = "redirect:/meals/meal.do?success=false&msg=Image Failed.";
+			}
+        }
 		return redirectUrlString;
 	}
 	

@@ -33,7 +33,7 @@
 							<th></th>
 							<th>Name</th>
 							<th>Type</th>
-							<th>Item-Catergory</th>
+							<th>Item-Category</th>
 							<th>Prefer Time</th>
 							<th>Image</th>
 							<th>Description</th>
@@ -53,7 +53,7 @@
 								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.foodType.name}"/></a></td>
 								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.itemCatergory}"/></a></td>
 								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.preferedTime}"/></a></td>
-								<td><a class="btn" href='<spring:url value="meal-detaill/${meal.id}.do" />'><c:out value="${meal.image}"/></a></td>
+								<td><img src='<c:out value="${meal.imageUrl}"/>' style="height:25px; width:25px;"/></td>
 								<td><a class="btn" href='<spring:url value="meal-detail/${meal.id}.do" />'><c:out value="${meal.description}"/></a></td>
 							</tr>
 						</c:forEach>
@@ -64,7 +64,7 @@
 							<th></th>
 							<th>Name</th>
 							<th>Type</th>
-							<th>Item-Catergory</th>
+							<th>Item-Category</th>
 							<th>Prefer Time</th>
 							<th>Image</th>
 							<th>Description</th>
@@ -84,45 +84,53 @@
       <!-- Modal content-->
       <div class="modal-content">
       	<div class="modal-header">
-        	<h4 class="modal-title">Add New Meal</h4>
+        	<div class="alert alert-info" style="text-align: center; padding:-5px;"><h4><b>Add New Meal</b></h4><small>Fill All Blanks And Hit Submit.</small></div>
      	 </div>
-     	 <div class="alert alert-info">Fill All Blanks And Hit Submit.</div>
-        <div class="modal-body">
-    		 <form:form modelAttribute="newMeal" enctype="application/x-www-form-urlencoded" method="post" >
+     	  <div class="modal-body" style="margin-top:-10px;">
+    		 <form:form modelAttribute="newMeal" enctype="multipart/form-data" method="post" >
     		 		<div class="row">
-				     <div class="form-group col-md-12">
+				     <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Item-Type :</label>
-				     	<form:select path="itemCatergory" cssClass="form-control" >
+				     	<form:select path="itemCatergory" cssClass="form-control selectboxField" >
+				     			<option value="default">Choose..</option>
 				     	  <%for (ItemCatergory ic : ItemCatergory.values()) {%>
 								<option value="<%=ic.getName()%>"><%=ic.getName()%></option>
 						  <%}%>
 						</form:select>
 						 <span style="color:red;"><form:errors path="itemCatergory"/></span>
 				     </div>
-				   </div>  
-    		 	
-				  <div class="row">
-				    <div class="form-group col-md-6">
-				   		 <label for="exampleInputEmail1">Meal-Name :</label>
-				    	 <form:input path="name" cssClass="form-control textFiled"/>
-				    	  <span style="color:red;"><form:errors path="name"/></span>
-				    </div>
-				    
-				     <div class="form-group col-md-6">
+				     
+				      <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Food-Type :</label>
-				     	<form:select path="foodTypeId" class="form-control foodTypeGenCode">
+				     	<form:select path="foodTypeId" class="form-control foodTypeGenCode selectboxField">
+				     			<option value="default">Choose..</option>
 				     	   <c:forEach items="${mealType}" var ="mealType">
 				     	   		<form:option label="${mealType.name}" value="${mealType.id}"/>
 				     	   </c:forEach>
 						</form:select>
 						 <span style="color:red;"><form:errors path="foodTypeId"/></span>
 				     </div>
+				   </div>  
+    		 	
+				  <div class="row">
+				  	 <div class="form-group col-md-6">
+				    	<label for="exampleInputEmail1">Meal-Code :</label>
+				    	 <form:input path="code" cssClass="form-control codeClass textFiled"/>
+				    	  <span style="color:red;"><form:errors path="code"/></span>
+				    </div>
+				  
+				    <div class="form-group col-md-6">
+				   		 <label for="exampleInputEmail1">Meal-Name :</label>
+				    	 <form:input path="name" cssClass="form-control textFiled"/>
+				    	  <span style="color:red;"><form:errors path="name"/></span>
+				    </div>
 				  </div>
 				  
 				   <div class="row">
 				     <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1">Prefer-Time :</label>
-				     	<form:select path="preferedTime" cssClass="form-control" >
+				     	<form:select path="preferedTime" cssClass="form-control selectboxField" >
+				     			<option value="default">Choose..</option>
 				     	  <%for (MealsSchedule ms : MealsSchedule.values()) {%>
 								<option value="<%=ms.getName()%>"><%=ms.getName()%></option>
 						  <%}%>
@@ -130,28 +138,14 @@
 						 <span style="color:red;"><form:errors path="preferedTime"/></span>
 				     </div>
 				     
-				   	 <div class="form-group col-md-6">
-				    	<label for="exampleInputEmail1">Meal-Code :</label>
-				    	 <form:input path="code" cssClass="form-control codeClass"/>
-				    	  <span style="color:red;"><form:errors path="code"/></span>
-				    </div>
-				  </div>
-				  
-				   <div class="row">
-				    <div class="form-group col-md-6">
+				      <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Unit-Price (LKR) :</label>
 				     <form:input path="price" cssClass="form-control currencyField"/>
 				      <span style="color:red;"><form:errors path="price"/></span>
 				    </div>
-				    
-				     <div class="form-group col-md-6">
-				       <label for="exampleInputEmail1">Meal-Image :</label>
-				    	<form:input path="image" type="file" cssClass="form-control" name="image"/>
-				    	 <span style="color:red;"><form:errors path="image"/></span>
-	 			    </div> 
 				  </div>
 				  
-			  	<div class = "row">
+				  	<div class = "row">
 				  	<div class = "col-md-12">
 				  	<label for="exampleInputEmail1">Description :</label>
 				  		<form:textarea path = "description" cssClass="form-control" />
@@ -159,6 +153,15 @@
 				  	</div>
 			  	</div>
 			  	
+				   <div class="row">
+				     <div class="form-group col-md-12">
+				       <label for="exampleInputEmail1">Meal-Image :</label>
+				    	<input name="image" id="image" type="file" class="form-control"/>
+				    	<img id="previewing" class ="previewing" src='<c:url value="/resources/dist/img/noimage.jpg" />' style = "width: 100%;"/>
+				    	 <span style="color:red;"></span>
+	 			    </div> 
+				  </div>
+				  
 			  	<br/>
 			     <div class = "row">
 				 	 <div class="form-group col-md-4">
@@ -183,7 +186,6 @@
 
   <script>
   	$(document).ready(function(){  		
-		$("#foodTypeId").val(1);
 		
     	 $('#employeeTable').DataTable({
 	      "paging": true,
@@ -218,5 +220,30 @@
     	    });
   	});
   	
- 	
-  	</script>
+  		// IMAGE HANDLING & PREVIEW
+  	    // Function to preview image after validation
+        $(function() {
+            $("#image").change(function() {
+                $("#image").empty(); 					// To remove the previous error message
+                var file = this.files[0];
+                var imagefile = file.type;
+                var match = ["image/jpeg", "image/png", "image/jpg"];
+                if (!((imagefile == match[0]) || (imagefile == match[1]) || (imagefile == match[2]))) {
+                	 $("#image").css("background-color", "red");
+                     $("#image").css("color", "white");
+                    $('.previewing').attr('src', 'img/sympols/noimage.jpg');
+                    return false;
+                } else {
+                    var reader = new FileReader();
+                    reader.onload = imageIsLoadedfront;
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
+        });
+
+        function imageIsLoadedfront(e) {
+            $("#image").css("background-color", "green");
+            $("#image").css("color", "white");
+            $('.previewing').attr('src', e.target.result);
+        };
+  </script>

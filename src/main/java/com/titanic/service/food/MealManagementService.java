@@ -9,10 +9,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.titanic.entity.Meal;
-import com.titanic.entity.User;
 import com.titanic.respository.MealRepository;
-import com.titanic.respository.UserRepository;
-import com.titanic.session.CurrentUser;
 
 /**
  * @author S.Sugashan
@@ -25,8 +22,6 @@ public class MealManagementService {
 	@Autowired
 	private MealRepository mRepository;
 	
-	@Autowired
-	private UserRepository uRepository;
 	
 	// GET ALL MEAL AS LIST
 	public List<Meal> findAll(){
@@ -35,8 +30,6 @@ public class MealManagementService {
 
 	// SAVE NEW MEAL
 	public void save(Meal meal) {
-		User user = uRepository.findByUserName(CurrentUser.me());
-		meal.setAddedByUser(user);
 		mRepository.save(meal);
 	}
 

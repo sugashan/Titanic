@@ -1,7 +1,11 @@
 package com.titanic.controller.food;
 
+import java.io.File;
+import java.nio.file.Files;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
+
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.titanic.entity.FoodComboPackage;
 import com.titanic.entity.PackageMeals;
-import com.titanic.other.GenericResult;
-import com.titanic.other.JsonFormer;
+import com.titanic.other.TitanicMessageConstant;
+import com.titanic.other.UniqueIdManager;
 import com.titanic.service.food.FoodComboPackageManagementService;
 
 @Controller
@@ -25,6 +29,10 @@ public class FoodComboPackageManagementController {
 	private FoodComboPackageManagementService fcpSerice;
 	
 	private String redirectUrlString="";
+	
+	// UPLOADED PATH
+	public File uploadFolder = new File(TitanicMessageConstant.UPLOAD_PATH+"combo/");
+		
 	
 	@ModelAttribute("singleUpdatedComboPackage")
 	public FoodComboPackage ConstructSingle() {
@@ -46,7 +54,10 @@ public class FoodComboPackageManagementController {
 		
 		FoodComboPackage fcp = new FoodComboPackage();
 		fcp.setName(request.getParameter("name"));
-		fcp.setPrice(Float.parseFloat(request.getParameter("price")));
+		
+		if(request.getParameter("price")!=null)
+			fcp.setPrice(Float.parseFloat(request.getParameter("price")));
+		
 		fcp.setAddedOn(request.getParameter("addedOn"));
 		fcp.setDescription(request.getParameter("description"));
 		fcp.setValidUntil(request.getParameter("validUntil"));
@@ -54,20 +65,31 @@ public class FoodComboPackageManagementController {
 		
 		String mealArrString = request.getParameter("mealArr");
 		try {
-			ObjectMapper mapper = new ObjectMapper();
-			List<PackageMeals> pckgMealList = mapper.readValue(
-												mealArrString,
-												mapper.getTypeFactory().constructCollectionType(List.class, PackageMeals.class));
-			for(PackageMeals pckgMeal : pckgMealList) {
-				pckgMeal.setFcpkg(fcp);
+			if(mealArrString!=null) {
+				ObjectMapper mapper = new ObjectMapper();
+				List<PackageMeals> pckgMealList = mapper.readValue(
+													mealArrString,
+													mapper.getTypeFactory().constructCollectionType(List.class, PackageMeals.class));
+				for(PackageMeals pckgMeal : pckgMealList) {
+					pckgMeal.setFcpkg(fcp);
+				}
+				fcp.setPackageMeal(pckgMealList);
 			}
-			System.out.println(JsonFormer.form(new GenericResult("listtt", pckgMealList)));
-			fcp.setPackageMeal(pckgMealList);
+			// Save file on system
+			Part filePart = request.getPart("image");
+			
+			String fileName = UniqueIdManager.getRandom(0) + filePart.getSubmittedFileName();
+			File file = new File(uploadFolder, fileName);
+            Files.copy(filePart.getInputStream(), file.toPath());
+           
+            fcp.setImage("/titanic/resources/uploads/combo/" + fileName);
+            fcp.setCode(UniqueIdManager.getUniqueCode("Cmp"));
+			fcpSerice.save(fcp);
+			redirectUrlString = "success";; 
 		} catch (Exception e) {
 			e.printStackTrace();
+			redirectUrlString = "Failed";
 		}
-		 fcpSerice.save(fcp);
-		 redirectUrlString = "success";; 
 		 return redirectUrlString;
 	}
 	

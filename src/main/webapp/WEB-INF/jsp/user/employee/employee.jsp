@@ -77,10 +77,9 @@
       <!-- Modal content-->
       <div class="modal-content">
       	<div class="modal-header">
-        	<h4 class="modal-title" style="text-align: center;"><b>Add New Employee</b></h4>
+        	<div class="alert alert-info" style="text-align: center; padding:-5px;"><h4><b>Add New Employee</b></h4><small>Fill All Blanks And Hit Submit.</small></div>
      	 </div>
-     	 <div class="alert alert-info">Fill All Blanks And Hit Submit.</div>
-        <div class="modal-body">
+        <div class="modal-body" style="margin-top:-10px;">
     		 <form:form modelAttribute="newEmployee" enctype="application/x-www-form-urlencoded" method="post"  >
 				  <div class="row">
 				    <div class="form-group col-md-6">
@@ -91,7 +90,8 @@
 				    
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1" Class="difColor">Role :</label>
-				     	<form:select path="user.roleId" cssClass="form-control" >
+				     	<form:select path="user.roleId" cssClass="form-control selectboxField" >
+				     			<option value="default">Choose..</option>
 				     	   <c:forEach items="${roles}" var ="role"  begin="1">
 				     	   		<form:option label="${role.name}" value="${role.id}"/>
 				     	   </c:forEach>

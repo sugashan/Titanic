@@ -18,7 +18,10 @@ public class Meal {
 	
 	@Size(min=3, message="Invalid Meal Name!")
 	private String name;
-	private String image;
+	
+	// Save the location of the image
+	private String imageUrl;
+	
 	private String code;
 	
 	@NotNull(message="price Can Not Be Empty!")
@@ -40,7 +43,7 @@ public class Meal {
 	
 	@NotNull(message="Food Type Can Not Be Empty!")
 	private int foodTypeId;
-	
+
 	public int getFoodTypeId() {
 		return foodTypeId;
 	}
@@ -59,11 +62,11 @@ public class Meal {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getImage() {
-		return image;
+	public String getImageUrl() {
+		return imageUrl;
 	}
-	public void setImage(String image) {
-		this.image = image;
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 	public String getCode() {
 		return code;

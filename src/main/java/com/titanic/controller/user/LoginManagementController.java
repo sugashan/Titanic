@@ -4,16 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
-
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.titanic.entity.Employee;
 import com.titanic.entity.User;
 import com.titanic.service.user.EmployeeManagementService;
@@ -34,12 +29,6 @@ public class LoginManagementController {
 	public String login() {
 		return "login";
 	}
-	
-//	@RequestMapping("/logout")
-//	public String logout() {
-//		 SecurityContextHolder.getContext().setAuthentication(null);
-//		return "login";
-//	}
 	
 	// SHOW LOCKSCREEN
 	@RequestMapping("/lockScreen")

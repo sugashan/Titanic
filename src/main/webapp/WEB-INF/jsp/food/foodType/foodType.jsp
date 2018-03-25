@@ -74,9 +74,8 @@
       <!-- Modal content-->
       <div class="modal-content">
       	<div class="modal-header">
-        	<h4 class="modal-title">Add New Food Type</h4>
+        	<div class="alert alert-info" style="text-align: center; padding:-5px;"><h4><b>Add New Item</b></h4><small>Fill All Blanks And Hit Submit.</small></div>
      	 </div>
-     	 <div class="alert alert-info">Fill All Blanks And Hit Submit.</div>
         <div class="modal-body">
     		 <form:form modelAttribute="newFoodType" enctype="application/x-www-form-urlencoded" method="post" >
 				  <div class="row">

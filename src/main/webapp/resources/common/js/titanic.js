@@ -1,6 +1,6 @@
 function validator(){
 	
-	// Validation method for US currency
+	// VALIDATION FOR CURENCY
 	$.validator.addMethod("currency", function(value, element, param) {
 	    var isParamString = typeof param === "string",
 	        symbol = isParamString ? param : param[0],
@@ -15,9 +15,23 @@ function validator(){
 
 	}, "Please specify a valid currency");
 	
+	// SELECTBOX VALIDATION
+	 $.validator.addMethod("valueNotEqualsToDefault", function(value, element, arg){
+		  return arg !== value;
+		 }, "Please Select One!.");
+	 
+	 
+	 
+	 $('.selectboxField').each(function () {
+	      $(this).rules('add', {
+	    	  
+	    	  valueNotEqualsToDefault:"default",
+	      });
+	    });
 	 
 	 $('.currencyField').each(function () {
 	      $(this).rules('add', {
+	    	  required: true,
 	    	  currency:true,
 	    	  currency: ["$", false]
 	      });
@@ -44,13 +58,20 @@ function validator(){
 	 
 	 $('.emailFiled').each(function () {
 	      $(this).rules('add', {
+	    	  required: true,
 	          email:true
 	      });
 	    });
 	 $('.dateField').each(function () {
 	      $(this).rules('add', {
+	    	  required: true,
 	          date:true
 	      });
 	    });
 		
+}
+
+// CLEAR FORMS
+function reset(){
+	 $('.form-control input[type="text"]').val('');
 }

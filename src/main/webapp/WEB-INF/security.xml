@@ -11,7 +11,7 @@
 
 	<http pattern="/resources/**" security="none"/>
 	
-	<http use-expressions="true" auto-config="true">
+	<http use-expressions="true">
 		<intercept-url pattern="/login*" access="isAnonymous()" />
 		<intercept-url pattern="/logout*" access="isAnonymous()"/>
 		

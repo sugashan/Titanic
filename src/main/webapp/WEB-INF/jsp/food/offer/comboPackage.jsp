@@ -91,11 +91,10 @@
       <!-- Modal content-->
       <div class="modal-content">
       	<div class="modal-header">
-        	<h4 class="modal-title">Add New Combo Package</h4>
+        	<div class="alert alert-info" style="text-align: center; padding:-5px;"><h4><b>Add New Combo</b></h4><small>Fill All Blanks And Hit Submit.</small></div>
      	 </div>
-     	 <div class="alert alert-info" id="res-msg"><strong>Fill All Blanks And Hit Submit.</strong></div>
         <div class="modal-body">
-    		 <form id="newComboPackage" enctype="application/x-www-form-urlencoded" method="post" >
+    		 <form id="newComboPackage" onsubmit="return addDta(this)" >
     		 	<security:csrfInput />
 				  <div class="row">
 				    <div class="form-group col-md-12">
@@ -110,13 +109,13 @@
 				  <div class="row">				    
 					<div class="form-group col-md-8">
 						<label for="exampleInputEmail1">Meal :</label>
-						<select name="meal" class="form-control mealSelect" id="selectedMeal">
+						<select name="meal" class="form-control mealSelect selectboxField" id="selectedMeal">
 						</select>
 					</div>				
    						
 					 <div class="form-group col-md-4">
 					 <label for="exampleInputEmail1">Quantity :</label>
-					 	<input type = "number" id="quantity"></input>
+					 	<input type = "number" id="quantity" class=""></input>
 					 </div>
  				</div>
       						
@@ -149,31 +148,23 @@
 				  
 				   <hr size="300"/>
 				  <div class="row"> 
-				    <div class="form-group col-md-6">
+				    <div class="form-group col-md-4">
 					    <label for="exampleInputEmail1">Start-From :</label>
 							<input name = "addedOn" id = "addedOn" type = "date" class="form-control dateField"/> 
 		 			       <span style="color:red;"></span>				    
 	 			    </div>
 				    
-				     <div class="form-group col-md-6">
+				     <div class="form-group col-md-4">
 				       <label for="exampleInputEmail1">Valid-Until :</label>
 						<input name = "validUntil" id = "validUntil" type = "date" class="form-control dateField"/> 
 	 			       <span style="color:red;"></span>	 			   
 	 			      </div> 
-				  </div>
-				  
-				  <div class="row">
-				    <div class="form-group col-md-6">
+	 			      
+	 			      <div class="form-group col-md-4">
 				    <label for="exampleInputEmail1">Package-Price (LKR) :</label>
 				     <input name = "price" id = "price" class="form-control currencyField" />
 				      <span style="color:red;"></span>
 				    </div>
-				    
-				     <div class="form-group col-md-6">
-				       <label for="exampleInputEmail1">Meal-Image :</label>
-				    	<input name = "image" id = "image" type="file" class="form-control" name="image"/>
-				    	 <span style="color:red;"></span>
-	 			    </div> 
 				  </div>
 				  
 			  	<div class = "row">
@@ -183,7 +174,16 @@
 				  		 <span style="color:red;"></span>
 				  	</div>
 			  	</div>
-			  	
+				  
+				  <div class="row">
+				     <div class="form-group col-md-12">
+				       <label for="exampleInputEmail1">Meal-Image :</label>
+				    	<input name="image" id="image" type="file" class="form-control"/>
+				    	<img id="previewing" class ="previewing" src='<c:url value="/resources/dist/img/noimage.jpg" />' style = "width: 100%;"/>
+				    	 <span style="color:red;"></span>
+	 			    </div> 
+				  </div>
+				  
 			  	<br/>
 			     <div class = "row">
 				 	 <div class="form-group col-md-4">
@@ -195,7 +195,7 @@
 			     	    Reset</button>
 				 	</div>
 				 	<div class="form-group col-md-4">
-				     	 <input type="button" id="submitBtn" onclick="addDta()" class="btn btn-lg btn-block btn-success" value="Save"/>
+				     	 <input type="submit" id="submit" class="btn btn-lg btn-block btn-success" value="Save"/>
 				  	  </div>
 				 </div>
 			</form>
@@ -203,7 +203,7 @@
       </div>
     </div>
   </div>
-
+ <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden" />
 
   <script>
   var mealArray = [];	
@@ -239,7 +239,6 @@
     	 
     	 //   VALIDATIONS
     	 $("#newComboPackage").validate();
-    	 
     	 validator();
     	
   	});
@@ -258,7 +257,7 @@
   	 }
   	 
   	// MANAGE MEAL TO ARRAY AND DISPLAY TABLE
-  	 function addMeal() {
+  	function addMeal() {
   		// ADD MEAL
   		var mealobj = {};
   		mealobj.mealId = $("#selectedMeal option:selected").val();
@@ -289,8 +288,9 @@
 	  	  	});
   			}
   	
-  	// SUBMIT DATA
-  	function addDta(){
+  	// SUBMIT DATA  
+  	 function addDta(form){
+  		 event.preventDefault();
   		var pckg = {};
   		pckg.name = $("#name").val();
   		pckg.addedOn = $("#addedOn").val();
@@ -298,7 +298,7 @@
   		pckg.validUntil = $("#validUntil").val();
   		pckg.description = $("#description").val();
   		pckg.mealArr = JSON.stringify(mealArray);
-  		console.log(pckg.mealArr);
+		pckg.image = $("#image").val();
   		
 		if (pckg.name.trim() == ""){
 			$("#res-msg").removeClass("alert-success").removeClass("alert-info").addClass("alert-danger");
@@ -309,13 +309,20 @@
 			$("#res-msg strong").html("Atleast One Meal is needed!");
 		}
 		else{
+			var frmData = new FormData(form);
+			frmData.append("mealArr", pckg.mealArr);
+			
 			$("#res-msg").removeClass("alert-success").removeClass("alert-danger").addClass("alert-info");
 			$("#res-msg strong").html("Fill All And Hit Save!");
 			 $.ajax({
 		  	    type: 'POST',
 		  	    url: 'http://localhost:8080/titanic/meals/comboPackage.do',
-		  	 	data: pckg,
+		  	 	data: frmData,
+		  	 	contentType: false,
+		  	 	cache: false, 						// To unable request pages to be cached
+				processData: false, 
 		  	    success: function(data, textStatus ){
+		  	    	console.log(data);
 		  	    	 $(".form-control").val("");
 		  			 $("#add-meal").modal("hide");
 			  	    if(data == "success"){
@@ -334,4 +341,30 @@
 		}
   	}
   
+ 	// IMAGE HANDLING & PREVIEW
+    // Function to preview image after validation
+    $(function() {
+        $("#image").change(function() {
+            $("#image").empty(); 					// To remove the previous error message
+            var file = this.files[0];
+            var imagefile = file.type;
+            var match = ["image/jpeg", "image/png", "image/jpg"];
+            if (!((imagefile == match[0]) || (imagefile == match[1]) || (imagefile == match[2]))) {
+            	 $("#image").css("background-color", "red");
+                 $("#image").css("color", "white");
+                $('.previewing').attr('src', 'img/sympols/noimage.jpg');
+                return false;
+            } else {
+                var reader = new FileReader();
+                reader.onload = imageIsLoadedfront;
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+    });
+
+    function imageIsLoadedfront(e) {
+        $("#image").css("background-color", "green");
+        $("#image").css("color", "white");
+        $('.previewing').attr('src', e.target.result);
+    };
   	</script>

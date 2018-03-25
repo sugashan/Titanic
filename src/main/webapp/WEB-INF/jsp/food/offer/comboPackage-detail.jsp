@@ -17,7 +17,7 @@
 <div class="content-wrapper">
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
-	<button value = "Edit Employee" class="btn btn-info" id="ediBtn" onclick="showEdit()"><i class="fa fa-pencil-square-o"></i> Edit Employee</button>
+	<button value = "Edit Employee" class="btn btn-info" id="ediBtn" onclick="showEdit()"><i class="fa fa-pencil-square-o"></i> Edit Combo Package</button>
 		<div class="box">
 			<div class="box-header">
 				<h3 class="box-title"><c:out value="${singleCombo.code}"/>- Combo Package</h3>
@@ -33,39 +33,37 @@
 			<div class="box-body">
 				<form id="singleUpdatedMeal" method="post">
 				 <div class="row">
-				    <div class="form-group col-md-6">
+				    <div class="form-group col-md-4">
 				   		 <label for="exampleInputEmail1">Combo-Name :</label>
 				    	 <input name="name" class="form-control" value="${singleCombo.name}"/>
 				    	  <span style="color:red;"></span>
 				    </div>
 				    
-				     <div class="form-group col-md-6">
+				     <div class="form-group col-md-2">
 				    	<label for="exampleInputEmail1">Combo-Code :</label>
 				    	 <input name="code" class="form-control" disabled value="${singleCombo.code}"/>
 				    	  <span style="color:red;"></span>
 				    </div>
-				  </div>
-				  
-				   <div class="row">
-				    <div class="form-group col-md-4">
+				    
+				     <div class="form-group col-md-2">
 				    <label for="exampleInputEmail1">Added-On :</label>
 				     <input name="addedOn" class="form-control" type = "date" value="${singleCombo.addedOn}"/>
 				   	<span style="color:red;"></span>
 				    </div>
 				    
-				     <div class="form-group col-md-4">
+				     <div class="form-group col-md-2">
 				    <label for="exampleInputEmail1">Valid-Until :</label>
 				     <input name="validUntil" class="form-control" type = "date" value="${singleCombo.validUntil}"/>
 				   	<span style="color:red;"></span>
 				    </div>
 				    
-				     <div class="form-group col-md-4">
+				     <div class="form-group col-md-2">
 				    <label for="exampleInputEmail1">Package-Price :</label>
 				     <input class="form-control" type="number" step="0.01" value="${singleCombo.price}"/>
 				   	<span style="color:red;"></span>
 				    </div>
 				  </div>
-				  
+
 			  	<div class = "row">
 				  	<div class = "col-md-12">
 				  	<label for="exampleInputEmail1">Description :</label>
@@ -76,8 +74,9 @@
 			  	
 			  	<br/>
 			  	 <div class="row">
-			  	 	<fieldset class="form-group col-md-12"><legend>Included Meals</legend>
-			  		  <table class="form-group col-md-6">
+			  	 <div  >
+			  	 	<fieldset class="col-md-6"><legend>Included Meals</legend>
+			  		  <table class="col-md-6" style="width:500px;">
 			  		  		<thead>
 							<tr style="border:1px solid black">
 								<th style="background-color:powderblue;">Number</th>
@@ -96,12 +95,19 @@
 					  	</c:forEach>
 					  	</tbody>
 					 </table>
-					  <div class="form-group col-md-6">
-				    	<input name="image" type="file" class="form-control" name="image"/>
-				    	<img src="${singleMeal.image}" alt="Meal face" height="42" width="42">
-				    	<span style="color:red;"></span>
-	 			    </div> 
 				   </fieldset>
+				   </div>
+				   
+					  <div>
+					  <fieldset class="form-group col-md-6"><legend>Combo Package Image</legend>
+					  <label for="exampleInputEmail1">Combo Image :</label>
+				    	<input name="image" type="file" class="form-control" name="image"/>
+				    	<div class="col-md-6">
+				    	<img src='<c:out value="${singleCombo.image}"/>' alt="Meal face" style="height:200px; width:450px;"/>
+				    	<span style="color:red;"></span>
+				    	</div>
+				    	</fieldset>
+	 			    </div> 
 				</div>			  	
 			  	
 			  	<br/>

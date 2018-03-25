@@ -21,7 +21,6 @@ public class UniqueUserNameValidator implements ConstraintValidator<UniqueUserNa
 		if(uRepository == null) {
 			return true;
 		}
-		System.out.println(value + "-----------fucking annotation");
 		return uRepository.findByUserName(value) == null;
 	}
 }
