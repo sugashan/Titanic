@@ -34,38 +34,38 @@ public class InitDbService {
 	@Autowired
 	private BranchRepository bRepo;
 	
-	@Autowired
-	private FoodTypeRepository fRepo;
-	
-	@Autowired
-	private MealRepository mRepo;
+//	@Autowired
+//	private FoodTypeRepository fRepo;
+//	
+//	@Autowired
+//	private MealRepository mRepo;
 
 	@PostConstruct
 	public void Init() {
 		
-		FoodType kottu = new FoodType();
-		kottu.setName("KOTTU");
-		kottu.setId(1);
-		kottu.setPreFix("KOT");
-		fRepo.save(kottu);
-		
-		FoodType kottu1 = new FoodType();
-		kottu1.setName("NOODELS");
-		kottu1.setId(2);
-		kottu1.setPreFix("NOOD");
-		fRepo.save(kottu1);
-		
-		Meal meal = new Meal();
-		meal.setId(1);
-		meal.setName("sssssss");
-		meal.setFoodType(kottu1);
-		mRepo.save(meal);
-		
-		Meal meal1 = new Meal();
-		meal1.setId(2);
-		meal1.setName("qqqqqqq");
-		meal1.setFoodType(kottu);
-		mRepo.save(meal1);
+//		FoodType kottu = new FoodType();
+//		kottu.setName("KOTTU");
+//		kottu.setId(1);
+//		kottu.setPreFix("KOT");
+//		fRepo.save(kottu);
+//		
+//		FoodType kottu1 = new FoodType();
+//		kottu1.setName("NOODELS");
+//		kottu1.setId(2);
+//		kottu1.setPreFix("NOOD");
+//		fRepo.save(kottu1);
+//		
+//		Meal meal = new Meal();
+//		meal.setId(1);
+//		meal.setName("sssssss");
+//		meal.setFoodType(kottu1);
+//		mRepo.save(meal);
+//		
+//		Meal meal1 = new Meal();
+//		meal1.setId(2);
+//		meal1.setName("qqqqqqq");
+//		meal1.setFoodType(kottu);
+//		mRepo.save(meal1);
 		
 		
 		Role adminRole = new Role();

@@ -22,6 +22,7 @@
     <!-- lockscreen credentials (contains the form) -->
     <form class="lockscreen-credentials" name='f' action='<c:url value="/login" />' method='POST'>
       <div class="input-group">
+       <input type="text" class="form-control" name="username" placeholder="UserName" value="${username }" hidden="hidden">
         <input type="password" class="form-control" placeholder="password" autofocus="autofocus">
         <div class="input-group-btn">
         	 <a type="submit"><i  class="fa fa-arrow-right text-muted"></i></a>

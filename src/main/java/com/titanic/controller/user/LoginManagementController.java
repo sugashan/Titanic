@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.titanic.entity.Employee;
 import com.titanic.entity.User;
@@ -32,7 +33,9 @@ public class LoginManagementController {
 	
 	// SHOW LOCKSCREEN
 	@RequestMapping("/lockScreen")
-	public String lockScreen() {
+	public String lockScreen(Model model) {
+		System.out.println(CurrentUser.me() + "ussssssssssssssssss");
+		model.addAttribute("username", CurrentUser.me());
 		return "lockScreen";
 	}
 	
