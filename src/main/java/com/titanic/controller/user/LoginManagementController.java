@@ -25,6 +25,8 @@ public class LoginManagementController {
 	@Autowired
 	private UserCommonService ucService;
 	
+	private String returnResult = "";
+	
 	// SHOW LOGIN
 	@RequestMapping("/login")
 	public String login() {
@@ -46,14 +48,21 @@ public class LoginManagementController {
 		try {
 			currUser = ucService.findOneByUserName(CurrentUser.me());
 	    	session.setAttribute("LoggerId", currUser.getId());
-	    	session.setAttribute("LoggerName", currUser.getName());
+	    	session.setAttribute("LoggerName", currUser.getUserName());
 	    	
 	    	ucService.saveLogin(currUser);
+	    	String userRole = currUser.getRole().getName();
+	    	if(userRole == "ROLE_CUSTOMER") {
+	    		returnResult = "redirect:/home.do";
+	    	}
+	    	else {
+	    		returnResult = "redirect:/dashboard.do";
+	    	}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
 		}
-		return "redirect:/home.do"; 
+		return returnResult; 
 	}
 	
 	// FAILURE LOGIN HANDLER

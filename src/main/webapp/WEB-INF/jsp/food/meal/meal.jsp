@@ -138,14 +138,22 @@
 						 <span style="color:red;"><form:errors path="preferedTime"/></span>
 				     </div>
 				     
-				      <div class="form-group col-md-6">
+				  <div class="form-group col-md-6">
 				    <label for="exampleInputEmail1">Unit-Price (LKR) :</label>
 				     <form:input path="price" cssClass="form-control currencyField"/>
 				      <span style="color:red;"><form:errors path="price"/></span>
 				    </div>
 				  </div>
 				  
-				  	<div class = "row">
+				 <div class = "row">
+				  	<div class = "col-md-12">
+				  	<label for="exampleInputEmail1">Incrediant :</label>
+				  		<form:textarea path = "incrediants" cssClass="form-control" />
+				  		 <span style="color:red;"><form:errors path="incrediants"/></span>
+				  	</div>
+			  	</div>
+				  
+				 <div class = "row">
 				  	<div class = "col-md-12">
 				  	<label for="exampleInputEmail1">Description :</label>
 				  		<form:textarea path = "description" cssClass="form-control" />

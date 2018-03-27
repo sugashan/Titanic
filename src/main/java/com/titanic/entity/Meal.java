@@ -43,7 +43,16 @@ public class Meal {
 	
 	@NotNull(message="Food Type Can Not Be Empty!")
 	private int foodTypeId;
-
+	
+	private String incrediants;
+	
+	
+	public String getIncrediants() {
+		return incrediants;
+	}
+	public void setIncrediants(String incrediants) {
+		this.incrediants = incrediants;
+	}
 	public int getFoodTypeId() {
 		return foodTypeId;
 	}
