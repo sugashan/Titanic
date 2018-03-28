@@ -21,7 +21,7 @@ function validator(){
 		 }, "Please Select One!.");
 	 
 	 
-	 
+	 // VALIDATION VIA CLASSES
 	 $('.selectboxField').each(function () {
 	      $(this).rules('add', {
 	    	  
@@ -39,14 +39,15 @@ function validator(){
 	 $('.textFiled, .uniqueTextFiled').each(function () {
 	      $(this).rules('add', {
 	          required: true,
-	          minlength:3
+	          minlength:4
 	      });
 	 });
 	 $('.numberFiled').each(function () {
 	      $(this).rules('add', {
 	          required: true,
+	          number:true,
 	          minlength:10,
-	          maxlength:12
+	          maxlength:12,
 	      });
 	    });
 	 $('.passwordFiled').each(function () {
@@ -68,8 +69,8 @@ function validator(){
 	          date:true
 	      });
 	    });
-		
 }
+
 
 // CLEAR FORMS
 function reset(){

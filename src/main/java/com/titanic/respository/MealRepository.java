@@ -1,5 +1,7 @@
 package com.titanic.respository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,5 +16,7 @@ public interface MealRepository extends JpaRepository<Meal, Integer> {
 	Meal findOneById(int id);
 
 	Meal findByItemCatergory(String name);
+
+	List<Meal> findByPreferedTime(String name);
 
 }

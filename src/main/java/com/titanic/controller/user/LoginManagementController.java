@@ -9,6 +9,7 @@ import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.titanic.entity.Employee;
 import com.titanic.entity.User;
@@ -26,6 +27,11 @@ public class LoginManagementController {
 	private UserCommonService ucService;
 	
 	private String returnResult = "";
+	
+	@ModelAttribute("newUser")
+	public User Construct() {
+		return  new User();
+	}
 	
 	// SHOW LOGIN
 	@RequestMapping("/login")

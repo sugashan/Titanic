@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 
 <%@ include file="../../layouts/taglib.jsp" %>
+    <%@ include file="../common/commonModals.jsp" %>
     
 	<!-- Header -->
 	<div class="header" id="home">
@@ -10,7 +11,8 @@
 			<div class="header-top_w3layouts">
 				<div class="forms">
 					<p><span class="fa fa-map-marker" aria-hidden="true"></span>Titanic, Nelliyady</p>
-					<p><span class="fa fa-envelope-o" aria-hidden="true"></span> <a href="mailto:info@example.com">info@example.com</a></p>
+					<p><span class="fa fa-envelope-o" aria-hidden="true"></span><a href="mailto:info@example.com">info@example.com</a> </p>
+					<p><span class="fa fa-phone" aria-hidden="true"></span> 021-226 2323 </p>
 				</div>
 				<ul class="top-right-info">
 					<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
@@ -19,19 +21,7 @@
 					<li><a href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
 
 				</ul>
-				<div class="search">
-					<div class="cd-main-header">
-						<ul class="cd-header-buttons">
-							<li><a class="cd-search-trigger" href="#cd-search"> <span></span></a></li>
-						</ul>
-						<!-- cd-header-buttons -->
-					</div>
-<!-- 					<div id="cd-search" class="cd-search"> -->
-<!-- 						<form action="#" method="post"> -->
-<!-- 							<input name="Search" type="search" placeholder="Click enter after typing..."> -->
-<!-- 						</form> -->
-<!-- 					</div> -->
-				</div>
+				
 				<div class="clearfix"></div>
 
 			</div>
@@ -64,6 +54,23 @@
 								</li>
 								<li><a class="scroll" href="#gallery">Gallery</a></li>
 								<li><a class="scroll" href="#mail">Contact</a></li>
+<%-- 								<security:authorize access=" !isAuthenticated()"> --%>
+<!-- 								<li><a class="scroll" href='<spring:url value="/titanic/login.do" />'>Login</a></li> -->
+<%-- 								</security:authorize> --%>
+								
+								<!-- User Info -->
+<%-- 								<security:authorize access=" isAuthenticated()"> --%>
+								<li class="dropdown menu__item">
+									<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" data-hover="Pages" role="button" aria-haspopup="true"
+									    aria-expanded="false"> My Account <span class="fa fa-angle-down"></span></a>
+									<ul class="dropdown-menu">
+										<li><a class="scroll" href="#"><i class="fa fa-user"></i> <%= session.getAttribute("LoggerName") %></a></li>
+										<li><a class="" href="#" data-toggle="modal" data-target="#myProfileModal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-address-book"></i> Profile </a></li>
+										<hr/>
+										<li><a class="scroll" href='<c:url value="/logout" />'><i class="fa fa-sign-out"></i> Logout</a></li>
+									</ul>
+								</li>
+<%-- 								</security:authorize> --%>
 							</ul>
 						</nav>
 					</div>
@@ -80,7 +87,7 @@
 						<div class="banner-top">
 							<div class="banner-info_agile_w3ls">
 								<h3>Come hungry. <span>Leave</span> happy.</h3>
-								<p>Small change,Big differences.</p>
+								<p>A Taste Of Good Life.</p>
 								<a href="#about" class="scroll">Read More <i class="fa fa-caret-right" aria-hidden="true"></i></a>
 								<a href="#mail" class="scroll">Contact Us <i class="fa fa-caret-right" aria-hidden="true"></i></a>
 							</div>
@@ -91,7 +98,7 @@
 						<div class="banner-top1">
 							<div class="banner-info_agile_w3ls">
 								<h3>Better Ingredients. <span>Better</span> Food.</h3>
-								<p>Enjoy life,It's delicious.</p>
+								<p>Enjoy life, It's delicious.</p>
 								<a href="#about" class="scroll">Read More <i class="fa fa-caret-right" aria-hidden="true"></i></a>
 								<a href="#mail" class="scroll">Contact Us <i class="fa fa-caret-right" aria-hidden="true"></i></a>
 							</div>
@@ -101,8 +108,8 @@
 					<li>
 						<div class="banner-top2">
 							<div class="banner-info_agile_w3ls">
-								<h3>Live, Love, <span>Eat</span>  Always.</h3>
-								<p>Small change,Big differences.</p>
+								<h3>Live, Love And <span>Eat</span> Always.</h3>
+								<p>Small change, Big differences.</p>
 								<a href="#about" class="scroll">Read More <i class="fa fa-caret-right" aria-hidden="true"></i></a>
 								<a href="#mail" class="scroll">Contact Us <i class="fa fa-caret-right" aria-hidden="true"></i></a>
 							</div>
@@ -113,7 +120,7 @@
 						<div class="banner-top3">
 							<div class="banner-info_agile_w3ls">
 								<h3>Enjoy life.  It's <span>Delicious.</span></h3>
-								<p>Small change,Big differences.</p>
+								<p>Good food is Good Mood.</p>
 								<a href="#about" class="scroll">Read More <i class="fa fa-caret-right" aria-hidden="true"></i></a>
 								<a href="#mail" class="scroll">Contact Us <i class="fa fa-caret-right" aria-hidden="true"></i></a>
 							</div>
@@ -126,123 +133,10 @@
 
 			<!--banner Slider starts Here-->
 		</div>
-		<!-- //Modal1 -->
 		<!--//Slider-->
 	</div>
 	
-	<!-- About Story -->
-	<div class="news" id="about">
-		<div class="container">
-			<div class="news-main_wthree_agile">
-				<div class="col-md-6 news-left">
-					<h2>OUR INTERESTING HISTORY</h2>
-				</div>
-				<div class="col-md-6 news-right">
-					<p>Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet ultrices. Maecenas dictum arcu purus, sit amet
-						volutpat purus viverra sit amet. Quisque lacinia quam sed tortor interdum, malesuada congue nunc ornare. Cum sociis
-						natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In semper lorem eget tortor pulvinar ultricies.
-					</p>
-					<p>Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet ultrices. Maecenas dictum arcu purus, sit amet
-						volutpat purus viverra sit amet. Quisque lacinia quam sed tortor interdum, malesuada congue nunc ornare. Cum sociis
-						natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In semper lorem eget tortor pulvinar ultricies.
-					</p>
-				</div>
-
-				<div class="clearfix"></div>
-				<div class="mid_slider">
-					<!-- banner -->
-					<div id="myCarousel" class="carousel slide" data-ride="carousel">
-						<!-- Indicators -->
-						<ol class="carousel-indicators">
-							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-							<li data-target="#myCarousel" data-slide-to="1" class=""></li>
-							<li data-target="#myCarousel" data-slide-to="2" class=""></li>
-							<li data-target="#myCarousel" data-slide-to="3" class=""></li>
-						</ol>
-						<div class="carousel-inner" role="listbox">
-							<div class="item active">
-								<div class="row">
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal1.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal2.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal3.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal4.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="row">
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal5.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal6.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal2.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal1.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="row">
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal1.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal2.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal3.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal4.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="row">
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal1.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal2.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal3.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
-										<div class="thumbnail"><img src="images/gal4.jpg" alt="Image" style="max-width:100%;"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-			<span class="fa fa-chevron-left" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-						<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-			<span class="fa fa-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-						<!-- The Modal -->
-					</div>
-					<!--//banner -->
-
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- services -->
+		<!-- services -->
 	<div class="work" id="services">
 		<div class="container">
 			<div class="work-main">
@@ -309,616 +203,25 @@
 		</div>
 	</div>
 	
-	<!-- about -->
-	<div class="about" id="about_one">
-		<div class="container">
-			<div class="about-main_w3_agileits">
-				<div class="col-md-6 about-left">
-					<img src="images/chef.jpg" alt="">
-				</div>
-				<div class="col-md-6 about-right_agileits">
-					<h3>For Goof Taste</h3>
-					<p>Nulla sodales efficitur consequat. Maecenas mi diam, imperdiet consectetur ultricies nec, convallis sit amet turpis.
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					<a class="active" href="#" data-toggle="modal" data-target="#myModal">Learn more</a>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- tab_section -->
-	<div class="tabs_section" id="menu">
-		<div class="container">
-			<h5>Special Menu</h5>
-			<div id="horizontalTab">
-				<ul class="resp-tabs-list">
-					<li> BREAKFAST</li>
-					<li> LUNCH</li>
-					<li> TO DAY SPECIALS</li>
-					<li> DRINKS</li>
-				</ul>
-				<div class="resp-tabs-container">
-
-					<div class="tab1">
-						<div class="recipe-grid">
-							<div class="col-md-6 menu-grids">
-								<div class="menu-text_wthree">
-
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal1.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$ 50</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal2.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$25</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal3.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-
-									<div class="menu-text-right">
-										<h4>$30</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-							</div>
-							<div class="col-md-6 menu-grids">
-								<div class="menu-text_wthree">
-
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal4.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$ 50</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal5.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-
-									<div class="menu-text-right">
-										<h4>$25</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal6.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$30</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-
-						<div class="clearfix"></div>
-					</div>
-
-					<div class="tab2">
-						<div class="recipe-grid">
-							<div class="col-md-6 menu-grids">
-								<div class="menu-text_wthree">
-
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal9.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$ 50</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal7.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$25</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal8.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-
-									<div class="menu-text-right">
-										<h4>$30</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-							</div>
-							<div class="col-md-6 menu-grids">
-								<div class="menu-text_wthree">
-
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal7.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$ 50</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal8.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-
-									<div class="menu-text-right">
-										<h4>$25</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal9.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$30</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-
-						<div class="clearfix"></div>
-
-					</div>
-					<div class="tab3">
-						<div class="recipe-grid">
-							<div class="col-md-6 menu-grids">
-								<div class="menu-text_wthree">
-
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal1.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$ 50</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal2.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$25</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal3.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-
-									<div class="menu-text-right">
-										<h4>$30</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-							</div>
-							<div class="col-md-6 menu-grids">
-								<div class="menu-text_wthree">
-
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal4.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$ 50</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal5.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-
-									<div class="menu-text-right">
-										<h4>$25</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text_wthree">
-									<div class="menu-text-left">
-										<div class="rep-img">
-											<img src="images/gal6.jpg" alt=" " class="img-responsive">
-										</div>
-										<div class="rep-text">
-											<h4>Lorem ipsum dolor............</h4>
-											<h6>with wild mushrooms and asparagus</h6>
-										</div>
-
-										<div class="clearfix"> </div>
-									</div>
-									<div class="menu-text-right">
-										<h4>$30</h4>
-									</div>
-									<div class="clearfix"> </div>
-								</div>
-							</div>
-							<div class="clearfix"> </div>
-						</div>
-
-						<div class="clearfix"></div>
-					</div>
-					<div class="tab4">
-
-						<div class="col-md-6 menu-grids">
-							<div class="menu-text_wthree">
-
-								<div class="menu-text-left">
-									<div class="rep-img">
-										<img src="images/gal12.jpg" alt=" " class="img-responsive">
-									</div>
-									<div class="rep-text">
-										<h4>Lorem ipsum dolor............</h4>
-										<h6>Itaque earum rerum hic tenetur </h6>
-									</div>
-
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text-right">
-									<h4>$ 50</h4>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-
-							<div class="menu-text_wthree">
-								<div class="menu-text-left">
-									<div class="rep-img">
-										<img src="images/gal10.jpg" alt=" " class="img-responsive">
-									</div>
-									<div class="rep-text">
-										<h4>Lorem ipsum dolor............</h4>
-										<h6>Itaque earum rerum hic tenetur </h6>
-									</div>
-
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text-right">
-									<h4>$25</h4>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="menu-text_wthree">
-								<div class="menu-text-left">
-									<div class="rep-img">
-										<img src="images/gal11.jpg" alt=" " class="img-responsive">
-									</div>
-									<div class="rep-text">
-										<h4>Lorem ipsum dolor............</h4>
-										<h6>Itaque earum rerum hic tenetur </h6>
-									</div>
-
-									<div class="clearfix"> </div>
-								</div>
-
-								<div class="menu-text-right">
-									<h4>$30</h4>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-						<div class="col-md-6 menu-grids">
-							<div class="menu-text_wthree">
-
-								<div class="menu-text-left">
-									<div class="rep-img">
-										<img src="images/gal10.jpg" alt=" " class="img-responsive">
-									</div>
-									<div class="rep-text">
-										<h4>Lorem ipsum dolor............</h4>
-										<h6>Itaque earum rerum hic tenetur </h6>
-									</div>
-
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text-right">
-									<h4>$ 50</h4>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-
-							<div class="menu-text_wthree">
-								<div class="menu-text-left">
-									<div class="rep-img">
-										<img src="images/gal11.jpg" alt=" " class="img-responsive">
-									</div>
-									<div class="rep-text">
-										<h4>Lorem ipsum dolor............</h4>
-										<h6>Itaque earum rerum hic tenetur </h6>
-									</div>
-
-									<div class="clearfix"> </div>
-								</div>
-
-								<div class="menu-text-right">
-									<h4>$25</h4>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="menu-text_wthree">
-								<div class="menu-text-left">
-									<div class="rep-img">
-										<img src="images/gal13.jpg" alt=" " class="img-responsive">
-									</div>
-									<div class="rep-text">
-										<h4>Lorem ipsum dolor............</h4>
-										<h6>Itaque earum rerum hic tenetur </h6>
-									</div>
-
-									<div class="clearfix"> </div>
-								</div>
-								<div class="menu-text-right">
-									<h4>$30</h4>
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-
-
-					<div class="clearfix"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<!-- services -->
-	<div class="choose">
-		<div class="container">
-			<div class="choose-main">
-				<div class="col-md-5 choose-left">
-					<h2>SPECIAL SERVICES</h2>
-				</div>
-				<div class="col-md-7 choose-right">
-					<div class="col-md-6 choose-right-top">
-						<h4>Best Chef</h4>
-						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
-							nisl nec tristique.</p>
-					</div>
-					<div class="col-md-6 choose-right-top">
-						<h4>150 Tables</h4>
-						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
-							nisl nec tristique.</p>
-					</div>
-					<div class="clearfix"></div>
-					<div class="col-md-6 choose-right-top">
-						<h4>Card Payment</h4>
-						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
-							nisl nec tristique. </p>
-					</div>
-					<div class="col-md-6 choose-right-top">
-						<h4>Special Offers</h4>
-						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
-							nisl nec tristique.</p>
-					</div>
-					<div class="clearfix"></div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
 	
 	<!-- gallery special-->
 	<div class="gallery" id="gallery">
 		<div class="container">
 			<div class="gallery-main">
 				<div class="gallery-top">
-					<div class="gallery-top-img portfolio-grids">
-						<a href="<c:url value="/resources/dist/img/home/gal6.jpg" />" class="b-link-stripe b-animate-go lightninBox" data-lb-group="1">
-									<img src="<c:url value="/resources/dist/img/home/gal6.jpg" />" class="img-responsive" alt="" />
-									<div class="p-mask">
-										<h4><span>Heading here</span></h4>
-									</div>
-								</a>
-
-					</div>
-
-<!-- 					<div class="gallery-top-img portfolio-grids"> -->
-<!-- 						<a href="images/gal5.jpg" class="b-link-stripe b-animate-go lightninBox" data-lb-group="1"> -->
-<!-- 									<img src="images/gal5.jpg" class="img-responsive" alt="" /> -->
-<!-- 									<div class="p-mask"> -->
-<!-- 										<h4><span>Heading here</span></h4> -->
-<!-- 									</div> -->
-<!-- 								</a> -->
-
-<!-- 					</div> -->
-<!-- 					<div class="gallery-top-img portfolio-grids"> -->
-<!-- 						<a href="images/gal4jpg" class="b-link-stripe b-animate-go lightninBox" data-lb-group="1"> -->
-<!-- 									<img src="images/gal4.jpg" class="img-responsive" alt="" /> -->
-<!-- 									<div class="p-mask"> -->
-<!-- 										<h4><span>Heading here</span></h4> -->
-<!-- 									</div> -->
-<!-- 								</a> -->
-
-<!-- 					</div> -->
-<!-- 					<div class="gallery-top-img portfolio-grids"> -->
-<!-- 						<a href="images/gal3.jpg" class="b-link-stripe b-animate-go lightninBox" data-lb-group="1"> -->
-<!-- 									<img src="images/gal3.jpg" class="img-responsive" alt="" /> -->
-<!-- 									<div class="p-mask"> -->
-<!-- 										<h4><span>Heading here</span></h4> -->
-<!-- 									</div> -->
-<!-- 								</a> -->
-
-<!-- 					</div> -->
-<!-- 					<div class="gallery-top-img portfolio-grids"> -->
-<!-- 						<a href="images/gal3.jpg" class="b-link-stripe b-animate-go lightninBox" data-lb-group="1"> -->
-<!-- 									<img src="images/gal3.jpg" class="img-responsive" alt="" /> -->
-<!-- 									<div class="p-mask"> -->
-<!-- 										<h4><span>Heading here</span></h4> -->
-<!-- 									</div> -->
-<!-- 								</a> -->
-
-<!-- 					</div> -->
-<!-- 					<div class="gallery-top-img portfolio-grids"> -->
-						<a href="images/gal1.jpg" class="b-link-stripe b-animate-go lightninBox" data-lb-group="1">
-									<img src="images/gal1.jpg" class="img-responsive" alt="" />
-									<div class="p-mask">
-										<h4><span>Heading here</span></h4>
-									</div>
-								</a>
-
-					</div>
+				<c:forEach items="${meals}" var="meal">
+					<c:if test="${not empty meal.imageUrl}">
+						<div class="gallery-top-img portfolio-grids">
+							<a href="<c:out value="${meal.imageUrl}" />" class="b-link-stripe b-animate-go lightninBox" data-lb-group="1">
+								<img src="<c:out value="${meal.imageUrl}" />" class="img-responsive" alt="" />
+								<div class="p-mask">
+									<h4><span>${meal.name}</span></h4>
+									<p>${meal.description}</p>
+								</div>
+							</a>
+						</div>
+					</c:if>
+				</c:forEach>
 					<div class="gallery-top-img">
 						<h3>OUR SPECIALS</h3>
 						<span> </span>
@@ -940,8 +243,211 @@
 				</div>
 			</div>
 		</div>
+	</div>
 	
-	<!-- Reservation -->
+	
+		<!-- Menu tab_section  -->
+	<div class="tabs_section" id="menu">
+		<div class="container">
+		<h5>Special Menu</h5>
+		<fieldset> <legend></legend>
+			<div id="horizontalTab">
+				<ul class="resp-tabs-list">
+					<li> BREAKFAST</li>
+					<li> LUNCH</li>
+					<li> DINNER</li>
+					<li> BEVERAGES</li>
+				</ul>
+				<div class="clearfix"> </div>
+				<div class="resp-tabs-container">
+		
+					<!-- Breakfast-Meal -->
+					<div class="tab1">
+						<div class="recipe-grid">
+							<c:forEach items="${breakfastMeals}" var="breakFastMeal">
+								<div class="col-md-6 menu-grids">
+									<div class="menu-text_wthree">
+										<div class="menu-text-left">
+											<div class="rep-img">
+												<img src='<c:out value="${breakFastMeal.imageUrl}"/>' alt=" " class="img-responsive">
+											</div>
+											<div class="rep-text">
+												<h4><c:out value="${breakFastMeal.name}"/></h4>
+												<h6>Incrediants - <c:out value="${breakFastMeal.incrediants}"/></h6>
+											</div>
+	
+											<div class="clearfix"> </div>
+										</div>
+										<div class="menu-text-right">
+											<h4>LKR <c:out value="${breakFastMeal.price}"/></h4>
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</div>
+							</c:forEach>
+							<div class="clearfix"> </div>
+						</div>
+							<div class="clearfix"> </div>
+						</div>
+						
+					<!-- Lunch-Meal -->
+					<div class="tab2">
+						<div class="recipe-grid">
+						<c:forEach items="${lunchMeals}" var="lunchtMeal">
+							<div class="col-md-6 menu-grids">
+								<div class="menu-text_wthree">
+									<div class="menu-text-left">
+										<div class="rep-img">
+											<img src='<c:out value="${lunchtMeal.imageUrl}"/>' alt=" " class="img-responsive">
+										</div>
+										<div class="rep-text">
+											<h4><c:out value="${lunchtMeal.name}"/></h4>
+											<h6>Incrediants - <c:out value="${lunchtMeal.incrediants}"/></h6>
+										</div>
+
+										<div class="clearfix"> </div>
+									</div>
+									<div class="menu-text-right">
+										<h4>LKR <c:out value="${lunchtMeal.price}"/></h4>
+									</div>
+									<div class="clearfix"> </div>
+								</div>
+							</div>
+						</c:forEach>
+						<div class="clearfix"> </div>
+					</div>
+						<div class="clearfix"> </div>
+					</div>
+						
+					<!-- Dinner-Meal -->
+					<div  class="tab3">
+							<div class="recipe-grid">
+							<c:forEach items="${dinnerMeals}" var="dinnerMeal">
+								<div class="col-md-6 menu-grids">
+									<div class="menu-text_wthree">
+										<div class="menu-text-left">
+											<div class="rep-img">
+												<img src='<c:out value="${dinnerMeal.imageUrl}"/>' alt=" " class="img-responsive">
+											</div>
+											<div class="rep-text">
+												<h4><c:out value="${dinnerMeal.name}"/></h4>
+												<h6>Incrediants - <c:out value="${dinnerMeal.incrediants}"/></h6>
+											</div>
+	
+											<div class="clearfix"> </div>
+										</div>
+										<div class="menu-text-right">
+											<h4>LKR <c:out value="${dinnerMeal.price}"/></h4>
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</div>
+							</c:forEach>
+							<div class="clearfix"> </div>
+						</div>
+							<div class="clearfix"> </div>
+					</div>
+					
+					
+					<!-- Beverages -->
+					<div class="tab4">
+					<div class="recipe-grid">
+							<c:forEach items="${anyTimeMeals}" var="anyTimeMeal">
+								<div class="col-md-6 menu-grids">
+									<div class="menu-text_wthree">
+										<div class="menu-text-left">
+											<div class="rep-img">
+												<img src='<c:out value="${anyTimeMeal.imageUrl}"/>' alt=" " class="img-responsive">
+											</div>
+											<div class="rep-text">
+												<h4><c:out value="${anyTimeMeal.name}"/></h4>
+												<h6>Incrediants - <c:out value="${anyTimeMeal.incrediants}"/></h6>
+											</div>
+	
+											<div class="clearfix"> </div>
+										</div>
+										<div class="menu-text-right">
+											<h4>LKR <c:out value="${anyTimeMeal.price}"/></h4>
+										</div>
+										<div class="clearfix"> </div>
+									</div>
+								</div>
+							</c:forEach>
+							<div class="clearfix"> </div>
+						</div>
+							<div class="clearfix"> </div>
+					
+					</div>
+					
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			</fieldset>
+		</div>
+	</div>
+	
+
+	<!--/services-->
+	<div class="choose">
+		<div class="container">
+			<div class="choose-main">
+				<div class="col-md-5 choose-left">
+					<h2>SPECIAL SERVICES</h2>
+				</div>
+				<div class="col-md-7 choose-right">
+					<div class="col-md-6 choose-right-top">
+						<span class="fa fa-truck" aria-hidden="true" style="font-size:50px; color: #ffa41f; padding-bottom: 15px"></span>
+						<h4>Door Delivery</h4>
+						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
+							nisl nec tristique.</p>
+					</div>
+					<div class="col-md-6 choose-right-top">
+						<span class="fa fa-shopping-cart" aria-hidden="true" style="font-size:50px; color: #ffa41f; padding-bottom: 15px"></span>
+						<h4>Customized Food</h4>
+						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
+							nisl nec tristique.</p>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-md-6 choose-right-top">
+						<span class="fa fa-credit-card" aria-hidden="true" style="font-size:50px; color: #ffa41f; padding-bottom: 15px"></span>
+						<h4>Card Payment</h4>
+						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
+							nisl nec tristique. </p>
+					</div>
+					<div class="col-md-6 choose-right-top">
+						<span class="fa fa-gift" aria-hidden="true" style="font-size:50px; color: #ffa41f; padding-bottom: 15px"></span>
+						<h4>Special Offers & Combo</h4>
+						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
+							nisl nec tristique.</p>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!--//services-->
+
+	<!-- about -->
+	<div class="about" id="about_one">
+		<div class="container">
+			<div class="about-main_w3_agileits">
+				<div class="col-md-6 about-left">
+					<img src='<c:url value="/resources/dist/img/home/chef.jpg" />' alt="">
+				</div>
+				<div class="col-md-6 about-right_agileits">
+					<h3>For Good Taste</h3>
+					<p>Nulla sodales efficitur consequat. Maecenas mi diam, imperdiet consectetur ultricies nec, convallis sit amet turpis.
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					<a class="active" href="#" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Learn more</a>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	
+	
 
 	<!-- Reservation -->
 	<div class="reservation" id="book">
@@ -967,6 +473,7 @@
 								<option>3 People</option>
 								<option>4 People</option>
 								<option>5 People</option>
+								<option>6 People</option>
 								<option>More</option>
 							</select>
 				</div>
@@ -982,10 +489,121 @@
 				</div>
 				<div class="clearfix"> </div>
 			</form>
-
 		</div>
-
 	</div>
+	
+		<!-- About Story -->
+	<div class="news" id="about">
+		<div class="container">
+			<div class="news-main_wthree_agile">
+				<div class="col-md-6 news-left">
+					<h2>OUR INTERESTING HISTORY</h2>
+				</div>
+				<div class="col-md-6 news-right">
+					<p>Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet ultrices. Maecenas dictum arcu purus, sit amet
+						volutpat purus viverra sit amet. Quisque lacinia quam sed tortor interdum, malesuada congue nunc ornare. Cum sociis
+						natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In semper lorem eget tortor pulvinar ultricies.
+					</p>
+					<p>Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet ultrices. Maecenas dictum arcu purus, sit amet
+						volutpat purus viverra sit amet. Quisque lacinia quam sed tortor interdum, malesuada congue nunc ornare. Cum sociis
+						natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In semper lorem eget tortor pulvinar ultricies.
+					</p>
+				</div>
+
+				<div class="clearfix"></div>
+				<div class="mid_slider">
+					<!-- banner -->
+					<div id="myCarousel" class="carousel slide" data-ride="carousel">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							<li data-target="#myCarousel" data-slide-to="1" class=""></li>
+							<li data-target="#myCarousel" data-slide-to="2" class=""></li>
+							<li data-target="#myCarousel" data-slide-to="3" class=""></li>
+						</ol>
+						<div class="carousel-inner" role="listbox">
+							<div class="item active">
+								<div class="row">
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal1.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal2.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal3.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal4.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="row">
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal5.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal6.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal7.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal8.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="row">
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal9.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal10.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal11.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal12.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="row">
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal13.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal1.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal2.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+									<div class="col-md-3 col-sm-3 col-xs-3 slidering">
+										<div class="thumbnail"><img src="<c:url value="/resources/dist/img/home/gal3.jpg" />" alt="Image" style="max-width:100%;"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+			<span class="fa fa-chevron-left" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+						<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+			<span class="fa fa-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+						<!-- The Modal -->
+					</div>
+					<!--//banner -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	
 	<!-- Comments -->
 	<div class="comments" id="client">
@@ -996,77 +614,22 @@
 					<p>Lorem ipsum dolor sit amet,vehicula vel sapien et</p>
 				</div>
 				<div class="comments-top">
-					<div class="col-md-4 comments-bottom">
-						<div class="comments-left">
-							<span class="fa fa-quote-right"></span>
-						</div>
-						<div class="comments-right">
-							<h3>Paul Demichev</h3>
-							<p class="para1">Client,Some Company</p>
-							<p class="para2">Nulla sodales efficitur consequat. Maecenas mi diam, imperdiet consectetur ultricies nec, convallis sit amet turpis.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="col-md-4 comments-bottom">
-						<div class="comments-left">
-							<span class="fa fa-quote-right"></span>
-						</div>
-						<div class="comments-right">
-							<h3>Oleg Topanic</h3>
-							<p class="para1">Client,Some Company</p>
-							<p class="para2">Nulla sodales efficitur consequat. Maecenas mi diam, imperdiet consectetur ultricies nec, convallis sit amet turpis.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="col-md-4 comments-bottom">
-						<div class="comments-left">
-							<span class="fa fa-quote-right"></span>
-						</div>
-						<div class="comments-right">
-							<h3>Julia Usina</h3>
-							<p class="para1">Client,Some Company</p>
-							<p class="para2">Nulla sodales efficitur consequat. Maecenas mi diam, imperdiet consectetur ultricies nec, convallis sit amet turpis.
-
-							</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="clearfix"></div>
-					<div class="col-md-4 comments-bottom">
-						<div class="comments-left">
-							<span class="fa fa-quote-right"></span>
-						</div>
-						<div class="comments-right">
-							<h3>Serdyuk Elena</h3>
-							<p class="para1">Client,Some Company</p>
-							<p class="para2">Nulla sodales efficitur consequat. Maecenas mi diam, imperdiet consectetur ultricies nec, convallis sit amet turpis.
-							</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="col-md-4 comments-bottom">
-						<div class="comments-left">
-							<span class="fa fa-quote-right"></span>
-						</div>
-						<div class="comments-right">
-							<h3>Kulikov Vlad</h3>
-							<p class="para1">Client,Some Company</p>
-							<p class="para2">Nulla sodales efficitur consequat. Maecenas mi diam, imperdiet consectetur ultricies nec, convallis sit amet turpis.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="col-md-4 comments-bottom">
-						<div class="comments-left">
-							<span class="fa fa-quote-right"></span>
-						</div>
-						<div class="comments-right">
-							<h3>Andrey Tikhonov</h3>
-							<p class="para1">Client,Some Company</p>
-							<p class="para2">Nulla sodales efficitur consequat. Maecenas mi diam, imperdiet consectetur ultricies nec, convallis sit amet turpis.</p>
-						</div>
-						<div class="clearfix"></div>
-					</div>
-					<div class="clearfix"></div>
+					<c:forEach begin="1" end="3">
+						<c:forEach items="${comments}" varStatus="comment">
+							<div class="col-md-4 comments-bottom">
+								<div class="comments-left">
+									<span class="fa fa-quote-right"></span>
+								</div>
+								<div class="comments-right">
+									<h3><c:out value="${comment.user.name}"/></h3>
+									<p class="para1">Rating</p>
+									<p class="para2"><c:out value="${comment.message}"/>.</p>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+						</c:forEach>
+							<div class="clearfix"></div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -1079,20 +642,27 @@
 			<div class="mail_grids_wthree_agile_info">
 				<div class="col-md-7 mail_grid_right_agileits_w3">
 					<h5>Please fill this form to contact with us.</h5>
-					<form action="#" method="post">
+					<form:form action="comment/addComment.do" modelAttribute="newFeedBack" enctype="application/x-www-form-urlencoded" method="post">
 						<div class="col-md-6 col-sm-6 contact_left_grid">
-							<input type="text" name="Name" placeholder="Name" required="required">
-							<input type="email" name="Email" placeholder="Email" required="required">
+							<form:input type="text" path="customerName" placeholder="Name" class="textFiled" />
+							 <form:errors path="customerName"/>
+							 
+							<form:input type="email" path="email" placeholder="Email" class="emailFiled"/>
+							 <form:errors path="email"/>
 						</div>
 						<div class="col-md-6 col-sm-6 contact_left_grid">
-							<input type="text" name="Telephone" placeholder="Telephone" required="required">
-							<input type="text" name="Subject" placeholder="Subject" required="required">
+							<form:input type="text" path="mobile" placeholder="Telephone" class="numberFiled"/>
+							 <form:errors path="mobile"/>
+							 
+							<form:input type="text" path="subject" placeholder="Subject" class="textFiled"/>
+							 <form:errors path="Subject"/>
 						</div>
 						<div class="clearfix"> </div>
-						<textarea name="Message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="required">Message...</textarea>
+						<form:textarea path="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" class="textFiled" placeholder="Message..."/>
+						<form:errors path="message"/>
 						<input type="submit" value="Submit">
 						<input type="reset" value="Clear">
-					</form>
+					</form:form>
 				</div>
 				<div class="col-md-5 contact-left">
 					<h5>Contact Info</h5>
@@ -1102,7 +672,7 @@
 						</div>
 						<div class="col-md-10 col-sm-10 col-xs-10 contact-text">
 							<h4>Visit us</h4>
-							<p>Parma Via Modena,BO, Italy</p>
+							<p>Titanic Restaruant, Nelliyady, jaffna</p>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -1112,7 +682,7 @@
 						</div>
 						<div class="col-md-10 col-sm-10 col-xs-10 contact-text">
 							<h4>Mail us</h4>
-							<p><a href="mailto:info@example.com">info@example.com</a></p>
+							<p><a href="mailto:info@example.com">info@titanic.com</a></p>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -1122,7 +692,7 @@
 						</div>
 						<div class="col-md-10 col-sm-10 col-xs-10 contact-text">
 							<h4>Call us</h4>
-							<p>+18044261149</p>
+							<p>021-226 2323</p>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -1132,7 +702,17 @@
 						</div>
 						<div class="col-md-10 col-sm-10 col-xs-10 contact-text">
 							<h4>Work hours</h4>
-							<p>Mon-Sat 09:00 AM - 05:00PM</p>
+							<table>
+								<tbody>
+									<tr><td><p>Monday</p></td><td> : </td><td><span style="color:#ffa41f;">07:00 AM - 11:00PM</span></td></tr>							
+									<tr><td><p>Tuesday</p></td><td> : </td><td><span style="color:#ffa41f;">07:00 AM - 11:00PM</span></td></tr>							
+									<tr><td><p>Wednesday</p></td><td> : </td><td><span style="color:#ffa41f;">07:00 AM - 11:00PM</span></td></tr>							
+									<tr><td><p>Thursday</p></td><td> : </td><td><span style="color:#ffa41f;">07:00 AM - 11:00PM</span></td></tr>							
+									<tr><td><p>Friday</p></td><td> : </td><td><p>Closed</p></td></tr>							
+									<tr><td><p>Saturday</p></td><td> : </td><td><span style="color:#ffa41f;">07:00 AM - 11:00PM</span></td></tr>							
+									<tr><td><p>Sunday</p></td><td> : </td><td><span style="color:#ffa41f;">07:00 AM - 11:00PM</span></td></tr>							
+								</tbody>
+							</table>
 						</div>
 						<div class="clearfix"></div>
 					</div>
@@ -1148,37 +728,20 @@
 
 	<!-- Footer -->	
 	<div class="copy">
-		<p>&copy; 2018 Luscious. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts.</a></p>
+		<p>&copy; 2018 Titanic. All rights reserved | Design by <a href="http://w3layouts.com">W3layouts.</a></p>
 
 	</div>
 	<!--/footer -->
 
-<!-- bootstrap-modal-pop-up -->
-	<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					Luscious
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>						
-				</div>
-				<div class="modal-body">
-					<img src="<c:url value="/resources/dist/img/home/banner1.jpg" />" alt=" " class="img-responsive" />
-					<p>Ut enim ad minima veniam, quis nostrum 
-						exercitationem ullam corporis suscipit laboriosam, 
-						nisi ut aliquid ex ea commodi consequatur? Quis autem 
-						vel eum iure reprehenderit qui in ea voluptate velit 
-						esse quam nihil molestiae consequatur, vel illum qui 
-						dolorem eum fugiat quo voluptas nulla pariatur.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-<!-- //bootstrap-modal-pop-up --> 
 
 
 	<!-- REQUIRED JS SCRIPTS -->
 	<!-- jQuery 2.2.3 -->
 	<script src="<c:url value="/resources/dist/js/home/jquery-2.2.3.min.js" />"></script>
+	
+  	<!-- Validator -->
+  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+  	<script type="text/javascript" src="<c:url value="/resources/common/js/titanic.js" />"></script>
 	
 	<!--search-bar-->
 	<script src="<c:url value="/resources/dist/js/home/main.js" />"></script>
@@ -1288,7 +851,10 @@
 			$().UItoTop({
 				easingType: 'easeOutQuart'
 			});
-
+			
+			// Validator
+// 			 $("#newFeedBack").validate();
+// 	    	 validator();
 		});
 	</script>
 	

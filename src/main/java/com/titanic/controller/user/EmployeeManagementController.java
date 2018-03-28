@@ -58,7 +58,7 @@ public class EmployeeManagementController {
 	public String addEmployee( @Valid @ModelAttribute("newEmployee") Employee employee, BindingResult errors) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
-			redirectUrlString = "redirect:/users/employee.do?success=false&msg=Registered Failed";
+			redirectUrlString = "employee";
 		}
 		else {
 //			try {
@@ -79,7 +79,7 @@ public class EmployeeManagementController {
 	public String updateEmployee(@Valid @ModelAttribute("singleUpdatedEmployee") Employee employee, BindingResult errors, @PathVariable int id, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
-			redirectUrlString = "redirect:/users/employee-detai.do?success=false&msg=Update Failed";
+			redirectUrlString = "employee-detai";
 		}
 		else {
 			model.addAttribute("singleEmployee", emService.update(employee, id));

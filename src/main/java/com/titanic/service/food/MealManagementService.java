@@ -78,4 +78,9 @@ public class MealManagementService {
 		}
 		return jsonResultArry.toString();
 	}
+
+	// GET MEAL PER PREFERED TIME TYPE
+	public List<Meal> findByPreferedTime(String name) {
+		return mRepository.findByPreferedTime(name);
+	}
 }

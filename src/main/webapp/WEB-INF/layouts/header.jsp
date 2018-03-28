@@ -151,7 +151,7 @@
               <li class="user-footer">
                 <div class="pull-left">
                  	<form name='f' action='<c:url value="/logout" />' method='POST'>
-                	   <button type="submit"  class="btn btn-warning btn-flat">Sign out</button>
+                	   <button type="submit" class="btn btn-warning btn-flat">Sign out</button>
                 	  <security:csrfInput/>
                 	</form>
                 </div>

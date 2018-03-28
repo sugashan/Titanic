@@ -89,7 +89,7 @@
      	  <div class="modal-body" style="margin-top:-10px;">
     		 <form:form modelAttribute="newMeal" enctype="multipart/form-data" method="post" >
     		 		<div class="row">
-				     <div class="form-group col-md-6">
+				     <div class="form-group col-md-4">
 				    	<label for="exampleInputEmail1">Item-Type :</label>
 				     	<form:select path="itemCatergory" cssClass="form-control selectboxField" >
 				     			<option value="default">Choose..</option>
@@ -100,7 +100,7 @@
 						 <span style="color:red;"><form:errors path="itemCatergory"/></span>
 				     </div>
 				     
-				      <div class="form-group col-md-6">
+				      <div class="form-group col-md-4">
 				    	<label for="exampleInputEmail1">Food-Type :</label>
 				     	<form:select path="foodTypeId" class="form-control foodTypeGenCode selectboxField">
 				     			<option value="default">Choose..</option>
@@ -109,6 +109,11 @@
 				     	   </c:forEach>
 						</form:select>
 						 <span style="color:red;"><form:errors path="foodTypeId"/></span>
+				     </div>
+				     
+				     <div class="form-group col-md-4">
+						<label for="exampleInputEmail1">Is It Titanic-Special :</label>				     
+				     	<form:checkbox path="isSpecial" value="true" cssClass="form-control"/>
 				     </div>
 				   </div>  
     		 	

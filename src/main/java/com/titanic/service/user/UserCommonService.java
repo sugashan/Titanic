@@ -61,4 +61,10 @@ public class UserCommonService {
 			logger.setUser(currUser);
 			lRepository.save(logger);
 		}
+		
+		// GET USER WITH MOBILE
+		public User findOneByTelephone(String mobile) {
+			return uRepository.findByMobile(mobile);
+			
+		}
 }

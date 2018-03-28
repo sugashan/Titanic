@@ -14,33 +14,22 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   
-  <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />">
-  
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
- 
   <!-- Theme style -->
-  <link href="<c:url value="/resources/dist/css/AdminLTE.min.css" />" rel="stylesheet">
+  <link href="<c:url value="/resources/dist/css/login/style.css" />" rel="stylesheet">
  
-  <!-- AdminLTE Skins.  -->
-  <link href="<c:url value="/resources/dist/css/skins/skin-blue.min.css" />" rel="stylesheet">
-  
    <title><tiles:getAsString name="title"/></title>
-   
+
 </head>
 
-<body class="hold-transition">
-		<!-- REQUIRED JS SCRIPTS -->
+<body>
+	<!-- REQUIRED JS SCRIPTS -->
 	<!-- jQuery 2.2.3 -->
 	<script src="<c:url value="/resources/plugins/jQuery/jquery-2.2.3.min.js" />"></script>
-	<script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
+	<script src="<c:url value="/resources/dist/js/login/index.js" />"></script>
 	
-	<!-- iCheck -->
-	<script src="<c:url value="/resources/plugins/iCheck/icheck.min.js" />"></script>
+  	<!-- Validator -->
+  	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+  	<script type="text/javascript" src="<c:url value="/resources/common/js/titanic.js" />"></script>
 	
 	<tiles:insertAttribute name="body" />
 </body>

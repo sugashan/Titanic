@@ -18,5 +18,6 @@
 		<class>com.titanic.entity.PickUpDeskOrder</class>
 		<class>com.titanic.entity.FoodComboPackage</class>
 		<class>com.titanic.entity.PackageMeals</class>
+		<class>com.titanic.entity.FeedBack</class>
 	</persistence-unit>
 </persistence>

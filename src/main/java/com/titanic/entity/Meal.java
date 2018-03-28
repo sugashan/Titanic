@@ -45,8 +45,17 @@ public class Meal {
 	private int foodTypeId;
 	
 	private String incrediants;
+	private boolean isSpecial;
 	
 	
+	
+
+	public boolean isSpecial() {
+		return isSpecial;
+	}
+	public void setSpecial(boolean isSpecial) {
+		this.isSpecial = isSpecial;
+	}
 	public String getIncrediants() {
 		return incrediants;
 	}
