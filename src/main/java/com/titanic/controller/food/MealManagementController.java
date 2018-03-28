@@ -73,7 +73,7 @@ public class MealManagementController {
 	public String addFoodType( @Valid @ModelAttribute("newMeal") Meal meal, BindingResult errors, HttpServletRequest request, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
-			redirectUrlString = "redirect:/meals/meal.do?success=false&msg=Added Failed";
+			redirectUrlString = "meal";
 		}
 	else {
 			try {

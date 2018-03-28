@@ -19,6 +19,7 @@ public class FoodComboPackage {
 	private int id;
 	
 	private String code;
+	
 	@NotNull(message="Food Type Can Not Be Empty!")
 	private String name;
 	
@@ -28,10 +29,13 @@ public class FoodComboPackage {
 	private float price;
 	private String image;
 	private String description;
+	
 	@NotNull(message="Food Type Can Not Be Empty!")
 	private String validUntil;
+	
 	@NotNull(message="Food Type Can Not Be Empty!")
 	private String addedOn;
+	
 	private Boolean status;
 	
 	

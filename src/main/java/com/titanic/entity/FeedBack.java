@@ -30,7 +30,15 @@ public class FeedBack {
 	@Size(min=4, message="Subject Should Be Atleast 4 Character!")
 	private String subject;
 	
+	private Boolean isReplied;
 	
+	
+	public Boolean getIsReplied() {
+		return isReplied;
+	}
+	public void setIsReplied(Boolean isReplied) {
+		this.isReplied = isReplied;
+	}
 	public String getSubject() {
 		return subject;
 	}

@@ -210,7 +210,7 @@
 			<div class="gallery-main">
 				<div class="gallery-top">
 				<c:forEach items="${meals}" var="meal">
-					<c:if test="${not empty meal.imageUrl}">
+					<c:if test="${not empty meal.imageUrl && meal.isSpecial eq true}">
 						<div class="gallery-top-img portfolio-grids">
 							<a href="<c:out value="${meal.imageUrl}" />" class="b-link-stripe b-animate-go lightninBox" data-lb-group="1">
 								<img src="<c:out value="${meal.imageUrl}" />" class="img-responsive" alt="" />

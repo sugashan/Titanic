@@ -15,8 +15,16 @@ public class Table {
 	private String xCor;
 	private String yCor;
 	private int capacity;
+	private Boolean isBooked;
 	
 	
+	
+	public Boolean getIsBooked() {
+		return isBooked;
+	}
+	public void setIsBooked(Boolean isBooked) {
+		this.isBooked = isBooked;
+	}
 	public int getId() {
 		return id;
 	}

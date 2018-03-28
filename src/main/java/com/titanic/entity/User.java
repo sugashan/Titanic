@@ -37,7 +37,7 @@ public class User {
 	private String userName;
 	
 	private String address;
-	private boolean enabled;
+	private Boolean enabled;
 	
 	private int roleId;
 	
@@ -107,10 +107,10 @@ public class User {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
-	public boolean isEnabled() {
+	public Boolean isEnabled() {
 		return enabled;
 	}
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
 }

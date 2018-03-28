@@ -26,6 +26,8 @@ public class FoodType {
 	
 	private String preFix;
 	
+	
+	
 	public int getId() {
 		return id;
 	}

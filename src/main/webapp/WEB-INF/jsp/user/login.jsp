@@ -32,7 +32,7 @@
 					<div class="cont_ba_opcitiy">
 
 						<h2>LOGIN</h2>
-						<p>Let's get In!.</p>
+						<p>Let's get In.!</p>
 						<button class="btn_login" onclick="cambiar_login()">LOGIN</button>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 					<div class="cont_ba_opcitiy">
 					
 						<h2>SIGN UP</h2>
-						<p>Don't have an account yet?!.</p>
+						<p>Don't have an account yet ?</p>
 						<button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN
 							UP</button>
 					</div>

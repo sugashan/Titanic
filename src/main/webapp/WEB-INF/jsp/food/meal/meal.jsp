@@ -102,7 +102,7 @@
 				     
 				      <div class="form-group col-md-4">
 				    	<label for="exampleInputEmail1">Food-Type :</label>
-				     	<form:select path="foodTypeId" class="form-control foodTypeGenCode selectboxField">
+				     	<form:select path="foodTypeId" cssClass="form-control foodTypeGenCode selectboxField">
 				     			<option value="default">Choose..</option>
 				     	   <c:forEach items="${mealType}" var ="mealType">
 				     	   		<form:option label="${mealType.name}" value="${mealType.id}"/>
@@ -112,8 +112,8 @@
 				     </div>
 				     
 				     <div class="form-group col-md-4">
-						<label for="exampleInputEmail1">Is It Titanic-Special :</label>				     
-				     	<form:checkbox path="isSpecial" value="true" cssClass="form-control"/>
+						<label for="exampleInputEmail1">Is It Titanic's Special Dish :</label>				     
+				     	<form:checkbox path="isSpecial" />
 				     </div>
 				   </div>  
     		 	

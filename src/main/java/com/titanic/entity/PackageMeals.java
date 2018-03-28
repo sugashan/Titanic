@@ -14,10 +14,13 @@ public class PackageMeals {
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private int id;
+		
 		@NotNull(message="Food Type Can Not Be Empty!")
 		private String mealId;
+		
 		@NotNull(message="Food Type Can Not Be Empty!")
 		private String mealName;
+		
 		@NotNull(message="Food Type Can Not Be Empty!")
 		private String quantity;
 		
