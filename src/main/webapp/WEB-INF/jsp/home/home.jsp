@@ -3,6 +3,7 @@
 
 <%@ include file="../../layouts/taglib.jsp" %>
     <%@ include file="../common/commonModals.jsp" %>
+
     
 	<!-- Header -->
 	<div class="header" id="home">
@@ -266,13 +267,13 @@
 						<div class="recipe-grid">
 							<c:forEach items="${breakfastMeals}" var="breakFastMeal">
 								<div class="col-md-6 menu-grids">
-									<div class="menu-text_wthree">
+									<div class="menu-text_wthree showCustomCart">
 										<div class="menu-text-left">
 											<div class="rep-img">
 												<img src='<c:out value="${breakFastMeal.imageUrl}"/>' alt=" " class="img-responsive">
 											</div>
 											<div class="rep-text">
-												<h4><c:out value="${breakFastMeal.name}"/></h4>
+												<h4><span class="dataholder" data-meal-id="${breakFastMeal.id}" data-meal-name="${breakFastMeal.name}" data-meal-price="${breakFastMeal.price}"><c:out value="${breakFastMeal.name}"/></span></h4>
 												<h6>Incrediants - <c:out value="${breakFastMeal.incrediants}"/></h6>
 											</div>
 	
@@ -295,13 +296,13 @@
 						<div class="recipe-grid">
 						<c:forEach items="${lunchMeals}" var="lunchtMeal">
 							<div class="col-md-6 menu-grids">
-								<div class="menu-text_wthree">
+								<div class="menu-text_wthree showCustomCart">
 									<div class="menu-text-left">
 										<div class="rep-img">
 											<img src='<c:out value="${lunchtMeal.imageUrl}"/>' alt=" " class="img-responsive">
 										</div>
 										<div class="rep-text">
-											<h4><c:out value="${lunchtMeal.name}"/></h4>
+											<h4><span class="dataholder" data-meal-id="${lunchtMeal.id}" data-meal-name="${lunchtMeal.name}" data-meal-price="${lunchtMeal.price}"><c:out value="${lunchtMeal.name}"/></span></h4>
 											<h6>Incrediants - <c:out value="${lunchtMeal.incrediants}"/></h6>
 										</div>
 
@@ -440,7 +441,7 @@
 					<h3>For Good Taste</h3>
 					<p>Nulla sodales efficitur consequat. Maecenas mi diam, imperdiet consectetur ultricies nec, convallis sit amet turpis.
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-					<a class="active" href="#" data-toggle="modal" data-target="#myModal" data-backdrop="static" data-keyboard="false">Learn more</a>
+					<a class="active" href="#">Learn more</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -749,6 +750,105 @@
 	<!-- js for portfolio lightbox -->
 	<script src="<c:url value="/resources/dist/js/home/jquery.chocolat.js" />"></script>
 	
+	
+	<script type="text/javascript">
+	var mealId = "";
+	var mealName = "";
+	var mealImage = "";
+	var priceTotal = 0;
+	var mealOrder = {};
+	var foodCart = [];
+		
+		// CUSTOMIZABLE CART SELECTION
+		$(".showCustomCart").click(function(){
+			mealId = $(this).find(".dataholder").attr("data-meal-id");
+			mealName = $(this).find(".dataholder").attr("data-meal-name");
+			mealImage = $(this).find(".img-responsive").attr("src");
+			priceTotal += $(this).find(".dataholder").attr("data-meal-price");
+			fillDataToModal();
+			$("#mealQuantity").val("1");
+			$("#myModal").modal("show");
+		});
+	
+		// FILL DATA'S TO MODAL
+		function fillDataToModal(){
+			$(".modal-header").html(mealName);
+			$("#selectedMealimage").attr("src" , mealImage);
+		}
+		
+		// ADDING TO CART
+		function addToCart(){
+			$("#toCart").css("display", "block");
+			mealOrder = {};
+			
+			mealOrder.quantity = $("#mealQuantity").val();
+			 mealOrder.customizedFoodMsg = $("#mealCustomizeInfo").val();
+			 mealOrder.mealId = mealId;
+			 mealOrder.mealName = mealName;
+			 mealOrder.price = price;
+			 foodCart.push(mealOrder);
+			 tablingOrder();
+			 $("#myModal").modal("hide");
+		}
+		
+		// SHOW CART MODAL
+		function showSubmitCart(){
+			$("#myCartModal").find(".modal-header").html("Few blanks from Your Order! Fill To Grap!");
+			$("#myCartModal").modal("show");
+		}
+		
+		// TABLE ORDER
+		function tablingOrder(){
+			var key = foodCart.length;
+			// DISPLAY TABLE APPENDING
+			
+			if( key>0 && mealOrder!= null && mealOrder.quantity>0 ){
+				
+				if(mealOrder.customizedFoodMsg == ""){
+					mealOrder.customizedFoodMsg = "none";
+				}
+				
+				var htmlStr = '<tr>';
+				htmlStr += "<td style='text-allign:center;'>"+key+"</td>";
+				htmlStr += "<td style='text-allign:center;'>"+ mealOrder.mealName  + "</td>";
+				htmlStr += "<td style='text-allign:center;'>"+ mealOrder.quantity + "</td>";
+				htmlStr += "<td style='text-allign:center;'>"+ mealOrder.customizedFoodMsg + "</td>";
+				htmlStr += '<td style='text-allign:center;'><a class="btn text-danger triggerRemove" data-id="'+ key +'"> <i class="fa fa-trash-o"></i> </a></td>';
+				htmlStr += "</tr>";
+	
+				$("#myCartModal").find("#addedOrderTableBody").append(htmlStr);
+				mealOrder = {};
+			
+				// REMOVE FROM ARRAY AND DISPLAY
+		  	  	$(".triggerRemove").click(function deleteMeal(){
+		  	  		var id = $(this).attr("data-id")-1;
+		  	  		alert(id);
+		  	  		document.getElementById("addedOrderTableBody").deleteRow(id);
+		  	  		foodCart.splice(id);
+		  	  		if(id > 0){
+			  	  		$("#myCartModal").modal("hide");
+			  	  		$("#toCart").css("display", "none");
+			  	  		resetCustom();
+		  	  		}
+	  	  		});
+			}
+		}
+		
+		
+		// CLEAR FIELDS
+		function resetCustom(){
+			mealId = "";
+			mealName = "";
+			mealImage = "";
+			mealOrder = {};
+			foodCart = [];
+			
+			 $('.form-control').each(function () {
+				 $('.form-control').val('');
+			 });
+		}
+	</script>
+	
 	<script type="text/javascript ">
 		$(function () {
 			$('.portfolio-grids a').Chocolat();
@@ -836,8 +936,10 @@
 		});
 	</script>
 	<!-- start-smoth-scrolling -->
+	
 
 	<script type="text/javascript">
+	
 		$(document).ready(function () {
 			/*
 				var defaults = {
@@ -853,14 +955,18 @@
 			});
 			
 			// Validator
-// 			 $("#newFeedBack").validate();
-// 	    	 validator();
+			 $("#newFeedBack").validate();
+	    	 validator();
+	    	 reset();
 		});
+		
 	</script>
 	
 	<!-- Top Hover button -->
 	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+	<!-- Cart Btn button -->
+	<a class="btn" id="toCart" onclick="showSubmitCart();" style="display: none;"><span style="opacity: 2;"> </span></a>
+	
 	<script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
-
 
 </body>

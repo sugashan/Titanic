@@ -107,11 +107,23 @@
 	  
 	  $("#newUser").validate();
 		 validator();
+		 reset();
   });
   
+
+//CONFIRM PASSWORD
+$('#password, #conFPassword').on('keyup', function () {
+if ($('#password').val() == $('#conFPassword').val()) {
+//	 $("#submitBtn").css("display", "block");
+	 $('#confirmPasswordError').html('');
+} else 
+	 $('#confirmPasswordError').html('Password Mis-Matching!');
+//	 $("#submitBtn").css("display", "none");
+});
+
+
 //CHECK UNIQUE USERNAME
 $('.uniqueTextFiled').on('change', function () {
-	alert(1);
   $.get('http://localhost:8080/titanic/users/availableUserName.do?userName=' +$(this).val(), 
           function(data){
               if(data == false){
@@ -123,15 +135,5 @@ $('.uniqueTextFiled').on('change', function () {
             	  $("#submitBtn").css("display", "block");
               }
           }, 'json');
-});
-
-//CONFIRM PASSWORD
-$('#password, #conFPassword').on('keyup', function () {
-if ($('#password').val() == $('#conFPassword').val()) {
-//	 $("#submitBtn").css("display", "block");
-	 $('#confirmPasswordError').html('');
-} else 
-	 $('#confirmPasswordError').html('Password Mis-Matching!');
-//	 $("#submitBtn").css("display", "none");
 });
 </script>

@@ -1,3 +1,12 @@
+
+// CLEAR FORMS
+function reset(){
+	 $('.form-control').each(function () {
+		 $('.form-control').val('');
+	 });
+}
+
+// VALIDATE FORMS
 function validator(){
 	
 	// VALIDATION FOR CURENCY
@@ -24,7 +33,6 @@ function validator(){
 	 // VALIDATION VIA CLASSES
 	 $('.selectboxField').each(function () {
 	      $(this).rules('add', {
-	    	  
 	    	  valueNotEqualsToDefault:"default",
 	      });
 	    });
@@ -36,12 +44,14 @@ function validator(){
 	    	  currency: ["$", false]
 	      });
 	    });
+	 
 	 $('.textFiled, .uniqueTextFiled').each(function () {
 	      $(this).rules('add', {
 	          required: true,
 	          minlength:4
 	      });
 	 });
+	 
 	 $('.numberFiled').each(function () {
 	      $(this).rules('add', {
 	          required: true,
@@ -50,6 +60,7 @@ function validator(){
 	          maxlength:12,
 	      });
 	    });
+	 
 	 $('.passwordFiled').each(function () {
  	      $(this).rules('add', {
  	          required: true,
@@ -63,6 +74,7 @@ function validator(){
 	          email:true
 	      });
 	    });
+	 
 	 $('.dateField').each(function () {
 	      $(this).rules('add', {
 	    	  required: true,
@@ -72,7 +84,3 @@ function validator(){
 }
 
 
-// CLEAR FORMS
-function reset(){
-	 $('.form-control input[type="text"]').val('');
-}

@@ -102,11 +102,11 @@
 			  	<br/>
 			     <div class = "row">
 				 	 <div class="form-group col-md-4">
-			     	    <button type="button" class="btn btn-lg btn-block btn-warning" data-dismiss="modal">
+			     	    <button type="button" class="btn btn-lg btn-block btn-warning" data-dismiss="modal"  onclick="reset()">
 			     	     <i class="fa fa-close"></i> Cancel</button>
 				 	  </div>
 				    	<div class="form-group col-md-4">
-				     	 <button type="button" class="btn btn-lg btn-block btn-secondary" type="reset">
+				     	 <button type="button" class="btn btn-lg btn-block btn-secondary" type="reset"  onclick="reset()">
 			     	   <i class="fa fa-repeat"></i> Reset</button>
 				 	</div>
 				 	<div class="form-group col-md-4">
@@ -144,5 +144,6 @@
     	 $("#newFoodType").validate();
     	 
     	 validator();
+    	 reset();
   	});
   	</script>

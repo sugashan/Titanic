@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class FoodOrder {
@@ -16,11 +17,22 @@ public class FoodOrder {
 	@OneToOne
 	private Meal meal;
 	
+	@NotNull(message="Quantity should be atleast 1.")
 	private int quantity;
+	
+	private String customizedFoodMsg;
 	
 	@OneToOne
 	private Orders order;
 	
+	
+	
+	public String getCustomizedFoodMsg() {
+		return customizedFoodMsg;
+	}
+	public void setCustomizedFoodMsg(String customizedFoodMsg) {
+		this.customizedFoodMsg = customizedFoodMsg;
+	}
 	public int getId() {
 		return id;
 	}

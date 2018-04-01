@@ -178,11 +178,11 @@
 			  	<br/>
 			     <div class = "row">
 				 	 <div class="form-group col-md-4">
-			     	    <button type="button" class="btn btn-lg btn-block btn-warning" data-dismiss="modal">
+			     	    <button type="button" class="btn btn-lg btn-block btn-warning" data-dismiss="modal"  onclick="reset()">
 			     	     <i class="fa fa-close"></i> Cancel</button>
 				 	  </div>
 				    	<div class="form-group col-md-4">
-				     	 <button type="button" class="btn btn-lg btn-block btn-secondary" type="reset">
+				     	 <button type="button" class="btn btn-lg btn-block btn-secondary" type="reset"  onclick="reset()">
 			     	   <i class="fa fa-repeat"></i> Reset</button>
 				 	</div>
 				 	<div class="form-group col-md-4">
@@ -222,15 +222,17 @@
     	 $("#newMeal").validate();
     	 
     	 validator();
+    	 reset();
     	 
     	// CHECK UNIQUE CODE
-     	 $('.foodTypeGenCode').on("change", function() {
-     		 var code = $('.foodTypeGenCode option:selected').text();
+    	 $('.foodTypeGenCode').on("change", function() {
+    		 var code = $('.foodTypeGenCode option:selected').text();
     		  $.get('http://localhost:8080/titanic/meals/lastMealId.do?code='+ code, 
     	              function(data){
-                   		  $(".codeClass").val(code + "-" + data);
+    	           		  $(".codeClass").val(code + "-" + data);
     	              }, 'json');
     	    });
+    	 
   	});
   	
   		// IMAGE HANDLING & PREVIEW

@@ -187,11 +187,11 @@
 			  	<br/>
 			     <div class = "row">
 				 	 <div class="form-group col-md-4">
-			     	    <button type="button" class="btn btn-lg btn-block btn-warning" data-dismiss="modal">
+			     	    <button type="button" class="btn btn-lg btn-block btn-warning" data-dismiss="modal" onclick="reset()">
 			     	     Cancel</button>
 				 	  </div>
 				    	<div class="form-group col-md-4">
-				     	 <button type="button" class="btn btn-lg btn-block btn-secondary" type="reset">
+				     	 <button type="button" class="btn btn-lg btn-block btn-secondary" type="reset" onclick="reset();">
 			     	    Reset</button>
 				 	</div>
 				 	<div class="form-group col-md-4">
@@ -240,7 +240,7 @@
     	 //   VALIDATIONS
     	 $("#newComboPackage").validate();
     	 validator();
-    	
+    	 reset();
   	});
   	
   	 //GET ALL MEAL AS LIST

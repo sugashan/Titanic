@@ -1729,6 +1729,10 @@ background: #428bca;
 	margin-top: 1.5em;
 }
 
+.rep-text:hover > h4, .rep-text:hover > h6 {
+    color:#ffa41f;
+ }
+
 .menu-text-right {
 	float: right;
 	width: 18%;
@@ -1967,6 +1971,18 @@ background: #428bca;
 	background: url(../../img/home/scroll-top.png) no-repeat 0px 0px;
 }
 
+#toCart{
+	text-decoration: none;
+	position: fixed;
+	bottom: 50px;
+	right: -5px;
+	overflow: hidden;
+	width: 100px;
+	height: 100px;
+	border: none;
+	text-indent: 100%;
+	background: url(../../img/home/cart.png);
+}
 
 /*--/Media Queries Starts Here --*/
 @media (max-width:1600px) {

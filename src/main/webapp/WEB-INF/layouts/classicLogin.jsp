@@ -18,7 +18,7 @@
   <link href="<c:url value="/resources/dist/css/login/style.css" />" rel="stylesheet">
  
    <title><tiles:getAsString name="title"/></title>
-
+   
 </head>
 
 <body>
