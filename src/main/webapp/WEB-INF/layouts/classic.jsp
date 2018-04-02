@@ -17,9 +17,10 @@
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 	  <!-- Ionicons -->
 	  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-	 
+	  
 	  <!-- Bootstrap Core CSS -->
 	  <link href="<c:url value="/resources/bootstrap/css/bootstrap.min.css" />" rel="stylesheet">
+	  <link href="<c:url value="/resources/common/css/bootstrap-toggle.min.css" />" rel="stylesheet">
 		
 	  <!-- Theme style -->
 	  <link href="<c:url value="/resources/dist/css/AdminLTE.min.css" />" rel="stylesheet">
@@ -55,6 +56,7 @@
 	<!-- jQuery 2.2.3 -->
 	<script src="<c:url value="/resources/plugins/jQuery/jquery-2.2.3.min.js" />"></script>
 	<script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
+	<script src="<c:url value="/resources/common/js/bootstrap-toggle.min.js" />"></script>
 	
 	<!-- AdminLTE App -->
 	<script src="<c:url value="/resources/dist/js/app.min.js" />"></script>	

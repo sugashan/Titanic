@@ -143,7 +143,7 @@
 			<div class="work-main">
 				<div class="work-top">
 					<h3>Our Services</h3>
-					<p>Lorem ipsum dolor sit amet,vehicula vel sapien et</p>
+					<p><small> "We see our customers as invited guests to a party, and we are the hosts. It's our job every day to make every important aspect of the customer experience a little bit better."</small></p>
 				</div>
 				<div class="work-bottom_w3ls_agile">
 					<div class="work-bottom-top">
@@ -151,14 +151,15 @@
 							<div class="work-bottom-left_agile_w3ls">
 								<span class="fa fa-spoon" aria-hidden="true"></span>
 								<h4>Fresh Products</h4>
-								<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. </p>
+								<p>Fresh food and fresh ideas are at the heart of food and service. Titanic delivers exceptional produce, custom cuts of meat, high-quality seafood, and herbs, as well as, high quality dairy products. 
+								 </p>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="work-bottom-left_agile_w3ls">
 								<span class="fa fa-apple" aria-hidden="true"></span>
 								<h4>Healthy Food</h4>
-								<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. </p>
+								<p>Titanic checking to ensure they are storing, preparing and handling food in a safe and sanitary way. We are committed to helping your healthcare operation grow, from meeting nutritional requirements and regulations, to controlling foods costs. </p>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -166,7 +167,7 @@
 								<span class="fa fa-home" aria-hidden="true"></span>
 								<h4>Traditional Methods
 								</h4>
-								<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. </p>
+								<p>We cater for traditional dishes. And also species, chemicals, colourings are minimized or avoided where possible. </p>
 							</div>
 						</div>
 
@@ -177,23 +178,23 @@
 							<div class="work-bottom-left_agile_w3ls">
 								<span class="fa fa-calendar" aria-hidden="true"></span>
 								<h4>Advance Booking</h4>
-								<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. </p>
+								<p>Quickly cater to the needs of large party bookings with our restaurant pre-order web app. Restaurant managers can create bespoke menus, share them online, and allow your guests to order before their arrival. </p>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="work-bottom-left_agile_w3ls">
 								<span class="fa fa-smile-o" aria-hidden="true"></span>
 								<h4>Best Chefs</h4>
-								<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. </p>
+								<p>We have well experienced creative and having Organizational Skills chef. Every chef knows that the success of dish in due in large part to the quality of ingredients. </p>
 							</div>
 
 						</div>
 						<div class="col-md-4">
 							<div class="work-bottom-left_agile_w3ls">
 								<span class="fa fa-child" aria-hidden="true"></span>
-								<h4>150 Tables
+								<h4>100 Tables
 								</h4>
-								<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. </p>
+								<p>We have a space to serve for nearly 400 people at a time. Private family rooms, halls also there for your big events.  </p>
 							</div>
 						</div>
 
@@ -400,27 +401,24 @@
 					<div class="col-md-6 choose-right-top">
 						<span class="fa fa-truck" aria-hidden="true" style="font-size:50px; color: #ffa41f; padding-bottom: 15px"></span>
 						<h4>Door Delivery</h4>
-						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
-							nisl nec tristique.</p>
+						<p>Guests can use this service to ship their orders, including purchases made at the Parks, from the hotel to their home.</p>
 					</div>
 					<div class="col-md-6 choose-right-top">
 						<span class="fa fa-shopping-cart" aria-hidden="true" style="font-size:50px; color: #ffa41f; padding-bottom: 15px"></span>
 						<h4>Customized Food</h4>
-						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
-							nisl nec tristique.</p>
+						<p>Customers can specify or customize their orders with their own desires. We believed that each of our customer has great own taste.</p>
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-md-6 choose-right-top">
 						<span class="fa fa-credit-card" aria-hidden="true" style="font-size:50px; color: #ffa41f; padding-bottom: 15px"></span>
 						<h4>Card Payment</h4>
-						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
-							nisl nec tristique. </p>
+						<p>It's customer's choice when it comes to payment form.  Your restaurant needs to be ready to accept it all.  And with Titanic credit card and payment processing, you will be. 
+						 With Titanic. </p>
 					</div>
 					<div class="col-md-6 choose-right-top">
 						<span class="fa fa-gift" aria-hidden="true" style="font-size:50px; color: #ffa41f; padding-bottom: 15px"></span>
 						<h4>Special Offers & Combo</h4>
-						<p>Duis sit amet posuere justo, sit amet finibus urna. Aenean elementum diam nec laoreet sodales. Morbi vulputate tempor
-							nisl nec tristique.</p>
+						<p>The following restaurants have teamed up with Restaurants Of titanic to offer you some fantastic savings, sample menus, exclusive promotions and special offers. .</p>
 					</div>
 					<div class="clearfix"></div>
 				</div>
@@ -439,8 +437,10 @@
 				</div>
 				<div class="col-md-6 about-right_agileits">
 					<h3>For Good Taste</h3>
-					<p>Nulla sodales efficitur consequat. Maecenas mi diam, imperdiet consectetur ultricies nec, convallis sit amet turpis.
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+					<p>Pack a punch with our food by adding light ingredients like vinegars, we use fresh herbs instead of the old,
+						 dried herbs that can potentially lose their flavor. Don't keep dried herbs longer than 3-months. 
+						 We get a ton of flavor from seasonal fresh produce.
+						 Shop at the local farmer's markets for tastier fruits and veggies.</p>
 					<a class="active" href="#">Learn more</a>
 				</div>
 				<div class="clearfix"></div>
@@ -501,13 +501,15 @@
 					<h2>OUR INTERESTING HISTORY</h2>
 				</div>
 				<div class="col-md-6 news-right">
-					<p>Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet ultrices. Maecenas dictum arcu purus, sit amet
-						volutpat purus viverra sit amet. Quisque lacinia quam sed tortor interdum, malesuada congue nunc ornare. Cum sociis
-						natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In semper lorem eget tortor pulvinar ultricies.
+					<p>We have great pleasure in inviting you to our new site at nelliyady town. 
+						Our hotel business with three buildings. One at down stairs is quite spacious 
+						to accommodate few hundreds during functions.
+						 There are some rooms at the third floor for those who come from distant places.
+						Second floor is open for our customers. And first floor is open for functions. Advance booking, Online payment and Credit card also possible with us. 
 					</p>
-					<p>Etiam faucibus viverra libero vel efficitur. Ut semper nisl ut laoreet ultrices. Maecenas dictum arcu purus, sit amet
-						volutpat purus viverra sit amet. Quisque lacinia quam sed tortor interdum, malesuada congue nunc ornare. Cum sociis
-						natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In semper lorem eget tortor pulvinar ultricies.
+					<p>The hotel is well reputed for catering the past few years. 
+						There are well experienced staff to keep you comfortable and promptly attend to your needs. 
+						And also we have well experienced creative and having Organizational Skills chef. We cater for traditional and western dishes too. 
 					</p>
 				</div>
 
@@ -589,13 +591,13 @@
 							</div>
 						</div>
 						<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-			<span class="fa fa-chevron-left" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
+							<span class="fa fa-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
 						<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-			<span class="fa fa-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
+							<span class="fa fa-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
 						<!-- The Modal -->
 					</div>
 					<!--//banner -->
@@ -612,7 +614,7 @@
 			<div class="comments-main">
 				<div class="comments-head">
 					<h3>Comments from our customers</h3>
-					<p>Lorem ipsum dolor sit amet,vehicula vel sapien et</p>
+					<p> "One of the greatest gifts you can give to anyone is the gift of attention."</p>
 				</div>
 				<div class="comments-top">
 					<c:forEach begin="1" end="3">
@@ -702,7 +704,7 @@
 							<span class="fa fa-clock-o" aria-hidden="true"></span>
 						</div>
 						<div class="col-md-10 col-sm-10 col-xs-10 contact-text">
-							<h4>Work hours</h4>
+							<h4>Open hours</h4>
 							<table>
 								<tbody>
 									<tr><td><p>Monday</p></td><td> : </td><td><span style="color:#ffa41f;">07:00 AM - 11:00PM</span></td></tr>							
@@ -755,7 +757,8 @@
 	var mealId = "";
 	var mealName = "";
 	var mealImage = "";
-	var priceTotal = 0;
+	var price = 0;
+	var totalPrice = 0;
 	var mealOrder = {};
 	var foodCart = [];
 		
@@ -764,7 +767,7 @@
 			mealId = $(this).find(".dataholder").attr("data-meal-id");
 			mealName = $(this).find(".dataholder").attr("data-meal-name");
 			mealImage = $(this).find(".img-responsive").attr("src");
-			priceTotal += $(this).find(".dataholder").attr("data-meal-price");
+			price = $(this).find(".dataholder").attr("data-meal-price");
 			fillDataToModal();
 			$("#mealQuantity").val("1");
 			$("#myModal").modal("show");
@@ -779,41 +782,47 @@
 		// ADDING TO CART
 		function addToCart(){
 			$("#toCart").css("display", "block");
+			
 			mealOrder = {};
 			
-			mealOrder.quantity = $("#mealQuantity").val();
+			 mealOrder.quantity = $("#mealQuantity").val();
 			 mealOrder.customizedFoodMsg = $("#mealCustomizeInfo").val();
 			 mealOrder.mealId = mealId;
 			 mealOrder.mealName = mealName;
-			 mealOrder.price = price;
+			 
+			 totalPrice = totalPrice + price* mealOrder.quantity;
 			 foodCart.push(mealOrder);
 			 tablingOrder();
+			 
+			 $("#mealQuantity").val("");
+			 $("#mealCustomizeInfo").val("");
+			 
 			 $("#myModal").modal("hide");
 		}
 		
 		// SHOW CART MODAL
 		function showSubmitCart(){
-			$("#myCartModal").find(".modal-header").html("Few blanks from Your Order! Fill To Grap!");
 			$("#myCartModal").modal("show");
 		}
 		
 		// TABLE ORDER
 		function tablingOrder(){
-			var key = foodCart.length;
+			var number = foodCart.length;
+			var key = number-1;
 			// DISPLAY TABLE APPENDING
-			
-			if( key>0 && mealOrder!= null && mealOrder.quantity>0 ){
+			$("#priceTag").html("Total : Rs " + totalPrice.toFixed(2));
+			if( key>-1 && mealOrder!= null && mealOrder.quantity>0 ){
 				
 				if(mealOrder.customizedFoodMsg == ""){
 					mealOrder.customizedFoodMsg = "none";
 				}
 				
 				var htmlStr = '<tr>';
-				htmlStr += "<td style='text-allign:center;'>"+key+"</td>";
-				htmlStr += "<td style='text-allign:center;'>"+ mealOrder.mealName  + "</td>";
-				htmlStr += "<td style='text-allign:center;'>"+ mealOrder.quantity + "</td>";
-				htmlStr += "<td style='text-allign:center;'>"+ mealOrder.customizedFoodMsg + "</td>";
-				htmlStr += '<td style='text-allign:center;'><a class="btn text-danger triggerRemove" data-id="'+ key +'"> <i class="fa fa-trash-o"></i> </a></td>';
+				htmlStr += "<td>"+ number + "-" + mealOrder.mealName  + "</td>";
+				htmlStr += "<td>"+ mealOrder.quantity + "</td>";
+				htmlStr += "<td>"+ price + "</td>";
+				htmlStr += "<td>"+ mealOrder.customizedFoodMsg + "</td>";
+				htmlStr += '<td><a class="btn text-danger triggerRemove" data-amount-cell="'+ mealOrder.quantity*price +'" data-id="'+ key +'"> <i class="fa fa-trash-o"></i> </a></td>';
 				htmlStr += "</tr>";
 	
 				$("#myCartModal").find("#addedOrderTableBody").append(htmlStr);
@@ -821,11 +830,15 @@
 			
 				// REMOVE FROM ARRAY AND DISPLAY
 		  	  	$(".triggerRemove").click(function deleteMeal(){
-		  	  		var id = $(this).attr("data-id")-1;
-		  	  		alert(id);
+		  	  		var id = $(this).attr("data-id");
 		  	  		document.getElementById("addedOrderTableBody").deleteRow(id);
 		  	  		foodCart.splice(id);
-		  	  		if(id > 0){
+		  	  		
+		  	  		var toalnewAmount = totalPrice - $(this).attr("data-amount-cell");
+		  	  		totalPrice = toalnewAmount.toFixed(2);;
+		  	  		$("#priceTag").html("Total : Rs " + totalPrice);
+		  	  		
+		  	  		if(id == 0){
 			  	  		$("#myCartModal").modal("hide");
 			  	  		$("#toCart").css("display", "none");
 			  	  		resetCustom();
@@ -834,19 +847,72 @@
 			}
 		}
 		
-		
 		// CLEAR FIELDS
 		function resetCustom(){
 			mealId = "";
+			price = 0;
+			totalPrice = 0;
 			mealName = "";
 			mealImage = "";
 			mealOrder = {};
 			foodCart = [];
+			$("#addedOrderTableBody  > tbody").html("");
+			$(".orderCartInfo").css("display", "block");
+			$(".orderPaymentInfo").css("display", "none");
 			
 			 $('.form-control').each(function () {
 				 $('.form-control').val('');
 			 });
 		}
+		
+		// DIRECT PAYMENT DETAIL
+		function directPayment(){
+			$(".orderCartInfo").css("display", "none");
+			$(".orderPaymentInfo").css("display", "block");
+		}
+		
+		// CONTROL TOGGLE SWTICH
+		$("#orderNow").change(function(){
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+			var hour = today.getHours();
+			var min = today.getMinutes();
+			var ampm = "AM";
+			
+			if(dd<10){
+			    dd='0'+dd;
+			} 
+			if(mm<10){
+			    mm='0'+mm;
+			} 
+			if(hour>12){
+				ampm = "PM"
+			}
+			if(min<10){
+				min='0'+min;
+			}
+			
+			var todayDate = mm+'/'+dd+'/'+yyyy;
+			var todayTime = hour+':'+min+' '+ampm;
+			$(".timepickerforPickUp").val(todayTime);
+			$(".datepickerforPickUp").attr("type", "text");
+			$(".datepickerforPickUp").val(todayDate);
+			
+			if($("#orderLater").prop('checked') == true){
+				$("#orderLater").bootstrapToggle("off");
+			}
+		});
+		
+ 		$("#orderLater").change(function(){
+ 			$(".datepickerforPickUp").attr("type", "date");
+ 			$(".timepickerforPickUp").val("");
+			$(".datepickerforPickUp").val("");
+ 			if($("#orderNow").prop('checked') == true){
+				$("#orderNow").bootstrapToggle("off");
+			}
+ 		});
 	</script>
 	
 	<script type="text/javascript ">
@@ -958,6 +1024,7 @@
 			 $("#newFeedBack").validate();
 	    	 validator();
 	    	 reset();
+	    	 
 		});
 		
 	</script>
@@ -968,5 +1035,5 @@
 	<a class="btn" id="toCart" onclick="showSubmitCart();" style="display: none;"><span style="opacity: 2;"> </span></a>
 	
 	<script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
-
+	<script src="<c:url value="/resources/common/js/bootstrap-toggle.min.js" />"></script>
 </body>

@@ -113,7 +113,7 @@
 				     
 				     <div class="form-group col-md-4">
 						<label for="exampleInputEmail1">Is It Titanic's Special Dish :</label>				     
-				     	<form:checkbox path="isSpecial" />
+				     	<form:checkbox path="isSpecial" data-toggle="toggle" data-on="True" data-off="False"/>
 				     </div>
 				   </div>  
     		 	

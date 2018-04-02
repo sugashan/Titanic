@@ -12,6 +12,7 @@
 	table, th, td {
    border: 1px solid black;
    text-align:center;
+   width:100%;
 }
 
 </style>
@@ -132,8 +133,8 @@
 				    	<thead>
 							<tr style="border:1px solid black">
 								<th style="background-color:powderblue;">Number</th>
-								<th style="background-color:powderblue;">Meal</th>
-								<th style="background-color:powderblue;">Quantity</th>
+								<th style="background-color:powderblue;">Meal-Name</th>
+								<th style="background-color:powderblue;">Qty</th>
 								<th style="background-color:powderblue;"></th>
 							</tr>
 						</thead>
@@ -281,9 +282,9 @@
 	  		// REMOVE FROM ARRAY AND DISPLAY
 	  	  	$(".triggerRemove").click(function deleteMeal(){
 	  	  		var id = $(this).attr("data-id")-1;
-	  	  		if(id > -1){
-	  	  		mealArray.splice(id);
 	  	  		document.getElementById("addedMealTable").deleteRow(id);
+	  	  		if(id > -1){
+	  	  			mealArray.splice(id);
 	  	  		}
 	  	  	});
   			}

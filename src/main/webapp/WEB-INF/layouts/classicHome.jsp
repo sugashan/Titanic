@@ -19,11 +19,13 @@
   
   <!-- Theme style -->
   <link href="<c:url value="/resources/dist/css/home/style.css" />" rel="stylesheet">
+  <link href="<c:url value="/resources/common/css/bootstrap-toggle.min.css" />" rel="stylesheet">
   
   <!-- Others -->
   <link href="<c:url value="/resources/dist/css/AdminLTE.min.css" />" rel="stylesheet">
   <link href="<c:url value="/resources/dist/css/home/wickedpicker.css" />" rel="stylesheet"> 
   <link href="<c:url value="/resources/dist/css/home/font-awesome.css" />" rel="stylesheet"> 
+  
    <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <link href="<c:url value="/resources/dist/css/home/easy-responsive-tabs.css" />" rel="stylesheet"> 
