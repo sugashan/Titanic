@@ -54,23 +54,20 @@
 								</li>
 								<li><a class="scroll scrollForNav" href="#gallery">Gallery</a></li>
 								<li><a class="scroll scrollForNav" href="#mail">Contact</a></li>
-<%-- 								<security:authorize access=" !isAuthenticated()"> --%>
-<%-- 								<li><a class="" href='<spring:url value="/login.do" />'>Login</a></li> --%>
-<%-- 								</security:authorize> --%>
 								
 								<!-- User Info -->
-								<security:authorize access=" isAuthenticated()">
+<%-- 								<security:authorize access=" isAuthenticated()"> --%>
 								<li class="dropdown menu__item">
 									<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" data-hover="Pages" role="button" aria-haspopup="true"
 									    aria-expanded="false"> My Account <span class="fa fa-angle-down"></span></a>
 									<ul class="dropdown-menu">
 										<li><a class="scroll" href="#"><i class="fa fa-user"></i> <%= session.getAttribute("LoggerName") %></a></li>
 										<li><a class="" href="#" data-toggle="modal" data-target="#myProfileModal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-address-book"></i> Profile </a></li>
-										<hr/>
+										<hr>
 										<li><a type="button" class="btn" data-target="#confirmLogoutModal" data-toggle="modal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-sign-out"></i> Logout</a></li>
 									</ul>
 								</li>
-								</security:authorize>
+<%-- 								</security:authorize> --%>
 							</ul>
 						</nav>
 					</div>
@@ -623,7 +620,7 @@
 									<span class="fa fa-quote-right"></span>
 								</div>
 								<div class="comments-right">
-									<h3><c:out value="${comment.user.name}"/></h3>
+									<h3><c:out value="${comment.customerName}"/></h3>
 									<p class="para1">Rating</p>
 									<p class="para2"><c:out value="${comment.message}"/>.</p>
 								</div>
@@ -649,12 +646,12 @@
 							<form:input type="text" path="customerName" placeholder="Name" class="textFiled" />
 							 <form:errors path="customerName"/>
 							 
-							<form:input type="email" path="email" placeholder="Email" class="emailFiled"/>
-							 <form:errors path="email"/>
+							<form:input type="custEmail" path="custEmail" placeholder="Email" class="emailFiled"/>
+							 <form:errors path="custEmail"/>
 						</div>
 						<div class="col-md-6 col-sm-6 contact_left_grid">
-							<form:input type="text" path="mobile" placeholder="Telephone" class="numberFiled"/>
-							 <form:errors path="mobile"/>
+							<form:input type="text" path="custMobile" placeholder="Telephone" class="numberFiled"/>
+							 <form:errors path="custMobile"/>
 							 
 							<form:input type="text" path="subject" placeholder="Subject" class="textFiled"/>
 							 <form:errors path="Subject"/>
@@ -1034,6 +1031,8 @@
 			
 			// Validator
 			 $("#newFeedBack").validate();
+			$("#currentLoggedCustomer").validate();
+	    	 $("#newInquiry").validate();
 	    	 validator();
 	    	 reset();
 	    	 

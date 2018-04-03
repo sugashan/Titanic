@@ -7,10 +7,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.titanic.entity.Customer;
 import com.titanic.entity.FeedBack;
+import com.titanic.entity.Inquiry;
 import com.titanic.entity.MealsSchedule;
+import com.titanic.entity.User;
 import com.titanic.service.food.MealManagementService;
 import com.titanic.service.orderbooking.OrderManagementService;
-import com.titanic.service.review.ReviewManagementService;
+import com.titanic.service.reviewandinquiry.ReviewManagementService;
 import com.titanic.service.user.CustomerManagementService;
 import com.titanic.session.CurrentUser;
 
@@ -34,8 +36,18 @@ public class HomeController {
 	
 	
 	@ModelAttribute("newFeedBack")
-	public FeedBack Construct() {
+	public FeedBack ConstructFeedBack() {
 		return  new FeedBack();
+	}
+	
+	@ModelAttribute("newInquiry")
+	public Inquiry ConstructInquiry() {
+		return new Inquiry();
+	}
+	
+	@ModelAttribute("currentLoggedCustomer")
+	public User ConstructUser() {
+		return  new User();
 	}
 	
 	@RequestMapping("/home")

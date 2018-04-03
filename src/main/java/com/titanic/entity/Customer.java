@@ -1,9 +1,12 @@
 package com.titanic.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -17,6 +20,9 @@ public class Customer {
 	private User user;
 	
 	private String codeBasedCity;
+	
+	@OneToMany
+	private List<Inquiry> inquries;
 
 	public int getId() {
 		return id;
@@ -35,6 +41,12 @@ public class Customer {
 	}
 	public void setCodeBasedCity(String codeBasedCity) {
 		this.codeBasedCity = codeBasedCity;
+	}
+	public List<Inquiry> getInquries() {
+		return inquries;
+	}
+	public void setInquries(List<Inquiry> inquries) {
+		this.inquries = inquries;
 	}
 	
 	

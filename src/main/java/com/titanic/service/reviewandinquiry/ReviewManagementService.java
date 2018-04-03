@@ -1,4 +1,4 @@
-package com.titanic.service.review;
+package com.titanic.service.reviewandinquiry;
 
 import java.util.List;
 

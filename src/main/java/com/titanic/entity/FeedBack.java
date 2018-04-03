@@ -18,11 +18,11 @@ public class FeedBack {
 	private String customerName;
 	
 	@Size(min=10, message="Enter a valid mobile!")
-	private String mobile;
+	private String custMobile;
 	
 	@javax.validation.constraints.Email(message="Invalid Email!")
 	@Size(min=8, message="Invalid Email!")
-	private String email;
+	private String custEmail;
 	
 	@Size(min=4, message="Message Should Be Atleast 4 Character!")
 	private String message;
@@ -65,17 +65,17 @@ public class FeedBack {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-	public String getMobile() {
-		return mobile;
+	public String getCustMobile() {
+		return custMobile;
 	}
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setCustMobile(String custMobile) {
+		this.custMobile = custMobile;
 	}
-	public String getEmail() {
-		return email;
+	public String getCustEmail() {
+		return custEmail;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCustEmail(String custEmail) {
+		this.custEmail = custEmail;
 	}
 	public String getMessage() {
 		return message;

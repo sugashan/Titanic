@@ -1,4 +1,4 @@
-package com.titanic.controller.review;
+package com.titanic.controller.reviewandinquiry;
 
 import javax.validation.Valid;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.titanic.entity.FeedBack;
-import com.titanic.service.review.ReviewManagementService;
+import com.titanic.service.reviewandinquiry.ReviewManagementService;
 
 @Controller
 public class ReviewManagementController {
@@ -29,6 +29,7 @@ public class ReviewManagementController {
 		else {
 //			try {
 		//		System.out.println(JsonFormer.form(feedBack));
+				feedBack.setIsReplied(false);
 				rmService.save(feedBack);
 				redirectUrlString = "redirect:/home.do?success=true&msg=Successfully Registered";
 //			} catch (JSONException e) {

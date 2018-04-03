@@ -19,5 +19,6 @@
 		<class>com.titanic.entity.FoodComboPackage</class>
 		<class>com.titanic.entity.PackageMeals</class>
 		<class>com.titanic.entity.FeedBack</class>
+		<class>com.titanic.entity.Inquiry</class>
 	</persistence-unit>
 </persistence>
