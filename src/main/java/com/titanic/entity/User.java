@@ -31,7 +31,7 @@ public class User {
 	@Size(min=5, message="Invalid Email!")
 	private String email;
 	
-	@Size(min=5, message="Invalid UserName!")
+	@Size(min=4, message="Invalid UserName!")
 	@Column(unique = true)
 	@UniqueUserName(message="UserName Already exits!")
 	private String userName;

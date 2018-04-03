@@ -78,22 +78,22 @@
 					<security:csrfInput/>
 				</form>
 
-				<form:form modelAttribute="newUser" action="users/addCustomer.do" enctype="application/x-www-form-urlencoded" method="post" class="cont_form_sign_up" >
+				<form:form modelAttribute="newUser" action="/titanic/users/addCustomer.do" enctype="application/x-www-form-urlencoded" method="post" class="cont_form_sign_up" >
 					<a href="#" onclick="ocultar_login_sign_up()"><i
 						class="material-icons">&#xE5C4;</i></a>
 					<h2>SIGN UP</h2>
-					<form:input type="text" path="email" placeholder="Email" class="emailFiled" /> 
+					<form:input type="text" path="email" placeholder="Email" class="emailFiled" style="height: 25px;" /> 
 					<form:errors path="email"/><br/>
-					<form:input type="text" path="userName" placeholder="UserName" class="textFiled uniqueTextFiled" /> 
+					<form:input type="text" path="userName" placeholder="UserName" class="textFiled uniqueTextFiled" style="height: 25px;"/> 
 					<form:errors path="userName"/><br/>
 					<span id="dublicateUserNameError" style="color:red;"></span>
-					<form:input type="number" path="mobile" placeholder="mobile" class="numberFiled" /> 
+					<form:input type="number" path="mobile" placeholder="mobile" class="numberFiled" style="height: 25px;"/> 
 					<form:errors path="mobile"/><br/>
-					<form:textarea type="text" path="address" placeholder="Address" class=""></form:textarea>
+					<form:textarea type="text" path="address" placeholder="Address" class="" style="height: 25px;"></form:textarea>
 					<form:errors path="address"/><br/>
-					<form:input type="password" path="password" placeholder="Password" class="passwordFiled" /> 
+					<form:input type="password" path="password" placeholder="Password" class="passwordFiled" style="height: 25px;"/> 
 					<form:errors path="password"/><br/>
-					<input type="password" id="conFPassword" placeholder="Confirm Password" class="passwordFiled" /><br/>
+					<input type="password" id="conFPassword" placeholder="Confirm Password" class="passwordFiled" style="height: 25px;"/><br/>
 					<span id="confirmPasswordError" style="color:red;"></span>
 					<button class="btn_sign_up" type="submit">SIGN UP</button>
 				</form:form>

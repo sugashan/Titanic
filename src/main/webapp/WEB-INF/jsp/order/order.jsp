@@ -245,7 +245,7 @@
 //      	      });
 //      	    });
 //   		});
-//   	});
+   	});
   	
 //   	// CHECK UNIQUE USERNAME
 //   	 $('.uniqueTextFiled').on('change', function () {

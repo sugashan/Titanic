@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.titanic.entity.Customer;
 import com.titanic.entity.Orders;
 import com.titanic.respository.OrdersRepository;
 
@@ -41,6 +42,11 @@ public class OrderManagementService {
 	// GET LAST INSERTED ID
 	public String getLastInsertedMealId() {
 		return oRepository.getLastInsertedId();
+	}
+
+	// GET LIST OF ORDERS FOR CUSTOMER
+	public List<Orders> findAllByCustomer(Customer currCustomer) {
+		return oRepository.findByCustomer(currCustomer);
 	}
 
 }

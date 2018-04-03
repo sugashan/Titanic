@@ -4,7 +4,6 @@
 <%@ include file="../../layouts/taglib.jsp" %>
     <%@ include file="../common/commonModals.jsp" %>
 
-    
 	<!-- Header -->
 	<div class="header" id="home">
 		<!--/top-bar-->
@@ -42,25 +41,25 @@
 					<div class="collapse navbar-collapse nav-wil" id="bs-example-navbar-collapse-1">
 						<nav>
 							<ul class="top_nav">
-								<li><a class="scroll" href="#home" class="active">Home</a></li>
-								<li><a class="scroll" href="#about">About Us</a></li>
-								<li><a class="scroll" href="#services">Services</a></li>
+								<li><a class="scroll scrollForNav" href="#home" class="active">Home</a></li>
+								<li><a class="scroll scrollForNav" href="#about">About Us</a></li>
+								<li><a class="scroll scrollForNav" href="#services">Services</a></li>
 								<li class="dropdown menu__item">
 									<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" data-hover="Pages" role="button" aria-haspopup="true"
 									    aria-expanded="false"> Order <span class="fa fa-angle-down"></span></a>
 									<ul class="dropdown-menu">
-										<li><a class="scroll" href="#menu">Menu</a></li>
-										<li><a class="scroll" href="#book">Booking</a></li>
+										<li><a class="scroll scrollForNav" href="#menu">Menu</a></li>
+										<li><a class="scroll scrollForNav" href="#book">Booking</a></li>
 									</ul>
 								</li>
-								<li><a class="scroll" href="#gallery">Gallery</a></li>
-								<li><a class="scroll" href="#mail">Contact</a></li>
+								<li><a class="scroll scrollForNav" href="#gallery">Gallery</a></li>
+								<li><a class="scroll scrollForNav" href="#mail">Contact</a></li>
 <%-- 								<security:authorize access=" !isAuthenticated()"> --%>
-<!-- 								<li><a class="scroll" href='<spring:url value="/titanic/login.do" />'>Login</a></li> -->
+<%-- 								<li><a class="" href='<spring:url value="/login.do" />'>Login</a></li> --%>
 <%-- 								</security:authorize> --%>
 								
 								<!-- User Info -->
-<%-- 								<security:authorize access=" isAuthenticated()"> --%>
+								<security:authorize access=" isAuthenticated()">
 								<li class="dropdown menu__item">
 									<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" data-hover="Pages" role="button" aria-haspopup="true"
 									    aria-expanded="false"> My Account <span class="fa fa-angle-down"></span></a>
@@ -68,10 +67,10 @@
 										<li><a class="scroll" href="#"><i class="fa fa-user"></i> <%= session.getAttribute("LoggerName") %></a></li>
 										<li><a class="" href="#" data-toggle="modal" data-target="#myProfileModal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-address-book"></i> Profile </a></li>
 										<hr/>
-										<li><a class="scroll" href='<c:url value="/logout" />'><i class="fa fa-sign-out"></i> Logout</a></li>
+										<li><a type="button" class="btn" data-target="#confirmLogoutModal" data-toggle="modal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-sign-out"></i> Logout</a></li>
 									</ul>
 								</li>
-<%-- 								</security:authorize> --%>
+								</security:authorize>
 							</ul>
 						</nav>
 					</div>
@@ -762,15 +761,27 @@
 	var mealOrder = {};
 	var foodCart = [];
 		
+	var curUser = "${myProfile.user.userName }";
+	
 		// CUSTOMIZABLE CART SELECTION
 		$(".showCustomCart").click(function(){
-			mealId = $(this).find(".dataholder").attr("data-meal-id");
-			mealName = $(this).find(".dataholder").attr("data-meal-name");
-			mealImage = $(this).find(".img-responsive").attr("src");
-			price = $(this).find(".dataholder").attr("data-meal-price");
-			fillDataToModal();
-			$("#mealQuantity").val("1");
-			$("#myModal").modal("show");
+			if( curUser == null || curUser.trim() == "" || curUser == "undefined"){
+				$("#confModalText").html("You are not logged In.");
+				$("#confModalText").css("background-color", "dodgerblue");
+				$("#confModalbtn").html("Login");
+				$("#confModalbtn").removeClass(" btn-danger").addClass("btn-success");
+				$("#confModalbtn").attr("href" , "/titanic/login.do");
+				$("#confirmModal").modal("show");
+			}
+			else{
+				mealId = $(this).find(".dataholder").attr("data-meal-id");
+				mealName = $(this).find(".dataholder").attr("data-meal-name");
+				mealImage = $(this).find(".img-responsive").attr("src");
+				price = $(this).find(".dataholder").attr("data-meal-price");
+				fillDataToModal();
+				$("#mealQuantity").val("1");
+				$("#myModal").modal("show");
+			}
 		});
 	
 		// FILL DATA'S TO MODAL
@@ -913,6 +924,7 @@
 				$("#orderNow").bootstrapToggle("off");
 			}
  		});
+ 		
 	</script>
 	
 	<script type="text/javascript ">
@@ -993,7 +1005,7 @@
 	<script src="<c:url value="/resources/dist/js/home/easing.js" />"></script>
 	<script type="text/javascript">
 		jQuery(document).ready(function ($) {
-			$(".scroll").click(function (event) {
+			$(".scrollForNav").click(function (event) {
 				event.preventDefault();
 				$('html,body').animate({
 					scrollTop: $(this.hash).offset().top
@@ -1024,6 +1036,10 @@
 			 $("#newFeedBack").validate();
 	    	 validator();
 	    	 reset();
+	    	 
+	    	 $("#confModalbtn").html("Delete");
+			$("#confModalbtn").removeClass("btn-success").addClass("btn-danger");
+			$("#confModalText").css("background-color", "#f39c12");
 	    	 
 		});
 		
