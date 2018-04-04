@@ -12,10 +12,12 @@
 	<http pattern="/resources/**" security="none"/>
 	
 	<http use-expressions="true">
+		<!-- LOGIN LOGOUT HOME URL -->
 		<intercept-url pattern="/login*" access="isAnonymous()" />
-		<intercept-url pattern="/users/addCustomer*" access="isAnonymous()" />
 		<intercept-url pattern="/logout*" access="isAnonymous()"/>
+		<intercept-url pattern="/home*" access="isAnonymous()"/>
 		
+		<!-- ACCESS DENIED URL -->
 		<access-denied-handler error-page="/accessDenied.do"/> 
 		
 		<!-- EMPLOYEE URL -->
@@ -24,13 +26,16 @@
 		
 		<!-- CUSTOMER URL -->
 		<intercept-url pattern="/users/customer**" access="hasAnyRole('ROLE_ADMIN, ROLE_RECEPTIONIST')"/>
-		<intercept-url pattern="/users/singleCustomer**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_DELIVERYBOY', 'ROLE_RECEPTIONIST')"/>
+		<intercept-url pattern="/users/singleCustomer**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER', 'ROLE_RECEPTIONIST')"/>
+		<intercept-url pattern="/users/addCustomer*" access="isAnonymous()" />
 		
 		<!-- MEAL URL -->
 		<intercept-url pattern="/meals/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST')"/>
 		
 		<!-- ORDER URL -->
 		<intercept-url pattern="/orders/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST', 'ROLE_DELIVERYBOY' )"/>
+		<intercept-url pattern="/newOrder" access="isAuthenticated()"/>
+		
 		
 		 <logout
 		      logout-success-url="/login.do"

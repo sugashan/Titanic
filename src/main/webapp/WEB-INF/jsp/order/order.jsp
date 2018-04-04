@@ -81,7 +81,7 @@
 <!--      	 </div> -->
 <!--      	 <div class="alert alert-info">Fill All Blanks And Hit Submit.</div> -->
 <!--         <div class="modal-body"> -->
-<%--     		 <form:form modelAttribute="newOrder" enctype="application/x-www-form-urlencoded" method="post"  > --%>
+<%--     		 <form:form modelAttribute="newDineInORCallOrder" enctype="application/x-www-form-urlencoded" method="post"  > --%>
 <!-- 				  <div class="row"> -->
 <!-- 				    <div class="form-group col-md-6"> -->
 <!-- 				   		 <label for="exampleInputEmail1" Class="difColor">Customer Name :</label> -->

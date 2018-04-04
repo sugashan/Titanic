@@ -1,8 +1,8 @@
 
 // CLEAR FORMS
 function reset(){
-	 $('.form-control').each(function () {
-		 $('.form-control').val('');
+	 $('.toBeReset').each(function () {
+		 $('.toBeReset').val('');
 	 });
 }
 

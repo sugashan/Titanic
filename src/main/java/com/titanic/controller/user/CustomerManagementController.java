@@ -60,21 +60,20 @@ public class CustomerManagementController {
 //					// TODO Auto-generated catch block
 //					e.printStackTrace();
 //				}
-			
 		}
 		return redirectUrlString;
 	}
 	
 	// UPDATE EXITING USER
 	@RequestMapping(value="users/customer-detail/{id}", method=RequestMethod.POST)
-	public String updateCustomer(@Valid @ModelAttribute("currentLoggedCustomer") Customer customer, BindingResult errors, @PathVariable int id, Model model) {
+	public String updateCustomer(@Valid @ModelAttribute("currentCustomer") Customer customer, BindingResult errors, @PathVariable int id, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
 			redirectUrlString = "home";
 		}
 		else {
-		model.addAttribute("singleCustomer", cmService.update(customer, id));
-		redirectUrlString = "redirect:/users/customer-detail.do?success=true&msg=Successfully Updated";
+			model.addAttribute("singleCustomer", cmService.update(customer, id));
+			redirectUrlString = "redirect:/home.do?success=true&msg=Successfully Updated";
 		}
 		return redirectUrlString;
 	}

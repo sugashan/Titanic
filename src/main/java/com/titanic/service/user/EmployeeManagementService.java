@@ -6,6 +6,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.titanic.entity.Customer;
 import com.titanic.entity.Employee;
 import com.titanic.entity.User;
 import com.titanic.respository.EmployeeRepository;
@@ -22,6 +24,9 @@ public class EmployeeManagementService {
 	
 	@Autowired
 	private UserCommonService ucService;
+	
+	@Autowired
+	private CustomerManagementService cmService;
 	
 	
 	// GET ALL EMPLOYEE AS LIST
@@ -41,6 +46,11 @@ public class EmployeeManagementService {
 		User resultUser = uRepository.save(employee.getUser());
 		if(resultUser!= null)
 		eRepository.save(employee);
+		
+		// ADDING A EMPLOYEE AS CUSTOMER
+		Customer newCustomer = new Customer();
+		newCustomer.setUser(employee.getUser());
+		cmService.save(newCustomer);
 	}
 
 	// DELETE A EMPLOYEE

@@ -66,4 +66,9 @@ public class CustomerManagementService {
 	public Customer findOneByName(String name) {
 		return cRepository.findByUser(ucService.findOneByUserName(name));
 	}
+	
+	// GET CUSTOMER WITH USER
+	public Customer findOneByUser(User currLogger) {
+		return cRepository.findByUser(currLogger);
+	}
 }

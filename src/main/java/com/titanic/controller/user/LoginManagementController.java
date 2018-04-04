@@ -82,20 +82,20 @@ public class LoginManagementController {
     public Employee myself(String name) {
     	Employee currUser = new Employee();
     	currUser = emService.findOneByName(name);
-		 return currUser;
+		return currUser;
     }
     
     // GET MYSELF USER
     @RequestMapping("/now")
     public Map<String, String> getNowDate() throws JSONException {
-   	 Calendar nowCal = Calendar.getInstance();
-   	 
-   	 SimpleDateFormat sfD = new SimpleDateFormat("yyyy-MM-dd");
-   	 SimpleDateFormat sfT = new SimpleDateFormat("hh:mm:ss");
-   	 
-   	 Map<String,String> resultMap = new HashMap<String, String>();
-   	 resultMap.put("today", sfD.format(nowCal.getTime()));
-   	 resultMap.put("currentTime", sfT.format(nowCal.getTime()));
+	   	 Calendar nowCal = Calendar.getInstance();
+	   	 
+	   	 SimpleDateFormat sfD = new SimpleDateFormat("yyyy-MM-dd");
+	   	 SimpleDateFormat sfT = new SimpleDateFormat("hh:mm:ss");
+	   	 
+	   	 Map<String,String> resultMap = new HashMap<String, String>();
+	   	 resultMap.put("today", sfD.format(nowCal.getTime()));
+	   	 resultMap.put("currentTime", sfT.format(nowCal.getTime()));
    	 
        return resultMap; 
     }

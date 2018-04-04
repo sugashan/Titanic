@@ -6,17 +6,33 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.titanic.entity.Customer;
 import com.titanic.entity.Orders;
+import com.titanic.other.TitanicMessageConstant;
+import com.titanic.respository.DeliveryTypeOrderRepository;
+import com.titanic.respository.OrderFoodRepository;
 import com.titanic.respository.OrdersRepository;
+import com.titanic.respository.PaymentRepository;
+import com.titanic.respository.PickUpTypeOrderRepository;
 
 @Service
 public class OrderManagementService {
 	
 	@Autowired
 	private OrdersRepository oRepository;
-
+	
+	@Autowired
+	private PickUpTypeOrderRepository ptoRepository;
+	
+	@Autowired
+	private DeliveryTypeOrderRepository dtoRepository;
+	
+	@Autowired
+	private OrderFoodRepository ofRepository;
+	
+	@Autowired
+	private PaymentRepository pRepository;
+	
 	// GET ALL ORDERS AS LIST
 	public List<Orders> findAll() {
 		return oRepository.findAll();
@@ -29,8 +45,20 @@ public class OrderManagementService {
 
 	// SAVE NEW ORDER
 	public void save(@Valid Orders order) {
-		// Check delivery type and add those relavent detail into table, payments??
+		String orderType = order.getDeliveryType().toString();
+		System.out.println(orderType);
+		if( orderType == TitanicMessageConstant.PICK_UP_ORDER) {
+			System.out.println("-----------------------");
+			
+		}
+		else if(orderType == TitanicMessageConstant.DELIVERY_ORDER) {
+			
+		}
+		ptoRepository.save(order.getPickUpOrder());
+		dtoRepository.save(order.getDeliveryOrder());
+		pRepository.save(order.getPayment());
 		oRepository.save(order);
+		ofRepository.saveAll(order.getFoodOrder());
 	}
 	
 	// UPDATE A ORDER
@@ -45,7 +73,7 @@ public class OrderManagementService {
 	}
 
 	// GET LIST OF ORDERS FOR CUSTOMER
-	public List<Orders> findAllByCustomer(Customer currCustomer) {
+	public Object findAllByCustomer(Customer currCustomer) {
 		return oRepository.findByCustomer(currCustomer);
 	}
 

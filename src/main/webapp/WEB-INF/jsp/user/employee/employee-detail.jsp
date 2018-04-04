@@ -87,7 +87,7 @@
 			  	<div class = "row">
 				  	<div class = "col-md-12">
 				  	<label for="exampleInputEmail1">Address :</label>
-				  		<form:textarea path = "user.address" class="form-control" row = "3" name="Address" placeholder="address" value="${singleEmployee.user.address}"/>
+				  		<form:input path = "user.address" class="form-control" row = "3" name="Address" placeholder="address" value="${singleEmployee.user.address}"/>
 				  		<span style="color:red;"><form:errors path="user.address"/></span>
 				  	</div>
 			  	</div>

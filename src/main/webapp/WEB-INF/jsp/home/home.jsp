@@ -3,6 +3,7 @@
 
 <%@ include file="../../layouts/taglib.jsp" %>
     <%@ include file="../common/commonModals.jsp" %>
+     <%@ include file="homeModal.jsp" %>
 
 	<!-- Header -->
 	<div class="header" id="home">
@@ -56,7 +57,7 @@
 								<li><a class="scroll scrollForNav" href="#mail">Contact</a></li>
 								
 								<!-- User Info -->
-<%-- 								<security:authorize access=" isAuthenticated()"> --%>
+								<security:authorize access=" isAuthenticated()">
 								<li class="dropdown menu__item">
 									<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" data-hover="Pages" role="button" aria-haspopup="true"
 									    aria-expanded="false"> My Account <span class="fa fa-angle-down"></span></a>
@@ -67,7 +68,7 @@
 										<li><a type="button" class="btn" data-target="#confirmLogoutModal" data-toggle="modal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-sign-out"></i> Logout</a></li>
 									</ul>
 								</li>
-<%-- 								</security:authorize> --%>
+								</security:authorize>
 							</ul>
 						</nav>
 					</div>
@@ -453,17 +454,17 @@
 			<form action="#" method="post">
 				<div class="col-md-4 form-time">
 					<label><i class="fa fa-clock-o" aria-hidden="true"></i></label>
-					<input type="text" id="timepicker" name="Time" placeholder="Time" class="timepicker form-control hasWickedpicker" value="Time"
+					<input type="text" id="timepicker" name="Time" placeholder="Time" class="timepicker  form-control hasWickedpicker" value="Time"
 					    onkeypress="return false;" required="required">
 				</div>
 				<div class="col-md-4 form-date">
 					<label><i class="fa fa-calendar" aria-hidden="true"></i> </label>
-					<input id="datepicker1" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}"
+					<input id="datepicker1" name="Text" class="" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}"
 					    required="required">
 				</div>
 				<div class="col-md-4 form-left">
 					<label><i class="fa fa-users" aria-hidden="true"></i></label>
-					<select class="form-control">
+					<select class="form-control " >
 								<option>No.of People</option>
 								<option>1 Person</option>
 								<option>2 People</option>
@@ -759,12 +760,10 @@
 	var foodCart = [];
 		
 	var curUser = "${myProfile.user.userName }";
-	
 		// CUSTOMIZABLE CART SELECTION
 		$(".showCustomCart").click(function(){
 			if( curUser == null || curUser.trim() == "" || curUser == "undefined"){
-				$("#confModalText").html("You are not logged In.");
-				$("#confModalText").css("background-color", "dodgerblue");
+				$("#confModalText").html("Please login to order.");
 				$("#confModalbtn").html("Login");
 				$("#confModalbtn").removeClass(" btn-danger").addClass("btn-success");
 				$("#confModalbtn").attr("href" , "/titanic/login.do");
@@ -797,7 +796,6 @@
 			 mealOrder.customizedFoodMsg = $("#mealCustomizeInfo").val();
 			 mealOrder.mealId = mealId;
 			 mealOrder.mealName = mealName;
-			 
 			 totalPrice = totalPrice + price* mealOrder.quantity;
 			 foodCart.push(mealOrder);
 			 tablingOrder();
@@ -806,11 +804,6 @@
 			 $("#mealCustomizeInfo").val("");
 			 
 			 $("#myModal").modal("hide");
-		}
-		
-		// SHOW CART MODAL
-		function showSubmitCart(){
-			$("#myCartModal").modal("show");
 		}
 		
 		// TABLE ORDER
@@ -855,6 +848,32 @@
 			}
 		}
 		
+		// DIRECT PAYMENT DETAIL
+		function directPayment(){
+			
+			var mealString = JSON.stringify(foodCart);
+			$("#foodOrderString").val(mealString);
+			$(".totalAmount").val(totalPrice);
+			var orderType = $("#pills-tab-order li.active").attr("data-order-type");
+			alert(orderType)
+			if(orderType == "PickUp"){
+				alert(1);
+				 $('.pickUp').each(function () {
+					 $('.pickUp').val('');
+				 });
+			}
+			else if(orderType == "Delivery"){
+				 $('.delivery').each(function () {
+					 $('.delivery').val('');
+				 });
+			}
+			
+			$("#deliveryType").val(orderType);
+			
+			$(".orderCartInfo").css("display", "none");
+			$(".orderPaymentInfo").css("display", "block");
+		}
+		
 		// CLEAR FIELDS
 		function resetCustom(){
 			mealId = "";
@@ -873,14 +892,8 @@
 			 });
 		}
 		
-		// DIRECT PAYMENT DETAIL
-		function directPayment(){
-			$(".orderCartInfo").css("display", "none");
-			$(".orderPaymentInfo").css("display", "block");
-		}
-		
 		// CONTROL TOGGLE SWTICH
-		$("#orderNow").change(function(){
+		$("#pickupNow").change(function(){
 			var today = new Date();
 			var dd = today.getDate();
 			var mm = today.getMonth()+1; //January is 0!
@@ -904,16 +917,17 @@
 			
 			var todayDate = mm+'/'+dd+'/'+yyyy;
 			var todayTime = hour+':'+min+' '+ampm;
-			$(".timepickerforPickUp").val(todayTime);
-			$(".datepickerforPickUp").attr("type", "text");
-			$(".datepickerforPickUp").val(todayDate);
-			
-			if($("#orderLater").prop('checked') == true){
-				$("#orderLater").bootstrapToggle("off");
+			if($("#pickupNow").prop('checked') == true){
+				$(".timepickerforPickUp").val(todayTime);
+				$(".datepickerforPickUp").attr("type", "text");
+				$(".datepickerforPickUp").val(todayDate);
+			}
+			if($("#pickupLater").prop('checked') == true){
+				$("#pickupLater").bootstrapToggle("off");
 			}
 		});
 		
- 		$("#orderLater").change(function(){
+		$("#pickupLater").change(function(){
  			$(".datepickerforPickUp").attr("type", "date");
  			$(".timepickerforPickUp").val("");
 			$(".datepickerforPickUp").val("");
@@ -921,6 +935,51 @@
 				$("#orderNow").bootstrapToggle("off");
 			}
  		});
+		
+		// DELIVERY
+		$("#deliverNow").change(function(){
+			var today = new Date();
+			var dd = today.getDate();
+			var mm = today.getMonth()+1; //January is 0!
+			var yyyy = today.getFullYear();
+			var hour = today.getHours();
+			var min = today.getMinutes();
+			var ampm = "AM";
+			
+			if(dd<10){
+			    dd='0'+dd;
+			} 
+			if(mm<10){
+			    mm='0'+mm;
+			} 
+			if(hour>12){
+				ampm = "PM"
+			}
+			if(min<10){
+				min='0'+min;
+			}
+			
+			var todayDate = mm+'/'+dd+'/'+yyyy;
+			var todayTime = hour+':'+min+' '+ampm;
+			if($("#deliverNow").prop('checked') == true){
+				$(".timepickerfordelivery").val(todayTime);
+				$(".datepickerfordelivery").attr("type", "text");
+				$(".datepickerfordelivery").val(todayDate);
+			}
+			if($("#deliverLater").prop('checked') == true){
+				$("#deliverLater").bootstrapToggle("off");
+			}
+		});
+		
+		$("#deliverLater").change(function(){
+ 			$(".datepickerfordelivery").attr("type", "date");
+ 			$(".timepickerfordelivery").val("");
+			$(".datepickerfordelivery").val("");
+ 			if($("#deliverNow").prop('checked') == true){
+				$("#deliverNow").bootstrapToggle("off");
+			}
+ 		});
+ 		
  		
 	</script>
 	
@@ -1031,10 +1090,9 @@
 			
 			// Validator
 			 $("#newFeedBack").validate();
-			$("#currentLoggedCustomer").validate();
+			$("#currentCustomer").validate();
 	    	 $("#newInquiry").validate();
 	    	 validator();
-	    	 reset();
 	    	 
 	    	 $("#confModalbtn").html("Delete");
 			$("#confModalbtn").removeClass("btn-success").addClass("btn-danger");
@@ -1047,7 +1105,7 @@
 	<!-- Top Hover button -->
 	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 	<!-- Cart Btn button -->
-	<a class="btn" id="toCart" onclick="showSubmitCart();" style="display: none;"><span style="opacity: 2;"> </span></a>
+	<a type="button" class="btn" data-target="#myCartModal" data-toggle="modal" data-backdrop="static" data-keyboard="false" id="toCart" style="display: none;"><span style="opacity: 2;"> </span></a>
 	
 	<script src="<c:url value="/resources/bootstrap/js/bootstrap.min.js" />"></script>
 	<script src="<c:url value="/resources/common/js/bootstrap-toggle.min.js" />"></script>

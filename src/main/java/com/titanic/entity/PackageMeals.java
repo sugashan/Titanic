@@ -16,7 +16,7 @@ public class PackageMeals {
 		private int id;
 		
 		@NotNull(message="Food Type Can Not Be Empty!")
-		private String mealId;
+		private int mealId;
 		
 		@NotNull(message="Food Type Can Not Be Empty!")
 		private String mealName;
@@ -28,10 +28,10 @@ public class PackageMeals {
 		@JoinColumn(name="fcpkg_id")		
 		private FoodComboPackage fcpkg;
 		
-		public String getMealId() {
+		public int getMealId() {
 			return mealId;
 		}
-		public void setMealId(String mealId) {
+		public void setMealId(int mealId) {
 			this.mealId = mealId;
 		}
 		public String getMealName() {

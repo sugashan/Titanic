@@ -83,7 +83,7 @@ public class FoodComboPackageManagementController {
             Files.copy(filePart.getInputStream(), file.toPath());
            
             fcp.setImage("/titanic/resources/uploads/combo/" + fileName);
-            fcp.setCode(UniqueIdManager.getUniqueCode("Cmp"));
+            fcp.setCode(UniqueIdManager.getUniqueCode("Cmp", 4));
 			fcpSerice.save(fcp);
 			redirectUrlString = "success";; 
 		} catch (Exception e) {

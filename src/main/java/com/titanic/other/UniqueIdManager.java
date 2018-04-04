@@ -13,8 +13,8 @@ public class UniqueIdManager {
 	}
 	
 	// GENERATE UNIQUE CODE
-	public static String getUniqueCode(String prefix) {
-		return "T-" + prefix + "-" + getRandom(4);
+	public static String getUniqueCode(String prefix, int count) {
+		return "T-" + prefix + "-" + getRandom(count);
 	}
 
 }

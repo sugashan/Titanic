@@ -2,16 +2,19 @@ package com.titanic.service;
 
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.titanic.entity.Branch;
+import com.titanic.entity.Customer;
 import com.titanic.entity.Employee;
 import com.titanic.entity.FoodType;
 import com.titanic.entity.Meal;
 import com.titanic.entity.Role;
 import com.titanic.entity.User;
 import com.titanic.respository.BranchRepository;
+import com.titanic.respository.CustomerRepository;
 import com.titanic.respository.EmployeeRepository;
 import com.titanic.respository.FoodTypeRepository;
 import com.titanic.respository.MealRepository;
@@ -39,6 +42,9 @@ public class InitDbService {
 	
 	@Autowired
 	private MealRepository mRepo;
+	
+	@Autowired
+	private CustomerRepository cRepo;
 
 	@PostConstruct
 	public void Init() {
@@ -132,6 +138,21 @@ public class InitDbService {
 		newEmployee.setBranch(defaultBranch);
 		eRepo.save(newEmployee);
 		
+		User newUser2 = new User();
+		newUser2.setEnabled(true);
+		newUser2.setId(2);
+		newUser2.setName("Sugash");
+		newUser2.setMobile("077-3284455");
+		newUser2.setUserName("sugash");
+		newUser2.setPassword(encoder.encode("sugash"));
+		newUser2.setAddress("Alvai, East");
+		newUser2.setRole(customerRole);
+		urepo.save(newUser2);
+		
+		Customer newCustomer = new Customer();
+		newCustomer.setId(1);
+		newCustomer.setUser(newUser2);
+		cRepo.save(newCustomer);
 	}
 
 }

@@ -3,10 +3,12 @@ package com.titanic.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -27,8 +29,7 @@ public class Orders {
 	@OneToOne
 	private Payment payment;
 	
-	@OneToOne
-	private Branch outletBranch;
+	private String outletBranch;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date orderedOn;
@@ -38,25 +39,26 @@ public class Orders {
 	@OneToOne
 	private Customer customer;
 	
-	@OneToOne
-	private Employee cook;
-	
 	private String deliveryType;
 	
-	@OneToMany
+	@OneToMany(mappedBy="order", cascade=CascadeType.REMOVE)
 	private List<FoodOrder> foodOrder;
 	
 	@OneToOne
-	private DeliveryOrder deliveryTypeorder;
+	@JoinColumn(name="delivery_id")
+	private DeliveryOrder deliveryOrder;
 	
 	@OneToOne
+	@JoinColumn(name="pickUp_id")
 	private PickUpDeskOrder pickUpOrder;
 	
 	private String expectedOrderTime; 
 	
+	private String foodOrderString;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date deliveredTime;
-	
+
 	
 	// ORDERED-ON & DELIVERED TIME ON SERVER TIMESTAMP
 	@PrePersist
@@ -71,9 +73,18 @@ public class Orders {
 
 	
 	// GETTER SETTER
+	
 	public Date getDeliveredTime() {
 		return deliveredTime;
 	}
+	public String getFoodOrderString() {
+		return foodOrderString;
+	}
+
+	public void setFoodOrderString(String foodOrderString) {
+		this.foodOrderString = foodOrderString;
+	}
+
 	public void setDeliveredTime(Date deliveredTime) {
 		this.deliveredTime = deliveredTime;
 	}
@@ -82,12 +93,6 @@ public class Orders {
 	}
 	public void setExpectedOrderTime(String expectedOrderTime) {
 		this.expectedOrderTime = expectedOrderTime;
-	}
-	public PickUpDeskOrder getPickUpOrder() {
-		return pickUpOrder;
-	}
-	public void setPickUpOrder(PickUpDeskOrder pickUpOrder) {
-		this.pickUpOrder = pickUpOrder;
 	}
 	public int getId() {
 		return id;
@@ -113,10 +118,10 @@ public class Orders {
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
-	public Branch getOutletBranch() {
+	public String getOutletBranch() {
 		return outletBranch;
 	}
-	public void setOutletBranch(Branch outletBranch) {
+	public void setOutletBranch(String outletBranch) {
 		this.outletBranch = outletBranch;
 	}
 	public Date getOrderedOn() {
@@ -137,12 +142,6 @@ public class Orders {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	public Employee getCook() {
-		return cook;
-	}
-	public void setCook(Employee cook) {
-		this.cook = cook;
-	}
 	public List<FoodOrder> getFoodOrder() {
 		return foodOrder;
 	}
@@ -155,11 +154,19 @@ public class Orders {
 	public void setDeliveryType(String deliveryType) {
 		this.deliveryType = deliveryType;
 	}
-	public DeliveryOrder getDeliveryTypeorder() {
-		return deliveryTypeorder;
+	public DeliveryOrder getDeliveryOrder() {
+		return deliveryOrder;
 	}
-	public void setDeliveryTypeorder(DeliveryOrder deliveryTypeorder) {
-		this.deliveryTypeorder = deliveryTypeorder;
+
+	public void setDeliveryOrder(DeliveryOrder deliveryOrder) {
+		this.deliveryOrder = deliveryOrder;
+	}
+
+	public PickUpDeskOrder getPickUpOrder() {
+		return pickUpOrder;
+	}
+	public void setPickUpOrder(PickUpDeskOrder pickUpOrder) {
+		this.pickUpOrder = pickUpOrder;
 	}
 	
 }

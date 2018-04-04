@@ -1,13 +1,9 @@
 package com.titanic.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -20,18 +16,40 @@ public class DeliveryOrder {
 	private String deliveryDate;
 	private String deliveryTime;
 	
+	@OneToOne
+	private Orders order;
 	
-	@OneToMany(cascade=CascadeType.REMOVE)
-	private List<Orders> order;
-	
+	private String recieverCustName;
 	private String deliveryAddress;
+	private String houseNumber;
+	private String refMobile;
+	
 	private Boolean deliveryStatus;
 	
+	// DELIVERY BOY
 	@OneToOne
 	private Employee employee;
 	
 	
-
+	
+	public String getRecieverCustName() {
+		return recieverCustName;
+	}
+	public void setRecieverCustName(String recieverCustName) {
+		this.recieverCustName = recieverCustName;
+	}
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
+	}
+	public String getRefMobile() {
+		return refMobile;
+	}
+	public void setRefMobile(String refMobile) {
+		this.refMobile = refMobile;
+	}
 	public String getDeliveryTime() {
 		return deliveryTime;
 	}
@@ -56,10 +74,10 @@ public class DeliveryOrder {
 	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
-	public List<Orders> getOrder() {
+	public Orders getOrder() {
 		return order;
 	}
-	public void setOrder(List<Orders> order) {
+	public void setOrder(Orders order) {
 		this.order = order;
 	}
 	public String getDeliveryAddress() {
