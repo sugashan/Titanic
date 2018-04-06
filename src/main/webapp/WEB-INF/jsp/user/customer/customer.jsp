@@ -37,7 +37,7 @@
 					</thead>
 
 					<tbody>
-						<c:forEach items="${customer}" var="cust">
+						<c:forEach items="${customers}" var="cust">
 							<tr>
 								<td><a class="btn" href='<spring:url value="singleCustomer/${cust.user.id}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
@@ -45,10 +45,10 @@
 									href='<spring:url value="deleteCustomer/${cust.user.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a><c:out value=" ${emp.user.id}"/></td>
-								<td><a class="btn" href='<spring:url value="singleCustomer/${cust.user.id}.do" />'><c:out value="${emp.user.name}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singleCustomer/${cust.user.id}.do" />'><c:out value="${emp.user.mobile}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singleCustomer/${cust.user.id}.do" />'><c:out value="${emp.branch.name}"/></a></td>
-								<td><a class="btn" href='<spring:url value="singleCustomer/${cust.user.id}.do" />'><c:out value="${emp.user.address}"/></a></td>
+								<td><a class="btn" href='<spring:url value="singleCustomer/${cust.user.id}.do" />'><c:out value="${cust.user.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="singleCustomer/${cust.user.id}.do" />'><c:out value="${cust.user.mobile}"/></a></td>
+								<td><a class="btn" href='<spring:url value="singleCustomer/${cust.user.id}.do" />'><c:out value="${cust.codeBasedCity}"/></a></td>
+								<td><a class="btn" href='<spring:url value="singleCustomer/${cust.user.id}.do" />'><c:out value="${cust.user.address}"/></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

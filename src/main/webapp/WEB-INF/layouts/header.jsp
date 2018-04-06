@@ -32,7 +32,7 @@
                 <!-- inner menu: contains the messages -->
                 <ul class="menu">
                   <li><!-- start message -->
-                    <a href="#">
+                    <a href="#"></a>
                       <div class="pull-left">
                         <!-- User Image -->
                         <img src="<c:url value="/resources/dist/img/user2-160x160.jpg" />" class="img-circle" alt="User Image">
@@ -44,7 +44,7 @@
                       </h4>
                       <!-- The message -->
                       <p>Why not buy a new awesome theme?</p>
-                    </a>
+                    
                   </li>
                   <!-- end message -->
                 </ul>
@@ -91,7 +91,7 @@
                 <!-- Inner menu: contains the tasks -->
                 <ul class="menu">
                   <li><!-- Task item -->
-                    <a href="#">
+                    <a href="#"></a>
                       <!-- Task title and progress text -->
                       <h3>
                         Design some buttons
@@ -104,7 +104,6 @@
                           <span class="sr-only">20% Complete</span>
                         </div>
                       </div>
-                    </a>
                   </li>
                   <!-- end task item -->
                 </ul>

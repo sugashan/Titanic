@@ -64,7 +64,7 @@
 									<ul class="dropdown-menu">
 										<li><a class="scroll" href="#"><i class="fa fa-user"></i> <%= session.getAttribute("LoggerName") %></a></li>
 										<li><a class="" href="#" data-toggle="modal" data-target="#myProfileModal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-address-book"></i> Profile </a></li>
-										<hr>
+										<!-- <hr> -->
 										<li><a type="button" class="btn" data-target="#confirmLogoutModal" data-toggle="modal" data-backdrop="static" data-keyboard="false" ><i class="fa fa-sign-out"></i> Logout</a></li>
 									</ul>
 								</li>
@@ -213,11 +213,11 @@
 						<div class="gallery-top-img portfolio-grids">
 							<a href="<c:out value="${meal.imageUrl}" />" class="b-link-stripe b-animate-go lightninBox" data-lb-group="1">
 								<img src="<c:out value="${meal.imageUrl}" />" class="img-responsive" alt="" />
-								<div class="p-mask">
-									<h4><span>${meal.name}</span></h4>
-									<p>${meal.description}</p>
-								</div>
 							</a>
+							<div class="p-mask">
+								<h4><span>${meal.name}</span></h4>
+								<p>${meal.description}</p>
+							</div>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -329,7 +329,7 @@
 												<img src='<c:out value="${dinnerMeal.imageUrl}"/>' alt=" " class="img-responsive">
 											</div>
 											<div class="rep-text">
-												<h4><c:out value="${dinnerMeal.name}"/></h4>
+												<h4><span class="dataholder" data-meal-id="${dinnerMeal.id}" data-meal-name="${dinnerMeal.name}" data-meal-price="${dinnerMeal.price}"><c:out value="${dinnerMeal.name}"/></span></h4>
 												<h6>Incrediants - <c:out value="${dinnerMeal.incrediants}"/></h6>
 											</div>
 	
@@ -359,7 +359,7 @@
 												<img src='<c:out value="${anyTimeMeal.imageUrl}"/>' alt=" " class="img-responsive">
 											</div>
 											<div class="rep-text">
-												<h4><c:out value="${anyTimeMeal.name}"/></h4>
+												<h4><span class="dataholder" data-meal-id="${anyTimeMeal.id}" data-meal-name="${anyTimeMeal.name}" data-meal-price="${anyTimeMeal.price}"><c:out value="${anyTimeMeal.name}"/></span></h4>
 												<h6>Incrediants - <c:out value="${anyTimeMeal.incrediants}"/></h6>
 											</div>
 	
@@ -414,7 +414,7 @@
 					</div>
 					<div class="col-md-6 choose-right-top">
 						<span class="fa fa-gift" aria-hidden="true" style="font-size:50px; color: #ffa41f; padding-bottom: 15px"></span>
-						<h4>Special Offers & Combo</h4>
+						<h4>Special Offers And Combo</h4>
 						<p>The following restaurants have teamed up with Restaurants Of titanic to offer you some fantastic savings, sample menus, exclusive promotions and special offers. .</p>
 					</div>
 					<div class="clearfix"></div>

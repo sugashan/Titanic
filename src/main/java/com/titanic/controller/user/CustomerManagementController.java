@@ -31,7 +31,7 @@ public class CustomerManagementController {
 	// GET ALL CUSTOMERS
 	@RequestMapping("/users/customer")
 	public String customer(Model model) {
-		model.addAttribute("customer", cmService.findAll());
+		model.addAttribute("customers", cmService.findAll());
 		return "customer";
 	}
 	

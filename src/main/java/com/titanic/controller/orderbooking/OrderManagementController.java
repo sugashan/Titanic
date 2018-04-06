@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.titanic.entity.FoodOrder;
 import com.titanic.entity.Orders;
+import com.titanic.other.GenericResult;
+import com.titanic.other.JsonFormer;
 import com.titanic.other.TitanicMessageConstant;
 import com.titanic.other.UniqueIdManager;
 import com.titanic.service.food.MealManagementService;
@@ -48,13 +50,32 @@ public class OrderManagementController {
 		return new Orders();
 	}
 
+	
 	// GET ALL ORDERS
 	@RequestMapping("orders/order")
 	public String order(Model model) {
-		
 		model.addAttribute("meals", mmService.findAll());
 		model.addAttribute("orders", omService.findAll());
 		return "order";
+	}
+	
+	// GET ALL ORDERS AS STRING
+	@RequestMapping("orders/allOrders")
+	@ResponseBody
+	public String orderString(Model model) {
+		
+		try {
+			redirectUrlString = JsonFormer.form(new GenericResult("Success", omService.findAll()));
+		} catch (Exception e) {
+			try {
+				redirectUrlString = JsonFormer.form(new GenericResult("Failed",""));
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		return redirectUrlString;
 	}
 	
 	// SINGLE VIEW ORDER

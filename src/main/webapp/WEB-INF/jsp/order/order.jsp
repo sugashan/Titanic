@@ -12,7 +12,7 @@
 	<input type = "button" data-target="#add-order" data-toggle="modal" data-backdrop="static" data-keyboard="false" class="btn btn-success" value = "Add New"/>
 		<div class="box">
 			<div class="box-header">
-				<h3 class="box-title">Employee</h3>
+				<h3 class="box-title">Orders</h3>
        		 	 <c:if test="${param.success eq true}">
                  <div class="alert alert-success alertMsg" style = "margin-top:15px; padding:5px;">${param.msg}</div>
                  </c:if>
@@ -48,7 +48,22 @@
 								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderedOn}"/></a></td>
 								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderType}"/></a></td>
 								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.branch.name}"/></a></td>
-								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderStatus}"/></a></td>
+								<c:if test="${order.orderStatus eq Accepted}">
+									<td style="color:blue;"><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderStatus}"/></a></td>
+								</c:if>
+								<c:if test="${order.orderStatus eq Rejected}">
+									<td style="color:red;"><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderStatus}"/></a></td>
+								</c:if>
+								<c:if test="${order.orderStatus eq Delivered}">
+									<td style="color:green;"><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderStatus}"/></a></td>
+								</c:if>
+								<c:if test="${order.orderStatus eq Paid}">
+									<td style="color:black;"><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderStatus}"/></a></td>
+								</c:if>
+								<c:if test="${order.orderStatus eq Cancel}">
+									<td style="color:warning;"><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderStatus}"/></a></td>
+								</c:if>
+								
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -344,8 +359,46 @@
 
 
   <script type="text/javascript">
-  	$(document).ready(function(){  		
-  		
+  
+   // PRINT ORDER TABLE
+   function createTable(){
+		 $.get('http://localhost:8080/titanic/orders/allOrders.do', 
+	             function(data){
+			 		console.log(data);
+		  }, 'json');
+	}
+  
+   	// CHECK USER FOR MOBILE
+	$('.custCheckMobile').on('change', function () {
+        $.get('http://localhost:8080/titanic/users/CustomerWithMobile.do?mobile=' +$(this).val(), 
+            function(data){
+                if(data.message == "success"){
+              	  $(".custName").val(data.result.name);
+              	  $(".custAddress").val(data.result.address);
+              	  $(".custMobile").val(data.result.mobile);
+                }
+          }, 'json');
+    });
+ 	
+	
+	// DIRECT TO DELIVERY INFO
+	function directDelivery(){
+		alert(1);
+		$(".orderCartInfo").css("display", "none");
+		$(".orderDeliveryInfo").css("display", "block");
+	}
+	
+	// DIRECT TO PAYMENT INFO
+	function directPayment(){
+		$(".orderDeliveryInfo").css("display", "none");
+		$(".orderCartInfo").css("display", "none");
+		$(".orderPaymentInfo").css("display", "block");
+	}
+	
+	
+	$(document).ready(function(){  		
+		createTable();
+		
     	 $('#orderTable').DataTable({
 		      "paging": true,
 		      "lengthChange": true,
@@ -368,30 +421,4 @@
     	 
    	});
   	
-	   	// CHECK USER FOR MOBILE
-  	 	$('.custCheckMobile').on('change', function () {
-		   $.get('http://localhost:8080/titanic/users/CustomerWithMobile.do?mobile=' +$(this).val(), 
-              function(data){
-                  if(data.message == "success"){
-                	  $(".custName").val(data.result.name);
-                	   $(".custAddress").val(data.result.address);
-                	    $(".custMobile").val(data.result.mobile);
-                  }
-              }, 'json');
-	    });
-  	
-		
-		// DIRECT TO DELIVERY INFO
-		function directDelivery(){
-			alert(1);
-			$(".orderCartInfo").css("display", "none");
-			$(".orderDeliveryInfo").css("display", "block");
-		}
-		
-		// DIRECT TO PAYMENT INFO
-		function directPayment(){
-			$(".orderDeliveryInfo").css("display", "none");
-			$(".orderCartInfo").css("display", "none");
-			$(".orderPaymentInfo").css("display", "block");
-		}
   	</script>
