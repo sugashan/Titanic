@@ -23,7 +23,7 @@
 			</div>
 			<!-- /.box-header -->
 			<div class="box-body">
-				<table id="employeeTable" class="table table-bordered table-striped">
+				<table id="orderTable" class="table table-bordered table-striped">
 					<thead>
 						<tr>
 							<th></th>
@@ -46,7 +46,7 @@
 								</a> <c:out value="${order.orderCode}"/></td>
 								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.customer.user.name}"/></a></td>
 								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderedOn}"/></a></td>
-								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.deliveryType}"/></a></td>
+								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderType}"/></a></td>
 								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.branch.name}"/></a></td>
 								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderStatus}"/></a></td>
 							</tr>
@@ -72,204 +72,326 @@
 </div>
 
 <!-- New Order modal -->
-<!--   <div class="modal fade" id="add-order" role="dialog"> -->
-<!--     <div class="modal-dialog"> -->
-<!--       Modal content -->
-<!--       <div class="modal-content"> -->
-<!--       	<div class="modal-header"> -->
-<!--         	<h4 class="modal-title" style="text-align: center;"><b>Add New Order</b></h4> -->
-<!--      	 </div> -->
-<!--      	 <div class="alert alert-info">Fill All Blanks And Hit Submit.</div> -->
-<!--         <div class="modal-body"> -->
-<%--     		 <form:form modelAttribute="newDineInORCallOrder" enctype="application/x-www-form-urlencoded" method="post"  > --%>
-<!-- 				  <div class="row"> -->
-<!-- 				    <div class="form-group col-md-6"> -->
-<!-- 				   		 <label for="exampleInputEmail1" Class="difColor">Customer Name :</label> -->
-<%-- 				    	 <form:input path="customer.user.name" cssClass="form-control textFiled"/> --%>
-<%-- 				    	  <span style="color:red;"><form:errors path="customer.user.name" type="text"/></span> --%>
-<!-- 				    </div> -->
-<!-- 				     <div class="form-group col-md-6"> -->
-<!-- 				   		 <label for="exampleInputEmail1" Class="difColor">Customer Mobile :</label> -->
-<%-- 				    	 <form:input path="customer.user.mobile" cssClass="form-control textFiled"/> --%>
-<%-- 				    	  <span style="color:red;"><form:errors path="customer.user.mobile" type="number"/></span> --%>
-<!-- 				    </div> -->
-<!-- 				  </div>   -->
-				    
-<!-- 				    <div class="row"> -->
-<!-- 				    <div class="form-group col-md-6"> -->
-<!-- 				   		 <label for="exampleInputEmail1" Class="difColor">Customer Name :</label> -->
-<%-- 				    	 <form:input path="user.name" cssClass="form-control textFiled"/> --%>
-<%-- 				    	  <span style="color:red;"><form:errors path="customer.user.name" type="text"/></span> --%>
-<!-- 				    </div> -->
-<!-- 				    <div class="form-group col-md-6"> -->
-<!-- 				    	<label for="exampleInputEmail1" Class="difColor">Role :</label> -->
-<%-- 				     	<form:select path="user.roleId" cssClass="form-control" > --%>
-<%-- 				     	   <c:forEach items="${roles}" var ="role"> --%>
-<%-- 				     	   		<form:option label="${role.name}" value="${role.id}"/> --%>
-<%-- 				     	   </c:forEach> --%>
-<%-- 						</form:select> --%>
-<%-- 						 <span style="color:red;" id="selectBox"><form:errors path="user.roleId"/></span> --%>
-<!-- 				     </div> -->
-<!-- 				  </div> -->
+  <div class="modal fade" id="add-order" role="dialog">
+    <div class="modal-dialog">
+      Modal content
+      <div class="modal-content">
+      	<div class="modal-header">
+        	<h4 class="modal-title" style="text-align: center;"><b>Add New Order</b></h4>
+     	 </div>
+     	 <div class="alert alert-info">Fill All Blanks And Hit Submit.</div>
+	     	 <form:form modelAttribute="newDineInORCallOrder" enctype="application/x-www-form-urlencoded" method="post" >
+	        	<div class="modal-body">
+	        	
+					  <!-- ORDER BASIC INFO -->
+					  <div class="orderCartInfo" style="display:block;">
+					  	  <div class="row">
+					    <div class="form-group col-md-6">
+					   		 <label for="exampleInputEmail1" Class="difColor">Customer Name :</label>
+					    	 <form:input path="customer.user.name" cssClass="form-control textFiled custName"/>
+					    	  <span style="color:red;"><form:errors path="customer.user.name" type="text"/></span>
+					    </div>
+					     <div class="form-group col-md-6">
+					   		 <label for="exampleInputEmail1" Class="difColor">Customer Mobile :</label>
+					    	 <form:input path="customer.user.mobile" cssClass="form-control textFiled custCheckMobile"/>
+					    	  <span style="color:red;"><form:errors path="customer.user.mobile" type="number"/></span>
+					    </div>
+					  </div>  
+					  <hr>
+					  
+						  <fieldset class=" col-md-12">
+									<legend>
+										Select Order : <span id="priceTag" style="float: right;"></span>
+									</legend>
+						  	<div class="row">				    
+								<div class="form-group col-md-8">
+									<label for="exampleInputEmail1">Meal :</label>
+									<select name="meal" class="form-control mealSelect selectboxField" id="selectedMeal">
+										<c:forEach items="${meals}" var="meal">
+											<option value="${meal.id}"><c:out value="${meal.name}"/></option>
+										</c:forEach>
+									</select>
+								</div>				
+			   						
+								 <div class="form-group col-md-4">
+								 	<label for="exampleInputEmail1">Quantity :</label>
+								 	<input type = "number" id="mealQuantity" class=""></input>
+								 </div>
+		 					</div>
+		      						
+		      				<div class="row">
+								 <div class="form-group col-md-12">
+								 	<label for="exampleInputEmail1">Customize Message :</label>
+								 	<input type = "number" id="mealCustomizeInfo" class="form-control" />
+								 </div>      				
+		      				</div>
+							
+							<div class="row">				    
+								<div  class="form-group col-md-12">
+									<input type="button" class = "btn btn-success btn-md btn-block" onclick="addMeal()" value="Add Meal"/>
+					   			</div>
+							</div>
+						    </fieldset>
+						    
+							 <br/>
+						  	<fieldset class=" col-md-12">
+								<legend>
+									Your Order : <span id="priceTag" style="float: right;"></span>
+								</legend>
+								<table class="col-md-12" style="width: 100%; text-allign: center;">
+									<thead>
+										<tr style="border: 1px solid black">
+											<th style="background-color: black; color: white;">Name</th>
+											<th style="background-color: black; color: white;">Qty</th>
+											<th style="background-color: black; color: white;">Unit-Price</th>
+											<th style="background-color: black; color: white;">Custom-Info</th>
+											<th style="background-color: black; color: white;"></th>
+										</tr>
+									</thead>
+		
+									<tbody id="addedOrderTableBody">
+		
+									</tbody>
+		
+								</table>
+							</fieldset>
+					  </div>
+					    
+					    <!-- DELIVERY INFO -->
+					  	<div class="orderDeliveryInfo" style = "display:none;">
+							<ul class="nav nav-pills nav-justified" id="pills-tab-order">
+								<li class="active" data-order-type="Dine-In"><a data-toggle="pill" href="#pills-DineIn" >Dine-In</a></li>
+								<li data-order-type="PickUp"><a data-toggle="pill" href="#pills-Pick" >Pick	up</a></li>
+								<li data-order-type="Delivery"><a data-toggle="pill" href="#pills-Delivery" >Delivery</a></li>
+							</ul>
+							
+								<p id="alertMsg" style="text-align: center; font-size: 16px">Please fill
+									these to get your Order!</p>
+							
+							<div class="tab-content" id="pills-tabContent">
+								<!--DINE-IN PILL -->
+								<div class="tab-pane fade in active" id="pills-DineIn">
+								
+								
+								</div>
+								
+								<!--PICK UP PILL -->
+								<div class="tab-pane fade in" id="pills-Pick">
+									<br />
+										<div class="row">
+											<div class="form-group col-md-12">
+												<input type="checkbox" id="pickupNow" name="testp[]" class="form-control" data-toggle="toggle" data-style="ios" data-on="True"
+													data-off="False" /> 
+												<label for="exampleInputEmail1">PickUp Now</label>
+												<input type="checkbox" id="pickupLater" name="testp[]"	class="form-control" data-toggle="toggle" data-style="ios"
+													data-on="True" data-off="False" /> 
+												<label	for="exampleInputEmail1">PickUp Later</label>
+											</div>
+										</div>
+										<div class="row">
+											<div class="form-group col-md-6">
+												<label for="exampleInputEmail1" Class="difColor">Pick Up Time :</label>
+												 <form:input type="text" path="pickUpOrder.pickUpTime" id="Time1"
+	 														placeholder="Time"  
+	 														class="pickUp timepickerforPickUp form-control timepicker"
+	  														value="Time" onkeypress="return false;" novalidate="true"
+	  														style="height: 35px;" /> 
+											</div>
+											<div class="form-group col-md-6">
+												<label for="exampleInputEmail1" Class="difColor">Pick Up Date :</label> 
+												<form:input path="pickUpOrder.pickUpDate" id="datepicker"
+	  													type="text" class="dateField pickUp datepickerforPickUp form-control"  
+	 	 												novalidate="true" />  
+											</div>
+										</div>
+										<div style="background-color: aliceblue;">
+											<hr />
+											<p>
+												<b>Note:</b> Time may differ with the outlet selected below.
+											</p>
+										</div>
+										<div class="row" style="padding-top: 15px;">
+											<div class="form-group col-md-12">
+												<label for="exampleInputEmail1">Branch Outlet :</label> 
+												<form:select path="outletBranch" class="form-control selectboxField">
+													<form:option value="Nelliyady-Titanic">Nelliyady-Titanic</form:option>
+												</form:select>
+											</div>
+										</div>
+								</div>
+								
+							<!--DELIVERY PILL -->
+							<div class="tab-pane fade col-md-12" id="pills-Delivery">
+									<br />
+									<div class="row">
+										<div class="form-group col-md-12">
+											<input type="checkbox" id="deliverNow" name="testd[]" class="form-control"	data-toggle="toggle" data-style="ios" data-on="True"
+															data-off="False" /> 
+											<label for="exampleInputEmail1">Deliver	Now</label> 
+												
+											<input type="checkbox" id="deliverLater" name="testd[]" class="form-control" data-toggle="toggle" data-style="ios"
+															data-on="True" data-off="False" /> 
+											<label	for="exampleInputEmail1">Deliver Later</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-6">
+											<label for="exampleInputEmail1" Class="difColor">Deliver Time :</label> 
+											<form:input type="text" path="deliveryOrder.deliveryTime" name="Time2"
+	  												placeholder="Time" class="delivery timepicker timepickerfordelivery form-control" 
+	 	 											novalidate="true" style="height: 35px;"/>  
+										</div>
+										<div class="form-group col-md-6">
+											<label for="exampleInputEmail1" Class="difColor">Deliver Date :</label> 
+											<form:input path="deliveryOrder.deliveryDate" type="text" id="datepicker2"
+	 	 											class="delivery dateField datepickerfordelivery form-control" novalidate="true" /> 
+										</div>
+									</div>
+									<div style="background-color: aliceblue;">
+										<hr />
+										<p>Note: Time may differ with the distance and traffic.</p>
+									</div>
+									<div class="row" style="padding-top: 15px;">
+										<div class="form-group col-md-12">
+											<label for="exampleInputEmail1">Customer fullName* :</label>
+											<form:input path="deliveryOrder.recieverCustName" class="textFiled delivery form-control custName"/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label for="exampleInputEmail1">House Number* :</label> 
+											<form:input path="deliveryOrder.houseNumber" class="textFiled delivery form-control" />
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label for="exampleInputEmail1">Delivery Address* :</label> 
+											<form:input path="deliveryOrder.deliveryAddress" class="textFiled delivery form-control custAddress"/>
+										</div>
+									</div>
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label for="exampleInputEmail1">Ref-Mobile Number* :</label>
+											<form:input	path="deliveryOrder.refMobile" class="numberFiled delivery form-control custMobile" />
+										</div>
+									</div>
+								</div>
+							</div>
+							<form:input path="orderType" hidden="hidden"/>
+						</div>
+						
+					  <!-- PAYMENT INFO -->	
+					  <div class="orderPaymentInfo" style="display: none">
+							<form:input path="foodOrderString" hidden="hidden"/>
+							<form:input path="payment.total" class="totalAmount" hidden="hidden"/>
+							<fieldset class=" col-md-12">
+								<legend>
+									Your Order : <span id="priceTag" style="float: right;"></span>
+								</legend>
+								<table class="col-md-12" style="width: 100%; text-allign: center;">
+									<thead>
+										<tr style="border: 1px solid black">
+											<th style="background-color: black; color: white;">Name</th>
+											<th style="background-color: black; color: white;">Qty</th>
+											<th style="background-color: black; color: white;">Unit-Price</th>
+											<th style="background-color: black; color: white;">Custom-Info</th>
+											<th style="background-color: black; color: white;"></th>
+										</tr>
+									</thead>
+		
+									<tbody id="addedOrderTableBody">
+		
+									</tbody>
+		
+								</table>
+							</fieldset>
+						</div>
+					</div>
 				  
-<!-- 				   <div class="row"> -->
-<!-- 				    <div class="form-group col-md-6"> -->
-<!-- 				    	<label for="exampleInputEmail1" Class="difColor">User Name :</label> -->
-<%-- 				    	 <form:input path="user.userName" cssClass="form-control uniqueTextFiled" type="text" /> --%>
-<%-- 				    	 <span style="color:red;"><form:errors path="user.userName"/></span> --%>
-<!-- 				    	 <span id="dublicateUserNameError" style="color:red;"></span> -->
-<!-- 				    </div> -->
-				    
-<!-- 				    <div class="form-group col-md-6"> -->
-<!-- 				    	<label for="exampleInputEmail1" Class="difColor">Mobile :</label> -->
-<%-- 				     	<form:input path="user.mobile" cssClass="form-control numberFiled" type="number"/> --%>
-<%-- 				     	<span style="color:red;"><form:errors path="user.mobile"/></span> --%>
-<!-- 				     </div> -->
-<!-- 				  </div> -->
 				  
-<!-- 				   <div class="row"> -->
-<!-- 				    <div class="form-group col-md-6"> -->
-<!-- 				    <label for="exampleInputEmail1" Class="difColor">NIC Number :</label> -->
-<%-- 				     <form:input path="nic" cssClass="form-control numberFiled" type="text" /> --%>
-<%-- 				      <span style="color:red;"><form:errors path="nic"/></span> --%>
-<!-- 				    </div> -->
-				    
-<!-- 				    <div class="form-group col-md-6"> -->
-<!-- 				    	<label for="exampleInputEmail1" Class="difColor">Email :</label> -->
-<%-- 				     	<form:input path="user.email" cssClass="form-control emailFiled"/> --%>
-<%-- 				     	   <span style="color:red;"><form:errors path="user.email"/></span> --%>
-<!-- 				     </div> -->
-<!-- 				  </div> -->
-				  
-<!-- 				   <div class="row"> -->
-<!-- 				    <div class="form-group col-md-6"> -->
-<!-- 				    <label for="exampleInputEmail1" Class="difColor">Contact :</label> -->
-<%-- 				     <form:input path="contact" cssClass="form-control numberFiled" type="number" /> --%>
-<%-- 				     <span style="color:red;"><form:errors path="contact"/></span> --%>
-<!-- 				    </div> -->
-				    
-<!-- 				    <div class="form-group col-md-6"> -->
-<!-- 				    <label for="exampleInputEmail1" Class="difColor">Date of Birth :</label> -->
-<%-- 	 			      <form:input path = "dob" type = "date" cssClass="form-control"/>  --%>
-<%-- 	 			       <span style="color:red;"><form:errors path="dob"/></span> --%>
-<!-- 	 			    </div>  -->
-<!-- 				  </div>  -->
-				  
-<!-- 			  	<div class = "row"> -->
-<!-- 				  	<div class = "col-md-12"> -->
-<!-- 				  	<label for="exampleInputEmail1" Class="difColor">Address :</label> -->
-<%-- 				  		<form:textarea path = "user.address" cssClass="form-control textFiled" type="text" /> --%>
-<!-- 				  	</div> -->
-<!-- 			  	</div> -->
-			  	
-<!-- 			  	<br/> -->
-<!-- 			  	<div class="row"> -->
-<!-- 				    <div class="form-group col-md-6" Class="difColor"> -->
-<!-- 				    <label for="exampleInputEmail1">Password :</label> -->
-<%-- 				       <form:password path="user.password" cssClass="form-control passwordFiled empPassword"  /> --%>
-<%-- 				       <span style="color:red;"><form:errors path="user.password"/></span> --%>
-<!-- 				    </div> -->
-				    
-<!-- 				    <div class="form-group col-md-6" Class="difColor"> -->
-<!-- 				    <label for="exampleInputEmail1">Confirm Password :</label> -->
-<!-- 				     	<input class="form-control passwordFiled" id="empConfirmPassword" type="password" placeholder="Confirm Password"/> -->
-<!-- 				   		<span id="confirmPasswordError" style="color:red;"></span> -->
-<!-- 				    </div> -->
-<!-- 		 		 </div> -->
-				  
-<!-- 			  	<br/> -->
-<!-- 			     <div class = "row"> -->
-<!-- 				 	 <div class="form-group col-md-4"> -->
-<!-- 			     	    <button type="button" class="btn btn-lg btn-block btn-warning" data-dismiss="modal"> -->
-<!-- 			     	     <i class="fa fa-close"></i> Cancel</button> -->
-<!-- 				 	  </div> -->
-<!-- 				    	<div class="form-group col-md-4"> -->
-<!-- 				     	 <button type="button" class="btn btn-lg btn-block btn-secondary" type="reset"> -->
-<!-- 			     	   <i class="fa fa-repeat"></i> Reset</button> -->
-<!-- 				 	</div> -->
-<!-- 				 	<div class="form-group col-md-4"> -->
-<!-- 				     	 <button type="submit" id="submitBtn" class="btn btn-lg btn-block btn-success"> -->
-<!-- 				        <i class="fa fa-floppy-o"></i> Submit</button> -->
-<!-- 				  	  </div> -->
-<!-- 				 </div> -->
-<%-- 			</form:form> --%>
-<!--         </div> -->
-<!--       </div> -->
-<!--     </div> -->
-<!--   </div> -->
+			     <div class="modal-footer">
+			     	<div class="orderCartInfo">
+						<button class="btn btn-success btn-block" onclick="directDelivery()"
+							type="button" id="directDeliveryBtn">
+							<i class="fa fa-cutlery" aria-hidden="true"></i> Continue Order Info
+						</button>
+					</div>
+					<div class="orderDeliveryInfo" style="display: none;">
+						<button class="btn btn-success btn-block" onclick="directPayment()"
+							type="button" id="directpaymentBtn">
+							<i class="fa fa-cutlery" aria-hidden="true"></i> Continue Order
+						</button>
+					</div>
+					<div class="orderPaymentInfo" style="display: none;">
+					 	 <div class="form-group col-md-4">
+				     	    <button type="button" class="btn btn-lg btn-block btn-warning" data-dismiss="modal">
+				     	     <i class="fa fa-close"></i> Cancel</button>
+					 	  </div>
+					    	<div class="form-group col-md-4">
+					     	 <button type="button" class="btn btn-lg btn-block btn-secondary" type="reset">
+				     	   <i class="fa fa-repeat"></i> Reset</button>
+					 	</div>
+					 	<div class="form-group col-md-4">
+					     	 <button type="submit" id="submitBtn" class="btn btn-lg btn-block btn-success">
+					        <i class="fa fa-floppy-o"></i> Submit</button>
+					  	</div>
+					</div>
+				</div>
+			</form:form>
+     	 </div>
+    </div>
+ </div>
 
 
   <script type="text/javascript">
   	$(document).ready(function(){  		
   		
-    	 $('#employeeTable').DataTable({
-	      "paging": true,
-	      "lengthChange": true,
-	      "searching": true,
-	      "ordering": true,
-	      "info": true,
-	      "autoWidth": false
+    	 $('#orderTable').DataTable({
+		      "paging": true,
+		      "lengthChange": true,
+		      "searching": true,
+		      "ordering": true,
+		      "info": true,
+		      "autoWidth": false
 	    });  		
     	 
-//     	 // SHOW CONFIRMATION MODAL TO DELETE EMPLOYEE
-//     	 $("#confModalText").html("Are you want to delete this Employee?");
-//     	 $(".triggerRemove").click(function(e){
-//     		e.preventDefault();
-//     		 $("#confModalbtn").attr("href", $(this).attr("href")); 
-//     		$("#confirmModal").modal("show");
-//     	 }); 
+    	 // SHOW CONFIRMATION MODAL TO CANCEL ORDER
+    	 $("#confModalText").html("Are you want to cancel this Order?");
+    	 $(".triggerRemove").click(function(e){
+    		e.preventDefault();
+    		$("#confModalbtn").attr("href", $(this).attr("href")); 
+    		$("#confirmModal").modal("show");
+    	 }); 
     	 
-//    		 //   VALIDATIONS
+    	 //   VALIDATIONS
 //     	 $("#newEmployee").validate();
     	 
-//     	 $('.textFiled, .uniqueTextFiled').each(function () {
-//     	      $(this).rules('add', {
-//     	          required: true,
-//     	          minlength:3
-//     	      });
-//     	 $('.numberFiled').each(function () {
-//    	      $(this).rules('add', {
-//    	          required: true,
-//    	          minlength:10,
-//    	      });
-//    	    });
-//     	 $('.passwordFiled').each(function () {
-//       	      $(this).rules('add', {
-//       	          required: true,
-//       	          minlength:5
-//       	      });
-//       	    });
-//     	 $('.emailFiled').each(function () {
-//      	      $(this).rules('add', {
-//      	          email:true
-//      	      });
-//      	    });
-//   		});
    	});
   	
-//   	// CHECK UNIQUE USERNAME
-//   	 $('.uniqueTextFiled').on('change', function () {
-// 		  $.get('http://localhost:8080/titanic/users/availableUserName.do?userName=' +$(this).val(), 
-// 	              function(data){
-// 	                  if(data == false){
-// 	                		 $('#dublicateUserNameError').html('User Name Already Exits!');
-// 	                		 $("#submitBtn").css("display", "none");
-// 	                  }
-// 	                  else{
-// 	                	  $('#dublicateUserNameError').html('');
-// 	                	  $("#submitBtn").css("display", "block");
-// 	                  }
-// 	              }, 'json');
-// 	    });
+	   	// CHECK USER FOR MOBILE
+  	 	$('.custCheckMobile').on('change', function () {
+		   $.get('http://localhost:8080/titanic/users/CustomerWithMobile.do?mobile=' +$(this).val(), 
+              function(data){
+                  if(data.message == "success"){
+                	  $(".custName").val(data.result.name);
+                	   $(".custAddress").val(data.result.address);
+                	    $(".custMobile").val(data.result.mobile);
+                  }
+              }, 'json');
+	    });
   	
-//   	// CONFIRM PASSWORD
-//   	$('.empPassword, #empConfirmPassword').on('keyup', function () {
-//   	  if ($('.empPassword').val() == $('#empConfirmPassword').val()) {
-//   		 $("#submitBtn").css("display", "block");
-//   		 $('#confirmPasswordError').html('');
-//   	  } else 
-//   		 $('#confirmPasswordError').html('Password Mis-Matching!');
-//   		 $("#submitBtn").css("display", "none");
-//   	});
-
+		
+		// DIRECT TO DELIVERY INFO
+		function directDelivery(){
+			alert(1);
+			$(".orderCartInfo").css("display", "none");
+			$(".orderDeliveryInfo").css("display", "block");
+		}
+		
+		// DIRECT TO PAYMENT INFO
+		function directPayment(){
+			$(".orderDeliveryInfo").css("display", "none");
+			$(".orderCartInfo").css("display", "none");
+			$(".orderPaymentInfo").css("display", "block");
+		}
   	</script>

@@ -35,7 +35,7 @@
 				<p id="confModalText" style="color: white;"></p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-secondary" id="cancelbtn" data-dismiss="modal">Cancel</button>
 				<a type="button" class="btn btn-danger" id="confModalbtn" href="">Delete</a>
 			</div>
 		</div>

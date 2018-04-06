@@ -15,7 +15,6 @@
 		<!-- LOGIN LOGOUT HOME URL -->
 		<intercept-url pattern="/login*" access="isAnonymous()" />
 		<intercept-url pattern="/logout*" access="isAnonymous()"/>
-		<intercept-url pattern="/home*" access="isAnonymous()"/>
 		
 		<!-- ACCESS DENIED URL -->
 		<access-denied-handler error-page="/accessDenied.do"/> 

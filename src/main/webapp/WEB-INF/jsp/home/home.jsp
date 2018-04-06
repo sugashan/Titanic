@@ -850,28 +850,41 @@
 		
 		// DIRECT PAYMENT DETAIL
 		function directPayment(){
-			
+			var checkEmptyTime = "";
+			var checkEmptyDate = "";
+			 
 			var mealString = JSON.stringify(foodCart);
 			$("#foodOrderString").val(mealString);
 			$(".totalAmount").val(totalPrice);
 			var orderType = $("#pills-tab-order li.active").attr("data-order-type");
-			alert(orderType)
 			if(orderType == "PickUp"){
-				alert(1);
-				 $('.pickUp').each(function () {
-					 $('.pickUp').val('');
-				 });
-			}
-			else if(orderType == "Delivery"){
 				 $('.delivery').each(function () {
 					 $('.delivery').val('');
 				 });
+				 checkEmptyTime =  $('.timepickerforPickUp').val();
+				 checkEmptyDate = $('.datepickerforPickUp').val();
+			}
+			else if(orderType == "Delivery"){
+				 $('.pickUp').each(function () {
+					 $('.pickUp').val('');
+				 });
+				 checkEmptyTime =  $('.timepickerfordelivery').val();
+				 checkEmptyDate = $('.datepickerfordelivery').val();
 			}
 			
 			$("#deliveryType").val(orderType);
 			
-			$(".orderCartInfo").css("display", "none");
-			$(".orderPaymentInfo").css("display", "block");
+			if(checkEmptyTime.trim() == "" || checkEmptyDate.trim() == ""){
+				$("#alertMsg").css("color", "red");
+				$("#alertMsg").html("Please Select time for " + orderType + ".");
+			}
+			else{
+				$("#alertMsg").css("color", "#999");
+				$("#alertMsg").html("Please fill these to get your Order!");
+				
+				$(".orderCartInfo").css("display", "none");
+				$(".orderPaymentInfo").css("display", "block");
+			}
 		}
 		
 		// CLEAR FIELDS
@@ -894,33 +907,11 @@
 		
 		// CONTROL TOGGLE SWTICH
 		$("#pickupNow").change(function(){
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth()+1; //January is 0!
-			var yyyy = today.getFullYear();
-			var hour = today.getHours();
-			var min = today.getMinutes();
-			var ampm = "AM";
 			
-			if(dd<10){
-			    dd='0'+dd;
-			} 
-			if(mm<10){
-			    mm='0'+mm;
-			} 
-			if(hour>12){
-				ampm = "PM"
-			}
-			if(min<10){
-				min='0'+min;
-			}
-			
-			var todayDate = mm+'/'+dd+'/'+yyyy;
-			var todayTime = hour+':'+min+' '+ampm;
 			if($("#pickupNow").prop('checked') == true){
-				$(".timepickerforPickUp").val(todayTime);
+				$(".timepickerforPickUp").val(timeDateNow("time"));
 				$(".datepickerforPickUp").attr("type", "text");
-				$(".datepickerforPickUp").val(todayDate);
+				$(".datepickerforPickUp").val(timeDateNow("date"));
 			}
 			if($("#pickupLater").prop('checked') == true){
 				$("#pickupLater").bootstrapToggle("off");
@@ -938,6 +929,28 @@
 		
 		// DELIVERY
 		$("#deliverNow").change(function(){
+			
+			if($("#deliverNow").prop('checked') == true){
+				$(".timepickerfordelivery").val(timeDateNow("time"));
+				$(".datepickerfordelivery").attr("type", "text");
+				$(".datepickerfordelivery").val(timeDateNow("date"));
+			}
+			if($("#deliverLater").prop('checked') == true){
+				$("#deliverLater").bootstrapToggle("off");
+			}
+		});
+		
+		$("#deliverLater").change(function(){
+ 			$(".datepickerfordelivery").attr("type", "date");
+ 			$(".timepickerfordelivery").val("");
+			$(".datepickerfordelivery").val("");
+ 			if($("#deliverNow").prop('checked') == true){
+				$("#deliverNow").bootstrapToggle("off");
+			}
+ 		});
+ 		
+		// TIME AND DATE
+		function timeDateNow(timeOrDate){
 			var today = new Date();
 			var dd = today.getDate();
 			var mm = today.getMonth()+1; //January is 0!
@@ -961,25 +974,14 @@
 			
 			var todayDate = mm+'/'+dd+'/'+yyyy;
 			var todayTime = hour+':'+min+' '+ampm;
-			if($("#deliverNow").prop('checked') == true){
-				$(".timepickerfordelivery").val(todayTime);
-				$(".datepickerfordelivery").attr("type", "text");
-				$(".datepickerfordelivery").val(todayDate);
+			
+			if(timeOrDate == "time"){
+				return todayTime;
 			}
-			if($("#deliverLater").prop('checked') == true){
-				$("#deliverLater").bootstrapToggle("off");
+			else if(timeOrDate == "date"){
+				return todayDate;
 			}
-		});
-		
-		$("#deliverLater").change(function(){
- 			$(".datepickerfordelivery").attr("type", "date");
- 			$(".timepickerfordelivery").val("");
-			$(".datepickerfordelivery").val("");
- 			if($("#deliverNow").prop('checked') == true){
-				$("#deliverNow").bootstrapToggle("off");
-			}
- 		});
- 		
+		}
  		
 	</script>
 	
@@ -1092,12 +1094,45 @@
 			 $("#newFeedBack").validate();
 			$("#currentCustomer").validate();
 	    	 $("#newInquiry").validate();
+	    	 $("#newFoodOrder").validate({
+	    		 rules: {
+	    	            'testp[]': {
+	    	                required: true,
+	    	                maxlength: 1
+	    	            },
+	    	            'testd[]': {
+	    	                required: true,
+	    	                maxlength: 1
+	    	            },
+	    	        },
+	    	        messages: {
+	    	            'test[]': {
+	    	                required: "You must check at least 1 box",
+	    	                maxlength: "Check no more than {0} boxes"
+	    	            }
+	    	        }
+	    	 });
 	    	 validator();
 	    	 
 	    	 $("#confModalbtn").html("Delete");
 			$("#confModalbtn").removeClass("btn-success").addClass("btn-danger");
 			$("#confModalText").css("background-color", "#f39c12");
-	    	 
+			
+			var msg = "${param.msg}";
+			var status = "${param.success}"
+			
+			if(msg.trim() != "" || status.trim() != ""){
+				$("#confModalText").html(status + "-" + msg);
+				$("#confModalbtn").css("display", "none"); 
+				$("#cancelbtn").html("Ok");
+	    		if(status == "true"){
+	    			$("#confModalText").css("background-color", "green");
+	    		}
+	    		else{
+	    			$("#confModalText").css("background-color", "red");
+	    		}
+	    		$("#confirmModal").modal("show");
+			}
 		});
 		
 	</script>

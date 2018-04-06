@@ -45,7 +45,7 @@ public class OrderManagementService {
 
 	// SAVE NEW ORDER
 	public void save(@Valid Orders order) {
-		String orderType = order.getDeliveryType().toString();
+		String orderType = order.getOrderType().toString();
 		System.out.println(orderType);
 		if( orderType == TitanicMessageConstant.PICK_UP_ORDER) {
 			System.out.println("-----------------------");

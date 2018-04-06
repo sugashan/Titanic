@@ -81,6 +81,12 @@ function validator(){
 	          date:true
 	      });
 	    });
+	 
+	 $('.requiredFiled').each(function(){
+		 $(this).rules('add', {
+	    	  required: true,
+	      });
+	 });
 }
 
 

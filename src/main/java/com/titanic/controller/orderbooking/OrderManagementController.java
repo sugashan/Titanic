@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.titanic.entity.FoodOrder;
-import com.titanic.entity.MealsSchedule;
 import com.titanic.entity.Orders;
 import com.titanic.other.TitanicMessageConstant;
 import com.titanic.other.UniqueIdManager;
@@ -53,9 +52,7 @@ public class OrderManagementController {
 	@RequestMapping("orders/order")
 	public String order(Model model) {
 		
-		for(MealsSchedule ms : MealsSchedule.values()) {
-			model.addAttribute(ms.getName(), mmService.findByItemType(ms.getName()));
-		}
+		model.addAttribute("meals", mmService.findAll());
 		model.addAttribute("orders", omService.findAll());
 		return "order";
 	}
@@ -98,12 +95,15 @@ public class OrderManagementController {
 														orderMeal,
 														mapper.getTypeFactory().constructCollectionType(List.class, FoodOrder.class));
 					
-					
+					orderMeal = "";
 					for(FoodOrder foodOrder : foodOrderList) {
 						foodOrder.setOrder(order);
+						orderMeal += foodOrder.getMealName() + " x " + foodOrder.getQuantity() + " , ";
 					}
 					order.setFoodOrder(foodOrderList);
-					
+					System.out.println("---------------------------------");
+					System.out.println(orderMeal);
+					order.setFoodOrderString(orderMeal);
 					// Need to be set dynamic // 
 					order.setOutletBranch("Nelliyady-Titanic");
 					

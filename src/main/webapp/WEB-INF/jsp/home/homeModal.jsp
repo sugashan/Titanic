@@ -59,10 +59,10 @@
 									up</a></li>
 							<li data-order-type="Delivery"><a data-toggle="pill" href="#pills-Delivery" >Delivery</a></li>
 						</ul>
-	
-						<p style="text-align: center; font-size: 18px">Please fill
-							these to get your Order!</p>
-						<hr />
+						
+							<p id="alertMsg" style="text-align: center; font-size: 16px">Please fill
+								these to get your Order!</p>
+						<hr>
 						
 						<div class="tab-content" id="pills-tabContent">
 							<!--PICK UP PILL -->
@@ -70,10 +70,10 @@
 								<br />
 									<div class="row">
 										<div class="form-group col-md-12">
-											<input type="checkbox" id="pickupNow" class="form-control" data-toggle="toggle" data-style="ios" data-on="True"
+											<input type="checkbox" id="pickupNow" name="testp[]" class="form-control" data-toggle="toggle" data-style="ios" data-on="True"
 												data-off="False" /> 
 											<label for="exampleInputEmail1">PickUp Now</label>
-											<input type="checkbox" id="pickupLater"	class="form-control" data-toggle="toggle" data-style="ios"
+											<input type="checkbox" id="pickupLater" name="testp[]"	class="form-control" data-toggle="toggle" data-style="ios"
 												data-on="True" data-off="False" /> 
 											<label	for="exampleInputEmail1">PickUp Later</label>
 										</div>
@@ -81,21 +81,21 @@
 									<div class="row">
 										<div class="form-group col-md-6">
 											<label for="exampleInputEmail1" Class="difColor">Pick Up Time :</label>
-											 <form:input type="text" path="pickUpOrder.pickUpTime"
+											 <form:input type="text" path="pickUpOrder.pickUpTime" id="Time1"
  														placeholder="Time"  
- 														class="pickUp timepickerforPickUp timepicker form-control hasWickedpicker"
-  														value="Time" onkeypress="return false;" required="required" 
+ 														class="pickUp timepickerforPickUp form-control timepicker"
+  														value="Time" onkeypress="return false;" novalidate="true"
   														style="height: 35px;" /> 
 										</div>
 										<div class="form-group col-md-6">
 											<label for="exampleInputEmail1" Class="difColor">Pick Up Date :</label> 
-											<form:input path="pickUpOrder.pickUpDate"
-  													type="date" class="pickUp datepickerforPickUp form-control"  
- 	 												required="required"/>  
+											<form:input path="pickUpOrder.pickUpDate" id="datepicker"
+  													type="text" class="dateField pickUp datepickerforPickUp form-control"  
+ 	 												novalidate="true" />  
 										</div>
 									</div>
 									<div style="background-color: aliceblue;">
-										<hr />
+										<hr>
 										<p>
 											<b>Note:</b> Time may differ with the outlet selected below.
 										</p>
@@ -103,7 +103,7 @@
 									<div class="row" style="padding-top: 15px;">
 										<div class="form-group col-md-12">
 											<label for="exampleInputEmail1">Branch Outlet :</label> 
-											<form:select path="outletBranch" class="form-control">
+											<form:select path="outletBranch" class="form-control selectboxField">
 												<form:option value="Nelliyady-Titanic">Nelliyady-Titanic</form:option>
 											</form:select>
 										</div>
@@ -115,11 +115,11 @@
 								<br />
 								<div class="row">
 									<div class="form-group col-md-12">
-										<input type="checkbox" id="deliverNow" class="form-control"	data-toggle="toggle" data-style="ios" data-on="True"
+										<input type="checkbox" id="deliverNow" name="testd[]" class="form-control"	data-toggle="toggle" data-style="ios" data-on="True"
 														data-off="False" /> 
 										<label for="exampleInputEmail1">Deliver	Now</label> 
 											
-										<input type="checkbox" id="deliverLater" class="form-control" data-toggle="toggle" data-style="ios"
+										<input type="checkbox" id="deliverLater" name="testd[]" class="form-control" data-toggle="toggle" data-style="ios"
 														data-on="True" data-off="False" /> 
 										<label	for="exampleInputEmail1">Deliver Later</label>
 									</div>
@@ -127,47 +127,47 @@
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="exampleInputEmail1" Class="difColor">Deliver Time :</label> 
-										<form:input type="text" path="deliveryOrder.deliveryTime"
-  												placeholder="Time" class="delivery timepickerfordelivery form-control" 
- 	 											required="required" style="height: 35px;"/>  
+										<form:input type="text" path="deliveryOrder.deliveryTime" name="Time2"
+  												placeholder="Time" class="delivery timepicker timepickerfordelivery form-control" 
+ 	 											novalidate="true" style="height: 35px;"/>  
 									</div>
 									<div class="form-group col-md-6">
 										<label for="exampleInputEmail1" Class="difColor">Deliver Date :</label> 
-										<form:input path="deliveryOrder.deliveryDate" type="date"
- 	 											class="delivery datepickerfordelivery form-control" required="required"/> 
+										<form:input path="deliveryOrder.deliveryDate" type="text" id="datepicker2"
+ 	 											class="delivery dateField datepickerfordelivery form-control" novalidate="true" /> 
 									</div>
 								</div>
 								<div style="background-color: aliceblue;">
-									<hr />
+									<hr>
 									<p>Note: Time may differ with the distance and traffic.</p>
 								</div>
 								<div class="row" style="padding-top: 15px;">
 									<div class="form-group col-md-12">
 										<label for="exampleInputEmail1">Customer fullName* :</label>
-										<form:input path="deliveryOrder.recieverCustName" class="delivery form-control" value="${myProfile.user.name}"/>
+										<form:input path="deliveryOrder.recieverCustName" class="textFiled delivery form-control" value="${myProfile.user.name}"/>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-md-12">
 										<label for="exampleInputEmail1">House Number* :</label> 
-										<form:input path="deliveryOrder.houseNumber" class="delivery form-control" />
+										<form:input path="deliveryOrder.houseNumber" class="textFiled delivery form-control" />
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-md-12">
 										<label for="exampleInputEmail1">Delivery Address* :</label> 
-										<form:input path="deliveryOrder.deliveryAddress" class="delivery form-control" value="${myProfile.user.address }"/>
+										<form:input path="deliveryOrder.deliveryAddress" class="textFiled delivery form-control" value="${myProfile.user.address }"/>
 									</div>
 								</div>
 								<div class="row">
 									<div class="form-group col-md-12">
 										<label for="exampleInputEmail1">Ref-Mobile Number* :</label>
-										<form:input	path="deliveryOrder.refMobile" class="delivery form-control" value="${myProfile.user.mobile}"/>
+										<form:input	path="deliveryOrder.refMobile" class="numberFiled delivery form-control" value="${myProfile.user.mobile}"/>
 									</div>
 								</div>
 							</div>
 						</div>
-						<form:input path="deliveryType" hidden="hidden"/>
+						<form:input path="orderType" hidden="hidden"/>
 					</div>
 					<div class="row orderPaymentInfo" style="display: none">
 						<form:input path="foodOrderString" hidden="hidden"/>
@@ -265,7 +265,7 @@
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="account-email">Mobile: </label> 
-									<form:input type="number" path="user.mobile" class="form-control numberFiled" value="${myProfile.user.mobile}" /> 
+									<form:input type="text" path="user.mobile" class="form-control numberFiled" value="${myProfile.user.mobile}" /> 
 									<form:errors path="user.mobile"/><br/>
 								</div>
 							</div>
@@ -319,7 +319,7 @@
 								<tbody>
 										<c:forEach items="${myOrders}" var="order" varStatus="status">
 											<tr>
-												<td>status</td>
+												<td>status.index</td>
 												<td><c:out value="${order.foodOrderString}"/></td>
 												<td><c:out value="${order.orderCode}"/></td>
 												<td><c:out value="${order.orderedOn}"/></td>

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 
 import com.titanic.annotation.UniqueUserName;
@@ -47,6 +48,26 @@ public class User {
 	@OneToOne
 	private Role role;
 	
+	// CONSTRUCTORS
+	public User(int id, @Size(min = 3, message = "Name Should Be Atleast 3 Character!") String name,
+			@Size(min = 10, message = "Invalid Mobile Number!") String mobile,
+			@Email(message = "Invalid Email!") @Size(min = 5, message = "Invalid Email!") String email,
+			@Size(min = 4, message = "Invalid UserName!") String userName, String address) {
+		
+		super();
+		this.id = id;
+		this.name = name;
+		this.mobile = mobile;
+		this.email = email;
+		this.userName = userName;
+		this.address = address;
+	}
+	
+	public User() {
+
+	}
+
+	// GETTERS SETTERS
 	public int getRoleId() {
 		return roleId;
 	}

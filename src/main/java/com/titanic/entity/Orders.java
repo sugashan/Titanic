@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -39,17 +39,15 @@ public class Orders {
 	@OneToOne
 	private Customer customer;
 	
-	private String deliveryType;
+	private String orderType;
 	
 	@OneToMany(mappedBy="order", cascade=CascadeType.REMOVE)
 	private List<FoodOrder> foodOrder;
 	
-	@OneToOne
-	@JoinColumn(name="delivery_id")
+	@ManyToOne(optional = true)
 	private DeliveryOrder deliveryOrder;
 	
-	@OneToOne
-	@JoinColumn(name="pickUp_id")
+	@ManyToOne(optional = true)
 	private PickUpDeskOrder pickUpOrder;
 	
 	private String expectedOrderTime; 
@@ -77,14 +75,18 @@ public class Orders {
 	public Date getDeliveredTime() {
 		return deliveredTime;
 	}
+	public String getOrderType() {
+		return orderType;
+	}
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
+	}
 	public String getFoodOrderString() {
 		return foodOrderString;
 	}
-
 	public void setFoodOrderString(String foodOrderString) {
 		this.foodOrderString = foodOrderString;
 	}
-
 	public void setDeliveredTime(Date deliveredTime) {
 		this.deliveredTime = deliveredTime;
 	}
@@ -148,20 +150,12 @@ public class Orders {
 	public void setFoodOrder(List<FoodOrder> foodOrder) {
 		this.foodOrder = foodOrder;
 	}
-	public String getDeliveryType() {
-		return deliveryType;
-	}
-	public void setDeliveryType(String deliveryType) {
-		this.deliveryType = deliveryType;
-	}
 	public DeliveryOrder getDeliveryOrder() {
 		return deliveryOrder;
 	}
-
 	public void setDeliveryOrder(DeliveryOrder deliveryOrder) {
 		this.deliveryOrder = deliveryOrder;
 	}
-
 	public PickUpDeskOrder getPickUpOrder() {
 		return pickUpOrder;
 	}
