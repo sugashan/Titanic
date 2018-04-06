@@ -69,6 +69,8 @@
   	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
   	<script type="text/javascript" src="<c:url value="/resources/common/js/titanic.js" />"></script>
   	
+  	<!-- Common script -->
+  	<script type="text/javascript" src="<c:url value="/resources/common/js/commonOrderScript.js" />"></script>
   	
 	 <!-- wrapper -->
 	<div class="wrapper">

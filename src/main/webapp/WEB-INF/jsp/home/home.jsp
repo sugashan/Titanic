@@ -742,6 +742,9 @@
   	<!-- Validator -->
   	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
   	<script type="text/javascript" src="<c:url value="/resources/common/js/titanic.js" />"></script>
+  	
+  	<!-- Common script -->
+  	<script type="text/javascript" src="<c:url value="/resources/common/js/commonOrderScript.js" />"></script>
 	
 	<!--search-bar-->
 	<script src="<c:url value="/resources/dist/js/home/main.js" />"></script>
@@ -760,230 +763,135 @@
 	var foodCart = [];
 		
 	var curUser = "${myProfile.user.userName }";
-		// CUSTOMIZABLE CART SELECTION
-		$(".showCustomCart").click(function(){
-			if( curUser == null || curUser.trim() == "" || curUser == "undefined"){
-				$("#confModalText").html("Please login to order.");
-				$("#confModalbtn").html("Login");
-				$("#confModalbtn").removeClass(" btn-danger").addClass("btn-success");
-				$("#confModalbtn").attr("href" , "/titanic/login.do");
-				$("#confirmModal").modal("show");
-			}
-			else{
-				mealId = $(this).find(".dataholder").attr("data-meal-id");
-				mealName = $(this).find(".dataholder").attr("data-meal-name");
-				mealImage = $(this).find(".img-responsive").attr("src");
-				price = $(this).find(".dataholder").attr("data-meal-price");
-				fillDataToModal();
-				$("#mealQuantity").val("1");
-				$("#myModal").modal("show");
-			}
-		});
 	
-		// FILL DATA'S TO MODAL
-		function fillDataToModal(){
-			$(".modal-header").html(mealName);
-			$("#selectedMealimage").attr("src" , mealImage);
+	// CUSTOMIZABLE CART SELECTION
+	$(".showCustomCart").click(function(){
+		if( curUser == null || curUser.trim() == "" || curUser == "undefined"){
+			$("#confModalText").html("Please login to order.");
+			$("#confModalbtn").html("Login");
+			$("#confModalbtn").removeClass(" btn-danger").addClass("btn-success");
+			$("#confModalbtn").attr("href" , "/titanic/login.do");
+			$("#confirmModal").modal("show");
 		}
-		
-		// ADDING TO CART
-		function addToCart(){
-			$("#toCart").css("display", "block");
-			
-			mealOrder = {};
-			
-			 mealOrder.quantity = $("#mealQuantity").val();
-			 mealOrder.customizedFoodMsg = $("#mealCustomizeInfo").val();
-			 mealOrder.mealId = mealId;
-			 mealOrder.mealName = mealName;
-			 totalPrice = totalPrice + price* mealOrder.quantity;
-			 foodCart.push(mealOrder);
-			 tablingOrder();
-			 
-			 $("#mealQuantity").val("");
-			 $("#mealCustomizeInfo").val("");
-			 
-			 $("#myModal").modal("hide");
+		else{
+			mealId = $(this).find(".dataholder").attr("data-meal-id");
+			mealName = $(this).find(".dataholder").attr("data-meal-name");
+			mealImage = $(this).find(".img-responsive").attr("src");
+			price = $(this).find(".dataholder").attr("data-meal-price");
+			fillDataToModal();
+			$("#mealQuantity").val("1");
+			$("#myModal").modal("show");
 		}
-		
-		// TABLE ORDER
-		function tablingOrder(){
-			var number = foodCart.length;
-			var key = number-1;
-			// DISPLAY TABLE APPENDING
-			$("#priceTag").html("Total : Rs " + totalPrice.toFixed(2));
-			if( key>-1 && mealOrder!= null && mealOrder.quantity>0 ){
-				
-				if(mealOrder.customizedFoodMsg == ""){
-					mealOrder.customizedFoodMsg = "none";
-				}
-				
-				var htmlStr = '<tr>';
-				htmlStr += "<td>"+ number + "-" + mealOrder.mealName  + "</td>";
-				htmlStr += "<td>"+ mealOrder.quantity + "</td>";
-				htmlStr += "<td>"+ price + "</td>";
-				htmlStr += "<td>"+ mealOrder.customizedFoodMsg + "</td>";
-				htmlStr += '<td><a class="btn text-danger triggerRemove" data-amount-cell="'+ mealOrder.quantity*price +'" data-id="'+ key +'"> <i class="fa fa-trash-o"></i> </a></td>';
-				htmlStr += "</tr>";
+	});
 	
-				$("#myCartModal").find("#addedOrderTableBody").append(htmlStr);
-				mealOrder = {};
-			
-				// REMOVE FROM ARRAY AND DISPLAY
-		  	  	$(".triggerRemove").click(function deleteMeal(){
-		  	  		var id = $(this).attr("data-id");
-		  	  		document.getElementById("addedOrderTableBody").deleteRow(id);
-		  	  		foodCart.splice(id);
-		  	  		
-		  	  		var toalnewAmount = totalPrice - $(this).attr("data-amount-cell");
-		  	  		totalPrice = toalnewAmount.toFixed(2);;
-		  	  		$("#priceTag").html("Total : Rs " + totalPrice);
-		  	  		
-		  	  		if(id == 0){
-			  	  		$("#myCartModal").modal("hide");
-			  	  		$("#toCart").css("display", "none");
-			  	  		resetCustom();
-		  	  		}
-	  	  		});
-			}
-		}
+	// FILL DATA'S TO MODAL
+	function fillDataToModal(){
+		$(".modal-header").html(mealName);
+		$("#selectedMealimage").attr("src" , mealImage);
+	}
 		
-		// DIRECT PAYMENT DETAIL
-		function directPayment(){
-			var checkEmptyTime = "";
-			var checkEmptyDate = "";
-			 
-			var mealString = JSON.stringify(foodCart);
-			$("#foodOrderString").val(mealString);
-			$(".totalAmount").val(totalPrice);
-			var orderType = $("#pills-tab-order li.active").attr("data-order-type");
-			if(orderType == "PickUp"){
-				 $('.delivery').each(function () {
-					 $('.delivery').val('');
-				 });
-				 checkEmptyTime =  $('.timepickerforPickUp').val();
-				 checkEmptyDate = $('.datepickerforPickUp').val();
-			}
-			else if(orderType == "Delivery"){
-				 $('.pickUp').each(function () {
-					 $('.pickUp').val('');
-				 });
-				 checkEmptyTime =  $('.timepickerfordelivery').val();
-				 checkEmptyDate = $('.datepickerfordelivery').val();
-			}
-			
-			$("#deliveryType").val(orderType);
-			
-			if(checkEmptyTime.trim() == "" || checkEmptyDate.trim() == ""){
-				$("#alertMsg").css("color", "red");
-				$("#alertMsg").html("Please Select time for " + orderType + ".");
-			}
-			else{
-				$("#alertMsg").css("color", "#999");
-				$("#alertMsg").html("Please fill these to get your Order!");
-				
-				$(".orderCartInfo").css("display", "none");
-				$(".orderPaymentInfo").css("display", "block");
-			}
-		}
+	// ADDING TO CART
+	function addToCart(){
+		$("#toCart").css("display", "block");
 		
-		// CLEAR FIELDS
-		function resetCustom(){
-			mealId = "";
-			price = 0;
-			totalPrice = 0;
-			mealName = "";
-			mealImage = "";
+		mealOrder = {};
+		
+		 mealOrder.quantity = $("#mealQuantity").val();
+		 mealOrder.customizedFoodMsg = $("#mealCustomizeInfo").val();
+		 mealOrder.mealId = mealId;
+		 mealOrder.mealName = mealName;
+		 totalPrice = totalPrice + price* mealOrder.quantity;
+		 foodCart.push(mealOrder);
+		 tablingOrder();
+		 
+		 $("#mealQuantity").val("");
+		 $("#mealCustomizeInfo").val("");
+		 
+		 $("#myModal").modal("hide");
+	}
+		
+	// TABLE ORDER
+	function tablingOrder(){
+		var number = foodCart.length;
+		var key = number-1;
+		// DISPLAY TABLE APPENDING
+		$("#priceTag").html("Total : Rs " + totalPrice.toFixed(2));
+		if( key>-1 && mealOrder!= null && mealOrder.quantity>0 ){
+			
+			if(mealOrder.customizedFoodMsg == ""){
+				mealOrder.customizedFoodMsg = "none";
+			}
+			
+			var htmlStr = '<tr>';
+			htmlStr += "<td>"+ number + "-" + mealOrder.mealName  + "</td>";
+			htmlStr += "<td>"+ mealOrder.quantity + "</td>";
+			htmlStr += "<td>"+ price + "</td>";
+			htmlStr += "<td>"+ mealOrder.customizedFoodMsg + "</td>";
+			htmlStr += '<td><a class="btn text-danger triggerRemove" data-amount-cell="'+ mealOrder.quantity*price +'" data-id="'+ key +'"> <i class="fa fa-trash-o"></i> </a></td>';
+			htmlStr += "</tr>";
+
+			$("#myCartModal").find("#addedOrderTableBody").append(htmlStr);
 			mealOrder = {};
-			foodCart = [];
-			$("#addedOrderTableBody  > tbody").html("");
-			$(".orderCartInfo").css("display", "block");
-			$(".orderPaymentInfo").css("display", "none");
-			
-			 $('.form-control').each(function () {
-				 $('.form-control').val('');
+		
+			// REMOVE FROM ARRAY AND DISPLAY
+	  	  	$(".triggerRemove").click(function deleteMeal(){
+	  	  		var id = $(this).attr("data-id");
+	  	  		document.getElementById("addedOrderTableBody").deleteRow(id);
+	  	  		foodCart.splice(id);
+	  	  		
+	  	  		var toalnewAmount = totalPrice - $(this).attr("data-amount-cell");
+	  	  		totalPrice = toalnewAmount.toFixed(2);;
+	  	  		$("#priceTag").html("Total : Rs " + totalPrice);
+	  	  		
+	  	  		if(id == 0){
+		  	  		$("#myCartModal").modal("hide");
+		  	  		$("#toCart").css("display", "none");
+		  	  		resetCustom();
+	  	  		}
+  	  		});
+		}
+	}
+		
+	// DIRECT PAYMENT DETAIL
+	function directPayment(){
+		var checkEmptyTime = "";
+		var checkEmptyDate = "";
+		 
+		var mealString = JSON.stringify(foodCart);
+		$("#foodOrderString").val(mealString);
+		$(".totalAmount").val(totalPrice);
+		var orderType = $("#pills-tab-order li.active").attr("data-order-type");
+		if(orderType == "PickUp"){
+			 $('.delivery').each(function () {
+				 $('.delivery').val('');
 			 });
+			 checkEmptyTime =  $('.timepickerforPickUp').val();
+			 checkEmptyDate = $('.datepickerforPickUp').val();
+		}
+		else if(orderType == "Delivery"){
+			 $('.pickUp').each(function () {
+				 $('.pickUp').val('');
+			 });
+			 checkEmptyTime =  $('.timepickerfordelivery').val();
+			 checkEmptyDate = $('.datepickerfordelivery').val();
 		}
 		
-		// CONTROL TOGGLE SWTICH
-		$("#pickupNow").change(function(){
-			
-			if($("#pickupNow").prop('checked') == true){
-				$(".timepickerforPickUp").val(timeDateNow("time"));
-				$(".datepickerforPickUp").attr("type", "text");
-				$(".datepickerforPickUp").val(timeDateNow("date"));
-			}
-			if($("#pickupLater").prop('checked') == true){
-				$("#pickupLater").bootstrapToggle("off");
-			}
-		});
+		$("#deliveryType").val(orderType);
 		
-		$("#pickupLater").change(function(){
- 			$(".datepickerforPickUp").attr("type", "date");
- 			$(".timepickerforPickUp").val("");
-			$(".datepickerforPickUp").val("");
- 			if($("#orderNow").prop('checked') == true){
-				$("#orderNow").bootstrapToggle("off");
-			}
- 		});
-		
-		// DELIVERY
-		$("#deliverNow").change(function(){
-			
-			if($("#deliverNow").prop('checked') == true){
-				$(".timepickerfordelivery").val(timeDateNow("time"));
-				$(".datepickerfordelivery").attr("type", "text");
-				$(".datepickerfordelivery").val(timeDateNow("date"));
-			}
-			if($("#deliverLater").prop('checked') == true){
-				$("#deliverLater").bootstrapToggle("off");
-			}
-		});
-		
-		$("#deliverLater").change(function(){
- 			$(".datepickerfordelivery").attr("type", "date");
- 			$(".timepickerfordelivery").val("");
-			$(".datepickerfordelivery").val("");
- 			if($("#deliverNow").prop('checked') == true){
-				$("#deliverNow").bootstrapToggle("off");
-			}
- 		});
- 		
-		// TIME AND DATE
-		function timeDateNow(timeOrDate){
-			var today = new Date();
-			var dd = today.getDate();
-			var mm = today.getMonth()+1; //January is 0!
-			var yyyy = today.getFullYear();
-			var hour = today.getHours();
-			var min = today.getMinutes();
-			var ampm = "AM";
-			
-			if(dd<10){
-			    dd='0'+dd;
-			} 
-			if(mm<10){
-			    mm='0'+mm;
-			} 
-			if(hour>12){
-				ampm = "PM"
-			}
-			if(min<10){
-				min='0'+min;
-			}
-			
-			var todayDate = mm+'/'+dd+'/'+yyyy;
-			var todayTime = hour+':'+min+' '+ampm;
-			
-			if(timeOrDate == "time"){
-				return todayTime;
-			}
-			else if(timeOrDate == "date"){
-				return todayDate;
-			}
+		if(checkEmptyTime.trim() == "" || checkEmptyDate.trim() == ""){
+			$("#alertMsg").css("color", "red");
+			$("#alertMsg").html("Please Select time for " + orderType + ".");
 		}
- 		
-	</script>
+		else{
+			$("#alertMsg").css("color", "#999");
+			$("#alertMsg").html("Please fill these to get your Order!");
+			
+			$(".orderCartInfo").css("display", "none");
+			$(".orderPaymentInfo").css("display", "block");
+		}
+	}
+		
+</script>
 	
 	<script type="text/javascript ">
 		$(function () {

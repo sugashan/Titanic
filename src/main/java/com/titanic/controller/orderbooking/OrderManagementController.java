@@ -45,7 +45,7 @@ public class OrderManagementController {
 		return new Orders();
 	}
 
-	@ModelAttribute("singleUpdatedOrder")
+	@ModelAttribute("singleUpdatedDineInORCallOrder")
 	public Orders ConstructSingle() {
 		return new Orders();
 	}
@@ -79,10 +79,10 @@ public class OrderManagementController {
 	}
 	
 	// SINGLE VIEW ORDER
-	@RequestMapping (value="orders/order-detail/{id}")
+	@RequestMapping (value="orders/order-detail-payment/{id}")
 	public String singleOrder(Model model, @RequestParam int id) {
 		model.addAttribute("singleOrder", omService.findOneById(id));
-		return "order-detail";
+		return "order-detail-payment";
 	}
 	
 	// ADD NEW ORDER FROM ADMIN - DINE IN
@@ -146,7 +146,7 @@ public class OrderManagementController {
 			
 	// UPDATE EXITING ORDER
 	@RequestMapping(value="orders/order-detail/{id}", method=RequestMethod.POST)
-	public String updateOrder(@Valid @ModelAttribute("singleUpdatedOrder") Orders order, BindingResult errors, @PathVariable int id, Model model) {
+	public String updateOrder(@Valid @ModelAttribute("singleUpdatedDineInORCallOrder") Orders order, BindingResult errors, @PathVariable int id, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
 			redirectUrlString = "redirect:/orders/order-detail.do?success=false&msg=Update Failed";

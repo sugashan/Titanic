@@ -1,4 +1,4 @@
-
+	
 // CLEAR FORMS
 function reset(){
 	 $('.toBeReset').each(function () {

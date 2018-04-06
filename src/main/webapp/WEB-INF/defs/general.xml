@@ -94,10 +94,10 @@
 		<put-attribute name="current" value="order"/>
 	</definition>
 	
-	<definition name="order-detail" extends="common">
+	<definition name="order-detail-payment" extends="common">
 		<put-attribute name="title" value="Titanic Order Detail" />
-		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/order/order-detail.jsp" />
-		<put-attribute name="current" value="order-detail"/>
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/order/order-detail-payment.jsp" />
+		<put-attribute name="current" value="order-detail-payment"/>
 	</definition>
 	  	  
   	<definition name="comboPackage" extends="common">

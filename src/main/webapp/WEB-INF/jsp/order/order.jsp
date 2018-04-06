@@ -27,6 +27,7 @@
 					<thead>
 						<tr>
 							<th></th>
+							<th>Order-Code</th>
 							<th>Customer</th>
 							<th>Ordered-On</th>
 							<th>Delivery-Type</th>
@@ -44,10 +45,11 @@
 									href='<spring:url value="deleteOrder/${order.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a> <c:out value="${order.orderCode}"/></td>
-								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.customer.user.name}"/></a></td>
-								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderedOn}"/></a></td>
-								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderType}"/></a></td>
-								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.branch.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="order-detail-payment/${order.id}.do" />'><c:out value="${order.orderCode}"/></a></td>
+								<td><a class="btn" href='<spring:url value="order-detail-payment/${order.id}.do" />'><c:out value="${order.customer.user.name}"/></a></td>
+								<td><a class="btn" href='<spring:url value="order-detail-payment/${order.id}.do" />'><c:out value="${order.orderedOn}"/></a></td>
+								<td><a class="btn" href='<spring:url value="order-detail-payment/${order.id}.do" />'><c:out value="${order.orderType}"/></a></td>
+								<td><a class="btn" href='<spring:url value="order-detail-payment/${order.id}.do" />'><c:out value="${order.branch.name}"/></a></td>
 								<c:if test="${order.orderStatus eq Accepted}">
 									<td style="color:blue;"><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'><c:out value="${order.orderStatus}"/></a></td>
 								</c:if>
@@ -71,6 +73,7 @@
 					<tfoot>
 						<tr>
 							<th></th>
+							<th>Order-Code</th>
 							<th>Customer</th>
 							<th>Ordered-On</th>
 							<th>Delivery-Type</th>
@@ -394,7 +397,6 @@
 		$(".orderCartInfo").css("display", "none");
 		$(".orderPaymentInfo").css("display", "block");
 	}
-	
 	
 	$(document).ready(function(){  		
 		createTable();
