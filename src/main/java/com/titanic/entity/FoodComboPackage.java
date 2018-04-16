@@ -23,7 +23,7 @@ public class FoodComboPackage {
 	@NotNull(message="Food Type Can Not Be Empty!")
 	private String name;
 	
-	@OneToMany(mappedBy="fcpkg", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="fcpkg")
 	private List<PackageMeals> packageMeal;
 	
 	private float price;

@@ -188,7 +188,9 @@
 
 
   <script type="text/javascript">
-  	$(document).ready(function(){  		
+  	$(document).ready(function(){  	
+  		history.replaceState(null, document.title, "employee.do");
+  		hideParam();
   		
     	 $('#employeeTable').DataTable({
 	      "paging": true,
@@ -211,6 +213,7 @@
     	 $("#newEmployee").validate();
     	 validator();
     	 reset();
+    	 history.replaceState(null, document.title, "employee.do");
   	});
   	
   	// CHECK UNIQUE USERNAME

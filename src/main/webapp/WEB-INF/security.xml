@@ -32,7 +32,7 @@
 		<intercept-url pattern="/meals/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST')"/>
 		
 		<!-- ORDER URL -->
-		<intercept-url pattern="/orders/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST', 'ROLE_DELIVERYBOY' )"/>
+		<intercept-url pattern="/orders/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER', 'ROLE_COOK', 'ROLE_RECEPTIONIST', 'ROLE_DELIVERYBOY' )"/>
 		<intercept-url pattern="/newOrder" access="isAuthenticated()"/>
 		
 		

@@ -66,6 +66,7 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){  		
+		hideParam();
 		$("#updBtnDiv").css("display", "none");
 		$(".form-control, form-group ").css("disabled", "true");
 		$(".editToShow").css("display", "block");

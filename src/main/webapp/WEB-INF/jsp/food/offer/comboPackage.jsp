@@ -210,7 +210,7 @@
   var mealArray = [];	
   
   	$(document).ready(function(){  		
-  		
+    	 hideParam();
 		getMealListAndFillSelectBox();
 		
 		// SET AJAX WITH CSRF
@@ -242,6 +242,7 @@
     	 $("#newComboPackage").validate();
     	 validator();
     	 reset();
+    	 history.replaceState(null, document.title, "comboPackage.do");
   	});
   	
   	 //GET ALL MEAL AS LIST

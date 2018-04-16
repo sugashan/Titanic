@@ -71,7 +71,9 @@
 </div>
 
   <script>
-  	$(document).ready(function(){  		
+  	$(document).ready(function(){  	
+  		history.replaceState(null, document.title, "customer.do");
+  		hideParam();
     	 $('#customerTable').DataTable({
 	      "paging": true,
 	      "lengthChange": true,

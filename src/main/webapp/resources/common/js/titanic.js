@@ -1,10 +1,19 @@
-	
+// HIDE PARAMS MSG 	
+ function hideParam(){
+	 setTimeout(function(){
+		 $(".alertMsg").each(function(){
+			 $(this).css("display", "none");
+		 });
+	 }, 1500);
+ }
+ 
 // CLEAR FORMS
 function reset(){
 	 $('.toBeReset').each(function () {
 		 $('.toBeReset').val('');
 	 });
 }
+
 
 // VALIDATE FORMS
 function validator(){

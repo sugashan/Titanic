@@ -12,4 +12,5 @@ public class TitanicMessageConstant {
 	
 	public static final String DELIVERY_ORDER = "Delivery";
 	public static final String PICK_UP_ORDER = "PickUp";
+	public static final String DINE_IN_ORDER = "Dine-In";
 }

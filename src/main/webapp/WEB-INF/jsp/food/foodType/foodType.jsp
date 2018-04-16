@@ -122,7 +122,8 @@
 
 
   <script>
-  	$(document).ready(function(){  		
+  	$(document).ready(function(){  
+    	 hideParam();
     	 $('#foodTypeTable').DataTable({
 	      "paging": true,
 	      "lengthChange": true,
@@ -145,5 +146,6 @@
     	 
     	 validator();
     	 reset();
+    	 history.replaceState(null, document.title, "foodType.do");
   	});
   	</script>

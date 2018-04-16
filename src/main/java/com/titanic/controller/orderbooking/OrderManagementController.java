@@ -1,10 +1,13 @@
 package com.titanic.controller.orderbooking;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +16,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.titanic.entity.DeliveryOrder;
 import com.titanic.entity.FoodOrder;
 import com.titanic.entity.Orders;
+import com.titanic.entity.PickUpDeskOrder;
 import com.titanic.other.GenericResult;
 import com.titanic.other.JsonFormer;
 import com.titanic.other.TitanicMessageConstant;
-import com.titanic.other.UniqueIdManager;
 import com.titanic.service.food.MealManagementService;
 import com.titanic.service.orderbooking.OrderManagementService;
 import com.titanic.service.user.CustomerManagementService;
@@ -40,26 +44,49 @@ public class OrderManagementController {
 	
 	String redirectUrlString ="";
 	
-	@ModelAttribute("newDineInORCallOrder")
-	public Orders Construct() {
-		return new Orders();
+	@ModelAttribute("newOrderFromAdmin")
+	public Orders ConstructOrder() {
+		Orders newDineIn =new Orders();
+		List <FoodOrder> orderList = new ArrayList<FoodOrder>();
+		for(int i = 1; i<8; i++) {
+			FoodOrder foodOrder = new FoodOrder();
+			foodOrder.setId(i);
+			orderList.add(foodOrder); 
+		}
+		newDineIn.setFoodOrder(orderList);
+		return newDineIn;
+	}
+	
+	@ModelAttribute("deliveryOrder")
+	public DeliveryOrder ConstructDeliveryOrder() {
+		return new DeliveryOrder();
+	}
+	
+	@ModelAttribute("pickUpOrder")
+	public PickUpDeskOrder ConstructPickUpDeskOrder() {
+		return new PickUpDeskOrder();
 	}
 
 	@ModelAttribute("singleUpdatedDineInORCallOrder")
 	public Orders ConstructSingle() {
 		return new Orders();
 	}
-
 	
 	// GET ALL ORDERS
 	@RequestMapping("orders/order")
 	public String order(Model model) {
 		model.addAttribute("meals", mmService.findAll());
+		try {
+			model.addAttribute("mealString", mmService.getAllMealMapString());
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		model.addAttribute("orders", omService.findAll());
 		return "order";
 	}
 	
-	// GET ALL ORDERS AS STRING
+	// GET ALL NEW ORDERS AS STRING
 	@RequestMapping("orders/allOrders")
 	@ResponseBody
 	public String orderString(Model model) {
@@ -79,22 +106,48 @@ public class OrderManagementController {
 	}
 	
 	// SINGLE VIEW ORDER
-	@RequestMapping (value="orders/order-detail-payment/{id}")
-	public String singleOrder(Model model, @RequestParam int id) {
-		model.addAttribute("singleOrder", omService.findOneById(id));
+	@RequestMapping (value="orders/order-detail-payment/{id}/{orderType}")
+	public String singleOrder(Model model, @PathVariable int id, @PathVariable String orderType ) {
+		
+		if(TitanicMessageConstant.DELIVERY_ORDER.equals(orderType)) {
+			model.addAttribute("singleOrder", omService.findOneDeliveryById(id));
+		}
+		else if(TitanicMessageConstant.DINE_IN_ORDER.equals(orderType)) {
+			model.addAttribute("singleOrder", omService.findOneDineInById(id));
+		}
+		else if(TitanicMessageConstant.PICK_UP_ORDER.equals(orderType)) {
+			model.addAttribute("singleOrder", omService.findOnePickUpById(id));
+		}
 		return "order-detail-payment";
 	}
 	
 	// ADD NEW ORDER FROM ADMIN - DINE IN
-	@RequestMapping(value="orders/newOrder", method=RequestMethod.POST)
-	public String addNewOrder( @Valid @ModelAttribute("newDineInORCallOrder") Orders order, BindingResult errors) {
-		if(errors.hasErrors()) {
-			System.out.println(errors.getFieldErrors().toString());
-			redirectUrlString = "redirect:/orders/newOrder.do?success=false&msg=Registered Failed";
+	@RequestMapping(value="orders/order", method=RequestMethod.POST)
+	public String addNewOrder( @Valid @ModelAttribute("newOrderFromAdmin") Orders order, BindingResult orderErrors) {
+		if(orderErrors.hasErrors()) {
+			System.out.println(orderErrors.getFieldErrors().toString());
+			redirectUrlString = "redirect:/orders/order.do?success=false&msg=Order Failed";
 		}
 		else {
+			String orderMeal = "";
+			List<FoodOrder> orderList = order.getFoodOrder();
+			Iterator<FoodOrder> ordItr = orderList.iterator();
+
+			while (ordItr.hasNext()) {
+				FoodOrder foodOrder = ordItr.next();
+			    if (foodOrder.getMealId() == 0 || foodOrder.getQuantity() == 0) {
+			    	ordItr.remove();
+			    }
+			    else {
+			    	orderMeal += foodOrder.getMealName() + " x " + foodOrder.getQuantity() + ", ";
+			    }
+			}
+			order.setFoodOrder(orderList);
+			order.setFoodOrderString(orderMeal);
+			order.setCustomer(cmService.findOneByName(order.getCustomer().getUser().getName()));
+		
 			omService.save(order);
-			redirectUrlString = "redirect:/orders/newOrder.do?success=true&msg=Successfully Added!";
+			redirectUrlString = "redirect:/orders/order.do?success=true&msg=Successfully Added!";
 		}
 		return redirectUrlString;
 	}
@@ -126,10 +179,7 @@ public class OrderManagementController {
 					System.out.println(orderMeal);
 					order.setFoodOrderString(orderMeal);
 					// Need to be set dynamic // 
-					order.setOutletBranch("Nelliyady-Titanic");
 					
-					order.setOrderStatus(TitanicMessageConstant.ACCEPTED_ORDER);
-					order.setOrderCode(UniqueIdManager.getUniqueCode("Ord", 8));
 					order.setCustomer(cmService.findOneByName(CurrentUser.me()));
 					omService.save(order);
 					redirectUrlString = "redirect:/home.do?success=true&msg=Successfully Added!";

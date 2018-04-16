@@ -96,7 +96,7 @@
 	
 	<definition name="order-detail-payment" extends="common">
 		<put-attribute name="title" value="Titanic Order Detail" />
-		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/order/order-detail-payment.jsp" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/order/order-detail-payment.jsp" />
 		<put-attribute name="current" value="order-detail-payment"/>
 	</definition>
 	  	  

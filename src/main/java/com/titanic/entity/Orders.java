@@ -5,10 +5,10 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
@@ -40,22 +40,18 @@ public class Orders {
 	private Customer customer;
 	
 	private String orderType;
+	private String tempStringForDeliveryOpt;
 	
 	@OneToMany(mappedBy="order", cascade=CascadeType.REMOVE)
 	private List<FoodOrder> foodOrder;
 	
-	@ManyToOne(optional = true)
-	private DeliveryOrder deliveryOrder;
-	
-	@ManyToOne(optional = true)
-	private PickUpDeskOrder pickUpOrder;
-	
-	private String expectedOrderTime; 
+	private String expectedDeliverTime; 
 	
 	private String foodOrderString;
+	private String description;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date deliveredTime;
+	private Date lastUpdatedTime;
 
 	
 	// ORDERED-ON & DELIVERED TIME ON SERVER TIMESTAMP
@@ -66,20 +62,29 @@ public class Orders {
 	
 	@PreUpdate
     protected void onUpdate() {
-		deliveredTime = new Date();
+		lastUpdatedTime = new Date();
     }
 
 	
 	// GETTER SETTER
 	
-	public Date getDeliveredTime() {
-		return deliveredTime;
-	}
 	public String getOrderType() {
 		return orderType;
 	}
+	public String getTempStringForDeliveryOpt() {
+		return tempStringForDeliveryOpt;
+	}
+	public void setTempStringForDeliveryOpt(String tempStringForDeliveryOpt) {
+		this.tempStringForDeliveryOpt = tempStringForDeliveryOpt;
+	}
 	public void setOrderType(String orderType) {
 		this.orderType = orderType;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public String getFoodOrderString() {
 		return foodOrderString;
@@ -87,14 +92,17 @@ public class Orders {
 	public void setFoodOrderString(String foodOrderString) {
 		this.foodOrderString = foodOrderString;
 	}
-	public void setDeliveredTime(Date deliveredTime) {
-		this.deliveredTime = deliveredTime;
+	public Date getLastUpdatedTime() {
+		return lastUpdatedTime;
 	}
-	public String getExpectedOrderTime() {
-		return expectedOrderTime;
+	public void setLastUpdatedTime(Date lastUpdatedTime) {
+		this.lastUpdatedTime = lastUpdatedTime;
 	}
-	public void setExpectedOrderTime(String expectedOrderTime) {
-		this.expectedOrderTime = expectedOrderTime;
+	public String getExpectedDeliverTime() {
+		return expectedDeliverTime;
+	}
+	public void setExpectedDeliverTime(String expectedDeliverTime) {
+		this.expectedDeliverTime = expectedDeliverTime;
 	}
 	public int getId() {
 		return id;
@@ -149,18 +157,6 @@ public class Orders {
 	}
 	public void setFoodOrder(List<FoodOrder> foodOrder) {
 		this.foodOrder = foodOrder;
-	}
-	public DeliveryOrder getDeliveryOrder() {
-		return deliveryOrder;
-	}
-	public void setDeliveryOrder(DeliveryOrder deliveryOrder) {
-		this.deliveryOrder = deliveryOrder;
-	}
-	public PickUpDeskOrder getPickUpOrder() {
-		return pickUpOrder;
-	}
-	public void setPickUpOrder(PickUpDeskOrder pickUpOrder) {
-		this.pickUpOrder = pickUpOrder;
 	}
 	
 }

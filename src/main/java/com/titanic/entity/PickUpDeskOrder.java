@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class PickUpDeskOrder {
@@ -15,7 +16,16 @@ public class PickUpDeskOrder {
 	private String pickUpDate;
 	private String pickUpTime;
 	
+	@OneToOne
+	private Orders order;
 	
+	
+	public Orders getOrder() {
+		return order;
+	}
+	public void setOrder(Orders order) {
+		this.order = order;
+	}
 	public String getPickUpDate() {
 		return pickUpDate;
 	}

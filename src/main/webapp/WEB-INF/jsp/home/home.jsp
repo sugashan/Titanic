@@ -840,7 +840,7 @@
 	  	  		foodCart.splice(id);
 	  	  		
 	  	  		var toalnewAmount = totalPrice - $(this).attr("data-amount-cell");
-	  	  		totalPrice = toalnewAmount.toFixed(2);;
+	  	  		totalPrice = toalnewAmount.toFixed(2);
 	  	  		$("#priceTag").html("Total : Rs " + totalPrice);
 	  	  		
 	  	  		if(id == 0){
@@ -875,8 +875,7 @@
 			 checkEmptyTime =  $('.timepickerfordelivery').val();
 			 checkEmptyDate = $('.datepickerfordelivery').val();
 		}
-		
-		$("#deliveryType").val(orderType);
+		$("#orderType").val(orderType);
 		
 		if(checkEmptyTime.trim() == "" || checkEmptyDate.trim() == ""){
 			$("#alertMsg").css("color", "red");
@@ -1041,6 +1040,7 @@
 	    		}
 	    		$("#confirmModal").modal("show");
 			}
+			 history.replaceState(null, document.title, "home.do");
 		});
 		
 	</script>

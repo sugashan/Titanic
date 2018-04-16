@@ -199,7 +199,7 @@
 
   <script>
   	$(document).ready(function(){  		
-		
+    	 hideParam();
     	 $('#employeeTable').DataTable({
 	      "paging": true,
 	      "lengthChange": true,
@@ -232,7 +232,7 @@
     	           		  $(".codeClass").val(code + "-" + data);
     	              }, 'json');
     	    });
-    	 
+    		history.replaceState(null, document.title, "meal.do");
   	});
   	
   		// IMAGE HANDLING & PREVIEW

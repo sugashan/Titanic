@@ -1,5 +1,6 @@
 package com.titanic.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -8,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Payment {
@@ -19,14 +23,30 @@ public class Payment {
 	private String t_date;
 	private float total;
 	private float given;
-	private String addedOn;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date addedOn;
+	
 	@OneToOne
 	private Employee employee;
 	
 	@OneToMany
 	private List<Orders> orders;
 	
+	private String description;
 	
+	
+	@PreUpdate
+    protected void onUpdate() {
+		addedOn = new Date();
+    }
+	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public int getId() {
 		return id;
 	}
@@ -51,10 +71,10 @@ public class Payment {
 	public void setGiven(float given) {
 		this.given = given;
 	}
-	public String getAddedOn() {
+	public Date getAddedOn() {
 		return addedOn;
 	}
-	public void setAddedOn(String addedOn) {
+	public void setAddedOn(Date addedOn) {
 		this.addedOn = addedOn;
 	}
 	public Employee getEmployee() {

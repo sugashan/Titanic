@@ -16,7 +16,6 @@ public class DeliveryOrder {
 	private String deliveryDate;
 	private String deliveryTime;
 	
-	
 	private String recieverCustName;
 	private String deliveryAddress;
 	private String houseNumber;
@@ -24,11 +23,20 @@ public class DeliveryOrder {
 	
 	private Boolean deliveryStatus;
 	
+	@OneToOne
+	private Orders order;
+	
 	// DELIVERY BOY
 	@OneToOne
 	private Employee employee;
 	
 	
+	public Orders getOrder() {
+		return order;
+	}
+	public void setOrder(Orders order) {
+		this.order = order;
+	}
 	public String getRecieverCustName() {
 		return recieverCustName;
 	}

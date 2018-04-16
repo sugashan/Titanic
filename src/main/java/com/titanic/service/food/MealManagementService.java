@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.titanic.entity.FoodType;
 import com.titanic.entity.Meal;
 import com.titanic.respository.MealRepository;
 
@@ -39,7 +41,7 @@ public class MealManagementService {
 		mRepository.delete(findOnebyId(id));
 	}
 	
-	// GET A FOOD TYPE WITH ID
+	// GET A MEAl WITH ID
 	public Meal findOnebyId(int id) {
 		return mRepository.findOneById(id);
 	}
@@ -66,7 +68,7 @@ public class MealManagementService {
 		return mRepository.findByItemCatergory(name);
 	}
 
-	// GET MEAL AND CHANGED INTO STRING 
+	// GET MEAL AS STRING 
 	public String getAllMealMapString() throws JSONException {
 		List<Meal> result = findAll();
 		JSONArray jsonResultArry = new JSONArray();
@@ -74,6 +76,7 @@ public class MealManagementService {
 			JSONObject object = new JSONObject();
 			object.put("id", meal.getId());
 			object.put("name", meal.getName());
+			object.put("price", meal.getPrice());
 			jsonResultArry.put(object);
 		}
 		return jsonResultArry.toString();
@@ -82,5 +85,10 @@ public class MealManagementService {
 	// GET MEAL PER PREFERED TIME TYPE
 	public List<Meal> findByPreferedTime(String name) {
 		return mRepository.findByPreferedTime(name);
+	}
+
+	// GET MEAL PER FOOD TYPE
+	public List<Meal> findByFoodType(FoodType fd) {
+		return mRepository.findByFoodType(fd);
 	}
 }

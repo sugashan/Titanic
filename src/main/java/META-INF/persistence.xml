@@ -20,5 +20,6 @@
 		<class>com.titanic.entity.PackageMeals</class>
 		<class>com.titanic.entity.FeedBack</class>
 		<class>com.titanic.entity.Inquiry</class>
+		<class>com.titanic.entity.DineInOrder</class>
 	</persistence-unit>
 </persistence>
