@@ -6,27 +6,6 @@
 <%@ include file="../common/commonModals.jsp" %>
 
 
-<style>
-.labelPay{
-	    background-color: black;
-    /* left: -33%; */
-    color: white;
-    width: 200px;
-    text-align: center;
-    padding: 5px;
-}
-
-.inputPay{
-	margin-top: -90px; 
-	width: 200px;
-	 height: 50px; 
-	 text-align: center;
-	  margin-left: 33%; 
-	  font-size: 40px;
-}
-
-</style>
-
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -81,8 +60,8 @@
 								<c:if test="${order.orderStatus eq 'Delivered'}">
 									<span style="color:green"><c:out value="${order.orderStatus}"/></span>
 								</c:if>
-								<c:if test="${order.orderStatus eq 'Paid'}">
-									<span style="color:yellow"><c:out value="${order.orderStatus}"/></span>
+								<c:if test="${order.orderStatus eq 'Finished'}">
+									<span style="color:green"><c:out value="${order.orderStatus}"/></span>
 								</c:if>
 								<c:if test="${order.orderStatus eq 'Cancel'}">
 									<span style="color:orange"><c:out value="${order.orderStatus}"/></span>
@@ -117,6 +96,10 @@
       <div class="modal-content">
       	<div class="modal-header">
         	<h4 class="modal-title" style="text-align: center;"><b>Add New Order</b></h4>
+        	<button type="button" onclick="resetField()" class="close" data-dismiss="modal"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+			</button>
      	 </div>
      	  <form:form modelAttribute="newOrderFromAdmin" enctype="application/x-www-form-urlencoded" method="post" >
      	 <div class="alert alert-info validMsg">Fill All Blanks And Hit Submit.</div>
@@ -160,6 +143,7 @@
 											<c:forEach items="${newOrderFromAdmin.foodOrder}" varStatus="status" var="foodOrder" >
 												<tr id ="${status.index}" data-amount-for-row="0">
 													<td><form:select path="foodOrder[${status.index}].mealId" class="form-control mealSelect selectboxField" id="mealId${status.index}">
+																<form:option value="0" label="Select Meal"/>
 															<c:forEach items="${meals}" var="meal">
 																<form:option value="${meal.id}" label="${meal.name}"/>
 															</c:forEach>
@@ -202,7 +186,8 @@
 									</div>
 									<div class="row">
 										<div class="form-group col-md-12">
-											<form:input path="payment.given" class="totalgiven inputPay" type = "number" step="0.01" style=" border: 2px solid black;"/>
+											<input class="totalgiven inputPay" type = "number" step="0.01" style=" border: 2px solid black;"/>
+											<form:input path="payment.given" hidden="true" id="given" />
 										</div>
 									</div>
 									<div class="row">
@@ -250,7 +235,7 @@
 										<div class="form-group col-md-6">
 											<label for="exampleInputEmail1" Class="difColor">Pick Up Time :</label>
 											 <input type="text"  id="Time1"
- 														placeholder="Time"  
+ 														placeholder="9:17 AM"  
  														class="pickUp timepickerforPickUp form-control timepicker"
   														value="Time" onkeypress="return false;"
   														style="height: 35px;" /> 
@@ -295,7 +280,7 @@
 										<div class="form-group col-md-6">
 											<label for="exampleInputEmail1" Class="difColor">Deliver Time :</label> 
 											<input type="text" name="Time2"
-	  												placeholder="Time" class="delivery timepicker timepickerfordelivery form-control" 
+	  												placeholder="9:17 AM" class="delivery timepicker timepickerfordelivery form-control" 
 	 	 											style="height: 35px;"/>  
 										</div>
 										<div class="form-group col-md-6">
@@ -583,10 +568,12 @@
 		var balance = 0;
 		var given =  $(".totalgiven").val();
 		if(totalPrice > given){
+			 $("#given").val(given);
 			 balance = totalPrice - given;
 			 $(".balance").css("border", "2px solid #e81212");
 		}
 		else if(totalPrice < given){
+			 $("#given").val(totalPrice);
 			 balance = given - totalPrice;
 			 $(".balance").css("border" , "2px solid #00a65a");
 		}

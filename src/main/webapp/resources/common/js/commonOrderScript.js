@@ -5,7 +5,7 @@ function timeDateNow(timeOrDate){
 	var mm = today.getMonth()+1; //January is 0!
 	var yyyy = today.getFullYear();
 	var hour = today.getHours();
-	var min = today.getMinutes();
+	var min = today.getMinutes() + 30;
 	var ampm = "AM";
 	
 	if(dd<10){

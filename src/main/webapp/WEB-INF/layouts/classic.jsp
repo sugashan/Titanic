@@ -25,8 +25,9 @@
 	  <!-- Theme style -->
 	  <link href="<c:url value="/resources/dist/css/AdminLTE.min.css" />" rel="stylesheet">
 		
-	  <!-- AdminLTE Skins.  -->
+	  <!-- AdminLTE Skins & Titanic.  -->
    	  <link href="<c:url value="/resources/dist/css/skins/skin-blue.min.css" />" rel="stylesheet">
+   	  <link href="<c:url value="/resources/common/css/titanic.css" />" rel="stylesheet">
    	  
    	   <!-- DataTable css -->
    	  <link href="<c:url value="/resources/plugins/datatables/dataTables.bootstrap.css" />" rel="stylesheet">

@@ -1,17 +1,16 @@
 package com.titanic.entity;
 
 import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Payment {
@@ -20,6 +19,7 @@ public class Payment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	@DateTimeFormat
 	private String t_date;
 	private float total;
 	private float given;
@@ -30,8 +30,8 @@ public class Payment {
 	@OneToOne
 	private Employee employee;
 	
-	@OneToMany
-	private List<Orders> orders;
+	@OneToOne
+	private Orders order;
 	
 	private String description;
 	
@@ -83,11 +83,11 @@ public class Payment {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	public List<Orders> getOrders() {
-		return orders;
+	public Orders getOrder() {
+		return order;
 	}
-	public void setOrders(List<Orders> orders) {
-		this.orders = orders;
+	public void setOrder(Orders order) {
+		this.order = order;
 	}
 	
 }

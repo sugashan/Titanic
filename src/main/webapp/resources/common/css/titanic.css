@@ -4,3 +4,26 @@
 	background-color:#fafafa;
 	cursor:pointer;
 }
+
+table, th, td {
+   border: 1px solid black;
+   text-align:center;
+}
+
+.labelPay{
+	    background-color: black;
+    /* left: -33%; */
+    color: white;
+    width: 200px;
+    text-align: center;
+    padding: 5px;
+}
+
+.inputPay{
+	margin-top: -90px; 
+	width: 200px;
+	 height: 50px; 
+	 text-align: center;
+	  margin-left: 33%; 
+	  font-size: 40px;
+}

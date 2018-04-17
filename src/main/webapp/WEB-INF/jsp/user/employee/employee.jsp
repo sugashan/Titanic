@@ -91,7 +91,7 @@
 				    <div class="form-group col-md-6">
 				    	<label for="exampleInputEmail1" Class="difColor">Role :</label>
 				     	<form:select path="user.roleId" cssClass="form-control selectboxField" >
-				     			<option value="default">Choose..</option>
+				     			<option value="0">Choose..</option>
 				     	   <c:forEach items="${roles}" var ="role"  begin="1">
 				     	   		<form:option label="${role.name}" value="${role.id}"/>
 				     	   </c:forEach>

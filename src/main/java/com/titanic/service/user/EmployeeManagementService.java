@@ -63,7 +63,12 @@ public class EmployeeManagementService {
 	// GET A EMPLOYEE
 	@Transactional
 	public Employee findOnebyId(int id) {
-		 return eRepository.findByUser(ucService.findOneByIdUser(id));
+		 return findByUser(ucService.findOneByIdUser(id));
+	}
+	
+	@Transactional
+	public Employee findByUser(User user) {
+		return eRepository.findByUser(user);
 	}
 
 	// UPDATE A EMPLOYEE

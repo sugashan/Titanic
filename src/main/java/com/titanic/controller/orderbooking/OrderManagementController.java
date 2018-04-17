@@ -67,7 +67,7 @@ public class OrderManagementController {
 		return new PickUpDeskOrder();
 	}
 
-	@ModelAttribute("singleUpdatedDineInORCallOrder")
+	@ModelAttribute("singleUpdatedOrder")
 	public Orders ConstructSingle() {
 		return new Orders();
 	}
@@ -195,15 +195,16 @@ public class OrderManagementController {
 		
 			
 	// UPDATE EXITING ORDER
-	@RequestMapping(value="orders/order-detail/{id}", method=RequestMethod.POST)
-	public String updateOrder(@Valid @ModelAttribute("singleUpdatedDineInORCallOrder") Orders order, BindingResult errors, @PathVariable int id, Model model) {
+	@RequestMapping(value="orders/order-detail-payment/{id}/{orderType}", method=RequestMethod.POST)
+	public String updateOrder(@Valid @ModelAttribute("singleUpdatedOrder") Orders order, BindingResult errors, @PathVariable int id, @PathVariable String orderType, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
-			redirectUrlString = "redirect:/orders/order-detail.do?success=false&msg=Update Failed";
+			redirectUrlString = "redirect:/orders/order-detail-payment/"+id+"/"+orderType+".do?success=false&msg=Update Failed";
 		}
 		else {
-			model.addAttribute("singleOrder", omService.update(order, id));
-		redirectUrlString = "redirect:/orders/order-detail.do?success=true&msg=Successfully Updated";
+			System.out.println(order.getOrderStatus() + "-------------------");
+			 omService.update(order, id, orderType);
+		redirectUrlString = "redirect:/orders/order-detail-payment/"+id+"/"+orderType+".do?success=true&msg=Successfully Updated";
 		}
 		return redirectUrlString;
 	}
