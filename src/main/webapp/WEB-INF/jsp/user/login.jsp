@@ -107,7 +107,6 @@
 	  
 	  $("#newUser").validate();
 		 validator();
-		 reset();
 		 history.replaceState(null, document.title, "login.do");
     	 hideParam();
   });

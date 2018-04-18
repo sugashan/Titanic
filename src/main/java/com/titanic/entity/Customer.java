@@ -23,6 +23,10 @@ public class Customer {
 	
 	@OneToMany
 	private List<Inquiry> inquries;
+	
+	@OneToMany
+	private List<Notification> messages;
+	
 
 	public int getId() {
 		return id;
@@ -47,6 +51,12 @@ public class Customer {
 	}
 	public void setInquries(List<Inquiry> inquries) {
 		this.inquries = inquries;
+	}
+	public List<Notification> getMessages() {
+		return messages;
+	}
+	public void setMessages(List<Notification> messages) {
+		this.messages = messages;
 	}
 	
 	

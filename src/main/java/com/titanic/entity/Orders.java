@@ -52,6 +52,9 @@ public class Orders {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastUpdatedTime;
 
+	@OneToOne
+	private Employee handledEmployee;
+	
 	
 	// ORDERED-ON & DELIVERED TIME ON SERVER TIMESTAMP
 	@PrePersist
@@ -69,6 +72,12 @@ public class Orders {
 	
 	public String getOrderType() {
 		return orderType;
+	}
+	public Employee getHandledEmployee() {
+		return handledEmployee;
+	}
+	public void setHandledEmployee(Employee handledEmployee) {
+		this.handledEmployee = handledEmployee;
 	}
 	public String getTempStringForDeliveryOpt() {
 		return tempStringForDeliveryOpt;

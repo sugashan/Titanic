@@ -1,6 +1,7 @@
 package com.titanic.service.orderbooking;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -8,10 +9,12 @@ import javax.validation.Valid;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import com.titanic.entity.Customer;
 import com.titanic.entity.DeliveryOrder;
 import com.titanic.entity.DineInOrder;
+import com.titanic.entity.Employee;
 import com.titanic.entity.FoodOrder;
 import com.titanic.entity.Orders;
 import com.titanic.entity.Payment;
@@ -24,6 +27,7 @@ import com.titanic.respository.OrderFoodRepository;
 import com.titanic.respository.OrdersRepository;
 import com.titanic.respository.PaymentRepository;
 import com.titanic.respository.PickUpTypeOrderRepository;
+import com.titanic.service.reviewandinquiry.NotificationManagementService;
 import com.titanic.service.user.EmployeeManagementService;
 import com.titanic.service.user.UserCommonService;
 import com.titanic.session.CurrentUser;
@@ -56,10 +60,13 @@ public class OrderManagementService {
 	@Autowired
 	private EmployeeManagementService emService;
 	
+	@Autowired 
+	private NotificationManagementService nmService;
+	
 	
 	// GET ALL ORDERS AS LIST
 	public List<Orders> findAll() {
-		return oRepository.findAll();
+		return oRepository.findTop50ByOrderByOrderedOnDesc();
 	}
 	
 	// GET SELECTED ORDER
@@ -76,19 +83,19 @@ public class OrderManagementService {
 	}
 	
 	// GET A DELIVERY ORDER
-	public DeliveryOrder findOneDeliveryById(int id) {
+	public DeliveryOrder findOneDeliveryByOrderId(int id) {
 		Orders order = findOneById(id);
 		return dtoRepository.findByOrder(order);
 	}
 
 	// GET A PICKUP ORDER
-	public PickUpDeskOrder findOnePickUpById(int id) {
+	public PickUpDeskOrder findOnePickUpByOrderId(int id) {
 		Orders order = findOneById(id);
 		return ptoRepository.findByOrder(order);
 	}
 	
 	// GET A DINE-IN ORDER
-	public DineInOrder findOneDineInById(int id) {
+	public DineInOrder findOneDineInByOrderId(int id) {
 		Orders order = findOneById(id);
 		return diRepository.findByOrder(order);
 	}
@@ -98,7 +105,6 @@ public class OrderManagementService {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		order.setOutletBranch("Nelliyady-Titanic");
-		order.setOrderStatus(TitanicMessageConstant.ACCEPTED_ORDER);
 		order.setOrderCode(UniqueIdManager.getUniqueCode("Ord", 8));
 		
 		String orderType = order.getOrderType().toString();
@@ -109,13 +115,12 @@ public class OrderManagementService {
 			fd.setOrder(order);
 		}
 		order.setFoodOrder(fdList);
-		if(TitanicMessageConstant.DELIVERY_ORDER.equals(orderType)) {
-			order.setDescription("Order from Dine-In for "+ order.getCustomer().getUser().getName());
-			order.getPayment().setT_date(order.getOrderedOn().toString());
+		if(TitanicMessageConstant.DINE_IN_ORDER.equals(orderType)) {
+			order.getPayment().setT_date(new Date().toString());
+			order.setOrderStatus(TitanicMessageConstant.FINISHED_ORDER);
 		}
 		Payment payment = order.getPayment();
 		payment.setOrder(order);
-		
 		
 		pRepository.save(order.getPayment());
 		Orders ord = oRepository.save(order);
@@ -130,7 +135,6 @@ public class OrderManagementService {
 				diRepository.save(diOrder);
 			}
 			else if(deliveryPickUpStringInfo != "" && deliveryPickUpStringInfo != null) {
-				System.out.println(deliveryPickUpStringInfo);
 				if(TitanicMessageConstant.DELIVERY_ORDER.equals(orderType)) {
 					System.out.println("-----------DELIVERY_ORDER------------");
 					
@@ -154,36 +158,60 @@ public class OrderManagementService {
 					}
 				}
 			}
+			
+			nmService.getAndSaveNotification(TitanicMessageConstant.RECEIVED_ORDER.toString(), order);
 		}
 	}
 	
+	// UPDATE ORDER STATUS ONLY
+	public void changeStatsOnly( String orderStatus, int id, String orderType) {
+		Orders existingOrder = findOneById(id);
+		existingOrder.setOrderStatus(orderStatus);
+		oRepository.save(existingOrder);
+	}
 	
 	// UPDATE A ORDER
+	@PreAuthorize(value = "hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')")
 	public void update(@Valid Orders order, int id, String orderType) {
 		Orders existingOrder = findOneById(id);
 		existingOrder.setOrderStatus(order.getOrderStatus());
 		
-		Payment payment = new Payment();
-		payment.setOrder(order);
-		payment.setTotal(existingOrder.getPayment().getTotal());
-		payment.setGiven(order.getPayment().getGiven());
-		payment.setAddedOn(existingOrder.getPayment().getAddedOn());
-		if(order.getPayment().getT_date() != null) {
-			payment.setT_date(order.getPayment().getT_date());
+		if(order.getPayment().getGiven() != 0) {
+			Payment payment = new Payment();
+			payment.setOrder(existingOrder);
+			payment.setTotal(existingOrder.getPayment().getTotal());
+			payment.setGiven(order.getPayment().getGiven());
+			payment.setAddedOn(existingOrder.getPayment().getAddedOn());
+			if(order.getPayment().getT_date() != null) {
+				payment.setT_date(order.getPayment().getT_date());
+			}
+			else {
+				payment.setT_date(new Date().toString());
+			}
+			payment.setDescription(order.getPayment().getDescription());
+			
+			payment.setEmployee(emService.findByUser(ucService.findOneByUserName(CurrentUser.me())));
+			existingOrder.setPayment(payment);
+			
+			pRepository.save(payment);
 		}
-		else {
-			payment.setT_date(existingOrder.getPayment().getT_date());
-		}
-		payment.setDescription(order.getPayment().getDescription());
-		
-		payment.setEmployee(emService.findByUser(ucService.findOneByUserName(CurrentUser.me())));
-		existingOrder.setPayment(payment);
-		
-		pRepository.save(payment);
 		oRepository.save(existingOrder);
 		
+		if(TitanicMessageConstant.DELIVERY_ORDER.equals(orderType)) {
+			DeliveryOrder  ddOrder = findOneDeliveryByOrderId(existingOrder.getId());
+			
+			Employee employee = order.getHandledEmployee();
+			if(employee != null) {
+				ddOrder.setEmployee(employee);
+				dtoRepository.save(ddOrder);
+			}
+		}
+
+		nmService.getAndSaveNotification(order.getOrderStatus(), existingOrder);
+	
 	}
 	
+
 	// GET LAST INSERTED ID
 	public String getLastInsertedMealId() {
 		return oRepository.getLastInsertedId();
@@ -192,6 +220,19 @@ public class OrderManagementService {
 	// GET LIST OF ORDERS FOR CUSTOMER
 	public Object findAllByCustomer(Customer currCustomer) {
 		return oRepository.findByCustomer(currCustomer);
+	}
+
+	// DELETING A ORDER
+	public void delete(int id, String orderType) {
+		if(TitanicMessageConstant.DINE_IN_ORDER.equals(orderType)) {
+			diRepository.delete(findOneDineInByOrderId(id));
+		}
+		if(TitanicMessageConstant.DELIVERY_ORDER.equals(orderType)) {
+			dtoRepository.delete(findOneDeliveryByOrderId(id));
+		}
+		if(TitanicMessageConstant.PICK_UP_ORDER.equals(orderType)) {
+			ptoRepository.delete(findOnePickUpByOrderId(id));
+		}
 	}
 
 }

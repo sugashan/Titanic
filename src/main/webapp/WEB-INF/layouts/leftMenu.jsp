@@ -35,9 +35,13 @@
 		<ul class="sidebar-menu">
 			<security:authorize access=" isAuthenticated()">
 			<li class="header ${current == 'home' ? 'active' : ''}">
-				<a href='<spring:url value="/home.do" />'> <i class="fa fa-home"></i><span>Home</span></a>
+				<a href='<spring:url value="/dashBoard.do" />'> <i class="fa fa-home"></i><span>DashBoard</span></a>
 			</li>
 
+			<li class="treeview ${current == 'home' ? 'active' : ''}">
+				<a href='<spring:url value="/home.do" />'> <i class="fa fa-laptop"></i><span>Titanic Home Page</span></a>
+			</li>
+			
 			<li class="treeview ${current == 'employee' ? 'active' : ''}"><a href="#"><i class="fa fa-user"></i>
 					<span>Users</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
@@ -71,66 +75,47 @@
 					</li>
 					<li class="${current == 'comboPackage' ? 'active' : ''}">
 						<a href='<spring:url value="/meals/comboPackage.do" />'><i
-							class="fa fa-circle-thin"></i><span> 
+							class="fa fa-circle-thin"></i><span>
 								Combo-Packages</span></a>
 					</li>
 				</ul>
 			</li>
 			
-			<li class="treeview"><a href="#"><i class="fa fa-truck"></i>
-					<span>Orders</span> <span class="pull-right-container"> <i
-						class="fa fa-angle-left pull-right"></i>
-				</span> </a>
-				<ul class="treeview-menu">
-					<li class="${current == 'meal' ? 'active' : ''}"><a href="<spring:url value="/orders/order.do" />"><i
-							class="fa fa-circle-thin"></i><span> Order</span></a></li>
-					<li class="active"><a href="#"><i
-							class="fa fa-circle-thin"></i><span> </span></a></li>
-					<li class="active"><a href="#"><i
-							class="fa fa-circle-thin"></i><span> </span></a></li>
-				</ul>
+			<li class="treeview ${current == 'order' ? 'active' : ''}">
+				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-cart-arrow-down"></i><span> Order</span></a>
 			</li>
-			</security:authorize>
-			<li class="treeview"><a href="#"><i class="fa fa-money"></i>
-					<span>Payments</span> <span class="pull-right-container"> <i
-						class="fa fa-angle-left pull-right"></i>
-				</span> </a>
-				<ul class="treeview-menu">
-					<li class="active"><a href="#">	<i class="fa fa-circle-thin"></i><span>Pay Cash</span></a></li>
-					<li class="active"><a href="#">	<i class="fa fa-circle-thin"></i><span>Pay Credit</span></a></li>
-					<li class="active"><a href="#">	<i class="fa fa-circle-thin"></i><span>Pay Cheque</span></a></li>
-					<li class="active"><a href="#">	<i class="fa fa-circle-thin"></i><span>Pay Loyality</span></a></li>
-					<li class="active"><a href="#">	<i class="fa fa-circle-thin"></i><span>Pay Card</span></a></li>
-				</ul>
+			
+			<li class="treeview ${current == 'order' ? 'active' : ''}">
+				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-table"></i><span> Tables</span></a>
 			</li>
-
-			<li class="treeview"><a href="#"><i class="fa fa-money"></i>
-					<span>Transactions</span> <span class="pull-right-container">
+			
+			<li class="treeview ${current == 'order' ? 'active' : ''}">
+				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-edit"></i><span> InQuiry</span></a>
+			</li>
+			
+			<li class="treeview ${current == 'order' ? 'active' : ''}">
+				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-comments-o"></i><span> Comments</span></a>
+			</li>
+			
+			<li class="treeview ${current == 'order' ? 'active' : ''}">
+				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-share"></i><span> FeedBacks</span></a>
+			</li>
+			
+			<li class="treeview"><a href="#"><i class="fa fa-th"></i>
+					<span>Utilities</span> <span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 				</span> </a>
 				<ul class="treeview-menu">
 					<li class="active"><a href="#"><i
-							class="fa fa-circle-thin"></i><span>Customer Transactions</span></a></li>
+							class="fa fa-calendar"></i><span>Calendar</span></a></li>
 					<li class="active"><a href="#"><i
-							class="fa fa-circle-thin"></i> <span>Supplier Transactions</span></a></li>
+							class="fa fa-dashboard"></i> <span>Tasks</span></a></li>
 					<li class="active"><a href="#"><i
-							class="fa fa-circle-thin"></i> <span>Bank Transactions</span></a></li>
+							class="fa fa-money"></i> <span>Payments</span></a></li>
 				</ul>
 			</li>
-
-			<li class="treeview"><a href="#"><i class="fa fa-link"></i>
-					<span>Others</span> <span class="pull-right-container"> <i
-						class="fa fa-angle-left pull-right"></i>
-				</span> </a>
-				<ul class="treeview-menu">
-					<li class="active"><a href="#"><i
-							class="fa fa-circle-thin "></i> <span>Departments</span></a></li>
-					<li class="active"><a href="#"><i
-							class="fa fa-circle-thin"></i> <span>Counters</span></a></li>
-					<li class="active"><a href="#"><i
-							class="fa fa-circle-thin"></i> <span>Banks</span></a></li>
-				</ul>
-			</li>
+			
+			</security:authorize>
 		</ul>
 		<!-- /.side bar-menu -->
 	</section>

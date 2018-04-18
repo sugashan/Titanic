@@ -108,7 +108,7 @@ public class InitDbService {
 		
 		Role deliveryRole = new Role();
 		deliveryRole.setId(5);
-		deliveryRole.setName("ROLE_DELIVERYBOY,");
+		deliveryRole.setName("ROLE_DELIVERYBOY");
 		deliveryRole.setDescription("role-deliveryBoy");
 		rRepo.save(deliveryRole);
 		
@@ -132,11 +132,26 @@ public class InitDbService {
 		newUser.setRole(adminRole);
 		urepo.save(newUser);
 		
+		Customer newDefaultCust = new Customer();
+		newDefaultCust.setId(1);
+		newDefaultCust.setUser(newUser);
+		cRepo.save(newDefaultCust);
+		
 		Employee newEmployee = new Employee();
 		newEmployee.setId(1);
 		newEmployee.setUser(newUser);
 		newEmployee.setBranch(defaultBranch);
 		eRepo.save(newEmployee);
+		
+		
+		newUser.setRole(deliveryRole);
+		Employee deleivery = new Employee();
+		deleivery.setAvailableForDeivery(true);
+		deleivery.setId(2);
+		deleivery.setUser(newUser);
+		deleivery.setBranch(defaultBranch);
+		eRepo.save(deleivery);
+		
 		
 		User newUser2 = new User();
 		newUser2.setEnabled(true);
@@ -150,7 +165,7 @@ public class InitDbService {
 		urepo.save(newUser2);
 		
 		Customer newCustomer = new Customer();
-		newCustomer.setId(1);
+		newCustomer.setId(2);
 		newCustomer.setUser(newUser2);
 		cRepo.save(newCustomer);
 	}

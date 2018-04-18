@@ -16,5 +16,8 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 	Orders findById(int id);
 
 	List<Orders> findByCustomer(Customer currCustomer);
+
+
+	List<Orders> findTop50ByOrderByOrderedOnDesc();
 	
 }

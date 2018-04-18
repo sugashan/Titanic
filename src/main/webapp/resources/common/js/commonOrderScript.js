@@ -32,22 +32,67 @@ function timeDateNow(timeOrDate){
 	}
 }
 
-//CLEAR FIELDS
-function resetCustom(){
-	mealId = "";
-	price = 0;
-	totalPrice = 0;
-	mealName = "";
-	mealImage = "";
-	mealOrder = {};
-	foodCart = [];
-	$("#addedOrderTableBody  > tbody").html("");
-	$(".orderCartInfo").css("display", "block");
-	$(".orderPaymentInfo").css("display", "none");
+
+// SHOW PAYMENT
+function showPayment(){
+	$(".orderDeliveryInfo").css("display", "none");
+	$(".orderCartInfo").css("display", "none");
+	$(".orderPaymentInfo").css("display", "block");
+}
+
+
+// COLLECTECTING DELIVERY PICK UP INFO
+function collectPickDeliveryInfo(orderType){
+	var checkEmptyTime = "";
+	var checkEmptyDate = "";
+	 var delivery = {};
+	 var pickUp = {};
+	var detailInfoDelPick = "";
 	
-	 $('.form-control').each(function () {
-		 $('.form-control').val('');
-	 });
+	
+	if(orderType == "PickUp"){
+		 $('.delivery').each(function () {
+			 $('.delivery').val('');
+		 });
+		 checkEmptyTime =  $('.timepickerforPickUp').val();
+		 checkEmptyDate = $('.datepickerforPickUp').val();
+		 
+		 pickUp.pickUpDate = checkEmptyTime;
+		 pickUp.pickUpTime = checkEmptyDate;
+		 detailInfoDelPick = JSON.stringify(pickUp);
+	}
+	else if(orderType == "Delivery"){
+		 $('.pickUp').each(function () {
+			 $('.pickUp').val('');
+		 });
+		 checkEmptyTime =  $('.timepickerfordelivery').val();
+		 checkEmptyDate = $('.datepickerfordelivery').val();
+		 
+		 delivery.recieverCustName = $("#recieverCustName").val();
+		 delivery.deliveryTime = checkEmptyTime;
+		 delivery.deliveryDate = checkEmptyDate;
+		 delivery.houseNumber = $("#houseNumber").val();
+		 delivery.refMobile = $("#refMobile").val();
+		 delivery.deliveryAddress = $("#deliveryAddress").val();
+		 detailInfoDelPick = JSON.stringify(delivery);
+	}
+	
+	$("#orderType").val(orderType);
+	$("#tempStringForDeliveryOpt").val(detailInfoDelPick);
+	
+	if(checkEmptyTime.trim() == "" || checkEmptyDate.trim() == ""){
+		$("#alertMsg").css("color", "red");
+		$("#alertMsg").html("Please Select time for " + orderType + ".");
+	}
+	else if($("#recieverCustName").val().trim() == "" || $("#deliveryAddress").val().trim() == "" || $("#refMobile").val().trim() == ""){
+		$("#alertMsg").css("color", "red");
+		$("#alertMsg").html("Please fill fileds for " + orderType + ".");
+	}
+	else{
+		$("#alertMsg").css("color", "#999");
+		$("#alertMsg").html("Please fill these to get your Order!");
+		showPayment();
+	}
 }
 
 
@@ -75,7 +120,7 @@ $("#pickupLater").change(function(){
 
 // DELIVERY
 $("#deliverNow").change(function(){
-	
+
 	if($("#deliverNow").prop('checked') == true){
 		$(".timepickerfordelivery").val(timeDateNow("time"));
 		$(".datepickerfordelivery").attr("type", "text");
@@ -93,4 +138,4 @@ $("#deliverLater").change(function(){
 		if($("#deliverNow").prop('checked') == true){
 		$("#deliverNow").bootstrapToggle("off");
 	}
-	});
+});

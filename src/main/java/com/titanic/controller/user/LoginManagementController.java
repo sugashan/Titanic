@@ -81,7 +81,7 @@ public class LoginManagementController {
     @RequestMapping("/mySelf")
     public Employee myself(String name) {
     	Employee currUser = new Employee();
-    	currUser = emService.findOneByName(name);
+    	currUser = emService.findByUser(ucService.findOneByUserName(name));
 		return currUser;
     }
     

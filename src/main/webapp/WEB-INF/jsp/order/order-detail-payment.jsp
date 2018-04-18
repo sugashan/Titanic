@@ -125,14 +125,14 @@
 
 						<tbody id="addedMealTable">
 							<c:if test="${singleOrder.order.foodOrder ne null}">
-						  	<c:forEach items="${singleOrder.order.foodOrder}" var="orderMeal" varStatus="ord" >
-						  	  <tr>
-						  	  	  <td><c:out value="${ord.index + 1}"/></td>
-						  	  	  <td><c:out value="${orderMeal.mealName}"/></td>
-						  	  	  <td><c:out value="${orderMeal.quantity}"/></td>
-						  	  	  <td><c:out value="${orderMeal.customizedFoodMsg}"/></td>
-						  	  </tr>
-						  	</c:forEach>
+							  	<c:forEach items="${singleOrder.order.foodOrder}" var="orderMeal" varStatus="ord" >
+							  	  <tr>
+							  	  	  <td><c:out value="${ord.index + 1}"/></td>
+							  	  	  <td><c:out value="${orderMeal.mealName}"/></td>
+							  	  	  <td><c:out value="${orderMeal.quantity}"/></td>
+							  	  	  <td><c:out value="${orderMeal.customizedFoodMsg}"/></td>
+							  	  </tr>
+							  	</c:forEach>
 							</c:if>
 					  	</tbody>
 					 </table>
@@ -221,7 +221,7 @@
 					<div class="row">
 						<div class="form-group col-md-6" style="margin-left: 25%;">
 					    <label for="exampleInputEmail1" Class="difColor">Transaction Date :</label>
-		 			      <form:input path = "payment.t_date" type = "date" cssClass="form-control dateField"/> 
+		 			      <form:input path = "payment.t_date" type = "date" cssClass="form-control dateField toBeReset"/> 
 		 			       <span style="color:red;"><form:errors path="payment.t_date"/></span>
 		 			    </div> 
 					</div>
@@ -248,8 +248,8 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-md-12">
-							<input class="totalgiven inputPay" type = "number" step="0.01" min="0" style=" border: 2px solid black;"/>
-							<form:input path="payment.given" hidden="true" id="given" />
+							<input class="totalgiven inputPay toBeReset" type = "number" value = "0" step="0.01" min="0" style=" border: 2px solid black;"/>
+							<form:input path="payment.given" value = "0" hidden="true" id="given" />
 						</div>
 					</div>
 					<div class="row">
@@ -259,15 +259,30 @@
 					</div>
 					<div class="row">
 						<div class="form-group col-md-12">
-							<input class="balance inputPay" type = "text" style=" border: 2px solid black;"/>
+							<input class="balance inputPay toBeReset" type = "text" style=" border: 2px solid black;"/>
 						</div>
 					</div>
+					
+					 <c:if test="${singleOrder.order.orderType eq 'Delivery' }">
+					 	<div class="row">
+							<div class="col-md-12">
+								<label>Delivery Boy :</label> 
+								<form:select path="handledEmployee" class="form-control toBeReset">
+									<form:option value="default">Select..</form:option>
+									<c:forEach items="${deliveryBoys}" var="deliveryBoy">
+									<form:option value="${deliveryBoy}" label="${deliveryBoy.user.userName}" />
+									</c:forEach>
+						 		</form:select>
+						 	</div>
+					 	</div>
+					 </c:if>
+					
 					
 					<br/>
 					<div class="row">
 						<div class="col-md-3">
 							<label>Order Status :</label> 
-							<form:select path="orderStatus" class="form-control selectboxField">
+							<form:select path="orderStatus" class="form-control selectboxField toBeReset">
 								<form:option value="default">Select..</form:option>
 								<form:option value="Rejected">Rejected</form:option>
 								<form:option value="Cancel">Cancel</form:option>
@@ -277,13 +292,13 @@
 						</div>
 						<div class="col-md-9">
 							<label>Payment Description :</label>
-							<form:textarea path="payment.description" rows="3" class="form-control"></form:textarea>
+							<form:textarea path="payment.description" rows="3" class="form-control toBeReset"></form:textarea>
 						</div>
 					</div>
 					
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-danger btn-block" onclick="reset()"	data-dismiss="modal" type="reset">
+					<button class="btn btn-danger btn-block" onclick="resetFormodal()"	data-dismiss="modal" type="reset">
 						<i class="fa fa-remove"></i> Cancel
 					</button>
 					<button class="btn btn-success btn-block" type="submit" style="display: block;">
@@ -329,7 +344,9 @@
 		$(".form-control, form-group ").css("disabled", "true");
 		$(".editToShow").css("display", "block");
 		
-		
+		$("#singleUpdatedOrder").validate();
+		validator();
+		reset();
 		 hideParam();
 		 window.history.replaceState({}, document.title,  "/titanic/orders/order-detail-payment/"+orderId+"/"+orderType+".do");
 	});
@@ -349,4 +366,10 @@
 		}
 		
 	});	
+	
+	// RESET FORM MODAL
+	function resetFormodal(){
+		 $("#given").val(0);
+		 resetFormField();
+	}
 </script>

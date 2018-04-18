@@ -7,10 +7,11 @@
 	 }, 1500);
  }
  
-// CLEAR FORMS
-function reset(){
-	 $('.toBeReset').each(function () {
-		 $('.toBeReset').val('');
+
+// CLEAR FORM FIELD
+function resetFormField(){
+	 $('.form-control').each(function () {
+		 $('.form-control').val('');
 	 });
 }
 

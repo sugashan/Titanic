@@ -1,5 +1,10 @@
 @charset "ISO-8859-1";
 
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active a {
+    color: #ffa41f;
+}
+
 .form-control[disabled]{
 	background-color:#fafafa;
 	cursor:pointer;

@@ -42,10 +42,12 @@
 							<tr>
 								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
-								</a> <a class="btn text-danger triggerRemove"
-									href='<spring:url value="deleteOrder/${order.id}/${order.orderType}.do" />'> <i
-										class="fa fa-trash-o"></i>
-								</a> <c:out value="${order.orderCode}"/></td>
+								</a> 
+<!-- 								<a class="btn text-danger triggerRemove" -->
+<%-- 									href='<spring:url value="deleteOrder/${order.id}/${order.orderType}.do" />'> <i --%>
+<!-- 										class="fa fa-trash-o"></i> -->
+<%-- 								</a> <c:out value="${order.orderCode}"/> --%>
+								</td>
 								<td><a class="btn" href='<spring:url value="order-detail-payment/${order.id}/${order.orderType}.do" />'><c:out value="${order.customer.user.userName}"/></a></td>
 								<td><a class="btn" href='<spring:url value="order-detail-payment/${order.id}/${order.orderType}.do" />'><c:out value="${order.orderedOn}"/></a></td>
 								<td><a class="btn" href='<spring:url value="order-detail-payment/${order.id}/${order.orderType}.do" />'><c:out value="${order.orderType}"/></a></td>
@@ -186,8 +188,8 @@
 									</div>
 									<div class="row">
 										<div class="form-group col-md-12">
-											<input class="totalgiven inputPay" type = "number" step="0.01" style=" border: 2px solid black;"/>
-											<form:input path="payment.given" hidden="true" id="given" />
+											<input class="totalgiven inputPay currencyField" type = "number" step="0.01" style=" border: 2px solid black;"/>
+											<form:input path="payment.given" hidden="true" id="given" value="0"/>
 										</div>
 									</div>
 									<div class="row">
@@ -388,9 +390,12 @@
 
    // CHECK USER FOR MOBILE
 	$('.custCheckMobile').on('change', function () {
+		 $(".custName").val("");
+     	  $(".custAddress").val("");
+     	  $(".custMobile").val("");
         $.get('http://localhost:8080/titanic/users/CustomerWithMobile.do?mobile=' +$(this).val(), 
             function(data){
-                if(data.message == "success"){
+                if(data.message == "success" && data.result != null){
               	  $(".custName").val(data.result.userName);
               	  $(".custAddress").val(data.result.address);
               	  $(".custMobile").val(data.result.mobile);
@@ -493,63 +498,12 @@
 	}
 	
 	
-	// SHOW PAYMENT
-	function showPayment(){
-		$(".orderDeliveryInfo").css("display", "none");
-		$(".orderCartInfo").css("display", "none");
-		$(".orderPaymentInfo").css("display", "block");
-	}
-	
-	
 	// DIRECT TO PAYMENT INFO
 	function directPayment(){
-		var checkEmptyTime = "";
-		var checkEmptyDate = "";
-		 var delivery = {};
-		 var pickUp = {};
-		var detailInfoDelPick = "";
 		
 		if($("#orderType").val().trim() == ""){
 			var orderType = $("#pills-tab-order li.active").attr("data-order-type");
-			if(orderType == "PickUp"){
-				 $('.delivery').each(function () {
-					 $('.delivery').val('');
-				 });
-				 checkEmptyTime =  $('.timepickerforPickUp').val();
-				 checkEmptyDate = $('.datepickerforPickUp').val();
-				 
-				 pickUp.pickUpDate = checkEmptyTime;
-				 pickUp.pickUpTime = checkEmptyDate;
-				 detailInfoDelPick = JSON.stringify(pickUp);
-			}
-			else if(orderType == "Delivery"){
-				 $('.pickUp').each(function () {
-					 $('.pickUp').val('');
-				 });
-				 checkEmptyTime =  $('.timepickerfordelivery').val();
-				 checkEmptyDate = $('.datepickerfordelivery').val();
-				 
-				 delivery.recieverCustName = $("#recieverCustName").val();
-				 delivery.deliveryTime = checkEmptyTime;
-				 delivery.deliveryDate = checkEmptyDate;
-				 delivery.houseNumber = $("#houseNumber").val();
-				 delivery.refMobile = $("#refMobile").val();
-				 delivery.deliveryAddress = $("#deliveryAddress").val();
-				 detailInfoDelPick = JSON.stringify(delivery);
-			}
-			
-			$("#orderType").val(orderType);
-			$("#tempStringForDeliveryOpt").val(detailInfoDelPick);
-			
-			if(checkEmptyTime.trim() == "" || checkEmptyDate.trim() == ""){
-				$("#alertMsg").css("color", "red");
-				$("#alertMsg").html("Please Select time for " + orderType + ".");
-			}
-			else{
-				$("#alertMsg").css("color", "#999");
-				$("#alertMsg").html("Please fill these to get your Order!");
-				showPayment();
-			}
+			collectPickDeliveryInfo(orderType);
 		}
 		else{
 			 $('.delivery').each(function () {
@@ -583,13 +537,14 @@
 	
 	// RESET
 	function resetField(){
-		 $('.form-control').each(function () {
-			 $('.form-control').val('');
-		 });
-		 
+		resetFormField();
+		
 		 $(".priceSetZero").each(function(){
 			 $(this).closest("tr").attr("data-amount-for-row", 0);
 			 $(this).attr("data-price", 0);
+			 var dataId = $(this).closest("tr").attr("id");
+			 $("#quantity"+dataId).val(0);
+			 $("#mealId"+dataId).val("0");
 		 });
 		 
 		 totalPrice = 0;
@@ -622,9 +577,8 @@
     	 }); 
     	 
     	 //   VALIDATIONS
-     	 $("#newOrderFromAdmin").validate();
-     	 $("#deliveryOrder").validate();
-     	 $("#pickUpOrder").validate();
+//      	 $("#newOrderFromAdmin").validate();
+//      	 validator();
     	 hideParam();
     	 history.replaceState(null, document.title, "order.do");
    	});

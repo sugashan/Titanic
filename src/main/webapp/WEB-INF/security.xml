@@ -35,6 +35,8 @@
 		<intercept-url pattern="/orders/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER', 'ROLE_COOK', 'ROLE_RECEPTIONIST', 'ROLE_DELIVERYBOY' )"/>
 		<intercept-url pattern="/newOrder" access="isAuthenticated()"/>
 		
+		<!-- NOTIFICATIONS URL -->
+		<intercept-url pattern="/notifications/newMsg" access="hasRole('ROLE_CUSTOMER')"/>
 		
 		 <logout
 		      logout-success-url="/login.do"

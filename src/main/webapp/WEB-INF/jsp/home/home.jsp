@@ -739,13 +739,13 @@
 	<!-- jQuery 2.2.3 -->
 	<script src="<c:url value="/resources/dist/js/home/jquery-2.2.3.min.js" />"></script>
 	
+	<!-- Common script -->
+  	<script type="text/javascript" src="<c:url value="/resources/common/js/commonOrderScript.js" />"></script>
+	
   	<!-- Validator -->
   	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
   	<script type="text/javascript" src="<c:url value="/resources/common/js/titanic.js" />"></script>
   	
-  	<!-- Common script -->
-  	<script type="text/javascript" src="<c:url value="/resources/common/js/commonOrderScript.js" />"></script>
-	
 	<!--search-bar-->
 	<script src="<c:url value="/resources/dist/js/home/main.js" />"></script>
 	
@@ -763,6 +763,7 @@
 	var foodCart = [];
 		
 	var curUser = "${myProfile.user.userName }";
+	var curuserId =  "${myProfile.user.id }";
 	
 	// CUSTOMIZABLE CART SELECTION
 	$(".showCustomCart").click(function(){
@@ -856,38 +857,31 @@
 	function directPayment(){
 		var checkEmptyTime = "";
 		var checkEmptyDate = "";
+		 var delivery = {};
+		 var pickUp = {};
+		var detailInfoDelPick = "";
 		 
 		var mealString = JSON.stringify(foodCart);
 		$("#foodOrderString").val(mealString);
 		$(".totalAmount").val(totalPrice);
 		var orderType = $("#pills-tab-order li.active").attr("data-order-type");
-		if(orderType == "PickUp"){
-			 $('.delivery').each(function () {
-				 $('.delivery').val('');
-			 });
-			 checkEmptyTime =  $('.timepickerforPickUp').val();
-			 checkEmptyDate = $('.datepickerforPickUp').val();
-		}
-		else if(orderType == "Delivery"){
-			 $('.pickUp').each(function () {
-				 $('.pickUp').val('');
-			 });
-			 checkEmptyTime =  $('.timepickerfordelivery').val();
-			 checkEmptyDate = $('.datepickerfordelivery').val();
-		}
-		$("#orderType").val(orderType);
+		collectPickDeliveryInfo(orderType);
+	}
+	
+	//CLEAR FIELDS
+	function resetCustom(){
+		mealId = "";
+		price = 0;
+		totalPrice = 0;
+		mealName = "";
+		mealImage = "";
+		mealOrder = {};
+		foodCart = [];
+		$("#addedOrderTableBody  > tbody").html("");
+		$(".orderCartInfo").css("display", "block");
+		$(".orderPaymentInfo").css("display", "none");
 		
-		if(checkEmptyTime.trim() == "" || checkEmptyDate.trim() == ""){
-			$("#alertMsg").css("color", "red");
-			$("#alertMsg").html("Please Select time for " + orderType + ".");
-		}
-		else{
-			$("#alertMsg").css("color", "#999");
-			$("#alertMsg").html("Please fill these to get your Order!");
-			
-			$(".orderCartInfo").css("display", "none");
-			$(".orderPaymentInfo").css("display", "block");
-		}
+		resetFormField();
 	}
 		
 </script>
@@ -997,6 +991,7 @@
 				easingType: 'easeOutQuart'
 			});
 			
+				
 			// Validator
 			 $("#newFeedBack").validate();
 			$("#currentCustomer").validate();
@@ -1029,7 +1024,7 @@
 			var status = "${param.success}"
 			
 			if(msg.trim() != "" || status.trim() != ""){
-				$("#confModalText").html(status + "-" + msg);
+				$("#confModalText").html(msg);
 				$("#confModalbtn").css("display", "none"); 
 				$("#cancelbtn").html("Ok");
 	    		if(status == "true"){

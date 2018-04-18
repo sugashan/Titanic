@@ -13,8 +13,10 @@ import com.titanic.entity.MealsSchedule;
 import com.titanic.entity.Orders;
 import com.titanic.service.food.MealManagementService;
 import com.titanic.service.orderbooking.OrderManagementService;
+import com.titanic.service.reviewandinquiry.NotificationManagementService;
 import com.titanic.service.reviewandinquiry.ReviewManagementService;
 import com.titanic.service.user.CustomerManagementService;
+import com.titanic.service.user.UserCommonService;
 import com.titanic.session.CurrentUser;
 
 @Controller
@@ -35,6 +37,11 @@ public class HomeController {
 	@Autowired
 	private CustomerManagementService cmService;
 	
+	@Autowired
+	private UserCommonService umService;
+	
+	@Autowired
+	private NotificationManagementService nmService;
 	
 	@ModelAttribute("newFeedBack")
 	public FeedBack ConstructFeedBack() {
@@ -60,8 +67,8 @@ public class HomeController {
 	public String home(Model model) {
 		model.addAttribute("comments", rmService.getAllComments());
 		model.addAttribute("meals", mmService.findAll());
-		
-		Customer CurrCustomer = cmService.findOneByName(CurrentUser.me());
+		Customer CurrCustomer = cmService.findOneByUser(umService.findOneByUserName(CurrentUser.me()));
+		model.addAttribute("msgs", nmService.getNewMsgs(CurrCustomer));
 		model.addAttribute("myProfile", CurrCustomer);
 		
 		model.addAttribute("myOrders", omService.findAllByCustomer(CurrCustomer));

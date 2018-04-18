@@ -67,4 +67,9 @@ public class UserCommonService {
 			return uRepository.findByMobile(mobile, true);
 			
 		}
+
+		// GET ONE USER WITH ROLE
+		public User findOneByRole(int i) {
+			return uRepository.findByRole(findRoleById(i));
+		}
 }

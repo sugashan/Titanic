@@ -52,7 +52,7 @@
 	<div class="modal-dialog" role="document">
 			<form:form modelAttribute="newFoodOrder" action="/titanic/newOrder.do" enctype="application/x-www-form-urlencoded" method="post" class="col-md-12 modal-content">
 				<div class="modal-body">
-					<div class="row orderCartInfo">
+					<div class="row orderDeliveryInfo">
 	
 						<ul class="nav nav-pills nav-justified" id="pills-tab-order">
 							<li class="active" data-order-type="PickUp"><a data-toggle="pill" href="#pills-Pick" >Pick
@@ -81,17 +81,16 @@
 									<div class="row">
 										<div class="form-group col-md-6">
 											<label for="exampleInputEmail1" Class="difColor">Pick Up Time :</label>
-											 <form:input type="text" path="pickUpOrder.pickUpTime" id="Time1"
+											 <input type="text" id="Time1"
  														placeholder="Time"  
  														class="pickUp timepickerforPickUp form-control timepicker"
-  														value="Time" onkeypress="return false;" novalidate="true"
+  														value="Time" onkeypress="return false;"
   														style="height: 35px;" /> 
 										</div>
 										<div class="form-group col-md-6">
 											<label for="exampleInputEmail1" Class="difColor">Pick Up Date :</label> 
-											<form:input path="pickUpOrder.pickUpDate" id="datepicker"
-  													type="text" class="dateField pickUp datepickerforPickUp form-control"  
- 	 												novalidate="true" />  
+											<input id="datepicker"
+  													type="text" class="dateField pickUp datepickerforPickUp form-control"  />  
 										</div>
 									</div>
 									<div style="background-color: aliceblue;">
@@ -127,14 +126,14 @@
 								<div class="row">
 									<div class="form-group col-md-6">
 										<label for="exampleInputEmail1" Class="difColor">Deliver Time :</label> 
-										<form:input type="text" path="deliveryOrder.deliveryTime" name="Time2"
+										<input type="text" name="Time2"
   												placeholder="Time" class="delivery timepicker timepickerfordelivery form-control" 
- 	 											novalidate="true" style="height: 35px;"/>  
+ 	 										    style="height: 35px;"/>  
 									</div>
 									<div class="form-group col-md-6">
 										<label for="exampleInputEmail1" Class="difColor">Deliver Date :</label> 
-										<form:input path="deliveryOrder.deliveryDate" type="text" id="datepicker2"
- 	 											class="delivery dateField datepickerfordelivery form-control" novalidate="true" /> 
+										<input type="text" id="datepicker2"
+ 	 											class="delivery dateField datepickerfordelivery form-control" /> 
 									</div>
 								</div>
 								<div style="background-color: aliceblue;">
@@ -142,32 +141,33 @@
 									<p>Note: Time may differ with the distance and traffic.</p>
 								</div>
 								<div class="row" style="padding-top: 15px;">
-									<div class="form-group col-md-12">
-										<label for="exampleInputEmail1">Customer fullName* :</label>
-										<form:input path="deliveryOrder.recieverCustName" class="textFiled delivery form-control" value="${myProfile.user.name}"/>
+										<div class="form-group col-md-12">
+											<label for="exampleInputEmail1">Customer fullName* :</label>
+											<input type="text" id="recieverCustName" class="textFiled delivery form-control custName" value="${myProfile.user.name}"/>
+										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-12">
-										<label for="exampleInputEmail1">House Number* :</label> 
-										<form:input path="deliveryOrder.houseNumber" class="textFiled delivery form-control" />
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label for="exampleInputEmail1">House Number* :</label> 
+											<input type="text" id="houseNumber" class="delivery form-control" />
+										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-12">
-										<label for="exampleInputEmail1">Delivery Address* :</label> 
-										<form:input path="deliveryOrder.deliveryAddress" class="textFiled delivery form-control" value="${myProfile.user.address }"/>
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label for="exampleInputEmail1">Delivery Address* :</label> 
+											<input type="text" id="deliveryAddress" class="textFiled delivery form-control custAddress" value="${myProfile.user.address}" />
+										</div>
 									</div>
-								</div>
-								<div class="row">
-									<div class="form-group col-md-12">
-										<label for="exampleInputEmail1">Ref-Mobile Number* :</label>
-										<form:input	path="deliveryOrder.refMobile" class="numberFiled delivery form-control" value="${myProfile.user.mobile}"/>
+									<div class="row">
+										<div class="form-group col-md-12">
+											<label for="exampleInputEmail1">Ref-Mobile Number* :</label>
+											<input type="text"	id="refMobile" class="numberFiled delivery form-control custMobile"  value="${myProfile.user.mobile}"/>
+										</div>
 									</div>
-								</div>
 							</div>
 						</div>
 						<form:input path="orderType" hidden="hidden"/>
+						<form:input path="tempStringForDeliveryOpt" hidden="hidden"/>
 					</div>
 					<div class="row orderPaymentInfo" style="display: none">
 						<form:input path="foodOrderString" hidden="hidden"/>
@@ -196,7 +196,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<div class="orderCartInfo">
+					<div class="orderDeliveryInfo">
 						<button class="btn btn-success btn-block" onclick="directPayment()"
 							type="button" id="directpaymentBtn">
 							<i class="fa fa-cutlery" aria-hidden="true"></i> Continue Order
@@ -223,7 +223,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<%=session.getAttribute("LoggerName")%>
+				<%=session.getAttribute("LoggerName")%> - My Profile
 				<button type="button" class="close" data-dismiss="modal"
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
@@ -234,6 +234,7 @@
 				<ul class="nav nav-pills nav-justified" id="pills-tab-profile">
 					<li class="active"><a data-toggle="pill" href="#pills-Account">My
 							Account</a></li>
+					<li><a data-toggle="pill" href="#pills-Msg">Notifications</a></li>
 					<li><a data-toggle="pill" href="#pills-Orders">Past Orders</a></li>
 					<li><a data-toggle="pill" href="#pills-FAQ">FAQ</a></li>
 				</ul>
@@ -303,8 +304,33 @@
 						</form:form>
 					</div>
 					
+					<!-- NOTIFICATION -->
+					<div class="tab-pane fade " id="pills-Msg">
+						<c:if test="${msgs eq null}">
+							<div class="row  alert alert-info" style="margin: -5px;">
+								<div class="col-md-12" style="margin: -15px;">
+									<p style="color:white; font-size:20px;">You don't have any new message!</p>
+								</div>
+							</div>
+						</c:if>
+						<c:if test="${msgs ne null}">
+							<c:forEach items="${msgs}" var="msg" varStatus="index">
+								<div class="row alert alert-info">
+									<div class="col-md-10">
+										<p style="color:white; font-size:20px;">${msg.message}!</p>
+										<small style="color:white;">${msg.createdDate}</small>
+										<p style="color:white;">${msg.description}</p>
+									</div>
+								</div>
+								<br/>
+							</c:forEach>
+						</c:if>
+					</div>
+					
+					
 					<!-- PAST ORDERS -->
 					<div class="tab-pane fade " id="pills-Orders">
+						<div class="row">
 							<table id="orderTable" class="col-md-12 table table-bordered table-striped" style="width:100%; text-allign:center;">
 								<thead>
 									<tr>
@@ -319,7 +345,7 @@
 								<tbody>
 										<c:forEach items="${myOrders}" var="order" varStatus="status">
 											<tr>
-												<td>status.index</td>
+												<td>${status.index}</td>
 												<td><c:out value="${order.foodOrderString}"/></td>
 												<td><c:out value="${order.orderCode}"/></td>
 												<td><c:out value="${order.orderedOn}"/></td>
@@ -329,6 +355,7 @@
 										</c:forEach>
 								</tbody>
 							</table>
+						</div>	
 					</div>
 					
 					<!-- FAQ -->

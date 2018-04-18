@@ -48,7 +48,7 @@ public class CustomerManagementService {
 		cRepository.delete(findOnebyId(id));
 	}
 	
-	// GET A CUSTOMER
+	// GET A CUSTOMER WITH USER ID
 	@Transactional
 	public Customer findOnebyId(int id) {
 		 return cRepository.findByUser( ucService.findOneByIdUser(id));
@@ -60,11 +60,6 @@ public class CustomerManagementService {
 		updatedCustomer.setUser(customer.getUser());
 		cRepository.save(updatedCustomer);
 		return findOnebyId(id);
-	}
-
-	// GET CUSTOMER WITH NAME
-	public Customer findOneByName(String name) {
-		return cRepository.findByUser(ucService.findOneByUserName(name));
 	}
 	
 	// GET CUSTOMER WITH USER

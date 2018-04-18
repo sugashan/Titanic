@@ -1,5 +1,6 @@
 package com.titanic.service.user;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.titanic.entity.Customer;
 import com.titanic.entity.Employee;
+import com.titanic.entity.Role;
 import com.titanic.entity.User;
 import com.titanic.respository.EmployeeRepository;
 import com.titanic.respository.UserRepository;
@@ -37,11 +39,17 @@ public class EmployeeManagementService {
 	// SAVE NEW EMPLOYEE
 	public void save(Employee employee) {
 		employee.getUser().setEnabled(true);
-		employee.setAvailableForDeivery(true);
+		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		employee.getUser().setPassword(encoder.encode(employee.getUser().getPassword()));
 		employee.setBranch(ucService.getBranchWithId(1));
-		employee.getUser().setRole(ucService.findRoleById(employee.getUser().getRoleId()));
+		Role role = ucService.findRoleById(employee.getUser().getRoleId());
+		
+		if(role.getName() == "ROLE_DELIVERYBOY") {
+			employee.setAvailableForDeivery(true);
+		}
+		employee.setAvailableForDeivery(false);
+		employee.getUser().setRole(role);
 		
 		User resultUser = uRepository.save(employee.getUser());
 		if(resultUser!= null)
@@ -85,10 +93,21 @@ public class EmployeeManagementService {
 		eRepository.save(updatedEmployee);
 		return findOnebyId(id);
 	}
-
-	// GET EMPLOYEE WITH NAME
-	public Employee findOneByName(String name) {
-		return eRepository.findByUser(ucService.findOneByUserName(name));
+	
+	// GET ALL WITH ROLE
+	public List<Employee> findAllByRole(int roleId) {
+		List<Employee> emp = new ArrayList<Employee>();
+		
+		System.out.println(roleId + "-----------------");
+			System.out.println("getting employee to deliver------------");
+		//	emp = eRepository.findAvailabledeliveryBoy(roleId, true);
+			emp = eRepository.findTop5ByUserRoleIdAndAvailableForDeivery(roleId, true);
+			for(Employee empp : emp) {
+				empp.getUser().getName();
+			}
+		return emp;
 	}
+	
+	
 
 }

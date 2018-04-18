@@ -21,6 +21,7 @@ public class Payment {
 	
 	@DateTimeFormat
 	private String t_date;
+	
 	private float total;
 	private float given;
 	
