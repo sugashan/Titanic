@@ -4,6 +4,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +19,13 @@ public class ReviewManagementController {
 	private ReviewManagementService rmService;
 	
 	private String redirectUrlString = "";
+	
+	// GET ALL COMMENT
+	@RequestMapping("comments/comment")
+	public String comments(Model model) {
+		model.addAttribute("comments", rmService.getAllComments());
+		return "review";
+	}
 	
 	// ADD NEW COMMENT
 	@RequestMapping(value="comment/addComment", method=RequestMethod.POST)

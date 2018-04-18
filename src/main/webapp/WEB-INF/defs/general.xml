@@ -111,4 +111,16 @@
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/food/offer/comboPackage-detail.jsp" />
 		<put-attribute name="current" value="comboPackage-detail"/>
 	</definition>
+	
+	<definition name="review" extends="common">
+		<put-attribute name="title" value="Titanic Comment" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/reviewAndComment/review.jsp" />
+		<put-attribute name="current" value="review"/>
+	</definition>
+	
+	<definition name="inquiry" extends="common">
+		<put-attribute name="title" value="Titanic Inquiry" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/reviewAndComment/inquiry.jsp" />
+		<put-attribute name="current" value="inquiry"/>
+	</definition>
 </tiles-definitions>

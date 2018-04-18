@@ -90,15 +90,7 @@
 			</li>
 			
 			<li class="treeview ${current == 'order' ? 'active' : ''}">
-				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-edit"></i><span> InQuiry</span></a>
-			</li>
-			
-			<li class="treeview ${current == 'order' ? 'active' : ''}">
-				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-comments-o"></i><span> Comments</span></a>
-			</li>
-			
-			<li class="treeview ${current == 'order' ? 'active' : ''}">
-				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-share"></i><span> FeedBacks</span></a>
+				<a href='<spring:url value="/comments/comment.do" />'> <i class="fa fa-comments-o"></i><span> Comments</span></a>
 			</li>
 			
 			<li class="treeview"><a href="#"><i class="fa fa-th"></i>
@@ -111,7 +103,20 @@
 					<li class="active"><a href="#"><i
 							class="fa fa-dashboard"></i> <span>Tasks</span></a></li>
 					<li class="active"><a href="#"><i
-							class="fa fa-money"></i> <span>Payments</span></a></li>
+							class="fa fa-book"></i> <span>Reports</span></a></li>
+				</ul>
+			</li>
+			
+			<li class="treeview"><a href="#"><i class="fa fa-th"></i>
+					<span>FAQ</span> <span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+				</span> </a>
+				<ul class="treeview-menu">
+					<li class="treeview ${current == 'inquiry' ? 'active' : ''}">
+						<a href='<spring:url value="/inquiries/inquiry.do" />'> <i class="fa fa-edit"></i><span> InQuiry</span></a>
+					</li>
+					<li class="active"><a href="#"><i
+							class="fa fa-dashboard"></i> <span>Tasks</span></a></li>
 				</ul>
 			</li>
 			

@@ -1,5 +1,7 @@
 package com.titanic.service.reviewandinquiry;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,11 @@ public class InquiryManagementService {
 	// SAVE INQUIRY
 	public void save(@Valid Inquiry inq) {
 		iRepository.save(inq);
+	}
+
+	// GET ALL INQUIRIES
+	public List<Inquiry> getAllInquiries() {
+		return iRepository.findAll();
 	}
 
 }

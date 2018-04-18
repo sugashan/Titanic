@@ -38,6 +38,10 @@
 		<!-- NOTIFICATIONS URL -->
 		<intercept-url pattern="/notifications/newMsg" access="hasRole('ROLE_CUSTOMER')"/>
 		
+		<!-- COMMENTS INQUIRIES -->
+		<intercept-url pattern="/comments/comment**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')"/>
+		<intercept-url pattern="/inquiries/inquiry**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')"/>
+		
 		 <logout
 		      logout-success-url="/login.do"
 		      delete-cookies="true"
