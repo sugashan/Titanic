@@ -32,7 +32,7 @@
 					<div class="cont_ba_opcitiy">
 
 						<h2>LOGIN</h2>
-						<p>Let's get In!</p>
+						<p>Have an <b> account </b>? Let's get In!</p>
 						<button class="btn_login" onclick="cambiar_login()">LOGIN</button>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 					<div class="cont_ba_opcitiy">
 					
 						<h2>SIGN UP</h2>
-						<p>Don't have an account yet?</p>
+						<p><b> Don't </b> have an account yet?</p>
 						<button class="btn_sign_up" onclick="cambiar_sign_up()">SIGN
 							UP</button>
 					</div>
@@ -69,8 +69,8 @@
 					<h2>LOGIN</h2>
 
 					<input type="text" name="username" placeholder="UserName"
-						autofocus="autofocus" /> 
-					<input type="password" name="password"
+						autofocus="autofocus" style="font-size:15px;" /> 
+					<input type="password" name="password" style="font-size:15px;"
 						placeholder="Password" /> 
 					<input name="submit" type="submit"
 						class="btn_login" value="LOGIN"

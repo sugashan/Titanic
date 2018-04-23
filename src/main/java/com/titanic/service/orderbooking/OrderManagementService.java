@@ -3,10 +3,8 @@ package com.titanic.service.orderbooking;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.transaction.Transactional;
 import javax.validation.Valid;
-
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -101,7 +99,7 @@ public class OrderManagementService {
 	}
 
 	// SAVE NEW ORDER
-	public void save(@Valid Orders order) {
+	public Orders save(@Valid Orders order) {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		order.setOutletBranch("Nelliyady-Titanic");
@@ -161,6 +159,7 @@ public class OrderManagementService {
 			
 			nmService.getAndSaveNotification(TitanicMessageConstant.RECEIVED_ORDER.toString(), order);
 		}
+		return ord;
 	}
 	
 	// UPDATE ORDER STATUS ONLY
@@ -233,6 +232,11 @@ public class OrderManagementService {
 		if(TitanicMessageConstant.PICK_UP_ORDER.equals(orderType)) {
 			ptoRepository.delete(findOnePickUpByOrderId(id));
 		}
+	}
+
+	// COUNT NEW ORDERS
+	public int countNewOrders() {
+		return oRepository.countByOrderStatus();
 	}
 
 }

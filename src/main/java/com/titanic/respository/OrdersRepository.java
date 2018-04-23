@@ -19,5 +19,8 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 
 
 	List<Orders> findTop50ByOrderByOrderedOnDesc();
+
+	@Query("SELECT COUNT(orderCode) FROM Orders WHERE orderStatus IS NOT 'Finished'")
+	int countByOrderStatus();
 	
 }

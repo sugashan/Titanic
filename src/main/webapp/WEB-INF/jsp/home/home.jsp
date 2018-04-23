@@ -647,7 +647,7 @@
 							<form:input type="text" path="customerName" placeholder="Name" class="textFiled" />
 							 <form:errors path="customerName"/>
 							 
-							<form:input type="custEmail" path="custEmail" placeholder="Email" class="emailFiled"/>
+							<form:input type="email" path="custEmail" placeholder="Email" class="emailFiled"/>
 							 <form:errors path="custEmail"/>
 						</div>
 						<div class="col-md-6 col-sm-6 contact_left_grid">
@@ -1024,7 +1024,7 @@
 			var status = "${param.success}"
 			
 			if(msg.trim() != "" || status.trim() != ""){
-				$("#confModalText").html(msg);
+				$("#confModalText").html(msg + "<br/><small>Thanks for Order! Your order ref-no is :- <b>" + mealCode + "</b></small>");
 				$("#confModalbtn").css("display", "none"); 
 				$("#cancelbtn").html("Ok");
 	    		if(status == "true"){

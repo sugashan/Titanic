@@ -222,7 +222,7 @@
     	 $("#newMeal").validate();
     	 
     	 validator();
-    	 reset();
+    	 resetFormField();
     	 
     	// CHECK UNIQUE CODE
     	 $('.foodTypeGenCode').on("change", function() {

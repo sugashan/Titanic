@@ -198,8 +198,8 @@ public class OrderManagementController {
 					// Need to be set dynamic // 
 					
 					order.setCustomer(cmService.findOneByUser(umService.findOneByUserName(CurrentUser.me())));
-					omService.save(order);
-					redirectUrlString = "redirect:/home.do?success=true&msg=Successfully Added!";
+					Orders savedOrder = omService.save(order);
+					redirectUrlString = "redirect:/home.do?success=true&msg=Successfully Added!&mealCode="+savedOrder.getOrderCode();
 				}
 			}
 			catch (Exception e) {

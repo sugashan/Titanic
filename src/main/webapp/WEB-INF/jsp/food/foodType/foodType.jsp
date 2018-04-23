@@ -145,7 +145,7 @@
     	 $("#newFoodType").validate();
     	 
     	 validator();
-    	 reset();
+    	 resetFormField();
     	 history.replaceState(null, document.title, "foodType.do");
   	});
   	</script>

@@ -123,4 +123,10 @@
 		<put-attribute name="containerbody" value="/WEB-INF/jsp/reviewAndComment/inquiry.jsp" />
 		<put-attribute name="current" value="inquiry"/>
 	</definition>
+	
+	<definition name="calendar" extends="common">
+		<put-attribute name="title" value="Titanic Calendar" />
+		<put-attribute name="containerbody" value="/WEB-INF/jsp/utility/calendar.jsp" />
+		<put-attribute name="current" value="calendar"/>
+	</definition>
 </tiles-definitions>

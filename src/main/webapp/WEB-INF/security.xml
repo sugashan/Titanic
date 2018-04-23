@@ -39,8 +39,14 @@
 		<intercept-url pattern="/notifications/newMsg" access="hasRole('ROLE_CUSTOMER')"/>
 		
 		<!-- COMMENTS INQUIRIES -->
-		<intercept-url pattern="/comments/comment**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')"/>
-		<intercept-url pattern="/inquiries/inquiry**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')"/>
+		<intercept-url pattern="/comments**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')"/>
+		<intercept-url pattern="/inquiries**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')"/>
+		
+		<!-- DASHBOARD -->
+		<intercept-url pattern="/dashboard**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER', 'ROLE_COOK', 'ROLE_RECEPTIONIST', 'ROLE_DELIVERYBOY' )"/>
+		
+		<!-- UTILITY -->
+		<intercept-url pattern="/utility/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST', 'ROLE_DELIVERYBOY' )"/>
 		
 		 <logout
 		      logout-success-url="/login.do"

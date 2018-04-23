@@ -212,7 +212,7 @@
    		 //   VALIDATIONS
     	 $("#newEmployee").validate();
     	 validator();
-    	 reset();
+    	 resetFormField();
     	 history.replaceState(null, document.title, "employee.do");
   	});
   	
