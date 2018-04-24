@@ -346,7 +346,7 @@
 		
 		$("#singleUpdatedOrder").validate();
 		validator();
-		reset();
+		resetFormField();
 		 hideParam();
 		 window.history.replaceState({}, document.title,  "/titanic/orders/order-detail-payment/"+orderId+"/"+orderType+".do");
 	});

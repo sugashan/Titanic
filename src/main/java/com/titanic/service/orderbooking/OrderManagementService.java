@@ -239,4 +239,14 @@ public class OrderManagementService {
 		return oRepository.countByOrderStatus();
 	}
 
+	// COUNT WITH TYPE ORDERS
+	public int countByOrderType(String orderType) {
+		return oRepository.countByOrderType(orderType);
+	}
+
+	// COUNT BETWEEN TYPE ORDERED ON AND TODAY
+	public int countOrdersBetweenTodayAndOrderedOn(Date today) {
+		return oRepository.countByTodayAndOrderedOn(today);
+	}
+
 }

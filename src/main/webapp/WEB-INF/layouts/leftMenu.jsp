@@ -60,7 +60,7 @@
 			</li>
 
 			<li class="treeview ${current == 'foodType' ? 'active' : ''}">
-				<a href="#"><i class="fa fa-cart-arrow-down"></i> <span>Meal</span> 
+				<a href="#"><i class="fa  fa-cutlery"></i> <span>Meal</span> 
 					<span class="pull-right-container"> <i	class="fa fa-angle-left pull-right"></i></span>
 				</a>
 				<ul class="treeview-menu">
@@ -82,7 +82,7 @@
 			</li>
 			
 			<li class="treeview ${current == 'order' ? 'active' : ''}">
-				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-cart-arrow-down"></i><span> Order</span></a>
+				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-bell-o"></i><span> Order</span></a>
 			</li>
 			
 			<li class="treeview ${current == 'order' ? 'active' : ''}">
@@ -97,7 +97,7 @@
 					<li class="active"><a href='<spring:url value="/utility/calendar.do" />'><i
 							class="fa fa-calendar"></i><span>Calendar</span></a></li>
 					<li class="active"><a href="#"><i
-							class="fa fa-dashboard"></i> <span>Tasks</span></a></li>
+							class="fa fa-hourglass-start"></i> <span>Tasks</span></a></li>
 					<li class="active"><a href="#"><i
 							class="fa fa-book"></i> <span>Reports</span></a></li>
 				</ul>

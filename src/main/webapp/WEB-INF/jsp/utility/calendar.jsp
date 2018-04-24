@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 
+ <%@ include file="../../layouts/taglib.jsp"%>
     
       <!-- fullCalendar 2.2.5-->
       <link href="<c:url value="/resources/plugins/fullcalendar/fullcalendar.min.css" />" rel="stylesheet">
@@ -111,9 +112,6 @@
 
 <!-- FastClick -->
 <script src="<c:url value="/resources/plugins/fastclick/fastclick.js"/>"></script>
-
-<!-- AdminLTE App -->
-<script src="<c:url value="/resources/dist/js/app.min.js"/>"></script>
 
 <!-- AdminLTE for demo purposes -->
 <script src="<c:url value="/resources/dist/js/demo.js"/>"></script>

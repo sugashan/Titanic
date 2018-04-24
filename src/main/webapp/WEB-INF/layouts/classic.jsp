@@ -35,7 +35,6 @@
    	  	<!--multiple-select  -->
    	  <link href="<c:url value="/resources/dist/css/multiple-select.css" />" rel="stylesheet">
    	  
-
    	  <title><tiles:getAsString name="title"/></title>
    	  
    	  <style type="text/css">
@@ -72,6 +71,9 @@
   	<!-- Common script -->
   	<script type="text/javascript" src="<c:url value="/resources/common/js/titanic.js" />"></script>
   	
+  	<!-- FastClick -->
+    <script type="text/javascript" src="<c:url value="/resources/plugins/fastclick/fastclick.js" />"></script>
+
 	 <!-- wrapper -->
 	<div class="wrapper">
 	
