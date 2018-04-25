@@ -3,6 +3,7 @@ package com.titanic.respository;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.titanic.entity.Customer;
 import com.titanic.entity.Orders;
 
-public interface OrdersRepository extends JpaRepository<Orders, Integer> {
+public interface OrdersRepository extends JpaRepository<Orders, Integer> , PagingAndSortingRepository<Orders, Integer>{
 	
 	@Query("SELECT MAX(id) FROM Orders")
 	String getLastInsertedId();

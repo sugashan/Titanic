@@ -116,6 +116,14 @@
 				     	<form:checkbox path="isSpecial" data-toggle="toggle" data-on="True" data-off="False"/>
 				     </div>
 				   </div>  
+				   
+				   <div class="row">
+				    <div class="form-group col-md-12">
+				   		 <label for="exampleInputEmail1">Meal-Name :</label>
+				    	 <form:input path="name" cssClass="form-control textFiled"/>
+				    	  <span style="color:red;"><form:errors path="name"/></span>
+				    </div>
+				  </div>
     		 	
 				  <div class="row">
 				  	 <div class="form-group col-md-6">
@@ -123,11 +131,11 @@
 				    	 <form:input path="code" cssClass="form-control codeClass textFiled"/>
 				    	  <span style="color:red;"><form:errors path="code"/></span>
 				    </div>
-				  
-				    <div class="form-group col-md-6">
-				   		 <label for="exampleInputEmail1">Meal-Name :</label>
-				    	 <form:input path="name" cssClass="form-control textFiled"/>
-				    	  <span style="color:red;"><form:errors path="name"/></span>
+				    
+				     <div class="form-group col-md-6">
+				    	<label for="exampleInputEmail1">Meal-Cooking-Avg-Time (Min) :</label>
+				    	 <form:input path="avgCookingTime" type="number" cssClass="form-control requiredFiled"/>
+				    	  <span style="color:red;"><form:errors path="avgCookingTime"/></span>
 				    </div>
 				  </div>
 				  
@@ -222,7 +230,6 @@
     	 $("#newMeal").validate();
     	 
     	 validator();
-    	 resetFormField();
     	 
     	// CHECK UNIQUE CODE
     	 $('.foodTypeGenCode').on("change", function() {
@@ -261,4 +268,14 @@
             $("#image").css("color", "white");
             $('.previewing').attr('src', e.target.result);
         };
+        
+        
+        // RESET
+        function reset(){
+        	alert(1);
+        	 $('.selectboxField').each(function () {
+       	      $(this).val("default");
+       	    });
+        	resetFormField();
+        }
   </script>

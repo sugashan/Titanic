@@ -1,4 +1,6 @@
-package com.titanic.controller.reviewandinquiry;
+package com.titanic.controller.msgandfaq;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +12,7 @@ import com.titanic.entity.Customer;
 import com.titanic.entity.Notification;
 import com.titanic.other.GenericResult;
 import com.titanic.other.JsonFormer;
-import com.titanic.service.reviewandinquiry.NotificationManagementService;
+import com.titanic.service.msgandfaq.NotificationManagementService;
 import com.titanic.service.user.CustomerManagementService;
 
 @Controller
@@ -30,7 +32,7 @@ public class NotificationManagementController {
 	@ResponseBody
 	public String newMsgsForCustomer(@RequestParam int userId ) {
 		Customer customer = cmService.findOnebyId(userId);
-		Notification newnotifications =  nmService.getNewMsgs(customer);
+		List<Notification> newnotifications =  nmService.getNewMsgs(customer);
 		try {
 			returnResultString = JsonFormer.form(new GenericResult("success", newnotifications));
 		} catch (Exception e) {

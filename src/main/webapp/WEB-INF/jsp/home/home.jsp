@@ -1022,6 +1022,7 @@
 			
 			var msg = "${param.msg}";
 			var status = "${param.success}"
+			var mealCode = "${param.mealCode}"
 			
 			if(msg.trim() != "" || status.trim() != ""){
 				$("#confModalText").html(msg + "<br/><small>Thanks for Order! Your order ref-no is :- <b>" + mealCode + "</b></small>");

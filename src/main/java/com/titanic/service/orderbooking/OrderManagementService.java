@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import com.titanic.entity.Customer;
@@ -17,6 +18,7 @@ import com.titanic.entity.FoodOrder;
 import com.titanic.entity.Orders;
 import com.titanic.entity.Payment;
 import com.titanic.entity.PickUpDeskOrder;
+import com.titanic.other.OrderRelatedCommonService;
 import com.titanic.other.TitanicMessageConstant;
 import com.titanic.other.UniqueIdManager;
 import com.titanic.respository.DeliveryTypeOrderRepository;
@@ -25,7 +27,6 @@ import com.titanic.respository.OrderFoodRepository;
 import com.titanic.respository.OrdersRepository;
 import com.titanic.respository.PaymentRepository;
 import com.titanic.respository.PickUpTypeOrderRepository;
-import com.titanic.service.reviewandinquiry.NotificationManagementService;
 import com.titanic.service.user.EmployeeManagementService;
 import com.titanic.service.user.UserCommonService;
 import com.titanic.session.CurrentUser;
@@ -58,13 +59,13 @@ public class OrderManagementService {
 	@Autowired
 	private EmployeeManagementService emService;
 	
-	@Autowired 
-	private NotificationManagementService nmService;
+	@Autowired
+	private OrderRelatedCommonService orcService;
 	
 	
 	// GET ALL ORDERS AS LIST
 	public List<Orders> findAll() {
-		return oRepository.findTop50ByOrderByOrderedOnDesc();
+		return oRepository.findAll(new Sort(Sort.Direction.DESC, "id"));
 	}
 	
 	// GET SELECTED ORDER
@@ -157,23 +158,26 @@ public class OrderManagementService {
 				}
 			}
 			
-			nmService.getAndSaveNotification(TitanicMessageConstant.RECEIVED_ORDER.toString(), order);
+			orcService.getAndSaveNotification(TitanicMessageConstant.RECEIVED_ORDER.toString(), order);
 		}
 		return ord;
 	}
 	
-	// UPDATE ORDER STATUS ONLY
-	public void changeStatsOnly( String orderStatus, int id, String orderType) {
+	// UPDATE ORDER STATUS ONLY PURPOSE OF DELETE OR CANCEL
+	public void changeStatsOnly( String orderStatus, int id, String orderType, String logger) {
 		Orders existingOrder = findOneById(id);
 		existingOrder.setOrderStatus(orderStatus);
+		existingOrder.setDescription(existingOrder.getDescription() + orderStatus + " By " + logger);
 		oRepository.save(existingOrder);
 	}
 	
-	// UPDATE A ORDER
+	// UPDATE A ORDER PURPOSE OF PROCEED A ORDER
 	@PreAuthorize(value = "hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')")
 	public void update(@Valid Orders order, int id, String orderType) {
+		int waitingTime = 0;
 		Orders existingOrder = findOneById(id);
 		existingOrder.setOrderStatus(order.getOrderStatus());
+		
 		
 		if(order.getPayment().getGiven() != 0) {
 			Payment payment = new Payment();
@@ -194,19 +198,39 @@ public class OrderManagementService {
 			
 			pRepository.save(payment);
 		}
+		
+		if(TitanicMessageConstant.ACCEPTED_ORDER.equals(order.getOrderStatus())) {
+			List<FoodOrder> ordFoodList = existingOrder.getFoodOrder();
+			for( FoodOrder foodOrder : ordFoodList) {
+				foodOrder.setStatus(TitanicMessageConstant.ACCEPTED_ORDER);
+				waitingTime += orcService.getCalculateExpectedWaitingTime(foodOrder);
+				System.out.println(waitingTime + "-------------waitingTime");
+			}
+			int avgWaitingTime = waitingTime/ordFoodList.size();
+			System.out.println(avgWaitingTime + "------------- avg Wating Time");
+			Date now = new Date();
+			now.setMinutes(now.getMinutes() + avgWaitingTime);
+			existingOrder.setExpectedDeliverTime(now.toString());
+			existingOrder.setWaitingTimeMin(avgWaitingTime);
+			
+			
+			existingOrder.setFoodOrder(ordFoodList);
+		}
+		
 		oRepository.save(existingOrder);
+		ofRepository.saveAll(existingOrder.getFoodOrder());
 		
 		if(TitanicMessageConstant.DELIVERY_ORDER.equals(orderType)) {
 			DeliveryOrder  ddOrder = findOneDeliveryByOrderId(existingOrder.getId());
 			
-			Employee employee = order.getHandledEmployee();
+			Employee employee = emService.findOnebyId(order.getDeliveryboyID());
 			if(employee != null) {
 				ddOrder.setEmployee(employee);
 				dtoRepository.save(ddOrder);
 			}
 		}
 
-		nmService.getAndSaveNotification(order.getOrderStatus(), existingOrder);
+		orcService.getAndSaveNotification(order.getOrderStatus(), existingOrder);
 	
 	}
 	

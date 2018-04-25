@@ -10,11 +10,12 @@ import com.titanic.entity.Customer;
 import com.titanic.entity.FeedBack;
 import com.titanic.entity.Inquiry;
 import com.titanic.entity.MealsSchedule;
+import com.titanic.entity.Notification;
 import com.titanic.entity.Orders;
 import com.titanic.service.food.MealManagementService;
+import com.titanic.service.msgandfaq.NotificationManagementService;
+import com.titanic.service.msgandfaq.ReviewManagementService;
 import com.titanic.service.orderbooking.OrderManagementService;
-import com.titanic.service.reviewandinquiry.NotificationManagementService;
-import com.titanic.service.reviewandinquiry.ReviewManagementService;
 import com.titanic.service.user.CustomerManagementService;
 import com.titanic.service.user.UserCommonService;
 import com.titanic.session.CurrentUser;
@@ -68,6 +69,7 @@ public class HomeController {
 		model.addAttribute("comments", rmService.getAllComments());
 		model.addAttribute("meals", mmService.findAll());
 		Customer CurrCustomer = cmService.findOneByUser(umService.findOneByUserName(CurrentUser.me()));
+		
 		model.addAttribute("msgs", nmService.getNewMsgs(CurrCustomer));
 		model.addAttribute("myProfile", CurrCustomer);
 		

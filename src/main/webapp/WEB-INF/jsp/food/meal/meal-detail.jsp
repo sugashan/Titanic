@@ -24,7 +24,7 @@
 			<div class="box-body">
 				<form:form modelAttribute="singleUpdatedMeal" method="post">
 				 <div class="row">
-				    <div class="form-group col-md-4">
+				    <div class="form-group col-md-6">
 				   		 <label for="exampleInputEmail1">Meal-Name :</label>
 				    	 <form:input path="name" cssClass="form-control" value="${singleMeal.name}"/>
 				    	  <span style="color:red;"><form:errors path="name"/></span>
@@ -58,20 +58,33 @@
 							 <span style="color:red;"><form:errors path="foodTypeId"/></span>
 				     </div>
 				     
-				      <div class="form-group col-md-2">
+				  </div>
+				  
+				   <div class="row">
+					   <div class = "col-md-6">
+					  	<label for="exampleInputEmail1">Description :</label>
+					  		<form:textarea path = "description" cssClass="form-control" />
+					  		<span style="color:red;"><form:errors path="description"/></span>
+					  	</div>
+					  	 <div class = "col-md-6">
+					  	<label for="exampleInputEmail1">Incrediant :</label>
+					  		<form:textarea path = "incrediants" cssClass="form-control"></form:textarea>
+					  		<span style="color:red;"><form:errors path="incrediants"/></span>
+					  	</div>
+				  	</div>
+				  	
+				  	 <div class="row">
+				  	 <div class = "col-md-4">
+					  	<label for="exampleInputEmail1">Meal-Cooking-Avg-Time (Min) :</label>
+					  		<form:input path = "avgCookingTime" cssClass="form-control" value="${singleMeal.avgCookingTime}" />
+					  		<span style="color:red;"><form:errors path="avgCookingTime"/></span>
+					  	</div>
+					  	<div class="form-group col-md-2">
 				    <label for="exampleInputEmail1">Unit-Price :</label>
 				     <form:input path="price" cssClass="form-control" type="number" step="0.01" value="${singleMeal.price}"/>
 				   	<span style="color:red;"><form:errors path="price"/></span>
 				    </div>
-				  </div>
-				  
-				   <div class="row">
-				   <div class = "col-md-6">
-				  	<label for="exampleInputEmail1">Description :</label>
-				  		<form:textarea path = "description" cssClass="form-control" value="${singleMeal.description}" />
-				  		<span style="color:red;"><form:errors path="description"/></span>
-				  	</div>
-				  	
+					  	
 				     <div class="form-group col-md-6">
 				     <label for="exampleInputEmail1">Meal Image :</label>
 						<input name="image" id="image" type="file" class="form-control"/>

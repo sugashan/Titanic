@@ -44,10 +44,21 @@ public class Meal {
 	@NotNull(message="Food Type Can Not Be Empty!")
 	private int foodTypeId;
 	
+	@NotNull(message = "Burst time cannot be empty!")
+	private int avgCookingTime;
+	
 	private String incrediants;
 	private Boolean isSpecial;
 	
 	
+	
+
+	public int getAvgCookingTime() {
+		return avgCookingTime;
+	}
+	public void setAvgCookingTime(int avgCookingTime) {
+		this.avgCookingTime = avgCookingTime;
+	}
 	public Boolean getIsSpecial() {
 		return isSpecial;
 	}

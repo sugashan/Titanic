@@ -37,13 +37,14 @@ function validator(){
 	// SELECTBOX VALIDATION
 	 $.validator.addMethod("valueNotEqualsToDefault", function(value, element, arg){
 		  return arg !== value;
-		 }, "Please Select One!.");
+		 }, "Please Select One!");
 	 
 	 
 	 // VALIDATION VIA CLASSES
 	 $('.selectboxField').each(function () {
 	      $(this).rules('add', {
 	    	  valueNotEqualsToDefault:"default",
+	    	  valueNotEqualsToDefault:0
 	      });
 	    });
 	 

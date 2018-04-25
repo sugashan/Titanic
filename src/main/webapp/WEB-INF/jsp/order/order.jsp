@@ -43,10 +43,10 @@
 								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
 								</a> 
-<!-- 								<a class="btn text-danger triggerRemove" -->
-<%-- 									href='<spring:url value="deleteOrder/${order.id}/${order.orderType}.do" />'> <i --%>
-<!-- 										class="fa fa-trash-o"></i> -->
-<%-- 								</a> <c:out value="${order.orderCode}"/> --%>
+								<a class="btn text-danger triggerRemove"
+									href='<spring:url value="deleteOrder/${order.id}/${order.orderType}.do" />'> <i
+										class="fa fa-trash-o"></i>
+								</a> <c:out value="${order.orderCode}"/>
 								</td>
 								<td><a class="btn" href='<spring:url value="order-detail-payment/${order.id}/${order.orderType}.do" />'><c:out value="${order.customer.user.userName}"/></a></td>
 								<td><a class="btn" href='<spring:url value="order-detail-payment/${order.id}/${order.orderType}.do" />'><c:out value="${order.orderedOn}"/></a></td>
@@ -188,7 +188,7 @@
 									</div>
 									<div class="row">
 										<div class="form-group col-md-12">
-											<input class="totalgiven inputPay currencyField" type = "number" step="0.01" style=" border: 2px solid black;"/>
+											<input class="totalgiven inputPay" type = "number" step="0.01" style=" border: 2px solid black;"/>
 											<form:input path="payment.given" hidden="true" id="given" value="0"/>
 										</div>
 									</div>

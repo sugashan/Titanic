@@ -13,9 +13,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
 	Employee findByUser(User user);
 
-//	@Query("SELECT e from Employee e where e.user.roleId = :role_id and e.availableForDeivery = :availableForDeivery")
-//	List<Employee> findAvailabledeliveryBoy(@Param("role_id")int id, @Param("availableForDeivery") boolean availableForDeivery);
+	@Query("select e from Employee e where e.user.roleId = :roleId and e.availableForDeivery = :availableForDeivery")
+	List<Employee> findAllByEmployeeUserRoleIdAndAvailableForDeivery(@Param("roleId") int roleId, @Param("availableForDeivery") boolean availableForDeivery);
 
-
-	List<Employee> findTop5ByUserRoleIdAndAvailableForDeivery(int roleId, boolean availableForDeivery);
 }

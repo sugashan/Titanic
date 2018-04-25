@@ -307,19 +307,19 @@
 					<!-- NOTIFICATION -->
 					<div class="tab-pane fade " id="pills-Msg">
 						<c:if test="${msgs eq null}">
-							<div class="row  alert alert-info" style="margin: -5px;">
+							<div class="row" style="margin: -5px;">
 								<div class="col-md-12" style="margin: -15px;">
-									<p style="color:white; font-size:20px;">You don't have any new message!</p>
+									<p style="color:white;">You don't have any new message!</p>
 								</div>
 							</div>
 						</c:if>
 						<c:if test="${msgs ne null}">
 							<c:forEach items="${msgs}" var="msg" varStatus="index">
-								<div class="row alert alert-info">
-									<div class="col-md-10">
-										<p style="color:white; font-size:20px;">${msg.message}!</p>
-										<small style="color:white;">${msg.createdDate}</small>
-										<p style="color:white;">${msg.description}</p>
+								<div class="row ">
+									<div class="col-md-12" style="background-color:  #ffa41f;">
+										<p style="color:white;"><b>${index.index +1} --</b> <c:out value=" ${msg.message}" />! :
+											<small style="color:black;"> <c:out value=" ${msg.createdDate}" /></small><br/>
+												           ${msg.description}</p>
 									</div>
 								</div>
 								<br/>

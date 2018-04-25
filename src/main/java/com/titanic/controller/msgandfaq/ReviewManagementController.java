@@ -1,4 +1,4 @@
-package com.titanic.controller.reviewandinquiry;
+package com.titanic.controller.msgandfaq;
 
 import javax.validation.Valid;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.titanic.entity.FeedBack;
-import com.titanic.service.reviewandinquiry.ReviewManagementService;
+import com.titanic.service.msgandfaq.ReviewManagementService;
 
 @Controller
 public class ReviewManagementController {

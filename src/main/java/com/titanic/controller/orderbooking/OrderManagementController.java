@@ -139,6 +139,7 @@ public class OrderManagementController {
 			redirectUrlString = "redirect:/orders/order.do?success=false&msg=Order Failed";
 		}
 		else {
+			
 			String orderMeal = "";
 			List<FoodOrder> orderList = order.getFoodOrder();
 			Iterator<FoodOrder> ordItr = orderList.iterator();
@@ -152,6 +153,7 @@ public class OrderManagementController {
 			    	orderMeal += foodOrder.getMealName() + " x " + foodOrder.getQuantity() + ", ";
 			    }
 			}
+			
 			order.setFoodOrder(orderList);
 			order.setFoodOrderString(orderMeal);
 			Customer customer = cmService.findOneByUser(umService.findOneByUserName(order.getCustomer().getUser().getName()));
@@ -193,6 +195,7 @@ public class OrderManagementController {
 						foodOrder.setOrder(order);
 						orderMeal += foodOrder.getMealName() + " x " + foodOrder.getQuantity() + " , ";
 					}
+					
 					order.setFoodOrder(foodOrderList);
 					order.setFoodOrderString(orderMeal);
 					// Need to be set dynamic // 
@@ -219,7 +222,6 @@ public class OrderManagementController {
 			redirectUrlString = "redirect:/orders/order-detail-payment/"+id+"/"+orderType+".do?success=false&msg=Update Failed";
 		}
 		else {
-			System.out.println(order.getOrderStatus() + "-------------------");
 			 omService.update(order, id, orderType);
 		redirectUrlString = "redirect:/orders/order-detail-payment/"+id+"/"+orderType+".do?success=true&msg=Successfully Updated";
 		}
@@ -235,16 +237,16 @@ public class OrderManagementController {
 	
 	// DELETE EXITING ORDER
 	@RequestMapping(value="orders/deleteOrder/{id}/{orderType}", method=RequestMethod.POST)
-	public String rejectOrder( @PathVariable int id, @PathVariable String orderType, Model model) {
-		omService.delete(id, orderType);
+	public String rejectOrder( @PathVariable int id, @PathVariable String orderType, Model model, HttpSession session) {
+		omService.changeStatsOnly(TitanicMessageConstant.REJECTED_ORDER, id, orderType, (String) session.getAttribute("LoggerName") );
 		redirectUrlString = "redirect:/orders/order.do?success=true&msg=Successfully Updated";
 		return redirectUrlString;
 	}
 	
 	// UPDATE STATUS OF ORDER
 	@RequestMapping(value="orders/changeStatusOrder/{id}/{orderType}", method=RequestMethod.POST)
-	public String changeStatusOrder(@RequestParam String orderStatus, @PathVariable int id, @PathVariable String orderType, Model model) {
-		omService.changeStatsOnly(orderStatus, id, orderType);
+	public String changeStatusOrder(@RequestParam String orderStatus, @PathVariable int id, @PathVariable String orderType, Model model,  HttpSession session) {
+		omService.changeStatsOnly(orderStatus, id, orderType,  (String) session.getAttribute("LoggerName"));
 		redirectUrlString = "redirect:/orders/order.do?success=true&msg=Successfully Updated";
 		return redirectUrlString;
 	}

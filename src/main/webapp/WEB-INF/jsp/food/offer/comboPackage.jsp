@@ -241,7 +241,6 @@
     	 //   VALIDATIONS
     	 $("#newComboPackage").validate();
     	 validator();
-    	 resetFormField();
     	 history.replaceState(null, document.title, "comboPackage.do");
   	});
   	

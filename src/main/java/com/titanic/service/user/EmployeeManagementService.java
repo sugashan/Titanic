@@ -1,14 +1,12 @@
 package com.titanic.service.user;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.titanic.entity.Customer;
 import com.titanic.entity.Employee;
 import com.titanic.entity.Role;
 import com.titanic.entity.User;
@@ -26,9 +24,6 @@ public class EmployeeManagementService {
 	
 	@Autowired
 	private UserCommonService ucService;
-	
-	@Autowired
-	private CustomerManagementService cmService;
 	
 	
 	// GET ALL EMPLOYEE AS LIST
@@ -54,11 +49,6 @@ public class EmployeeManagementService {
 		User resultUser = uRepository.save(employee.getUser());
 		if(resultUser!= null)
 		eRepository.save(employee);
-		
-		// ADDING A EMPLOYEE AS CUSTOMER
-		Customer newCustomer = new Customer();
-		newCustomer.setUser(employee.getUser());
-		cmService.save(newCustomer);
 	}
 
 	// DELETE A EMPLOYEE
@@ -96,16 +86,7 @@ public class EmployeeManagementService {
 	
 	// GET ALL WITH ROLE
 	public List<Employee> findAllByRole(int roleId) {
-		List<Employee> emp = new ArrayList<Employee>();
-		
-		System.out.println(roleId + "-----------------");
-			System.out.println("getting employee to deliver------------");
-		//	emp = eRepository.findAvailabledeliveryBoy(roleId, true);
-			emp = eRepository.findTop5ByUserRoleIdAndAvailableForDeivery(roleId, true);
-			for(Employee empp : emp) {
-				empp.getUser().getName();
-			}
-		return emp;
+		return eRepository.findAllByEmployeeUserRoleIdAndAvailableForDeivery(roleId, true);
 	}
 	
 	

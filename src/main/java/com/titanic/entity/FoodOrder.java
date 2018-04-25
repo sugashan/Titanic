@@ -28,7 +28,25 @@ public class FoodOrder {
 	
 	private String mealName;
 	
-
+	@OneToOne
+	private Employee cook;
+	
+	private String status;
+	
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public Employee getCook() {
+		return cook;
+	}
+	public void setCook(Employee cook) {
+		this.cook = cook;
+	}
 	public String getMealName() {
 		return mealName;
 	}

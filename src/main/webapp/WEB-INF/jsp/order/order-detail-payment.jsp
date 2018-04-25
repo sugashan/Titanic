@@ -221,7 +221,7 @@
 					<div class="row">
 						<div class="form-group col-md-6" style="margin-left: 25%;">
 					    <label for="exampleInputEmail1" Class="difColor">Transaction Date :</label>
-		 			      <form:input path = "payment.t_date" type = "date" cssClass="form-control dateField toBeReset"/> 
+		 			      <form:input path = "payment.t_date" type = "date" cssClass="tdate form-control dateField toBeReset"/> 
 		 			       <span style="color:red;"><form:errors path="payment.t_date"/></span>
 		 			    </div> 
 					</div>
@@ -267,10 +267,10 @@
 					 	<div class="row">
 							<div class="col-md-12">
 								<label>Delivery Boy :</label> 
-								<form:select path="handledEmployee" class="form-control toBeReset">
-									<form:option value="default">Select..</form:option>
+								<form:select path="deliveryboyID" class="form-control">
+									<form:option value="0">Select..</form:option>
 									<c:forEach items="${deliveryBoys}" var="deliveryBoy">
-									<form:option value="${deliveryBoy}" label="${deliveryBoy.user.userName}" />
+									<form:option value="${deliveryBoy.id}" label="${deliveryBoy.user.userName}" />
 									</c:forEach>
 						 		</form:select>
 						 	</div>
@@ -284,7 +284,7 @@
 							<label>Order Status :</label> 
 							<form:select path="orderStatus" class="form-control selectboxField toBeReset">
 								<form:option value="default">Select..</form:option>
-								<form:option value="Rejected">Rejected</form:option>
+								<form:option value="Processing">Processing</form:option>
 								<form:option value="Cancel">Cancel</form:option>
 								<form:option value="Delivered">Delivered</form:option>
 								<form:option value="Finished">Finished</form:option>
@@ -326,7 +326,7 @@
 	payable = (total - givenPast).toFixed(2);
 	
 	$(document).ready(function(){  		
-		
+		$(".totalgiven").prop("disabled", false);
 		if (payable > 0){
 			$("#type").html(" DUE ");
 			$("#payable").val(payable + " LKR");
@@ -338,15 +338,30 @@
 			$("#payable").val(payable + " LKR");
 			$("#payable").css("background-color", "green");
 			$("#payable").css("color", "white");
+			 $(".totalgiven").prop("disabled", true);
 		}
 		
 		$("#updBtnDiv").css("display", "none");
 		$(".form-control, form-group ").css("disabled", "true");
 		$(".editToShow").css("display", "block");
 		
+		var now = new Date();
+		var dd = now.getDate();
+		var mm = now.getMonth()+1; //January is 0!
+		var yyyy = now.getFullYear();
+		
+		if(dd<10){
+		    dd='0'+dd;
+		} 
+		if(mm<10){
+		    mm='0'+mm;
+		} 
+		var todayDate = mm+'/'+dd+'/'+yyyy;
+		console.log(todayDate);
+		$(".tdate").val(todayDate);
+		
 		$("#singleUpdatedOrder").validate();
 		validator();
-		resetFormField();
 		 hideParam();
 		 window.history.replaceState({}, document.title,  "/titanic/orders/order-detail-payment/"+orderId+"/"+orderType+".do");
 	});

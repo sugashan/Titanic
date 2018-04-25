@@ -34,7 +34,7 @@
 		<!-- Side bar Menu -->
 		<ul class="sidebar-menu">
 			<security:authorize access=" isAuthenticated()">
-			<li class="header ${current == 'home' ? 'active' : ''}">
+			<li class="header ${current == 'dashboard' ? 'active' : ''}">
 				<a href='<spring:url value="/dashboard.do" />'> <i class="fa fa-home"></i><span>DashBoard</span></a>
 			</li>
 
@@ -42,7 +42,7 @@
 				<a href='<spring:url value="/home.do" />'> <i class="fa fa-laptop"></i><span>Titanic Home Page</span></a>
 			</li>
 			
-			<li class="treeview ${current == 'employee' ? 'active' : ''}"><a href="#"><i class="fa fa-user"></i>
+			<li class="treeview ${current == 'employee' or current == 'customer' ? 'active' : ''}"><a href="#"><i class="fa fa-user"></i>
 					<span>Users</span> <span class="pull-right-container"> <i
 						class="fa fa-angle-left pull-right"></i>
 				</span> </a>
@@ -51,7 +51,7 @@
 						<a href='<spring:url value="/users/employee.do" />'><i class="fa fa-circle-thin"></i><span>
 								Employees</span></a>
 					</li>
-					<li class="${current == 'employee' ? 'active' : ''}">
+					<li class="${current == 'customer' ? 'active' : ''}">
 						<a href='<spring:url value="/users/customer.do" />'><i
 							class="fa fa-circle-thin"></i><span> 
 								Customers</span></a>
@@ -59,7 +59,7 @@
 				</ul>
 			</li>
 
-			<li class="treeview ${current == 'foodType' ? 'active' : ''}">
+			<li class="treeview ${current == 'foodType' or current == 'meal' or current == 'comboPackage' ? 'active' : ''}">
 				<a href="#"><i class="fa  fa-cutlery"></i> <span>Meal</span> 
 					<span class="pull-right-container"> <i	class="fa fa-angle-left pull-right"></i></span>
 				</a>
@@ -85,29 +85,29 @@
 				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-bell-o"></i><span> Order</span></a>
 			</li>
 			
-			<li class="treeview ${current == 'order' ? 'active' : ''}">
+			<li class="treeview ${current == 'table' ? 'active' : ''}">
 				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-table"></i><span> Tables</span></a>
 			</li>
 			
-			<li class="treeview"><a href="#"><i class="fa fa-th"></i>
+			<li class="treeview ${current == 'inquiry' ? 'active' : ''}"><a href="#"><i class="fa fa-th"></i>
 					<span>Utilities</span> <span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 				</span> </a>
 				<ul class="treeview-menu">
-					<li class="active"><a href='<spring:url value="/utility/calendar.do" />'><i
+					<li class="active ${current == 'calendar' ? 'active' : ''}"><a href='<spring:url value="/utility/calendar.do" />'><i
 							class="fa fa-calendar"></i><span>Calendar</span></a></li>
-					<li class="active"><a href="#"><i
+					<li class="${current == 'task' ? 'active' : ''}"><a href="#"><i
 							class="fa fa-hourglass-start"></i> <span>Tasks</span></a></li>
-					<li class="active"><a href="#"><i
+					<li class="${current == 'report' ? 'active' : ''}"><a href="#"><i
 							class="fa fa-book"></i> <span>Reports</span></a></li>
 				</ul>
 			</li>
 			
-			<li class="treeview ${current == 'order' ? 'active' : ''}">
+			<li class="treeview ${current == 'review' ? 'active' : ''}">
 				<a href='<spring:url value="/comments/comment.do" />'> <i class="fa fa-comments-o"></i><span> Comments</span></a>
 			</li>
 			
-			<li class="treeview"><a href="#"><i class="fa fa-question-circle"></i>
+			<li class="treeview ${current == 'inquiry' ? 'active' : ''}"><a href="#"><i class="fa fa-question-circle"></i>
 					<span>FAQ</span> <span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i>
 				</span> </a>

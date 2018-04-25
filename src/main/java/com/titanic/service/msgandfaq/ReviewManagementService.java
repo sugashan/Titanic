@@ -1,4 +1,4 @@
-package com.titanic.service.reviewandinquiry;
+package com.titanic.service.msgandfaq;
 
 import java.util.List;
 

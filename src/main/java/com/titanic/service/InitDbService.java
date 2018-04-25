@@ -1,6 +1,8 @@
 package com.titanic.service;
 
 import javax.annotation.PostConstruct;
+
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,13 +13,17 @@ import com.titanic.entity.Customer;
 import com.titanic.entity.Employee;
 import com.titanic.entity.FoodType;
 import com.titanic.entity.Meal;
+import com.titanic.entity.Notification;
 import com.titanic.entity.Role;
 import com.titanic.entity.User;
+import com.titanic.other.GenericResult;
+import com.titanic.other.JsonFormer;
 import com.titanic.respository.BranchRepository;
 import com.titanic.respository.CustomerRepository;
 import com.titanic.respository.EmployeeRepository;
 import com.titanic.respository.FoodTypeRepository;
 import com.titanic.respository.MealRepository;
+import com.titanic.respository.NotificatonRepository;
 import com.titanic.respository.RoleRepository;
 import com.titanic.respository.UserRepository;
 
@@ -46,6 +52,7 @@ public class InitDbService {
 	@Autowired
 	private CustomerRepository cRepo;
 
+	
 	@PostConstruct
 	public void Init() {
 		
@@ -68,11 +75,13 @@ public class InitDbService {
 		meal.setIsSpecial(true);
 		meal.setItemCatergory("dish");
 		meal.setPreferedTime("breakfast");
+		meal.setAvgCookingTime(1);
 		meal.setPrice((float) 2.23);
 		mRepo.save(meal);
 		
 		Meal meal1 = new Meal();
 		meal1.setId(2);
+		meal1.setAvgCookingTime(2);
 		meal1.setName("qqqqqqq");
 		meal1.setFoodType(kottu);
 		meal1.setIsSpecial(true);
@@ -119,38 +128,25 @@ public class InitDbService {
 		defaultBranch.setName("Nelliyady-Titanic");
 		bRepo.save(defaultBranch);
 		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
 		User newUser = new User();
 		newUser.setEnabled(true);
 		newUser.setId(1);
 		newUser.setName("Admin");
 		newUser.setMobile("077-3284456");
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		
 		newUser.setUserName("admin");
 		newUser.setPassword(encoder.encode("admin"));
 		newUser.setAddress("Alvai, East");
+		newUser.setRoleId(1);
 		newUser.setRole(adminRole);
 		urepo.save(newUser);
-		
-		Customer newDefaultCust = new Customer();
-		newDefaultCust.setId(1);
-		newDefaultCust.setUser(newUser);
-		cRepo.save(newDefaultCust);
 		
 		Employee newEmployee = new Employee();
 		newEmployee.setId(1);
 		newEmployee.setUser(newUser);
 		newEmployee.setBranch(defaultBranch);
 		eRepo.save(newEmployee);
-		
-		
-		newUser.setRole(deliveryRole);
-		Employee deleivery = new Employee();
-		deleivery.setAvailableForDeivery(true);
-		deleivery.setId(2);
-		deleivery.setUser(newUser);
-		deleivery.setBranch(defaultBranch);
-		eRepo.save(deleivery);
 		
 		
 		User newUser2 = new User();
@@ -161,6 +157,7 @@ public class InitDbService {
 		newUser2.setUserName("sugash");
 		newUser2.setPassword(encoder.encode("sugash"));
 		newUser2.setAddress("Alvai, East");
+		newUser2.setRoleId(4);
 		newUser2.setRole(customerRole);
 		urepo.save(newUser2);
 		
@@ -168,6 +165,26 @@ public class InitDbService {
 		newCustomer.setId(2);
 		newCustomer.setUser(newUser2);
 		cRepo.save(newCustomer);
+		
+		User newUser3 = new User();
+		newUser3.setEnabled(true);
+		newUser3.setId(3);
+		newUser3.setName("DeliveryBoy");
+		newUser3.setMobile("077-2222222");
+		newUser3.setRoleId(5);
+		newUser3.setUserName("delivery");
+		newUser3.setPassword(encoder.encode("delivery"));
+		newUser3.setAddress("Alvai, East");
+		newUser3.setRole(deliveryRole);
+		urepo.save(newUser3);
+		
+		Employee deleivery = new Employee();
+		deleivery.setAvailableForDeivery(true);
+		deleivery.setId(2);
+		deleivery.setUser(newUser3);
+		deleivery.setBranch(defaultBranch);
+		eRepo.save(deleivery);
+		
 	}
 
 }

@@ -33,7 +33,7 @@ public class Orders {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date orderedOn;
 	
-	private String waitingTime;
+	private int waitingTimeMin;
 	
 	@OneToOne
 	private Customer customer;
@@ -52,8 +52,7 @@ public class Orders {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date lastUpdatedTime;
 
-	@OneToOne
-	private Employee handledEmployee;
+	private int deliveryboyID;
 	
 	
 	// ORDERED-ON & DELIVERED TIME ON SERVER TIMESTAMP
@@ -73,11 +72,11 @@ public class Orders {
 	public String getOrderType() {
 		return orderType;
 	}
-	public Employee getHandledEmployee() {
-		return handledEmployee;
+	public int getDeliveryboyID() {
+		return deliveryboyID;
 	}
-	public void setHandledEmployee(Employee handledEmployee) {
-		this.handledEmployee = handledEmployee;
+	public void setDeliveryboyID(int deliveryboyID) {
+		this.deliveryboyID = deliveryboyID;
 	}
 	public String getTempStringForDeliveryOpt() {
 		return tempStringForDeliveryOpt;
@@ -148,11 +147,11 @@ public class Orders {
 	public void setOrderedOn(Date orderedOn) {
 		this.orderedOn = orderedOn;
 	}
-	public String getWaitingTime() {
-		return waitingTime;
+	public int getWaitingTimeMin() {
+		return waitingTimeMin;
 	}
-	public void setWaitingTime(String waitingTime) {
-		this.waitingTime = waitingTime;
+	public void setWaitingTimeMin(int waitingTimeMin) {
+		this.waitingTimeMin = waitingTimeMin;
 	}
 	public Customer getCustomer() {
 		return customer;

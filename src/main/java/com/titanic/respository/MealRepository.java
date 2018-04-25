@@ -22,4 +22,6 @@ public interface MealRepository extends JpaRepository<Meal, Integer> {
 
 	List<Meal> findByFoodType(FoodType fd);
 
+	
+
 }
