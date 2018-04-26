@@ -10,8 +10,9 @@ import com.titanic.entity.Customer;
 import com.titanic.entity.FeedBack;
 import com.titanic.entity.Inquiry;
 import com.titanic.entity.MealsSchedule;
-import com.titanic.entity.Notification;
 import com.titanic.entity.Orders;
+import com.titanic.other.CommonService;
+import com.titanic.service.food.FoodComboPackageManagementService;
 import com.titanic.service.food.MealManagementService;
 import com.titanic.service.msgandfaq.NotificationManagementService;
 import com.titanic.service.msgandfaq.ReviewManagementService;
@@ -44,6 +45,13 @@ public class HomeController {
 	@Autowired
 	private NotificationManagementService nmService;
 	
+	@Autowired
+	private CommonService commonService;
+	
+	@Autowired
+	private FoodComboPackageManagementService fcpmService;
+	
+	
 	@ModelAttribute("newFeedBack")
 	public FeedBack ConstructFeedBack() {
 		return  new FeedBack();
@@ -67,11 +75,13 @@ public class HomeController {
 	@RequestMapping("/home")
 	public String home(Model model) {
 		model.addAttribute("comments", rmService.getAllComments());
-		model.addAttribute("meals", mmService.findAll());
+	//	model.addAttribute("meals", mmService.findAll());
 		Customer CurrCustomer = cmService.findOneByUser(umService.findOneByUserName(CurrentUser.me()));
 		
 		model.addAttribute("msgs", nmService.getNewMsgs(CurrCustomer));
 		model.addAttribute("myProfile", CurrCustomer);
+		
+		model.addAttribute("offer", fcpmService.findAllGivenDate(commonService.getNowDate().get("today")));
 		
 		model.addAttribute("myOrders", omService.findAllByCustomer(CurrCustomer));
 		

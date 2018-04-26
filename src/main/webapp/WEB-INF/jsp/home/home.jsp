@@ -765,29 +765,118 @@
 	var curUser = "${myProfile.user.userName }";
 	var curuserId =  "${myProfile.user.id }";
 	
-	// CUSTOMIZABLE CART SELECTION
-	$(".showCustomCart").click(function(){
+	var offer = "${offer.id}";
+	var offerName = "${offer.name}";
+	var offerImage = "${offer.image}";
+	var mealPcg = [];
+	mealPcg = ${offer.pckgMealString};
+	var price = "${offer.price}";
+	
+	var msg = "${param.msg}";
+	var status = "${param.success}"
+	var mealCode = "${param.mealCode}"
+	
+	$(document).ready(function(){
+		
+	   	 $("#confModalbtn").html("Delete");
+			$("#confModalbtn").removeClass("btn-success").addClass("btn-danger");
+			$("#confModalText").css("background-color", "#f39c12");
+			
+			if(msg.trim() != "" || status.trim() != ""){
+					$("#confModalText").html(msg + "<br/><small>Thanks for Order! Your order ref-no is :- <b>" + mealCode + "</b></small>");
+					$("#confModalbtn").css("display", "none"); 
+					$("#cancelbtn").html("Ok");
+		 		if(status == "true"){
+		 			$("#confModalText").css("background-color", "green");
+		 		}
+		 		else{
+		 			$("#confModalText").css("background-color", "red");
+		 		}
+	 			$("#confirmModal").modal("show");
+			}
+		
+			if(offer == "" || offer == null || offer == undefined){
+				
+				$("#selectedMealimagelinkn").prop("onclick", "");
+				$("#modalContentAtShow").html("Let's Customize Your Order!")
+				$(".customFiled").css("display", "block");
+				$(".customFiledforoffer").css("display", "none");
+			}
+			else if(msg.trim() == "" && status.trim() == ""){
+				$(".customFiled").css("display", "none");
+				$(".customFiledforoffer").css("display", "block");
+				
+				$("#selectedMealimagelinkn").prop("onclick", "addOfferToCart()");
+				$("#modalContentAtShow").html("Just <b>" + price + "</b> LKR Only!")
+				fillDataToModal(offerName, offerImage);
+				$("#myModal").modal("show");
+			}
+		
+		 history.replaceState(null, document.title, "home.do");
+	});
+		
+	// FUNCTION TO CHECK LOGIN AND SHOW CART
+	function loginAndCheckLogin(){
+		$("#myModal").modal("hide");
 		if( curUser == null || curUser.trim() == "" || curUser == "undefined"){
 			$("#confModalText").html("Please login to order.");
 			$("#confModalbtn").html("Login");
 			$("#confModalbtn").removeClass(" btn-danger").addClass("btn-success");
 			$("#confModalbtn").attr("href" , "/titanic/login.do");
 			$("#confirmModal").modal("show");
+			return false;
 		}
 		else{
+			return true;
+		}
+	}
+	
+	// CHANGE DATA FOR CANCELED OFFER
+	function dataChanager(){
+		
+	}
+	
+	// OFFER BUTTON CLICK EVENT
+	function addOfferToCart(){
+		$("#myModal").modal("hide");
+		if(loginAndCheckLogin() == true){
+			foodCart = mealPcg;
+			totalPrice = parseFloat(price);
+			price = 0;
+			$.each(foodCart, function(key, order){
+				order.customizedFoodMsg = "none";
+				mealOrder = order;
+				tablingOrder();
+				$("#remover").removeClass("triggerRemove");
+			});
+			console.log(foodCart);
+			$("#myCartModal").modal({backdrop:'static', keyboard:false });
+			
+		}
+	}
+		
+		
+	// CUSTOMIZABLE CART SELECTION
+	$(".showCustomCart").click(function(){
+		if(loginAndCheckLogin() == true){
+			$(".customFiledforoffer").css("display", "none");
+			$("#selectedMealimagelinkn").prop("onclick", "");
+			$("#modalContentAtShow").html("Let's Customize Your Order!")
+			$(".customFiled").css("display", "block");
 			mealId = $(this).find(".dataholder").attr("data-meal-id");
 			mealName = $(this).find(".dataholder").attr("data-meal-name");
 			mealImage = $(this).find(".img-responsive").attr("src");
 			price = $(this).find(".dataholder").attr("data-meal-price");
-			fillDataToModal();
+			fillDataToModal(mealName, mealImage);
 			$("#mealQuantity").val("1");
 			$("#myModal").modal("show");
 		}
 	});
 	
+	
 	// FILL DATA'S TO MODAL
-	function fillDataToModal(){
-		$(".modal-header").html(mealName);
+	function fillDataToModal(mealName, mealImage){
+		$(".modal-header p").html(mealName);
 		$("#selectedMealimage").attr("src" , mealImage);
 	}
 		
@@ -815,6 +904,7 @@
 	function tablingOrder(){
 		var number = foodCart.length;
 		var key = number-1;
+		console.log(totalPrice);
 		// DISPLAY TABLE APPENDING
 		$("#priceTag").html("Total : Rs " + totalPrice.toFixed(2));
 		if( key>-1 && mealOrder!= null && mealOrder.quantity>0 ){
@@ -828,7 +918,7 @@
 			htmlStr += "<td>"+ mealOrder.quantity + "</td>";
 			htmlStr += "<td>"+ price + "</td>";
 			htmlStr += "<td>"+ mealOrder.customizedFoodMsg + "</td>";
-			htmlStr += '<td><a class="btn text-danger triggerRemove" data-amount-cell="'+ mealOrder.quantity*price +'" data-id="'+ key +'"> <i class="fa fa-trash-o"></i> </a></td>';
+			htmlStr += '<td><a id="remover" class="btn text-danger triggerRemove" data-amount-cell="'+ mealOrder.quantity*price +'" data-id="'+ key +'"> <i class="fa fa-trash-o"></i> </a></td>';
 			htmlStr += "</tr>";
 
 			$("#myCartModal").find("#addedOrderTableBody").append(htmlStr);
@@ -878,10 +968,13 @@
 		mealOrder = {};
 		foodCart = [];
 		$("#addedOrderTableBody  > tbody").html("");
-		$(".orderCartInfo").css("display", "block");
+		$(".orderDeliveryInfo").css("display", "block");
 		$(".orderPaymentInfo").css("display", "none");
+		$("#remover").addClass("triggerRemove");
 		
-		resetFormField();
+		 $('.tobereset').each(function () {
+			 $(this).val('');
+		 });
 	}
 		
 </script>
@@ -977,7 +1070,16 @@
 
 	<script type="text/javascript">
 	
+	 //GET NEW COMBO
+	 function getComboPackg(){
+		 $.get('http://localhost:8080/titanic/newCombo.do', 
+	         function(data){
+			 	console.log(data);
+		 });
+	 }
+	
 		$(document).ready(function () {
+		//	getComboPackg();
 			/*
 				var defaults = {
 		  			containerID: 'toTop', // fading element id
@@ -1015,30 +1117,7 @@
 	    	        }
 	    	 });
 	    	 validator();
-	    	 
-	    	 $("#confModalbtn").html("Delete");
-			$("#confModalbtn").removeClass("btn-success").addClass("btn-danger");
-			$("#confModalText").css("background-color", "#f39c12");
-			
-			var msg = "${param.msg}";
-			var status = "${param.success}"
-			var mealCode = "${param.mealCode}"
-			
-			if(msg.trim() != "" || status.trim() != ""){
-				$("#confModalText").html(msg + "<br/><small>Thanks for Order! Your order ref-no is :- <b>" + mealCode + "</b></small>");
-				$("#confModalbtn").css("display", "none"); 
-				$("#cancelbtn").html("Ok");
-	    		if(status == "true"){
-	    			$("#confModalText").css("background-color", "green");
-	    		}
-	    		else{
-	    			$("#confModalText").css("background-color", "red");
-	    		}
-	    		$("#confirmModal").modal("show");
-			}
-			 history.replaceState(null, document.title, "home.do");
 		});
-		
 	</script>
 	
 	<!-- Top Hover button -->

@@ -43,7 +43,7 @@
 						<tr>
 							<th></th>
 							<th>Name</th>
-							<th>Added-On</th>
+							<th>Valid-From</th>
 							<th>Valid-Until</th>
 							<th>Price</th>
 							<th>Description</th>
@@ -60,7 +60,7 @@
 										class="fa fa-trash-o"></i>
 								</a><c:out value="${comboPackage.id}"/></td>
 								<td><a class="btn" href='<spring:url value="comboPackage-detail/${comboPackage.id}.do" />'><c:out value="${comboPackage.name}"/></a></td>
-								<td><a class="btn" href='<spring:url value="comboPackage-detail/${comboPackage.id}.do" />'><c:out value="${comboPackage.addedOn}"/></a></td>
+								<td><a class="btn" href='<spring:url value="comboPackage-detail/${comboPackage.id}.do" />'><c:out value="${comboPackage.validFrom}"/></a></td>
 								<td><a class="btn" href='<spring:url value="comboPackage-detail/${comboPackage.id}.do" />'><c:out value="${comboPackage.validUntil}"/></a></td>
 								<td><a class="btn" href='<spring:url value="comboPackage-detail/${comboPackage.id}.do" />'><c:out value="${comboPackage.price}"/></a></td>
 								<td><a class="btn" href='<spring:url value="comboPackage-detail/${comboPackage.id}.do" />'><c:out value="${comboPackage.description}"/></a></td>
@@ -72,7 +72,7 @@
 						<tr>
 							<th></th>
 							<th>Name</th>
-							<th>Added-On</th>
+							<th>Valid-From</th>
 							<th>Valid-Until</th>
 							<th>Price</th>
 							<th>Description</th>
@@ -151,7 +151,7 @@
 				  <div class="row"> 
 				    <div class="form-group col-md-4">
 					    <label for="exampleInputEmail1">Start-From :</label>
-							<input name = "addedOn" id = "addedOn" type = "date" class="form-control dateField"/> 
+							<input name = "validFrom" id = "validFrom" type = "date" class="form-control dateField"/> 
 		 			       <span style="color:red;"></span>				    
 	 			    </div>
 				    
@@ -294,7 +294,7 @@
   		 event.preventDefault();
   		var pckg = {};
   		pckg.name = $("#name").val();
-  		pckg.addedOn = $("#addedOn").val();
+  		pckg.validFrom = $("#validFrom").val();
   		pckg.price = $("#price").val();
   		pckg.validUntil = $("#validUntil").val();
   		pckg.description = $("#description").val();

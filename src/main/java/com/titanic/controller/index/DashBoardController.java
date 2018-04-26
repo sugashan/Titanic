@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import com.titanic.other.TitanicMessageConstant;
 import com.titanic.service.orderbooking.OrderManagementService;
 import com.titanic.service.user.CustomerManagementService;
@@ -24,7 +23,7 @@ public class DashBoardController {
 	@Autowired
 	private CustomerManagementService cmService;
 	
-	
+	@SuppressWarnings("deprecation")
 	@RequestMapping("/dashboard")
 	public String dashboard(Model model) {
 		
@@ -35,6 +34,7 @@ public class DashBoardController {
 			dashBoardInfo.put("dineInOrders", omService.countByOrderType(TitanicMessageConstant.DINE_IN_ORDER));
 			dashBoardInfo.put("delievryOrders", omService.countByOrderType(TitanicMessageConstant.DELIVERY_ORDER));
 			dashBoardInfo.put("pickUpOrders", omService.countByOrderType(TitanicMessageConstant.PICK_UP_ORDER));
+			
 			
 			JSONArray orderViaMonth = new JSONArray();
 			for(int i = 1; i<7; i++) {
@@ -49,12 +49,9 @@ public class DashBoardController {
 				JSONObject orderChartInfo = new JSONObject();
 				orderChartInfo.put("y", 1900 + today.getYear() + " Q"+qProb);
 				orderChartInfo.put("item1", i*100 + omService.countOrdersBetweenTodayAndOrderedOn(today));
-				
-				System.out.println(orderChartInfo.get("y"));
 				orderViaMonth.put(orderChartInfo);
 			}
 			dashBoardInfo.put("ordersCountBySixMonth", orderViaMonth);
-			System.out.println(dashBoardInfo);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -2,11 +2,12 @@ package com.titanic.controller.food;
 
 import java.io.File;
 import java.nio.file.Files;
+//import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
-
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.titanic.entity.FoodComboPackage;
 import com.titanic.entity.PackageMeals;
+//import com.titanic.other.CommonService;
+//import com.titanic.other.GenericResult;
+//import com.titanic.other.JsonFormer;
 import com.titanic.other.TitanicMessageConstant;
 import com.titanic.other.UniqueIdManager;
 import com.titanic.service.food.FoodComboPackageManagementService;
@@ -27,6 +31,9 @@ public class FoodComboPackageManagementController {
 	
 	@Autowired
 	private FoodComboPackageManagementService fcpSerice;
+	
+//	@Autowired
+//	private CommonService commonService;
 	
 	private String redirectUrlString="";
 	
@@ -46,6 +53,30 @@ public class FoodComboPackageManagementController {
 		return "comboPackage";
 	}
 	
+	
+	// GET COMBO FOR TODAY
+	@RequestMapping("/newCombo")
+	@ResponseBody
+	public String findNewComboForToday() throws JSONException {
+//		 List<PackageMeals> pml = new ArrayList<PackageMeals>();
+//		 
+//		FoodComboPackage lstfcd = fcpSerice.findAllGivenDate(commonService.getNowDate().get("today"));
+//		if(lstfcd != null) {
+//			for (PackageMeals pm: lstfcd.getPackageMeal()) {
+//				System.out.println(pm.getMealName()+ "-----------");
+//				pml.add(pm);
+//			}
+//			lstfcd.setPackageMeal(pml);
+//		}
+//		GenericResult gr = new GenericResult("success", pml);
+//		redirectUrlString = JsonFormer.form(gr);
+//		
+//		System.out.println("----------------------");
+//		System.out.println(redirectUrlString);
+		return redirectUrlString;
+	}
+	
+	
 	// ADD NEW PACKAGE
 	@CrossOrigin
 	@RequestMapping(value = "/meals/comboPackage", method = RequestMethod.POST)
@@ -58,7 +89,8 @@ public class FoodComboPackageManagementController {
 		if(request.getParameter("price")!=null)
 			fcp.setPrice(Float.parseFloat(request.getParameter("price")));
 		
-		fcp.setAddedOn(request.getParameter("addedOn"));
+		
+		fcp.setValidFrom(request.getParameter("validFrom"));
 		fcp.setDescription(request.getParameter("description"));
 		fcp.setValidUntil(request.getParameter("validUntil"));
 		fcp.setStatus(true);
@@ -78,11 +110,14 @@ public class FoodComboPackageManagementController {
 			// Save file on system
 			Part filePart = request.getPart("image");
 			
-			String fileName = UniqueIdManager.getRandom(0) + filePart.getSubmittedFileName();
-			File file = new File(uploadFolder, fileName);
-            Files.copy(filePart.getInputStream(), file.toPath());
-           
-            fcp.setImage("/titanic/resources/uploads/combo/" + fileName);
+			if(filePart.getSubmittedFileName().isEmpty() == false) {
+				String fileName = UniqueIdManager.getRandom(0) + filePart.getSubmittedFileName();
+				File file = new File(uploadFolder, fileName);
+	            Files.copy(filePart.getInputStream(), file.toPath());
+	           
+	            fcp.setImage("/titanic/resources/uploads/combo/" + fileName);
+			}
+			
             fcp.setCode(UniqueIdManager.getUniqueCode("Cmp", 4));
 			fcpSerice.save(fcp);
 			redirectUrlString = "success";; 

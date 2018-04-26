@@ -1,5 +1,6 @@
 package com.titanic.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -7,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 
@@ -29,15 +33,29 @@ public class FoodComboPackage {
 	private String image;
 	private String description;
 	
-	@NotNull(message="Food Type Can Not Be Empty!")
 	private String validUntil;
 	
-	@NotNull(message="Food Type Can Not Be Empty!")
-	private String addedOn;
+	private String validFrom;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date addedOn;
 	
 	private Boolean status;
 	
+	private String pckgMealString;
 	
+	@PrePersist
+    protected void onCreate() {
+		addedOn = new Date();
+    }
+	
+	
+	public String getPckgMealString() {
+		return pckgMealString;
+	}
+	public void setPckgMealString(String pckgMealString) {
+		this.pckgMealString = pckgMealString;
+	}
 	public String getImage() {
 		return image;
 	}
@@ -56,17 +74,23 @@ public class FoodComboPackage {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public String getAddedOn() {
-		return addedOn;
-	}
-	public void setAddedOn(String addedOn) {
-		this.addedOn = addedOn;
-	}
 	public String getValidUntil() {
 		return validUntil;
 	}
 	public void setValidUntil(String validUntil) {
 		this.validUntil = validUntil;
+	}
+	public String getValidFrom() {
+		return validFrom;
+	}
+	public void setValidFrom(String validFrom) {
+		this.validFrom = validFrom;
+	}
+	public Date getAddedOn() {
+		return addedOn;
+	}
+	public void setAddedOn(Date addedOn) {
+		this.addedOn = addedOn;
 	}
 	public String getName() {
 		return name;

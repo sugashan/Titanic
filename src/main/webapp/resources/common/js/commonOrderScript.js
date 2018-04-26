@@ -84,10 +84,6 @@ function collectPickDeliveryInfo(orderType){
 		$("#alertMsg").css("color", "red");
 		$("#alertMsg").html("Please Select time for " + orderType + ".");
 	}
-	else if($("#recieverCustName").val().trim() == "" || $("#deliveryAddress").val().trim() == "" || $("#refMobile").val().trim() == ""){
-		$("#alertMsg").css("color", "red");
-		$("#alertMsg").html("Please fill fileds for " + orderType + ".");
-	}
 	else{
 		$("#alertMsg").css("color", "#999");
 		$("#alertMsg").html("Please fill these to get your Order!");

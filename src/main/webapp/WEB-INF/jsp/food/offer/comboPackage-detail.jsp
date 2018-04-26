@@ -39,16 +39,17 @@
 				    	  <span style="color:red;"></span>
 				    </div>
 				    
-				     <div class="form-group col-md-2">
-				    	<label for="exampleInputEmail1">Combo-Code :</label>
-				    	 <input name="code" class="form-control" disabled value="${singleCombo.code}"/>
-				    	  <span style="color:red;"></span>
-				    </div>
 				    
 				     <div class="form-group col-md-2">
 				    <label for="exampleInputEmail1">Added-On :</label>
-				     <input name="addedOn" class="form-control" type = "date" value="${singleCombo.addedOn}"/>
+				     <input name="validFrom" class="form-control" disabled type = "text" value="${singleCombo.addedOn}"/>
 				   	<span style="color:red;"></span>
+				    </div>
+				    
+				    <div class="form-group col-md-2">
+				    	<label for="exampleInputEmail1">Valid-From :</label>
+				    	 <input name="validFrom" class="form-control"  type = "date" value="${singleCombo.validFrom}"/>
+				    	  <span style="color:red;"></span>
 				    </div>
 				    
 				     <div class="form-group col-md-2">

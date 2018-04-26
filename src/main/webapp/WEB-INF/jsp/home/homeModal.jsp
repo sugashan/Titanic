@@ -8,37 +8,49 @@
 	role="dialog" aria-labelledby="myModal">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div class="modal-header">Luscious</div>
+			<div class="modal-header"><p>Luscious</p>
+				<button type="button" class="close" data-dismiss="modal" onclick="dataChanager()"
+					aria-label="Close">
+					<span aria-hidden="true">&times;</span></button>
+			</div>
 			<div class="modal-body">
 				<!-- For Customize Order -->
 				<div id="orderCustomDiv" style="display: block">
-					<img src="<c:url value="/resources/dist/img/home/banner1.jpg" />"
-						alt=" " class="img-responsive" id="selectedMealimage" />
+					<a id="selectedMealimagelinkn"><img src="<c:url value="/resources/dist/img/home/banner1.jpg" />"
+						alt=" " class="img-responsive" id="selectedMealimage" /></a>
 					<p id="modalContentAtShow"
 						style="text-align: center; font-size: 18px">Let's Customize
 						Your Order!</p>
-					<div class="row">
+					<div class="row customFiled">
 						<div class="col-md-3">
 							<label>Quantity :</label> <input type="number"
-								class="form-control" id="mealQuantity" autofocus="autofocus" />
+								class="form-control tobereset" id="mealQuantity" autofocus="autofocus" />
 						</div>
 						<div class="col-md-9">
 							<label>Customize Message :</label>
-							<textarea rows="3" class="form-control" id="mealCustomizeInfo"
+							<textarea rows="3" class="form-control tobereset" id="mealCustomizeInfo"
 								placeholder="Please customize your food within 100 characters!"></textarea>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-danger btn-block" onclick="reset()"
-					data-dismiss="modal" type="reset">
-					<i class="fa fa-remove"></i> Cancel
-				</button>
-				<button class="btn btn-success btn-block" onclick="addToCart()"
-					type="button" id="addCartBtn" style="display: block;">
-					<i class="fa fa-shopping-cart "></i> Add To Cart
-				</button>
+				<div class="customFiled">
+					<button class="btn btn-danger btn-block"
+						data-dismiss="modal" type="reset">
+						<i class="fa fa-remove"></i> Cancel
+					</button>
+					<button class="btn btn-success btn-block" onclick="addToCart()"
+						type="button" id="addCartBtn" style="display: block;">
+						<i class="fa fa-shopping-cart "></i> Add To Cart
+					</button>
+				</div>
+				<div class="customFiledforoffer">
+					<button class="btn btn-success btn-block" onclick="addOfferToCart()"
+						type="button" id="offerCartBtn" style="display: block;">
+						<i class="fa fa-shopping-cart "></i>  Grap It
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -83,14 +95,14 @@
 											<label for="exampleInputEmail1" Class="difColor">Pick Up Time :</label>
 											 <input type="text" id="Time1"
  														placeholder="Time"  
- 														class="pickUp timepickerforPickUp form-control timepicker"
+ 														class="pickUp timepickerforPickUp form-control tobereset timepicker"
   														value="Time" onkeypress="return false;"
   														style="height: 35px;" /> 
 										</div>
 										<div class="form-group col-md-6">
 											<label for="exampleInputEmail1" Class="difColor">Pick Up Date :</label> 
 											<input id="datepicker"
-  													type="text" class="dateField pickUp datepickerforPickUp form-control"  />  
+  													type="text" class=" tobereset dateField pickUp datepickerforPickUp form-control"  />  
 										</div>
 									</div>
 									<div style="background-color: aliceblue;">
@@ -127,13 +139,13 @@
 									<div class="form-group col-md-6">
 										<label for="exampleInputEmail1" Class="difColor">Deliver Time :</label> 
 										<input type="text" name="Time2"
-  												placeholder="Time" class="delivery timepicker timepickerfordelivery form-control" 
+  												placeholder="Time" class="delivery tobereset timepicker timepickerfordelivery form-control" 
  	 										    style="height: 35px;"/>  
 									</div>
 									<div class="form-group col-md-6">
 										<label for="exampleInputEmail1" Class="difColor">Deliver Date :</label> 
 										<input type="text" id="datepicker2"
- 	 											class="delivery dateField datepickerfordelivery form-control" /> 
+ 	 											class="delivery dateField  tobereset datepickerfordelivery form-control" /> 
 									</div>
 								</div>
 								<div style="background-color: aliceblue;">

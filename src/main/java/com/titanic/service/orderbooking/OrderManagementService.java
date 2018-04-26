@@ -1,6 +1,7 @@
 package com.titanic.service.orderbooking;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.transaction.Transactional;
@@ -208,9 +209,11 @@ public class OrderManagementService {
 			}
 			int avgWaitingTime = waitingTime/ordFoodList.size();
 			System.out.println(avgWaitingTime + "------------- avg Wating Time");
-			Date now = new Date();
-			now.setMinutes(now.getMinutes() + avgWaitingTime);
-			existingOrder.setExpectedDeliverTime(now.toString());
+			
+			Calendar nowCal = Calendar.getInstance();
+			nowCal.add(Calendar.MINUTE, avgWaitingTime);
+			
+			existingOrder.setExpectedDeliverTime(nowCal.getTime().toString());
 			existingOrder.setWaitingTimeMin(avgWaitingTime);
 			
 			

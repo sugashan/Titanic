@@ -80,13 +80,14 @@ public class MealManagementController {
 				 // Save file on system
 				 Part filePart = request.getPart("image");
 				 
-				 String fileName = UniqueIdManager.getRandom(0) + filePart.getSubmittedFileName();
-				 File file = new File(uploadFolder, fileName);
-                 Files.copy(filePart.getInputStream(), file.toPath());
-                
-            	 meal.setFoodType(ftService.findOnebyId(meal.getFoodTypeId()));         
-			     meal.setImageUrl("/titanic/resources/uploads/meal/" + fileName);
+				 if(filePart.getSubmittedFileName().isEmpty() == false) {
+					 String fileName = UniqueIdManager.getRandom(0) + filePart.getSubmittedFileName();
+					 File file = new File(uploadFolder, fileName);
+	                 Files.copy(filePart.getInputStream(), file.toPath());
+				     meal.setImageUrl("/titanic/resources/uploads/meal/" + fileName);
+				 }
 			     
+			     meal.setFoodType(ftService.findOnebyId(meal.getFoodTypeId())); 
 			     User user = uRepository.findByUserName(CurrentUser.me());
 				 meal.setAddedByUser(user);
 					
