@@ -87,7 +87,7 @@
 					<form:input type="text" path="userName" placeholder="UserName" class="textFiled uniqueTextFiled" style="height: 25px;"/> 
 					<form:errors path="userName"/><br/>
 					<span id="dublicateUserNameError" style="color:red;"></span>
-					<form:input type="number" path="mobile" placeholder="mobile (xxx-xxxxxxx)" class="" style="height: 25px;"/> 
+					<form:input type="text" path="mobile" placeholder="mobile (xxx-xxxxxxx)" class="" style="height: 25px;"/> 
 					<form:errors path="mobile"/><br/>
 					<form:textarea type="text" path="address" placeholder="Address" class="" style="height: 25px;"></form:textarea>
 					<form:errors path="address"/><br/>
