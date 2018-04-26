@@ -47,7 +47,7 @@ public class CustomerManagementController {
 	public String addCustomer( @Valid @ModelAttribute("newUser") User customerUser, BindingResult errors, Model model) {
 		if(errors.hasErrors()) {
 			System.out.println(errors.getFieldErrors().toString());
-			redirectUrlString = "login";
+			redirectUrlString = "/login";
 		}
 		else {
 //				try {

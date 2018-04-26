@@ -769,7 +769,7 @@
 	var offerName = "${offer.name}";
 	var offerImage = "${offer.image}";
 	var mealPcg = [];
-	mealPcg = ${offer.pckgMealString};
+	mealPcg = "${offer.pckgMealString}";
 	var price = "${offer.price}";
 	
 	var msg = "${param.msg}";

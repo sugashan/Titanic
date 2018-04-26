@@ -22,7 +22,6 @@ public class User {
 	@Size(min=3, message="Name Should Be Atleast 3 Character!")
 	private String name;
 	
-	@Size(min=10, message="Invalid Mobile Number!")
 	private String mobile;
 	
 	@Size(min=4, message="Password Should Be Atleast 4 Character!")
