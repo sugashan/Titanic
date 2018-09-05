@@ -37,6 +37,8 @@ public class User {
 	private String userName;
 	
 	private String address;
+	
+	@Column(nullable = false, columnDefinition="TINYINT(1)")
 	private Boolean enabled;
 	
 	private int roleId;

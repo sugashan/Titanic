@@ -2,6 +2,7 @@ package com.titanic.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,9 @@ public class Notification {
 	
 	private String message;
 	private String description;
-	private boolean isRead;
+	
+	@Column(nullable = false, columnDefinition="TINYINT(1)")
+	private Boolean isRead;
 	
 	@OneToOne
 	private Customer customer;
@@ -55,10 +58,10 @@ public class Notification {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public boolean isRead() {
+	public Boolean getIsRead() {
 		return isRead;
 	}
-	public void setRead(boolean isRead) {
+	public void setIsRead(Boolean isRead) {
 		this.isRead = isRead;
 	}
 	public Date getCreatedDate() {

@@ -16,9 +16,6 @@
 		<intercept-url pattern="/login*" access="isAnonymous()" />
 		<intercept-url pattern="/logout*" access="isAnonymous()"/>
 		
-		<!-- ACCESS DENIED URL -->
-		<access-denied-handler error-page="/accessDenied.do"/> 
-		
 		<!-- EMPLOYEE URL -->
 		<intercept-url pattern="/users/employee**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_RECEPTIONIST')"/>
 		<intercept-url pattern="/users/singleEmployee/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_DELIVERYBOY', 'ROLE_RECEPTIONIST')"/>
@@ -48,6 +45,9 @@
 		<!-- UTILITY -->
 		<intercept-url pattern="/utility/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_COOK', 'ROLE_RECEPTIONIST', 'ROLE_DELIVERYBOY' )"/>
 		
+		<!-- ACCESS DENIED URL -->
+		<access-denied-handler error-page="/accessDenied.do"/> 
+		
 		 <logout
 		      logout-success-url="/login.do"
 		      delete-cookies="true"
@@ -67,7 +67,7 @@
 				authorities-by-username-query="select user.userName, role.name from user 
 												join role on user.role_id = role.id 
 											where user.userName=?" 
-				users-by-username-query="select userName, password, enabled from user where userName=? "	/>
+				users-by-username-query="select userName, password, enabled from user where userName=? "/>
 		</authentication-provider>
 	</authentication-manager>
 

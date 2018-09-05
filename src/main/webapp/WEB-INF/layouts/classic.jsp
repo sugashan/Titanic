@@ -26,7 +26,7 @@
 	  <link href="<c:url value="/resources/dist/css/AdminLTE.min.css" />" rel="stylesheet">
 		
 	  <!-- AdminLTE Skins & Titanic.  -->
-   	  <link href="<c:url value="/resources/dist/css/skins/skin-blue.min.css" />" rel="stylesheet">
+   	  <link href="<c:url value="/resources/dist/css/skins/skin-red.min.css" />" rel="stylesheet">
    	  <link href="<c:url value="/resources/common/css/titanic.css" />" rel="stylesheet">
    	  
    	   <!-- DataTable css -->
@@ -47,7 +47,7 @@
 
 </head>
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-red sidebar-mini">
 
 	<%@ taglib uri="http://tiles.apache.org/tags-tiles-extras" prefix="tilesx"%>
 	<tilesx:useAttribute name="current"/>
