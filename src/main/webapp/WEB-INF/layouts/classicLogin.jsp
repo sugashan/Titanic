@@ -10,13 +10,17 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
+
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   
+  <!-- ========== FAVICON ========== -->
+  <link rel="icon" href="/resources/dist/img/favicon.ico">
+  
   <!-- Theme style -->
   <link href="<c:url value="/resources/dist/css/login/style.css" />" rel="stylesheet">
- 
+  
+  
    <title><tiles:getAsString name="title"/></title>
    
 </head>

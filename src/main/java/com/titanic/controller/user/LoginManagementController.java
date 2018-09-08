@@ -58,7 +58,7 @@ public class LoginManagementController {
 	    	
 	    	ucService.saveLogin(currUser);
 	    	String userRole = currUser.getRole().getName();
-	    	if(userRole == "ROLE_CUSTOMER") {
+	    	if(userRole.equals("ROLE_CUSTOMER")) {
 	    		returnResult = "redirect:/home.do";
 	    	}
 	    	else {

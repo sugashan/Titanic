@@ -769,7 +769,7 @@
 	var offerName = "${offer.name}";
 	var offerImage = "${offer.image}";
 	var mealPcg = [];
-	mealPcg = "${offer.pckgMealString}";
+	mealPcg = '${offer.pckgMealString}';
 	var price = "${offer.price}";
 	
 	var msg = "${param.msg}";
@@ -840,7 +840,7 @@
 	function addOfferToCart(){
 		$("#myModal").modal("hide");
 		if(loginAndCheckLogin() == true){
-			foodCart = mealPcg;
+			foodCart = JSON.parse(mealPcg);s
 			totalPrice = parseFloat(price);
 			price = 0;
 			$.each(foodCart, function(key, order){

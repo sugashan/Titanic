@@ -10,9 +10,12 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1" name="viewport">
   
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
+  <link rel="icon" type="image/png" href="/resources/dist/img/favicon.ico">
   
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="<c:url value="/resources/bootstrap/css/bootstrap.css" />">
@@ -33,6 +36,7 @@
   
   <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic'
 	    rel='stylesheet' type='text/css'>
+	    
  
   <title><tiles:getAsString name="title"/></title>
   
