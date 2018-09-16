@@ -68,7 +68,7 @@ public class OrderRelatedCommonService {
 		
 		Notification notifier = new Notification();
 		notifier.setCustomer(existingOrder.getCustomer());
-		notifier.setRead(false);
+		notifier.setIsRead(false);
 		notifier.setMessage("Order "+ existingOrder.getOrderCode() + " is " + orderStatus);
 		notifier.setDescription(msg);
 		nmService.save(notifier);

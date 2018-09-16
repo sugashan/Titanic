@@ -40,7 +40,7 @@
 					<tbody id="order-content-body">
 						<c:forEach items="${orders}" var="order">
 							<tr>
-								<td><a class="btn" href='<spring:url value="order-detail/${order.id}.do" />'>
+								<td><a class="btn" href='<spring:url value="order-detail-payment/${order.id}/${order.orderType}.do" />'>
 										<i class="fa fa-pencil-square-o"></i>
 								</a> 
 								<a class="btn text-danger triggerRemove"

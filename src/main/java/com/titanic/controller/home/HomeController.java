@@ -75,7 +75,7 @@ public class HomeController {
 	@RequestMapping("/home")
 	public String home(Model model) {
 		model.addAttribute("comments", rmService.getAllComments());
-	//	model.addAttribute("meals", mmService.findAll());
+		model.addAttribute("meals", mmService.findAll());
 		Customer CurrCustomer = cmService.findOneByUser(umService.findOneByUserName(CurrentUser.me()));
 		
 		model.addAttribute("msgs", nmService.getNewMsgs(CurrCustomer));

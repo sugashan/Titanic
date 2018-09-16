@@ -85,9 +85,9 @@
 				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-bell-o"></i><span> Order</span></a>
 			</li>
 			
-			<li class="treeview ${current == 'table' ? 'active' : ''}">
+		<!-- 	<li class="treeview ${current == 'table' ? 'active' : ''}">
 				<a href='<spring:url value="/orders/order.do" />'> <i class="fa fa-table"></i><span> Tables</span></a>
-			</li>
+			</li>   -->
 			
 			<li class="treeview ${current == 'inquiry' ? 'active' : ''}"><a href="#"><i class="fa fa-th"></i>
 					<span>Utilities</span> <span class="pull-right-container">

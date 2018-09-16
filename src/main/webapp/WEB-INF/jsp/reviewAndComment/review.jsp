@@ -41,9 +41,7 @@
 					<tbody>
 						<c:forEach items="${comments}" var="comment">
 							<tr>
-								<td><a class="btn" href='<spring:url value="singleComment/${comment.id}.do" />'>
-										<i class="fa fa-pencil-square-o"></i>
-								</a> <a class="btn text-danger triggerRemove"
+								<td> <a class="btn text-danger triggerRemove"
 									href='<spring:url value="deleteComment/${comment.id}.do" />'> <i
 										class="fa fa-trash-o"></i>
 								</a><c:out value=" ${emp.user.id}"/></td>

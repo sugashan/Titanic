@@ -28,7 +28,7 @@ public class CustomerManagementService {
 	public void save(Customer customer) {
 		customer.getUser().setEnabled(true);
 		customer.getUser().setRole(ucService.findRoleById(4));
-		
+		customer.getUser().setRoleId(4);
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		customer.getUser().setPassword(encoder.encode(customer.getUser().getPassword()));
 		User resultUser = uRepository.save(customer.getUser());

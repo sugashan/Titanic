@@ -212,12 +212,12 @@
 					<c:if test="${not empty meal.imageUrl && meal.isSpecial eq true}">
 						<div class="gallery-top-img portfolio-grids">
 							<a href="<c:out value="${meal.imageUrl}" />" class="b-link-stripe b-animate-go lightninBox" data-lb-group="1">
-								<img src="<c:out value="${meal.imageUrl}" />" class="img-responsive" alt="" />
-							</a>
+								<img src="<c:out value="${meal.imageUrl}" />" class="img-responsive" alt="" style="width:290px; height:290px;"/>
 							<div class="p-mask">
 								<h4><span>${meal.name}</span></h4>
 								<p>${meal.description}</p>
 							</div>
+							</a>
 						</div>
 					</c:if>
 				</c:forEach>
@@ -614,22 +614,20 @@
 					<p> "One of the greatest gifts you can give to anyone is the gift of attention."</p>
 				</div>
 				<div class="comments-top">
-					<c:forEach begin="1" end="3">
-						<c:forEach items="${comments}" varStatus="comment">
+						<c:forEach items="${comments}" var="comment" begin="0" end="2">
 							<div class="col-md-4 comments-bottom">
 								<div class="comments-left">
 									<span class="fa fa-quote-right"></span>
 								</div>
 								<div class="comments-right">
 									<h3><c:out value="${comment.customerName}"/></h3>
-									<p class="para1">Rating</p>
+									<p class="para1"><b><c:out value="${comment.subject}"/>!</b></p>
 									<p class="para2"><c:out value="${comment.message}"/>.</p>
 								</div>
 								<div class="clearfix"></div>
 							</div>
 						</c:forEach>
 							<div class="clearfix"></div>
-					</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -776,6 +774,7 @@
 	var status = "${param.success}"
 	var mealCode = "${param.mealCode}"
 	
+
 	$(document).ready(function(){
 		
 	   	 $("#confModalbtn").html("Delete");
@@ -840,7 +839,7 @@
 	function addOfferToCart(){
 		$("#myModal").modal("hide");
 		if(loginAndCheckLogin() == true){
-			foodCart = JSON.parse(mealPcg);s
+			foodCart = JSON.parse(mealPcg);
 			totalPrice = parseFloat(price);
 			price = 0;
 			$.each(foodCart, function(key, order){

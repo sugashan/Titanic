@@ -54,6 +54,7 @@ public class CustomerManagementController {
 				Customer customer = new Customer();
 				customerUser.setName(customerUser.getUserName());
 				customer.setUser(customerUser);
+				
 				cmService.save(customer);
 				redirectUrlString = "redirect:/login.do?success=true&msg=Successfully Registered";
 //				} catch (JSONException e) {
